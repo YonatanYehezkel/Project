@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+   <children>
+      <ImageView fitHeight="591.0" fitWidth="1147.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="30.0" layoutY="26.0" mnemonicParsing="false" text="Back" />
+      <Button layoutX="1054.0" layoutY="26.0" mnemonicParsing="false" text="Log Out" />
+      <TableView layoutX="30.0" layoutY="116.0" prefHeight="392.0" prefWidth="200.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Customer" />
+          <TableColumn prefWidth="75.0" text="Sum" />
+        </columns>
+      </TableView>
+      <TableView layoutX="921.0" layoutY="116.0" prefHeight="392.0" prefWidth="200.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Customer" />
+          <TableColumn prefWidth="75.0" text="Sum" />
+        </columns>
+      </TableView>
+      <TableView layoutX="255.0" layoutY="116.0" prefHeight="392.0" prefWidth="637.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Customer" />
+          <TableColumn prefWidth="75.0" text="City" />
+            <TableColumn prefWidth="75.0" text="Serial" />
+            <TableColumn prefWidth="75.0" text="Time limit" />
+            <TableColumn prefWidth="108.0" text="Order value" />
+        </columns>
+      </TableView>
+      <Label layoutX="80.0" layoutY="76.0" text="Small Car Driver" />
+      <Label layoutX="971.0" layoutY="84.0" text="Big Car Driver" />
+      <Button layoutX="55.0" layoutY="531.0" mnemonicParsing="false" text="Build Small Car Route" />
+      <Button layoutX="953.0" layoutY="531.0" mnemonicParsing="false" text="Build Big Car Route" />
+   </children>
+</AnchorPane>

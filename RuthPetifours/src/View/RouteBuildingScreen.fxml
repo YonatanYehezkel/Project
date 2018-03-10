@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="476.0" prefWidth="1082.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+   <children>
+      <TabPane layoutX="-248.0" layoutY="-236.0" prefHeight="367.0" prefWidth="367.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Big Car Driver">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="14.0" layoutY="14.0" prefHeight="285.0" prefWidth="811.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="Number" />
+                              <TableColumn prefWidth="102.0" text="Customer" />
+                              <TableColumn prefWidth="110.0" text="Address" />
+                              <TableColumn prefWidth="97.0" text="Contact" />
+                              <TableColumn prefWidth="132.0" text="Order Num" />
+                              <TableColumn prefWidth="132.0" text="Time limit" />
+                              <TableColumn prefWidth="132.0" text="Sum" />
+                           </columns>
+                        </TableView>
+                        <Button layoutX="47.0" layoutY="356.0" mnemonicParsing="false" text="Export To Excel" />
+                        <Button layoutX="366.0" layoutY="356.0" mnemonicParsing="false" text="Print for driver" />
+                        <Button layoutX="766.0" layoutY="356.0" mnemonicParsing="false" text="Save" />
+                     </children>
+                  </AnchorPane>
+               </content>
+          </Tab>
+          <Tab text="Small Car Driver">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="14.0" layoutY="14.0" prefHeight="285.0" prefWidth="811.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Number" />
+                            <TableColumn prefWidth="102.0" text="Customer" />
+                              <TableColumn prefWidth="110.0" text="Address" />
+                              <TableColumn prefWidth="97.0" text="Contact" />
+                              <TableColumn prefWidth="132.0" text="Order Num" />
+                              <TableColumn prefWidth="132.0" text="Time limit" />
+                              <TableColumn prefWidth="132.0" text="Sum" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="47.0" layoutY="356.0" mnemonicParsing="false" text="Export To Excel" />
+                        <Button layoutX="366.0" layoutY="356.0" mnemonicParsing="false" text="Print for driver" />
+                        <Button layoutX="766.0" layoutY="356.0" mnemonicParsing="false" text="Save" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+   <children>
+      <ImageView fitHeight="544.0" fitWidth="728.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="32.0" layoutY="33.0" mnemonicParsing="false" text="Back" />
+      <Button layoutX="308.0" layoutY="33.0" mnemonicParsing="false" text="Import Orderes" />
+      <Button layoutX="641.0" layoutY="33.0" mnemonicParsing="false" text="Back" />
+      <TableView layoutX="106.0" layoutY="109.0" prefHeight="344.0" prefWidth="529.0">
+        <columns>
+          <TableColumn prefWidth="111.0" text="Customer" />
+          <TableColumn prefWidth="139.0" text="City" />
+            <TableColumn prefWidth="135.0" text="Serial Num" />
+            <TableColumn prefWidth="138.0" text="Order Value" />
+        </columns>
+      </TableView>
+      <Button layoutX="269.0" layoutY="481.0" mnemonicParsing="false" text="Procced To Orderes Sorting" />
+   </children>
+</AnchorPane>
