@@ -2,6 +2,7 @@ package Controller;
 
 import java.io.IOException;
 
+import db.DB;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -27,6 +28,7 @@ public class MainClass extends Application {
         this.primaryStage.setFullScreenExitHint("");
         //this.primaryStage.setFullScreen(true);
        initRootLayout();
+     
 	}
 	
 	
@@ -50,5 +52,9 @@ public class MainClass extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
+		//DB db = new DB();
+		//db.getAllCustomers();
+		controller = new ControllerLogic();
+		System.out.println(controller.getAllContacts().get("contact1").getCompanyName());
 	}
 }

@@ -1,12 +1,21 @@
 package Controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import Model.Contact;
+import Model.Customer;
 import Model.I_ModelLogic;
+import Model.JobRole;
 import Model.ModelLogic;
 import Utils.Constants;
 //import Utils.Constants;
 import View.ViewLogic;
+import db.DB;
 
 public class ControllerLogic {
+	
+	public DB db = new DB();
 	
 	/**
 	 * Singleton instance of this class, loaded on the first execution of
@@ -66,4 +75,15 @@ public class ControllerLogic {
 		ControllerLogic.view = view;
 	}
 
+	public HashMap<Integer, Customer> getAllCustomers() {
+		return db.getAllCustomers();	 
+	}
+	
+	public HashMap<String, Contact> getAllContacts(){
+		return db.getAllContacts();		
+	}
+	
+	public ArrayList<JobRole> getAllJobRoles(){
+		return db.getAllJobRoles();
+	}
 }
