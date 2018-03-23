@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="View.LoginScreenController">
+<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.LoginScreenController">
    <children>
       <ImageView fitHeight="372.0" fitWidth="702.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -32,20 +31,12 @@ fx:controller="View.LoginScreenController">
             <Font size="25.0" />
          </font>
       </Label>
-      <TextField id="userlLoginField" fx:id="UserLoginField" layoutX="159.0" layoutY="107.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </TextField>
-      <PasswordField fx:id="passField" layoutX="159.0" layoutY="162.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </PasswordField>
       <Button id="loginBtn" fx:id="login" layoutX="205.0" layoutY="224.0" mnemonicParsing="false" onAction="#validateUserInput" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: Green;" text="Login" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
+      <ComboBox fx:id="userList" layoutX="159.0" layoutY="110.0" prefHeight="30.0" prefWidth="200.0" />
+      <PasswordField id="password" fx:id="password" layoutX="159.0" layoutY="165.0" prefHeight="30.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

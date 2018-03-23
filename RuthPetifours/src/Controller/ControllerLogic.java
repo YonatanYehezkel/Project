@@ -8,6 +8,7 @@ import Model.Customer;
 import Model.I_ModelLogic;
 import Model.JobRole;
 import Model.ModelLogic;
+import Model.User;
 import Utils.Constants;
 //import Utils.Constants;
 import View.ViewLogic;
@@ -85,5 +86,9 @@ public class ControllerLogic {
 	
 	public ArrayList<JobRole> getAllJobRoles(){
 		return db.getAllJobRoles();
+	}
+	
+	public HashMap<String, User> getAllUsers(){
+		return db.getAllUsers();		
 	}
 }

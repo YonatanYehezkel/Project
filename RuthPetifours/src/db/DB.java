@@ -171,8 +171,8 @@ public class DB {
 		return null;
 	}
 	
-	public HashMap<Integer, User> getAllUsers (){
-		HashMap<Integer, User> users = new HashMap<Integer, User>();
+	public HashMap<String, User> getAllUsers (){
+		HashMap<String, User> users = new HashMap<String, User>();
 		if(setConnection()) {
 			try {
 				
@@ -182,7 +182,7 @@ public class DB {
 					//System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3)+"  "+rs.getString(4));  
 					User u = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 							rs.getString(6), rs.getString(7), rs.getInt(1));
-					users.put(u.getId(), u);
+					users.put(u.getUserName(), u);
 					
 				}
 				con.close();
