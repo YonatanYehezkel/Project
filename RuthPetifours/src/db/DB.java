@@ -6,6 +6,7 @@ import java.util.HashMap;
 import Model.Contact;
 import Model.Customer;
 import Model.JobRole;
+import Model.User;
 
 
 
@@ -161,6 +162,31 @@ public class DB {
 				}
 				con.close();
 				return roles;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return null;
+	}
+	
+	public HashMap<Integer, User> getAllUsers (){
+		HashMap<Integer, User> users = new HashMap<Integer, User>();
+		if(setConnection()) {
+			try {
+				
+				PreparedStatement statement = con.prepareStatement("select * from user");    
+				ResultSet rs = statement.executeQuery(); 
+				while(rs.next())  {
+					//System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3)+"  "+rs.getString(4));  
+					User u = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+							rs.getString(6), rs.getString(7), rs.getInt(1));
+					users.put(u.getId(), u);
+					
+				}
+				con.close();
+				return users;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}  
