@@ -23,6 +23,18 @@ public class User {
 		this.answer2 = answer2;
 		this.idJobRole = idJobRole;
 	}
+	
+	public User(String userName, String password, String question1, String question2, String answer1,
+			String answer2, int idJobRole) {
+		super();
+		this.userName = userName;
+		this.password = password;
+		this.question1 = question1;
+		this.question2 = question2;
+		this.answer1 = answer1;
+		this.answer2 = answer2;
+		this.idJobRole = idJobRole;
+	}
 
 	public int getId() {
 		return id;

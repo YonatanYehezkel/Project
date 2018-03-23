@@ -28,6 +28,7 @@ public class LoginScreenController {
   		if(password.getText().equals(controller.getAllUsers().get(userList.getSelectionModel().getSelectedItem()).getPassword())) {
 			System.out.println("ok");
 		}
+  		//controller.addNewUser(new User ("A", "A", "A", "A", "A", "A", 1));
 				
 	}
 	

@@ -195,6 +195,35 @@ public class DB {
 			System.out.println("DB is not available");
 		return null;
 	}
+	
+	public boolean addNewUser (User u) {
+		if(setConnection()) {
+			try {
+				String query = "insert into user (username, password, question1, question2, answer1, answer2, jobrole)"
+					        + " values (?, ?, ?, ?, ?, ?, ?)";
+				PreparedStatement statement = con.prepareStatement(query);    
+				//ResultSet rs = statement.executeQuery(); 
+				statement.setString (1, u.getUserName());
+				statement.setString (2, u.getPassword());
+				statement.setString (3, u.getQuestion1());
+				statement.setString (4, u.getQuestion2());
+				statement.setString (5, u.getAnswer1());
+				statement.setString (6, u.getAnswer2());
+				statement.setInt (7, u.getIdJobRole());
+
+			      // execute the preparedstatement
+				statement.execute();
+			      
+			    con.close();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return false;
+	}
 }
 		
 

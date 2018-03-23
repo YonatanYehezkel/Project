@@ -91,4 +91,10 @@ public class ControllerLogic {
 	public HashMap<String, User> getAllUsers(){
 		return db.getAllUsers();		
 	}
+	
+	public boolean addNewUser (User u) {
+		if(db.addNewUser(u))
+				return true;
+		return false;
+	}
 }
