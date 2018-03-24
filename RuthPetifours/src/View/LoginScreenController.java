@@ -1,6 +1,8 @@
 package View;
 
 import Controller.ControllerLogic;
+import Model.Customer;
+import Model.JobRole;
 import Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -28,7 +30,8 @@ public class LoginScreenController {
   		if(password.getText().equals(controller.getAllUsers().get(userList.getSelectionModel().getSelectedItem()).getPassword())) {
 			System.out.println("ok");
 		}
-  		//controller.addNewUser(new User ("A", "A", "A", "A", "A", "A", 1));
+  		controller.deleteCustomer("test");
+  		//controller.addNewCustomer(new Customer ("test", "test", "test"));
 				
 	}
 	

@@ -97,4 +97,53 @@ public class ControllerLogic {
 				return true;
 		return false;
 	}
+	
+	public boolean deleteUser (int id) {
+		if(db.deleteUser(id))
+				return true;
+		return false;
+	}
+	
+	public boolean addNewJobRole (JobRole j) {
+		if(db.addNewJobRole(j))
+				return true;
+		return false;
+	}
+	
+	public boolean deleteJobRole (String s) {
+		if(db.deleteJobRole(s))
+				return true;
+		return false;
+	}
+	
+	public boolean addNewContact (Contact con, Customer cus) {
+		if(db.addNewContact(con, cus))
+				return true;
+		return false;
+	}
+	
+	public boolean deleteContact (String s) {
+		if(db.deleteContact(s))
+				return true;
+		return false;
+	}
+	
+	public boolean addNewCustomer (Customer cus) {
+		if(db.addNewCustomer(cus))
+				return true;
+		return false;
+	}
+	
+	public boolean deleteCustomer (int id) {
+		if(db.deleteCustomer(id))
+				return true;
+		return false;
+	}
+	
+	public boolean deleteCustomer (String s) {
+		if(db.deleteCustomer(s))
+				return true;
+		return false;
+	}
+	
 }

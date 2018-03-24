@@ -20,7 +20,18 @@ public class Customer {
 		this.adress = adress;
 		this.comment = comment;
 	}
-	
+	 /*
+	  * new Customer, w/o ID
+	  */
+	public Customer(String customerName, String adress, String comment) {
+		super();
+		this.customerName = customerName;
+		this.adress = adress;
+		this.comment = comment;
+	}
+	/*
+	 * full constructor
+	 */
 	public Customer(int id, String customerName, String adress, String comment, ArrayList contacts) {
 		super();
 		this.id = id;

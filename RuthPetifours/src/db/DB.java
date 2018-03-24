@@ -224,6 +224,195 @@ public class DB {
 			System.out.println("DB is not available");
 		return false;
 	}
+	
+	public boolean deleteUser (int id) {
+		if(setConnection()) {
+			try {
+				String query = "DELETE FROM user WHERE iduser = ?";
+				PreparedStatement statement = con.prepareStatement(query);    
+				//ResultSet rs = statement.executeQuery(); 
+				statement.setInt(1, id);
+
+			      // execute the preparedstatement
+				statement.execute();
+			      
+			    con.close();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return false;
+	}
+	
+	public boolean addNewJobRole (JobRole j) {
+		if(setConnection()) {
+			try {
+				String query = "insert into jobrole (jobRolecol)"
+					        + " values (?)";
+				PreparedStatement statement = con.prepareStatement(query);    
+				//ResultSet rs = statement.executeQuery(); 
+				statement.setString (1, j.getJobRole());
+				
+
+			      // execute the preparedstatement
+				statement.execute();
+			      
+			    con.close();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return false;
+	}
+	
+	public boolean deleteJobRole (String role) {
+		if(setConnection()) {
+			try {
+				String query = "DELETE FROM jobrole WHERE jobRolecol = ?";
+				PreparedStatement statement = con.prepareStatement(query);    
+				//ResultSet rs = statement.executeQuery(); 
+				statement.setString(1, role);
+
+			      // execute the preparedstatement
+				statement.execute();
+			      
+			    con.close();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return false;
+	}
+	
+	public boolean addNewContact (Contact contact, Customer customer) {
+		if(setConnection()) {
+			try {
+				String query = "insert into contact (name, phonenumber1, phonenumber1, email1, "
+						+ "email1, jobrole, idcustomer)"
+					        + " values (?, ?, ?, ?, ?, ?, ?)";
+				PreparedStatement statement = con.prepareStatement(query);    
+				//ResultSet rs = statement.executeQuery(); 
+				statement.setString (1, contact.getContactName());
+				statement.setInt (2, contact.getPhoneNumber1());
+				statement.setInt (3, contact.getPhoneNumber2());
+				statement.setString (4, contact.getEmail1());
+				statement.setString (5, contact.getEmail2());
+				statement.setString (6, contact.getJobRole());
+				statement.setInt (7, customer.getId());
+
+			      // execute the preparedstatement
+				statement.execute();
+			      
+			    con.close();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return false;
+	}
+	
+	public boolean deleteContact (String name) {
+		if(setConnection()) {
+			try {
+				String query = "DELETE FROM contact WHERE name = ?";
+				PreparedStatement statement = con.prepareStatement(query);    
+				//ResultSet rs = statement.executeQuery(); 
+				statement.setString(1, name);
+
+			      // execute the preparedstatement
+				statement.execute();
+			      
+			    con.close();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return false;
+	}
+	
+	public boolean addNewCustomer (Customer customer) {
+		if(setConnection()) {
+			try {
+				String query = "insert into customer (customername, adress, comment)"
+					        + " values (?, ?, ?)";
+				PreparedStatement statement = con.prepareStatement(query);    
+				//ResultSet rs = statement.executeQuery(); 
+				statement.setString (1, customer.getCustomerName());
+				statement.setString (2, customer.getAdress());
+				statement.setString (3, customer.getComment());
+		
+			      // execute the preparedstatement
+				statement.execute();
+			      
+			    con.close();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return false;
+	}
+	
+	public boolean deleteCustomer (int id) {
+		if(setConnection()) {
+			try {
+				String query = "DELETE FROM customer WHERE idcustomer = ?";
+				PreparedStatement statement = con.prepareStatement(query);    
+				//ResultSet rs = statement.executeQuery(); 
+				statement.setInt(1, id);
+
+			      // execute the preparedstatement
+				statement.execute();
+			      
+			    con.close();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return false;
+	}
+	
+	public boolean deleteCustomer (String s) {
+		if(setConnection()) {
+			try {
+				String query = "DELETE FROM customer WHERE customername = ?";
+				PreparedStatement statement = con.prepareStatement(query);    
+				//ResultSet rs = statement.executeQuery(); 
+				statement.setString(1, s);
+
+			      // execute the preparedstatement
+				statement.execute();
+			      
+			    con.close();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return false;
+	}
 }
 		
 

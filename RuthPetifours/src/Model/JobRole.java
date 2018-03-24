@@ -11,6 +11,11 @@ public class JobRole {
 		this.id = id;
 		this.jobRole = jobRole;
 	}
+	
+	public JobRole(String jobRole) {
+		super();
+		this.jobRole = jobRole;
+	}
 	public int getId() {
 		return id;
 	}
