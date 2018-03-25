@@ -1,8 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="681.0" fitWidth="1038.0" pickOnBounds="true" preserveRatio="true" />
+      <TableView layoutX="24.0" layoutY="135.0" prefHeight="526.0" prefWidth="567.0">
+        <columns>
+          <TableColumn prefWidth="142.0" text="User ID" />
+          <TableColumn minWidth="8.0" prefWidth="141.0" text="User Name" />
+            <TableColumn minWidth="8.0" prefWidth="141.0" text="User Address" />
+            <TableColumn minWidth="8.0" prefWidth="141.0" text="Position" />
+        </columns>
+      </TableView>
+      <Label layoutX="352.0" layoutY="35.0" text="Users Managment">
+         <font>
+            <Font size="39.0" />
+         </font>
+      </Label>
+      <Button layoutX="783.0" layoutY="135.0" mnemonicParsing="false" text="Add User" />
+      <Button layoutX="749.0" layoutY="206.0" mnemonicParsing="false" text="Change User Details" />
+      <Button layoutX="771.0" layoutY="278.0" mnemonicParsing="false" text="Remove User" />
+      <Button layoutX="24.0" layoutY="32.0" mnemonicParsing="false" text="Back" />
+   </children>
 </AnchorPane>
-
