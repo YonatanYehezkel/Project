@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.sql.*;
+import java.text.DateFormat;
+import java.time.LocalDateTime;
 
 public class MainClass extends Application {
 	
@@ -56,6 +58,12 @@ public class MainClass extends Application {
 		//DB db = new DB();
 		//db.getAllCustomers();
 		controller = new ControllerLogic();
-		System.out.println(controller.getAllContacts().get("contact1").getCompanyName());
+		//System.out.println(controller.getAllOrders().get("1").getId());
+		
+		
+		LocalDateTime updated_date=LocalDateTime.now();
+	    //Timestamp timestamp = new Timestamp(updated_date.getTime());
+	    //updated_date = timestamp;
+		System.out.println(updated_date);
 	}
 }

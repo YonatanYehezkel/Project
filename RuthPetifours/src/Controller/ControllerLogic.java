@@ -8,6 +8,7 @@ import Model.Customer;
 import Model.I_ModelLogic;
 import Model.JobRole;
 import Model.ModelLogic;
+import Model.Order;
 import Model.User;
 import Utils.Constants;
 //import Utils.Constants;
@@ -78,6 +79,10 @@ public class ControllerLogic {
 
 	public HashMap<Integer, Customer> getAllCustomers() {
 		return db.getAllCustomers();	 
+	}
+	
+	public HashMap<String, Order> getAllOrders() {
+		return db.getAllOrders();
 	}
 	
 	public HashMap<String, Contact> getAllContacts(){

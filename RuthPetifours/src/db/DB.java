@@ -6,6 +6,7 @@ import java.util.HashMap;
 import Model.Contact;
 import Model.Customer;
 import Model.JobRole;
+import Model.Order;
 import Model.User;
 
 
@@ -35,7 +36,11 @@ public class DB {
 	try{  
 		Class.forName("com.mysql.jdbc.Driver");  
 		con=DriverManager.getConnection(  
-		"jdbc:mysql://localhost:3306/sys","root","Longshot747");  
+		"jdbc:mysql://localhost:3306/sys","root","Longshot747"
+			/*"jdbc:mysql://localhost:3306/ruth_db","root","1234"*/	
+		 );  
+		 
+				
 
 		/*Statement stmt=con.createStatement();  
 		ResultSet rs=stmt.executeQuery("select * from permissions");  
@@ -72,6 +77,34 @@ public class DB {
 			System.out.println("DB is not available");
 		return null;
 	}
+	
+	public  HashMap<String, Order> getAllOrders() {
+		HashMap<String, Order> orders = new HashMap<String, Order>();
+		
+		if(setConnection()) {
+			try {
+				stmt = con.createStatement();
+				ResultSet rs=stmt.executeQuery("select * from order");  
+				while(rs.next())  {
+					//System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3)+"  "+rs.getString(4));  
+					
+					Order o = new Order(rs.getString(1), rs.getDate(2), rs.getDate(3), null, 
+							rs.getDate(5), null, null, rs.getFloat(8), rs.getDate(9), rs.getDate(10));
+					//o.setContacts(getContactsOfCustomer(c));
+					orders.put(rs.getString(1), o);
+					
+				}
+				con.close();
+				return orders;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return null;
+	}
+	
 	
 	public ArrayList<Contact> getContactsOfCustomer(Customer cus) {
 		ArrayList<Contact> contacts = new ArrayList();
