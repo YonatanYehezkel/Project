@@ -23,9 +23,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
@@ -34,6 +36,8 @@ public class CustomersManageController implements Initializable{
 	@FXML Button Back;
 	
 	@FXML Button Add;
+	
+	@FXML Button Remove;
 	
 	@FXML private TableView<Customer> customersTable;
 	
@@ -121,5 +125,44 @@ public class CustomersManageController implements Initializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@FXML private void removeCustomer() {
+		
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.initOwner(MainClass.getPrimaryStage());
+        alert.setTitle("Confirm before delete");
+        alert.setHeaderText("Customer Action");
+        alert.setContentText("Are you sure yo want to remove the customre from the system?");
+        alert.showAndWait();
+       
+        if(alert.getResult().getText().equals("OK")) {
+        	Customer del = customersTable.getSelectionModel().getSelectedItem();
+        	int del_id = del.getId();
+        	if(DBC.deleteCustomer(del_id)) {
+        		int selectedIndex = customersTable.getSelectionModel().getSelectedIndex();
+        	    if (selectedIndex >= 0) {
+        	    	customersTable.getItems().remove(selectedIndex);
+        	    }
+        	    
+        	    Alert alert2 = new Alert(AlertType.INFORMATION);
+        	    alert2.initOwner(MainClass.getPrimaryStage());
+        	    alert2.setTitle("Delete Confirmation");
+        	    alert2.setHeaderText("Customer Action");
+        	    alert2.setContentText("Selected customer has been successfully removed");
+        	    alert2.showAndWait();	    	
+        	}
+        }
+	}
+	
+	@FXML private void editCustomerDetails() {
+		
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.initOwner(MainClass.getPrimaryStage());
+        alert.setTitle("Confirm before delete");
+        alert.setHeaderText("Customer Action");
+        alert.setContentText("Are you sure yo want to change the customre from the system?");
+        alert.showAndWait();
+		
 	}
 }
