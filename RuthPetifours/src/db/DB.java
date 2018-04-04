@@ -39,8 +39,8 @@ public class DB {
 	try{  
 		Class.forName("com.mysql.jdbc.Driver");  
 		con=DriverManager.getConnection(  
-		/*"jdbc:mysql://localhost:3306/sys","root","Longshot747"*/
-			"jdbc:mysql://localhost:3306/ruth_db","root","1234"
+		"jdbc:mysql://localhost:3306/sys","root","Longshot747"
+			/*"jdbc:mysql://localhost:3306/ruth_db","root","1234"*/
 		 );  
 		 
 				
@@ -429,8 +429,6 @@ public class DB {
 
 
 
-/////////////////////////////////////////////////////////////////////////////////////////
-
 public User getUserByID(int id) {
 	User u = null;
 	if(setConnection()) {
@@ -573,6 +571,89 @@ public boolean deleteProduct (int id) throws MySQLIntegrityConstraintViolationEx
 	}
 	else 
 		System.out.println("DB is not available");
+	return false;
+}
+
+public boolean addNewProduct (Product p) {
+	if(setConnection()) {
+		try {
+			String query = "insert into product (idproduct, title, price, unit)"
+				        + " values (?, ?, ?, ?)";
+			PreparedStatement statement = con.prepareStatement(query);    
+			//ResultSet rs = statement.executeQuery(); 
+			statement.setInt (1, p.getId());
+			statement.setString (2, p.getTitle());
+			statement.setFloat (3, p.getPrice());
+			statement.setString (4, p.getUnit());
+			
+
+		      // execute the preparedstatement
+			statement.execute();
+		      
+		    con.close();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+	}
+	else 
+		System.out.println("DB is not available");
+	return false;
+}
+
+public boolean addNewOrder(Order o) {
+	if(setConnection()) {
+		try {
+			String query = "insert into order (ordernum, submitted_date, delivery_eta, "
+					+ "submitted_by, update_date, update_by, customer_id, discount,"
+					+ "actual_delivery_date, payment_date)"
+				        + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement statement = con.prepareStatement(query);    
+			//ResultSet rs = statement.executeQuery(); 
+			statement.setString (1, o.getId());
+			statement.setDate (2, o.getSubmitted_date());
+			statement.setDate (3, o.getDelivery_eta());
+			//statement.setInt (4, o.getSubmitted_by());
+			
+
+		      // execute the preparedstatement
+			statement.execute();
+		      
+		    con.close();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+	}
+	else 
+		System.out.println("DB is not available");
+	return false;
+}
+
+public boolean updateCustomer (Customer c) {
+	
+	if(setConnection()) {
+		try {
+			 String query = "update customer set customername = ?, adress = ?, comment = ? "
+			 		+ "where idcustomer = ?";
+		     PreparedStatement preparedStmt = con.prepareStatement(query);
+		     preparedStmt.setString  (1, c.getCustomerName());
+		     preparedStmt.setString(2, c.getAdress());
+		     preparedStmt.setString(3, c.getComment());
+		     preparedStmt.setInt(4, c.getId());
+
+		     // execute the java preparedstatement
+		     preparedStmt.executeUpdate();
+		      
+		    con.close();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+	}
+	else 
+		System.out.println("DB is not available");
+		
 	return false;
 }
 
