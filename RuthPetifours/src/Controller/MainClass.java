@@ -16,6 +16,7 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 
 import Model.Customer;
 import Model.Product;
+import Model.User;
 
 public class MainClass extends Application {
 	
@@ -63,7 +64,8 @@ public class MainClass extends Application {
 		//DB db = new DB();
 		//db.getAllCustomers();
 		controller = new ControllerLogic();
-		controller.updateCustomer(new Customer (2, "AAAA", null, null));
+		//System.out.println(controller.getUserByUsername("TestUser").getPassword());
+		controller.updateUser(new User(2, "AAAA", "a", "a", "a", "a", "a", 1));
 		//System.out.println(controller.getProductByID(1111).getTitle());
 		//System.out.println(controller.getAllOrders().get("1").getCustomer());
 		//System.out.println(controller.getAllCustomers().get(1).getCustomerName());

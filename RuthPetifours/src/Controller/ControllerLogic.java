@@ -183,5 +183,15 @@ public class ControllerLogic {
 			return true;
 		return false;
 	}
+	
+	public User getUserByUsername(String username) {
+		return db.getUserByUsername(username);
+	}
+	
+	public boolean updateUser(User u) {
+		if(db.updateUser(u))
+			return true;
+		return false;
+	}
 
 }
