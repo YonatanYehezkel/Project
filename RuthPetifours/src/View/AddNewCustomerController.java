@@ -16,7 +16,7 @@ import javafx.scene.control.Button;
 
 public class AddNewCustomerController {
 	
-	@FXML private TextField id;
+	//@FXML private TextField id;
 	
 	@FXML private TextField name;
 	
@@ -35,7 +35,7 @@ public class AddNewCustomerController {
 	@FXML private void addNewCustomerToDB(){
 		
 		
-		if(!id.getText().isEmpty() && !name.getText().isEmpty() && !address.getText().isEmpty() && !comments.getText().isEmpty()) {
+		if(!name.getText().isEmpty() && !address.getText().isEmpty() && !comments.getText().isEmpty()) {
 			
 			Customer c = new Customer (name.getText(),address.getText(),comments.getText());
 			
