@@ -58,12 +58,15 @@ public class MainClass extends Application {
 		//DB db = new DB();
 		//db.getAllCustomers();
 		controller = new ControllerLogic();
-		//System.out.println(controller.getAllOrders().get("1").getId());
+		controller.deleteProduct(1111);
+		//System.out.println(controller.getProductByID(1111).getTitle());
+		//System.out.println(controller.getAllOrders().get("1").getCustomer());
+		//System.out.println(controller.getAllCustomers().get(1).getCustomerName());
 		
 		
 		LocalDateTime updated_date=LocalDateTime.now();
 	    //Timestamp timestamp = new Timestamp(updated_date.getTime());
 	    //updated_date = timestamp;
-		System.out.println(updated_date);
+		//System.out.println(updated_date);
 	}
 }

@@ -3,10 +3,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import Model.Contact;
 import Model.Customer;
 import Model.JobRole;
 import Model.Order;
+import Model.Product;
 import Model.User;
 
 
@@ -36,8 +39,8 @@ public class DB {
 	try{  
 		Class.forName("com.mysql.jdbc.Driver");  
 		con=DriverManager.getConnection(  
-		"jdbc:mysql://localhost:3306/sys","root","Longshot747"
-			/*"jdbc:mysql://localhost:3306/ruth_db","root","1234"*/	
+		/*"jdbc:mysql://localhost:3306/sys","root","Longshot747"*/
+			"jdbc:mysql://localhost:3306/ruth_db","root","1234"
 		 );  
 		 
 				
@@ -78,32 +81,7 @@ public class DB {
 		return null;
 	}
 	
-	public  HashMap<String, Order> getAllOrders() {
-		HashMap<String, Order> orders = new HashMap<String, Order>();
-		
-		if(setConnection()) {
-			try {
-				stmt = con.createStatement();
-				ResultSet rs=stmt.executeQuery("select * from order");  
-				while(rs.next())  {
-					//System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3)+"  "+rs.getString(4));  
-					
-					Order o = new Order(rs.getString(1), rs.getDate(2), rs.getDate(3), null, 
-							rs.getDate(5), null, null, rs.getFloat(8), rs.getDate(9), rs.getDate(10));
-					//o.setContacts(getContactsOfCustomer(c));
-					orders.put(rs.getString(1), o);
-					
-				}
-				con.close();
-				return orders;
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}  
-		}
-		else 
-			System.out.println("DB is not available");
-		return null;
-	}
+	
 	
 	
 	public ArrayList<Contact> getContactsOfCustomer(Customer cus) {
@@ -179,6 +157,8 @@ public class DB {
 			System.out.println("DB is not available");
 		return null;
 	}
+	
+	
 	
 	public ArrayList<JobRole> getAllJobRoles (){
 		ArrayList<JobRole> roles = new ArrayList();
@@ -446,7 +426,158 @@ public class DB {
 			System.out.println("DB is not available");
 		return false;
 	}
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+public User getUserByID(int id) {
+	User u = null;
+	if(setConnection()) {
+		try {
+			
+			PreparedStatement statement = con.prepareStatement("select * from user where iduser = ?");    
+			statement.setInt(1, id); 
+			ResultSet rs = statement.executeQuery(); 
+			while(rs.next())  {
+				//System.out.println(rs.getInt(1) + rs.getString(2) + rs.getString(3) + rs.getString(4) + rs.getString(5) + rs.getString(6) + rs.getString(7) + rs.getInt(8));  
+				u = new User(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
+				//c.setContacts(getContactsOfCustomer(c));
+			}
+			con.close();
+			return u;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+	}
+	else 
+		System.out.println("DB is not available");
+	return null;
 }
+
+public  HashMap<String, Order> getAllOrders() {
+	HashMap<String, Order> orders = new HashMap<String, Order>();
+	
+	if(setConnection()) {
+		try {
+			stmt = con.createStatement();
+			ResultSet rs=stmt.executeQuery("select * from ruth_db.order");  
+			while(rs.next())  {
+				//System.out.println(rs.getString(1) + rs.getDate(2) + rs.getDate(3) +rs.getInt(4)  +
+					//	rs.getDate(5) + rs.getInt(6) + rs.getInt(7)+  rs.getFloat(8) + rs.getDate(9) +
+						//rs.getDate(10));  
+				
+				Order o = new Order(
+						rs.getString(1), 
+						rs.getDate(2), 
+						rs.getDate(3),
+						getUserByID(rs.getInt(4)).getUserName(), 
+						rs.getDate(5), 
+						getUserByID(rs.getInt(6)).getUserName(), 
+						getCompanyByID(rs.getInt(7)).getCustomerName(), 
+						rs.getFloat(8), 
+						rs.getDate(9), 
+						rs.getDate(10));
+				//o.setContacts(getContactsOfCustomer(c));
+				orders.put(rs.getString(1), o);
+				//System.out.println(rs.getInt(1));
+			
+			}
+			con.close();
+			return orders;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+	}
+	else 
+		System.out.println("DB is not available");
+	return null;
+}
+
+public ArrayList <Product> getAllProductsbyOrder(String orderID){
+	ArrayList <Product> products = new ArrayList();
+	
+	if(setConnection()) {
+		try {
+			stmt = con.createStatement();
+			ResultSet rs=stmt.executeQuery("select * from ruth_db.order_details where idorder = ?");  
+			while(rs.next())  {
+				//System.out.println(rs.getString(1) + rs.getDate(2) + rs.getDate(3) +rs.getInt(4)  +
+					//	rs.getDate(5) + rs.getInt(6) + rs.getInt(7)+  rs.getFloat(8) + rs.getDate(9) +
+						//rs.getDate(10));  
+				
+				//Product p = new Product(
+					//	rs.getString(1), 
+						//rs.getInt(2), 
+						//rs.getFloat(3)
+					//);
+				//o.setContacts(getContactsOfCustomer(c));
+				//orders.put(rs.getString(1), o);
+				//System.out.println(rs.getInt(1));
+			
+			}
+			con.close();
+			return products;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+	}
+	else 
+		System.out.println("DB is not available");
+	return null;
+}
+
+public Product getProductByID(int id) {
+	Product p = null;
+	if(setConnection()) {
+		try {
+			
+			PreparedStatement statement = con.prepareStatement("select * from product where idproduct = ?");    
+			statement.setInt(1, id); 
+			ResultSet rs = statement.executeQuery(); 
+			while(rs.next())  {
+				//System.out.println(rs.getInt(1) + rs.getString(2) + rs.getString(3) + rs.getString(4) + rs.getString(5) + rs.getString(6) + rs.getString(7) + rs.getInt(8));  
+				p = new Product(rs.getInt(1), rs.getString(2), rs.getFloat(3), rs.getString(4));
+				//c.setContacts(getContactsOfCustomer(c));
+			}
+			con.close();
+			return p;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+	}
+	else 
+		System.out.println("DB is not available");
+	return null;
+}
+
+public boolean deleteProduct (int id) throws MySQLIntegrityConstraintViolationException {
+	if(setConnection()) {
+		try {
+			String query = "DELETE FROM product WHERE idproduct = ?";
+			PreparedStatement statement = con.prepareStatement(query);    
+			//ResultSet rs = statement.executeQuery(); 
+			statement.setInt(1, id);
+
+		      // execute the preparedstatement
+			statement.execute();
+		      
+		    con.close();
+			return true;
+		} catch (MySQLIntegrityConstraintViolationException e) {
+			throw new MySQLIntegrityConstraintViolationException();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}  
+	}
+	else 
+		System.out.println("DB is not available");
+	return false;
+}
+
+} 
+
 		
 
 

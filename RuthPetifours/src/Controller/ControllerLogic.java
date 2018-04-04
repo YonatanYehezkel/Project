@@ -9,6 +9,7 @@ import Model.I_ModelLogic;
 import Model.JobRole;
 import Model.ModelLogic;
 import Model.Order;
+import Model.Product;
 import Model.User;
 import Utils.Constants;
 //import Utils.Constants;
@@ -148,6 +149,20 @@ public class ControllerLogic {
 	public boolean deleteCustomer (String s) {
 		if(db.deleteCustomer(s))
 				return true;
+		return false;
+	}
+	
+	public User getUserByID(int id) {
+		return db.getUserByID(id);
+	}
+	
+	public Product getProductByID(int id) {
+		return db.getProductByID(id);
+	}
+	
+	public boolean deleteProduct (int id) {
+	//	if(db.deleteProduct(id))
+	//			return true;
 		return false;
 	}
 	

@@ -5,17 +5,29 @@ public class Product {
 	public int id;
 	public String title;
 	public float price;
+	public float quantity;
+	public String unit;
 	
 	/*
 	 * full Product constructor
 	 */
-	public Product(int id, String title, float price) {
+	public Product(int id, String title, float price, float quantity, String unit) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.price = price;
+		this.quantity = quantity;
+		this.unit = unit;
 	}
 
+	public Product(int id, String title, float price, String unit) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.price = price;
+		this.unit = unit;
+	}
+	
 	public int getId() {
 		return id;
 	}
