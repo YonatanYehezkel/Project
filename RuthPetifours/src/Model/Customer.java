@@ -9,6 +9,7 @@ public class Customer {
 	public String adress;
 	public String comment;
 	public ArrayList<Contact> contacts;
+	public int ordersAmount;
 	
 	/*
 	 * Customer constructor w/o list of contacts
@@ -81,10 +82,10 @@ public class Customer {
 		this.contacts = contacts;
 	}
 	
-	
-	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", customerName=" + customerName + ", adress=" + adress + ", comment=" + comment
+				+ ", contacts=" + contacts + ", ordersAmount=" + ordersAmount + "]";
+	}
 
 }
