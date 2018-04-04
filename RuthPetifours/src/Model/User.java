@@ -11,6 +11,10 @@ public class User {
 	public String answer2;
 	public int idJobRole;
 	
+	public User() {
+		super();		
+	}
+	
 	public User(int id, String userName, String password, String question1, String question2, String answer1,
 			String answer2, int idJobRole) {
 		super();
