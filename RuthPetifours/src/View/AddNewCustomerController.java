@@ -37,7 +37,7 @@ public class AddNewCustomerController {
 		
 		if(!id.getText().isEmpty() && !name.getText().isEmpty() && !address.getText().isEmpty() && !comments.getText().isEmpty()) {
 			
-			Customer c = new Customer (Integer.parseInt(id.getText()),name.getText(),address.getText(),comments.getText());
+			Customer c = new Customer (name.getText(),address.getText(),comments.getText());
 			
 			if(DBC.addNewCustomer(c)) {
 				

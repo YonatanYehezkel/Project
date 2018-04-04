@@ -11,8 +11,13 @@ import javafx.scene.layout.AnchorPane;
 
 public class UsersManageController {
 	
-@FXML Button Back;
+	@FXML Button Back;
 	
+	@FXML Button Add;
+	
+	@FXML Button Remove;
+	
+
 	@FXML private void goBackToMainMenu(){
 		
 		try {
