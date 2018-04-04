@@ -657,6 +657,11 @@ public boolean updateCustomer (Customer c) {
 	return false;
 }
 
+public boolean updateUser(User u) {
+	
+	return false;
+}
+
 } 
 
 		
