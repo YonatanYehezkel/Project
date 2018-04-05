@@ -28,6 +28,24 @@ public class Product {
 		this.unit = unit;
 	}
 	
+	
+	
+	public float getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(float quantity) {
+		this.quantity = quantity;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
 	public int getId() {
 		return id;
 	}

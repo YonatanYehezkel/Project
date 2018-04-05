@@ -12,6 +12,12 @@ import java.sql.*;
 import java.text.DateFormat;
 import java.time.LocalDateTime;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
+import Model.Customer;
+import Model.Product;
+import Model.User;
+
 public class MainClass extends Application {
 	
 	public static Stage primaryStage;
@@ -58,7 +64,8 @@ public class MainClass extends Application {
 		//DB db = new DB();
 		//db.getAllCustomers();
 		controller = new ControllerLogic();
-		controller.deleteProduct(1111);
+		//System.out.println(controller.getUserByUsername("TestUser").getPassword());
+		//controller.updateUser(new User(2, "AAAA", "a", "a", "a", "a", "a", 1));
 		//System.out.println(controller.getProductByID(1111).getTitle());
 		//System.out.println(controller.getAllOrders().get("1").getCustomer());
 		//System.out.println(controller.getAllCustomers().get(1).getCustomerName());

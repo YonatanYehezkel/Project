@@ -3,6 +3,8 @@ package Controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import Model.Contact;
 import Model.Customer;
 import Model.I_ModelLogic;
@@ -160,10 +162,36 @@ public class ControllerLogic {
 		return db.getProductByID(id);
 	}
 	
-	public boolean deleteProduct (int id) {
-	//	if(db.deleteProduct(id))
-	//			return true;
+	public boolean deleteProduct (int id) throws MySQLIntegrityConstraintViolationException {
+		try {
+			if(db.deleteProduct(id))
+					return true;
+		} catch (MySQLIntegrityConstraintViolationException e) {
+			throw new MySQLIntegrityConstraintViolationException();
+		}
 		return false;
 	}
 	
+	public boolean addNewProduct(Product p) {
+		if(db.addNewProduct(p))
+			return true;		
+		return false;
+	}
+	
+	public boolean updateCustomer (Customer c) {
+		if(db.updateCustomer(c))
+			return true;
+		return false;
+	}
+	
+	public User getUserByUsername(String username) {
+		return db.getUserByUsername(username);
+	}
+	
+	public boolean updateUser(User u) {
+		if(db.updateUser(u))
+			return true;
+		return false;
+	}
+
 }

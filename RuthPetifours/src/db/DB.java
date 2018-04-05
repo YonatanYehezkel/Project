@@ -39,8 +39,8 @@ public class DB {
 	try{  
 		Class.forName("com.mysql.jdbc.Driver");  
 		con=DriverManager.getConnection(  
-		"jdbc:mysql://localhost:3306/sys","root","Longshot747"
-			/*"jdbc:mysql://localhost:3306/ruth_db","root","1234"*/
+		/*"jdbc:mysql://localhost:3306/sys","root","Longshot747"*/
+			"jdbc:mysql://localhost:3306/ruth_db","root","1234"
 		 );  
 		 
 				
@@ -260,6 +260,28 @@ public class DB {
 		return false;
 	}
 	
+	public boolean deleteOrder (int id) {
+		if(setConnection()) {
+			try {
+				String query = "DELETE FROM order WHERE ordernum = ?";
+				PreparedStatement statement = con.prepareStatement(query);    
+				//ResultSet rs = statement.executeQuery(); 
+				statement.setInt(1, id);
+
+			      // execute the preparedstatement
+				statement.execute();
+			      
+			    con.close();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return false;
+	}
+	
 	public boolean addNewJobRole (JobRole j) {
 		if(setConnection()) {
 			try {
@@ -429,8 +451,6 @@ public class DB {
 
 
 
-/////////////////////////////////////////////////////////////////////////////////////////
-
 public User getUserByID(int id) {
 	User u = null;
 	if(setConnection()) {
@@ -446,6 +466,55 @@ public User getUserByID(int id) {
 			}
 			con.close();
 			return u;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+	}
+	else 
+		System.out.println("DB is not available");
+	return null;
+}
+
+public User getUserByUsername(String username) {
+	User u = null;
+	if(setConnection()) {
+		try {
+			
+			PreparedStatement statement = con.prepareStatement("select * from user where username = ?");    
+			statement.setString(1, username); 
+			ResultSet rs = statement.executeQuery(); 
+			while(rs.next())  {
+				//System.out.println(rs.getInt(1) + rs.getString(2) + rs.getString(3) + rs.getString(4) + rs.getString(5) + rs.getString(6) + rs.getString(7) + rs.getInt(8));  
+				u = new User(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
+				//c.setContacts(getContactsOfCustomer(c));
+			}
+			con.close();
+			return u;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+	}
+	else 
+		System.out.println("DB is not available");
+	return null;
+}
+
+public Customer getCustomerByName(String name) {
+	Customer c = null;
+	if(setConnection()) {
+		try {
+			
+			PreparedStatement statement = con.prepareStatement("select * from customer "
+					+ "where customername = ?");    
+			statement.setString(1, name); 
+			ResultSet rs = statement.executeQuery(); 
+			while(rs.next())  {
+				//System.out.println(rs.getInt(1) + rs.getString(2) + rs.getString(3) + rs.getString(4) + rs.getString(5) + rs.getString(6) + rs.getString(7) + rs.getInt(8));  
+				c = new Customer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
+				//c.setContacts(getContactsOfCustomer(c));
+			}
+			con.close();
+			return c;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}  
@@ -573,6 +642,126 @@ public boolean deleteProduct (int id) throws MySQLIntegrityConstraintViolationEx
 	}
 	else 
 		System.out.println("DB is not available");
+	return false;
+}
+
+public boolean addNewProduct (Product p) {
+	if(setConnection()) {
+		try {
+			String query = "insert into product (idproduct, title, price, unit)"
+				        + " values (?, ?, ?, ?)";
+			PreparedStatement statement = con.prepareStatement(query);    
+			//ResultSet rs = statement.executeQuery(); 
+			statement.setInt (1, p.getId());
+			statement.setString (2, p.getTitle());
+			statement.setFloat (3, p.getPrice());
+			statement.setString (4, p.getUnit());
+			
+
+		      // execute the preparedstatement
+			statement.execute();
+		      
+		    con.close();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+	}
+	else 
+		System.out.println("DB is not available");
+	return false;
+}
+
+public boolean addNewOrder(Order o) {
+	if(setConnection()) {
+		try {
+			String query = "insert into order (ordernum, submitted_date, delivery_eta, "
+					+ "submitted_by, update_date, update_by, customer_id, discount,"
+					+ "actual_delivery_date, payment_date)"
+				        + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement statement = con.prepareStatement(query);    
+			//ResultSet rs = statement.executeQuery(); 
+			statement.setString (1, o.getId());
+			statement.setDate (2, o.getSubmitted_date());
+			statement.setDate (3, o.getDelivery_eta());
+			statement.setInt (4, getUserByUsername(o.getSubmitted_by()).getId());
+			statement.setDate (5, o.getUpdate_date());
+			statement.setInt (6, getUserByUsername(o.getUpdated_by()).getId());
+			statement.setInt (7, getCustomerByName(o.getCustomer()).getId());
+			statement.setFloat (8, o.getDiscount());
+			statement.setDate (9, o.getActual_delivery_date());
+			statement.setDate (10, o.getPayment_date());
+
+		      // execute the preparedstatement
+			statement.execute();
+		      
+		    con.close();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+	}
+	else 
+		System.out.println("DB is not available");
+	return false;
+}
+
+public boolean updateCustomer (Customer c) {
+	
+	if(setConnection()) {
+		try {
+			 String query = "update customer set customername = ?, adress = ?, comment = ? "
+			 		+ "where idcustomer = ?";
+		     PreparedStatement preparedStmt = con.prepareStatement(query);
+		     preparedStmt.setString  (1, c.getCustomerName());
+		     preparedStmt.setString(2, c.getAdress());
+		     preparedStmt.setString(3, c.getComment());
+		     preparedStmt.setInt(4, c.getId());
+
+		     // execute the java preparedstatement
+		     preparedStmt.executeUpdate();
+		      
+		    con.close();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+	}
+	else 
+		System.out.println("DB is not available");
+		
+	return false;
+}
+
+
+public boolean updateUser(User u) {
+	if(setConnection()) {
+		try {
+			 String query = "update user set username = ?, password = ?, question1 = ?,"
+			 		+ " question2 = ?, answer1 = ?, answer2 = ?, jobrole = ? "
+			 		+ "where iduser = ?";
+		     PreparedStatement preparedStmt = con.prepareStatement(query);
+		     preparedStmt.setString  (1, u.getUserName());
+		     preparedStmt.setString(2, u.getPassword());
+		     preparedStmt.setString(3, u.getQuestion1());
+		     preparedStmt.setString(4, u.getQuestion2());
+		     preparedStmt.setString(5, u.getAnswer1());
+		     preparedStmt.setString(6, u.getAnswer2());
+		     preparedStmt.setInt(7, u.getIdJobRole());
+		     preparedStmt.setInt(8, u.getId());
+
+		     // execute the java preparedstatement
+		     preparedStmt.executeUpdate();
+		      
+		    con.close();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  
+	}
+	else 
+		System.out.println("DB is not available");
+		
 	return false;
 }
 
