@@ -10,23 +10,22 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.UsersManageController">
    <children>
-      <ImageView fitHeight="681.0" fitWidth="1038.0" pickOnBounds="true" preserveRatio="true" />
-      <TableView layoutX="24.0" layoutY="135.0" prefHeight="526.0" prefWidth="567.0">
+      <ImageView fitHeight="681.0" fitWidth="748.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" />
+      <TableView fx:id="usersTable" layoutX="24.0" layoutY="135.0" prefHeight="526.0" prefWidth="443.0">
         <columns>
-          <TableColumn prefWidth="142.0" text="User ID" />
-          <TableColumn minWidth="8.0" prefWidth="141.0" text="User Name" />
-            <TableColumn minWidth="8.0" prefWidth="141.0" text="User Address" />
-            <TableColumn minWidth="8.0" prefWidth="141.0" text="Position" />
+          <TableColumn fx:id="id" prefWidth="142.0" text="User ID" />
+          <TableColumn fx:id="userName" minWidth="8.0" prefWidth="141.0" text="User Name" />
+            <TableColumn fx:id="idJobRole" minWidth="8.0" prefWidth="141.0" text="Job Role" />
         </columns>
       </TableView>
-      <Label layoutX="352.0" layoutY="35.0" text="Users Managment">
+      <Label layoutX="240.0" layoutY="35.0" text="Users Managment">
          <font>
             <Font size="39.0" />
          </font>
       </Label>
-      <Button fx:id="Add" layoutX="783.0" layoutY="135.0" mnemonicParsing="false" text="Add User" />
-      <Button fx:id="Edit" layoutX="749.0" layoutY="206.0" mnemonicParsing="false" text="Change User Details" />
-      <Button fx:id="Remove" layoutX="771.0" layoutY="278.0" mnemonicParsing="false" text="Remove User" />
+      <Button fx:id="Add" layoutX="587.0" layoutY="135.0" mnemonicParsing="false" onAction="#goToAddScreen" text="Add User" />
+      <Button fx:id="Edit" layoutX="553.0" layoutY="371.0" mnemonicParsing="false" text="Change User Details" />
+      <Button fx:id="Remove" layoutX="575.0" layoutY="627.0" mnemonicParsing="false" onAction="#removeCustomer" text="Remove User" />
       <Button fx:id="Back" layoutX="24.0" layoutY="32.0" mnemonicParsing="false" onAction="#goBackToMainMenu" text="Back" />
    </children>
 </AnchorPane>

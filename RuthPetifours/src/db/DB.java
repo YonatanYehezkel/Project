@@ -39,8 +39,8 @@ public class DB {
 	try{  
 		Class.forName("com.mysql.jdbc.Driver");  
 		con=DriverManager.getConnection(  
-		/*"jdbc:mysql://localhost:3306/sys","root","Longshot747"*/
-			"jdbc:mysql://localhost:3306/ruth_db","root","1234"
+		"jdbc:mysql://localhost:3306/sys","root","Longshot747"
+			/*"jdbc:mysql://localhost:3306/ruth_db","root","1234"*/
 		 );  
 		 
 				

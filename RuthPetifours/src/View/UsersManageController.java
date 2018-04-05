@@ -40,9 +40,9 @@ public class UsersManageController implements Initializable{
 	
 	@FXML private TableColumn<User,String> userName;
 	
-	@FXML private TableColumn<User,String> adress;
+	//@FXML private TableColumn<User,String> adress;
 	
-	@FXML private TableColumn<User,String> position;
+	@FXML private TableColumn<User,Integer> idJobRole;
 	
 	@FXML private ObservableList<User> Users;
 	
@@ -77,8 +77,9 @@ public class UsersManageController implements Initializable{
 		
 		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		userName.setCellValueFactory(new PropertyValueFactory<>("userName"));
-		adress.setCellValueFactory(new PropertyValueFactory<>("adress"));
-		position.setCellValueFactory(new PropertyValueFactory<>("position"));
+		idJobRole.setCellValueFactory(new PropertyValueFactory<>("idJobRole"));
+		
+		loadDataFromDB();
 	}
 	
 	@FXML private void loadDataFromDB(){

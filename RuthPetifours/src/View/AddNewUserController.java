@@ -1,26 +1,46 @@
 package View;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import Controller.MainClass;
-import Model.Customer;
+import Model.JobRole;
+import Model.User;
 import db.DB;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 
-public class AddNewUserController {
+public class AddNewUserController implements Initializable{
 	
 	@FXML private TextField name;
 	
-	@FXML private TextField address;
+	@FXML private TextField password;
 	
-	@FXML private TextField position;
+	@FXML private TextField question1;
+	
+	@FXML private TextField answer1;
+	
+	@FXML private TextField question2;
+	
+	@FXML private TextField answer2;
+	
+	@FXML private ComboBox<JobRole> jobRole = new ComboBox<JobRole>();
+	
+	@FXML private ArrayList<JobRole> jobs = new ArrayList<JobRole>();
+	
+	@FXML private ObservableList<JobRole> jobsList = FXCollections.observableArrayList(new ArrayList<JobRole>());
 	
 	@FXML private Button Save;
 	
@@ -31,22 +51,24 @@ public class AddNewUserController {
 	@FXML private void addNewUserToDB(){
 		
 		
-		if(!name.getText().isEmpty() && !address.getText().isEmpty() && !position.getText().isEmpty()) {
+		if(!name.getText().isEmpty() && !password.getText().isEmpty() && !question1.getText().isEmpty() && !answer1.getText().isEmpty() 
+				&& !question2.getText().isEmpty() && !answer2.getText().isEmpty() && !jobRole.getValue().getJobRole().equals("")) {
 			
-			Customer c = new Customer (name.getText(),address.getText(),position.getText());
+			User u = new User (name.getText(), password.getText() , question1.getText() , answer1.getText()
+					,question2.getText() ,answer2.getText() ,jobRole.getValue().getId());
 			
-			if(DBC.addNewCustomer(c)) {
+			if(DBC.addNewUser(u)) {
 				
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.initOwner(MainClass.getPrimaryStage());
-	            alert.setTitle("New Customer has been added successfuly");
-	            alert.setHeaderText("Customer Action");
-	            alert.setContentText("New Customer has been added successfulyl");
+	            alert.setTitle("New User has been added successfuly");
+	            alert.setHeaderText("User Action");
+	            alert.setContentText("New User has been added successfulyl");
 	            alert.showAndWait();
 	            
 	            try {
 					FXMLLoader loader = new FXMLLoader();
-					loader.setLocation(MainMenuController.class.getResource("/View/MainMenuScreen.fxml"));
+					loader.setLocation(MainMenuController.class.getResource("/View/UsersManageScreen.fxml"));
 					AnchorPane appSet = loader.load();
 					Scene appSetScene = new Scene(appSet);
 					
@@ -60,13 +82,13 @@ public class AddNewUserController {
 				
 			}
 			
-			else if (!DBC.addNewCustomer(c)) {
+			else if (!DBC.addNewUser(u)) {
 				
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.initOwner(MainClass.getPrimaryStage());
-	            alert.setTitle("There was a problem adding new customer");
-	            alert.setHeaderText("Customer Action");
-	            alert.setContentText("There was a problem adding new customer");
+	            alert.setTitle("There was a problem adding the new user");
+	            alert.setHeaderText("User Action");
+	            alert.setContentText("There was a problem adding new user");
 	            alert.showAndWait();
 				
 			}
@@ -76,8 +98,8 @@ public class AddNewUserController {
 			
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.initOwner(MainClass.getPrimaryStage());
-            alert.setTitle("There was a problem adding new customer");
-            alert.setHeaderText("Customer Action");
+            alert.setTitle("There was a problem adding the new user");
+            alert.setHeaderText("User Action");
             alert.setContentText("Please fill all of the fields before pressing the SAVE button");
             alert.showAndWait();
 		}
@@ -88,7 +110,7 @@ public class AddNewUserController {
 		
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainMenuController.class.getResource("/View/CustomersManageScreen.fxml"));
+			loader.setLocation(MainMenuController.class.getResource("/View/UsersManageScreen.fxml"));
 			AnchorPane appSet = loader.load();
 			Scene appSetScene = new Scene(appSet);
 			
@@ -100,6 +122,18 @@ public class AddNewUserController {
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		jobs = DBC.getAllJobRoles();
+		
+		for(JobRole j : jobs) {
+			jobsList.add(j);
+		}
+		
+		jobRole.setItems(jobsList);
 	}
 
 }

@@ -28,6 +28,11 @@ public class JobRole {
 	public void setJobRole(String jobRole) {
 		this.jobRole = jobRole;
 	}
+
+	@Override
+	public String toString() {
+		return jobRole;
+	}
 	
 	
 
