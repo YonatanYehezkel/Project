@@ -33,7 +33,9 @@
          </font>
       </Button>
       <ComboBox fx:id="userList" layoutX="224.0" layoutY="94.0" onAction="#setSelectedUser" prefHeight="30.0" prefWidth="200.0" />
-      <PasswordField id="password" fx:id="password" layoutX="224.0" layoutY="149.0" prefHeight="30.0" prefWidth="200.0" />
+      <PasswordField id="password" fx:id="password" layoutX="224.0" layoutY="149.0" onKeyPressed="#hideErrorPassword" prefHeight="30.0" prefWidth="200.0" />
       <Text id="forgotPassword" fx:id="forgotPassword" layoutX="224.0" layoutY="206.0" onMouseClicked="#openResrorePasswordWindow" strokeType="OUTSIDE" strokeWidth="0.0" text="Forgot your password?" underline="true" wrappingWidth="193.0000004172325" />
+      <Text fx:id="errorUser" fill="#9e070e" layoutX="361.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="select user" wrappingWidth="62.99999886006117" />
+      <Text fx:id="errorPassword" fill="#9e070e" layoutX="339.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="type password" wrappingWidth="156.99999505281448" />
    </children>
 </AnchorPane>

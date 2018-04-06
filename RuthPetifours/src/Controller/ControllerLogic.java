@@ -188,6 +188,7 @@ public class ControllerLogic {
 		return db.getUserByUsername(username);
 	}
 	
+	
 	public boolean updateUser(User u) {
 		if(db.updateUser(u))
 			return true;
