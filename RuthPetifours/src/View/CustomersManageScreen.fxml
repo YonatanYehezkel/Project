@@ -27,7 +27,7 @@
          </font>
       </Label>
       <Button fx:id="Add" layoutX="989.0" layoutY="135.0" mnemonicParsing="false" onAction="#goToAddScreen" text="Add Customer" />
-      <Button layoutX="955.0" layoutY="203.0" mnemonicParsing="false" text="Change Customer Details" />
+      <Button fx:id="Edit" layoutX="955.0" layoutY="203.0" mnemonicParsing="false" onAction="#editCustomerDetails" text="Change Customer Details" />
       <Button fx:id="Remove" layoutX="977.0" layoutY="275.0" mnemonicParsing="false" onAction="#removeCustomer" text="Remove Customer" />
       <Button fx:id="Back" layoutX="24.0" layoutY="32.0" mnemonicParsing="false" onAction="#goBackToMainMenu" text="Back" />
    </children>
