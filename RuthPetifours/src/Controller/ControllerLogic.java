@@ -194,5 +194,11 @@ public class ControllerLogic {
 			return true;
 		return false;
 	}
+	
+	public boolean importCustomersFromExcel() {
+		if(db.importCustomersFromExcel("a"))
+			return true;
+		return false;		
+	}
 
 }

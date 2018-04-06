@@ -64,6 +64,7 @@ public class MainClass extends Application {
 		//DB db = new DB();
 		//db.getAllCustomers();
 		controller = new ControllerLogic();
+		controller.importCustomersFromExcel();
 		//System.out.println(controller.getUserByUsername("TestUser").getPassword());
 		//controller.updateUser(new User(2, "AAAA", "a", "a", "a", "a", "a", 1));
 		//System.out.println(controller.getProductByID(1111).getTitle());

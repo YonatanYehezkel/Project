@@ -30,6 +30,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 
 public class CustomersManageController implements Initializable{
 	
@@ -38,6 +39,8 @@ public class CustomersManageController implements Initializable{
 	@FXML Button Add;
 	
 	@FXML Button Remove;
+	
+	@FXML Button fromExcel;
 	
 	@FXML private TableView<Customer> customersTable;
 	
@@ -164,5 +167,11 @@ public class CustomersManageController implements Initializable{
         alert.setContentText("Are you sure yo want to change the customre from the system?");
         alert.showAndWait();
 		
+	}
+	
+	@FXML private void exportFromExcel() {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Resource File");
+		fileChooser.showOpenDialog(MainClass.getPrimaryStage());
 	}
 }

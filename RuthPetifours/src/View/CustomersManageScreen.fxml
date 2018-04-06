@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomersManageController">
+<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomersManageController">
    <children>
       <ImageView fitHeight="691.0" fitWidth="1190.0" layoutX="-39.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true" />
       <TableView fx:id="customersTable" layoutX="24.0" layoutY="135.0" prefHeight="526.0" prefWidth="914.0">
@@ -30,5 +30,6 @@
       <Button layoutX="955.0" layoutY="203.0" mnemonicParsing="false" text="Change Customer Details" />
       <Button fx:id="Remove" layoutX="977.0" layoutY="275.0" mnemonicParsing="false" onAction="#removeCustomer" text="Remove Customer" />
       <Button fx:id="Back" layoutX="24.0" layoutY="32.0" mnemonicParsing="false" onAction="#goBackToMainMenu" text="Back" />
+      <Button fx:id="fromExcel" layoutX="24.0" layoutY="97.0" mnemonicParsing="false" onAction="#exportFromExcel" text="From excel" />
    </children>
 </AnchorPane>
