@@ -824,6 +824,10 @@ public class DB {
 		
 		return false;
 	}
+	
+	public void test() {
+		
+	}
 
 } 
 
