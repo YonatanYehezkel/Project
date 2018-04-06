@@ -1,24 +1,18 @@
 package View;
 
 import java.io.IOException;
-
 import javax.swing.JOptionPane;
-
 import Controller.ControllerLogic;
 import Controller.MainClass;
-import Model.Customer;
-import Model.JobRole;
 import Model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.SelectionModel;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 
 public class LoginScreenController {
@@ -26,6 +20,8 @@ public class LoginScreenController {
 	@FXML private ComboBox<String> userList;
 	@FXML private PasswordField password;
 	@FXML private Button Login;
+	@FXML private Text errorUser;
+	@FXML private Text errorPassword;
 	
 	  //ControllerLogic reference pointer
   	private static ControllerLogic controller;
@@ -40,29 +36,38 @@ public class LoginScreenController {
   	}
 	
   	@FXML public void validateUserInput () {
-  		//System.out.println(controller.getAllUsers().get(userList.getSelectionModel().getSelectedItem()).getPassword() + " db");
-  		//System.out.println(password.getText());
-  		if(password.getText().equals(controller.getAllUsers().get(userList.getSelectionModel().getSelectedItem()).getPassword())) {
-			System.out.println("ok");
+  		if (userList.getSelectionModel().isEmpty())
+  			errorUser.setVisible(true);
+  		else if(password.getText().equals(controller.getAllUsers().get(userList.getSelectionModel().getSelectedItem()).getPassword())) {
 			goToMainMenu();
 		}
-  		//controller.deleteCustomer("test");
-  		//controller.addNewCustomer(new Customer ("test", "test", "test"));
-				
+  		else if(password.getText().equals(""))
+  			errorPassword.setVisible(true);	
+  		else if(!password.getText().equals(controller.getAllUsers().get(userList.getSelectionModel().getSelectedItem()).getPassword())) {
+  			errorPassword.setText("password is wrong");
+  			errorPassword.setVisible(true);
+  		}
+  			
 	}
+  	
+  	@FXML public void hideErrorPassword() {
+  		errorPassword.setVisible(false);	
+  	}
 	
 	  @FXML
 	    private void initialize() {
 		  fillComboBox();
 		  currentUser = new User();
+		  errorUser.setVisible(false);
+	  	  errorPassword.setVisible(false);
 	   }
 	
 	 @FXML private void fillComboBox(){
-		// System.out.println(controller.getAllUsers().get(1).getUserName());
-		 userList.getItems().addAll(controller.getAllUsers().get("TestUser").getUserName());
+		 userList.getItems().addAll(controller.getAllUsers().keySet());
 	    }
 	 
 	 @FXML private void goToMainMenu(){
+		 
 		 
 		 try {
 				FXMLLoader loader = new FXMLLoader();
@@ -85,7 +90,7 @@ public class LoginScreenController {
 		 if(userList.getSelectionModel().isEmpty()) {
 			 //Alert alert = new Alert(AlertType.INFORMATION);
 			 //alert.setContentText("Select User");
-			 JOptionPane.showMessageDialog(null, "thank you for using java");
+			 JOptionPane.showMessageDialog(null, "select User");
 		 }
 		 else {	 
 			 try {
@@ -105,9 +110,11 @@ public class LoginScreenController {
 	 }
 	 
 	 @FXML private void setSelectedUser() {
+		 errorUser.setVisible(false);
 		 String selected_text = userList.getSelectionModel().getSelectedItem();
 		 currentUser = controller.getUserByUsername(selected_text);
 		 }
 
+	 
 	
 }
