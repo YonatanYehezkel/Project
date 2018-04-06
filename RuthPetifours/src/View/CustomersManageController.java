@@ -40,7 +40,10 @@ public class CustomersManageController implements Initializable{
 	
 	@FXML Button Remove;
 	
+
 	@FXML Button fromExcel;
+
+	@FXML Button Edit;
 	
 	@FXML private TableView<Customer> customersTable;
 	
@@ -162,10 +165,39 @@ public class CustomersManageController implements Initializable{
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.initOwner(MainClass.getPrimaryStage());
-        alert.setTitle("Confirm before delete");
+        alert.setTitle("Confirm before changes");
         alert.setHeaderText("Customer Action");
-        alert.setContentText("Are you sure yo want to change the customre from the system?");
+        alert.setContentText("Are you sure yo want to change this customer's details?");
         alert.showAndWait();
+		
+        if(alert.getResult().getText().equals("OK")) {
+        	
+        	customersTable.getSelectionModel().selectedItemProperty().addListener(
+                    (observable, oldValue, newValue) -> showPersonDetails(newValue));
+        	
+        	customersTable.setEditable(true);
+        	Customer edit = customersTable.getSelectionModel().getSelectedItem();
+        	//int edit_id = edit.getId();
+        	
+        	if(DBC.updateCustomer(edit)) {
+        		
+        		loadDataFromDB();
+        		
+        	    Alert alert2 = new Alert(AlertType.INFORMATION);
+        	    alert2.initOwner(MainClass.getPrimaryStage());
+        	    alert2.setTitle("Edit Confirmation");
+        	    alert2.setHeaderText("Customer Action");
+        	    alert2.setContentText("Selected customer's details has been successfully updated");
+        	    alert2.showAndWait();
+        	    
+            	//customersTable.setEditable(false);
+
+        	}
+        }
+        
+	}
+	
+	@FXML private void showPersonDetails(Customer c) {
 		
 	}
 	

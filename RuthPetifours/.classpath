@@ -11,6 +11,5 @@
 	<classpathentry kind="lib" path="external Jars/com.mysql.jdbc_5.1.5.jar"/>
 	<classpathentry kind="lib" path="external Jars/mysql-connector-java-5.1.46-bin.jar"/>
 	<classpathentry kind="lib" path="external Jars/poi-3.7.jar"/>
-	<classpathentry kind="lib" path="external Jars/javafx-0.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
