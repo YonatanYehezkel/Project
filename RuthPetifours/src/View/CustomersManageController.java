@@ -1,5 +1,6 @@
 package View;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -10,8 +11,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import com.mysql.jdbc.Connection;
 
+import Controller.ControllerLogic;
 import Controller.MainClass;
 import Model.Contact;
 import Model.Customer;
@@ -31,6 +35,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class CustomersManageController implements Initializable{
 	
@@ -60,9 +65,8 @@ public class CustomersManageController implements Initializable{
 	@FXML private TableColumn<Customer,Integer> ordersAmount;
 	
 	@FXML private ObservableList<Customer> Customers;
-	
-	@FXML private DB DBC;
-	
+		
+	private ControllerLogic controller;
 	
 	@FXML private void goBackToMainMenu(){
 		
@@ -85,7 +89,7 @@ public class CustomersManageController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		DBC = new DB();
+		controller = new ControllerLogic();
 		
 		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		customerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
@@ -103,7 +107,7 @@ public class CustomersManageController implements Initializable{
 		
 		//DBC.setConnection();
 		
-		HashMap<Integer, Customer> rs = DBC.getAllCustomers();
+		HashMap<Integer, Customer> rs = controller.getAllCustomers();
 		
 		ArrayList<Customer> customers = new ArrayList<Customer>();
 		
@@ -145,7 +149,7 @@ public class CustomersManageController implements Initializable{
         if(alert.getResult().getText().equals("OK")) {
         	Customer del = customersTable.getSelectionModel().getSelectedItem();
         	int del_id = del.getId();
-        	if(DBC.deleteCustomer(del_id)) {
+        	if(controller.deleteCustomer(del_id)) {
         		int selectedIndex = customersTable.getSelectionModel().getSelectedIndex();
         	    if (selectedIndex >= 0) {
         	    	customersTable.getItems().remove(selectedIndex);
@@ -179,7 +183,7 @@ public class CustomersManageController implements Initializable{
         	Customer edit = customersTable.getSelectionModel().getSelectedItem();
         	//int edit_id = edit.getId();
         	
-        	if(DBC.updateCustomer(edit)) {
+        	if(controller.updateCustomer(edit)) {
         		
         		loadDataFromDB();
         		
@@ -203,7 +207,11 @@ public class CustomersManageController implements Initializable{
 	
 	@FXML private void exportFromExcel() {
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Open Resource File");
-		fileChooser.showOpenDialog(MainClass.getPrimaryStage());
+		fileChooser.setTitle("Select a file for import");
+		ExtensionFilter filter = new ExtensionFilter("Excel", "*.xlsx", "*.xls");
+		fileChooser.getExtensionFilters().add(filter);
+		File f = fileChooser.showOpenDialog(MainClass.getPrimaryStage());
+		
+		controller.importCustomersFromExcel(f);
 	}
 }

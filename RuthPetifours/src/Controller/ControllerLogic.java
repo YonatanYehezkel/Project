@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -195,8 +196,8 @@ public class ControllerLogic {
 		return false;
 	}
 	
-	public boolean importCustomersFromExcel() {
-		if(db.importCustomersFromExcel("a"))
+	public boolean importCustomersFromExcel(File f) {
+		if(db.importCustomersFromExcel(f))
 			return true;
 		return false;		
 	}

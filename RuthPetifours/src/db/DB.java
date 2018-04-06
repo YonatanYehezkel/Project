@@ -1,4 +1,5 @@
 package db;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
@@ -772,11 +773,11 @@ public class DB {
 		return false;
 	}
 
-	public boolean importCustomersFromExcel (String path) {
+	public boolean importCustomersFromExcel (File f) {
 		if(setConnection()) {
 			try {
 				
-				  FileInputStream input = new FileInputStream("C:\\Users\\Tolstyak\\Desktop\\test.xls");
+				  FileInputStream input = new FileInputStream(f);
 		          POIFSFileSystem fs = new POIFSFileSystem(input);
 		          HSSFWorkbook wb = new HSSFWorkbook(fs);
 		          HSSFSheet sheet = wb.getSheetAt(0);
@@ -825,10 +826,7 @@ public class DB {
 		return false;
 	}
 	
-	public void test() {
-		
-	}
-
+	
 } 
 
 		
