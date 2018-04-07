@@ -8,7 +8,6 @@ public class Contact {
 	public String email1;
 	public String email2;
 	public String jobRole;
-	public int idCustomer;
 	public String CompanyName;
 	
 
@@ -16,8 +15,7 @@ public class Contact {
 	/*
 	 * full constructor
 	 */
-	public Contact(String contactName, int phoneNumber1, int phoneNumber2, String email1, String email2, String jobRole,
-			int idCustomer) {
+	public Contact(String contactName, int phoneNumber1, int phoneNumber2, String email1, String email2, String jobRole, String CompanyName) {
 		super();
 		this.contactName = contactName;
 		this.phoneNumber1 = phoneNumber1;
@@ -25,7 +23,7 @@ public class Contact {
 		this.email1 = email1;
 		this.email2 = email2;
 		this.jobRole = jobRole;
-		this.idCustomer = idCustomer;
+		this.CompanyName = CompanyName;
 	}
 
 	public String getContactName() {
@@ -76,13 +74,6 @@ public class Contact {
 		this.jobRole = jobRole;
 	}
 
-	public int getIdCustomer() {
-		return idCustomer;
-	}
-
-	public void setIdCustomer(int idCustomer) {
-		this.idCustomer = idCustomer;
-	}
 	
 	public String getCompanyName() {
 		return CompanyName;

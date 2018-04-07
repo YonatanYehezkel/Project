@@ -118,7 +118,7 @@ public class UsersManageController implements Initializable{
 		}
 	}
 	
-	@FXML private void removeCustomer() {
+	@FXML private void removeUser() {
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.initOwner(MainClass.getPrimaryStage());
@@ -130,7 +130,7 @@ public class UsersManageController implements Initializable{
         if(alert.getResult().getText().equals("OK")) {
         	User del = usersTable.getSelectionModel().getSelectedItem();
         	int del_id = del.getId();
-        	if(DBC.deleteCustomer(del_id)) {
+        	if(DBC.deleteUser(del_id)) {
         		int selectedIndex = usersTable.getSelectionModel().getSelectedIndex();
         	    if (selectedIndex >= 0) {
         	    	usersTable.getItems().remove(selectedIndex);

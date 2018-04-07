@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Customer {
 	
-	public int id;
+
 	public String customerName;
 	public String adress;
 	public String comment;
@@ -14,41 +14,24 @@ public class Customer {
 	/*
 	 * Customer constructor w/o list of contacts
 	 */
-	public Customer(int id, String customerName, String adress, String comment) {
-		super();
-		this.id = id;
-		this.customerName = customerName;
-		this.adress = adress;
-		this.comment = comment;
-	}
-	 /*
-	  * new Customer, w/o ID
-	  */
 	public Customer(String customerName, String adress, String comment) {
 		super();
 		this.customerName = customerName;
 		this.adress = adress;
 		this.comment = comment;
 	}
+
 	/*
 	 * full constructor
 	 */
-	public Customer(int id, String customerName, String adress, String comment, ArrayList contacts) {
+	public Customer(String customerName, String adress, String comment, ArrayList contacts) {
 		super();
-		this.id = id;
 		this.customerName = customerName;
 		this.adress = adress;
 		this.comment = comment;
 		this.contacts = contacts;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getCustomerName() {
 		return customerName;
@@ -84,7 +67,7 @@ public class Customer {
 	
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", customerName=" + customerName + ", adress=" + adress + ", comment=" + comment
+		return "Customer [customerName=" + customerName + ", adress=" + adress + ", comment=" + comment
 				+ ", contacts=" + contacts + ", ordersAmount=" + ordersAmount + "]";
 	}
 

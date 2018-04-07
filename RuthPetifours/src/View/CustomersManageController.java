@@ -52,8 +52,6 @@ public class CustomersManageController implements Initializable{
 	
 	@FXML private TableView<Customer> customersTable;
 	
-	@FXML private TableColumn<Customer,Integer> id;
-	
 	@FXML private TableColumn<Customer,String> customerName;
 	
 	@FXML private TableColumn<Customer,String> adress;
@@ -61,9 +59,7 @@ public class CustomersManageController implements Initializable{
 	@FXML private TableColumn<Customer,String> comment;
 	
 	@FXML private TableColumn<Customer, ArrayList<Contact>> contacts;
-	
-	@FXML private TableColumn<Customer,Integer> ordersAmount;
-	
+		
 	@FXML private ObservableList<Customer> Customers;
 		
 	private ControllerLogic controller;
@@ -91,12 +87,10 @@ public class CustomersManageController implements Initializable{
 		// TODO Auto-generated method stub
 		controller = new ControllerLogic();
 		
-		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		customerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
 		adress.setCellValueFactory(new PropertyValueFactory<>("adress"));
 		comment.setCellValueFactory(new PropertyValueFactory<>("comment"));
 		contacts.setCellValueFactory(new PropertyValueFactory<>("contacts"));
-		ordersAmount.setCellValueFactory(new PropertyValueFactory<>("ordersAmount"));
 		
 		loadDataFromDB();
 	}
@@ -107,7 +101,7 @@ public class CustomersManageController implements Initializable{
 		
 		//DBC.setConnection();
 		
-		HashMap<Integer, Customer> rs = controller.getAllCustomers();
+		HashMap<String, Customer> rs = controller.getAllCustomers();
 		
 		ArrayList<Customer> customers = new ArrayList<Customer>();
 		
@@ -148,7 +142,7 @@ public class CustomersManageController implements Initializable{
        
         if(alert.getResult().getText().equals("OK")) {
         	Customer del = customersTable.getSelectionModel().getSelectedItem();
-        	int del_id = del.getId();
+        	String del_id = del.getCustomerName();
         	if(controller.deleteCustomer(del_id)) {
         		int selectedIndex = customersTable.getSelectionModel().getSelectedIndex();
         	    if (selectedIndex >= 0) {

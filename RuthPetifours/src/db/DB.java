@@ -19,6 +19,9 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 
 
 
@@ -64,18 +67,18 @@ public class DB {
 	return false;
 	}
 	
-	public  HashMap<Integer, Customer> getAllCustomers() {
-		HashMap<Integer, Customer> customers = new HashMap<Integer, Customer>();
+	public  HashMap<String, Customer> getAllCustomers() {
+		HashMap<String, Customer> customers = new HashMap<String, Customer>();
 		
 		if(setConnection()) {
 			try {
 				stmt = con.createStatement();
 				ResultSet rs=stmt.executeQuery("select * from customer");  
 				while(rs.next())  {
-					//System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3)+"  "+rs.getString(4));  
-					Customer c = new Customer(rs.getInt(1),rs.getString(2),rs.getString(3), rs.getString(4));
+					//System.out.println(rs.getString(1)+"  "+rs.getString(2)+"  "+rs.getString(3));  
+					Customer c = new Customer(rs.getString(1),rs.getString(2), rs.getString(3));
 					c.setContacts(getContactsOfCustomer(c));
-					customers.put(rs.getInt(1), c);
+					customers.put(rs.getString(1), c);
 					
 				}
 				con.close();
@@ -97,12 +100,11 @@ public class DB {
 		if(setConnection()) {
 			try {
 				
-				PreparedStatement statement = con.prepareStatement("select * from contact where idCustomer = ?");    
-				statement.setInt(1, cus.getId()); 
+				PreparedStatement statement = con.prepareStatement("select * from contact where customer = ?");    
+				statement.setString(1, cus.getCustomerName()); 
 				ResultSet rs = statement.executeQuery(); 
 				while(rs.next())  {
-					//System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3)+"  "+rs.getString(4));  
-					Contact c = new Contact(rs.getString(1),rs.getInt(2),rs.getInt(3), rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7));
+					Contact c = new Contact(rs.getString(1),rs.getInt(2),rs.getInt(3), rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
 					contacts.add(c);
 					
 				}
@@ -126,9 +128,8 @@ public class DB {
 				ResultSet rs=stmt.executeQuery("select * from contact");  
 				while(rs.next())  {
 					//System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3)+"  "+rs.getString(4));  
-					Contact c = new Contact(rs.getString(1),rs.getInt(2),rs.getInt(3), rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7));
-					c.setCompanyName(getCompanyByID(c.getIdCustomer()).getCustomerName());
-					contacts.put(rs.getString(1), c);
+					Contact c = new Contact(rs.getString(1),rs.getInt(2),rs.getInt(3), rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
+				    contacts.put(rs.getString(1), c);
 					
 				}
 				con.close();
@@ -142,17 +143,16 @@ public class DB {
 		return null;
 	}
 	
-	public Customer getCompanyByID(int id) {
+	public Customer getCustomerByID(String name) {
 		Customer c = null;
 		if(setConnection()) {
 			try {
 				
-				PreparedStatement statement = con.prepareStatement("select * from customer where idcustomer = ?");    
-				statement.setInt(1, id); 
+				PreparedStatement statement = con.prepareStatement("select * from customer where customername = ?");    
+				statement.setString(1, name); 
 				ResultSet rs = statement.executeQuery(); 
 				while(rs.next())  {
-					//System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3)+"  "+rs.getString(4));  
-					c = new Customer(rs.getInt(1),rs.getString(2),rs.getString(3), rs.getString(4));
+					c = new Customer(rs.getString(1),rs.getString(2), rs.getString(3));
 					c.setContacts(getContactsOfCustomer(c));
 				}
 				con.close();
@@ -340,7 +340,7 @@ public class DB {
 		if(setConnection()) {
 			try {
 				String query = "insert into contact (name, phonenumber1, phonenumber1, email1, "
-						+ "email1, jobrole, idcustomer)"
+						+ "email1, jobrole, customer)"
 					        + " values (?, ?, ?, ?, ?, ?, ?)";
 				PreparedStatement statement = con.prepareStatement(query);    
 				//ResultSet rs = statement.executeQuery(); 
@@ -350,7 +350,7 @@ public class DB {
 				statement.setString (4, contact.getEmail1());
 				statement.setString (5, contact.getEmail2());
 				statement.setString (6, contact.getJobRole());
-				statement.setInt (7, customer.getId());
+				statement.setString (7, customer.getCustomerName());
 
 			      // execute the preparedstatement
 				statement.execute();
@@ -413,27 +413,7 @@ public class DB {
 		return false;
 	}
 	
-	public boolean deleteCustomer (int id) {
-		if(setConnection()) {
-			try {
-				String query = "DELETE FROM customer WHERE idcustomer = ?";
-				PreparedStatement statement = con.prepareStatement(query);    
-				//ResultSet rs = statement.executeQuery(); 
-				statement.setInt(1, id);
 
-			      // execute the preparedstatement
-				statement.execute();
-			      
-			    con.close();
-				return true;
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}  
-		}
-		else 
-			System.out.println("DB is not available");
-		return false;
-	}
 	
 	public boolean deleteCustomer (String s) {
 		if(setConnection()) {
@@ -507,30 +487,7 @@ public class DB {
 		return null;
 	}
 	
-	public Customer getCustomerByName(String name) {
-		Customer c = null;
-		if(setConnection()) {
-			try {
-				
-				PreparedStatement statement = con.prepareStatement("select * from customer "
-						+ "where customername = ?");    
-				statement.setString(1, name); 
-				ResultSet rs = statement.executeQuery(); 
-				while(rs.next())  {
-					//System.out.println(rs.getInt(1) + rs.getString(2) + rs.getString(3) + rs.getString(4) + rs.getString(5) + rs.getString(6) + rs.getString(7) + rs.getInt(8));  
-					c = new Customer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
-					//c.setContacts(getContactsOfCustomer(c));
-				}
-				con.close();
-				return c;
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}  
-		}
-		else 
-			System.out.println("DB is not available");
-		return null;
-	}
+	
 	
 	public  HashMap<String, Order> getAllOrders() {
 		HashMap<String, Order> orders = new HashMap<String, Order>();
@@ -551,10 +508,10 @@ public class DB {
 							getUserByID(rs.getInt(4)).getUserName(), 
 							rs.getDate(5), 
 							getUserByID(rs.getInt(6)).getUserName(), 
-							getCompanyByID(rs.getInt(7)).getCustomerName(), 
-							rs.getFloat(8), 
-							rs.getDate(9), 
-							rs.getDate(10));
+							rs.getString(10),
+							rs.getFloat(7), 
+							rs.getDate(8), 
+							rs.getDate(9));
 					//o.setContacts(getContactsOfCustomer(c));
 					orders.put(rs.getString(1), o);
 					//System.out.println(rs.getInt(1));
@@ -684,8 +641,8 @@ public class DB {
 		if(setConnection()) {
 			try {
 				String query = "insert into order (ordernum, submitted_date, delivery_eta, "
-						+ "submitted_by, update_date, update_by, customer_id, discount,"
-						+ "actual_delivery_date, payment_date)"
+						+ "submitted_by, update_date, update_by, discount,"
+						+ "actual_delivery_date, payment_date, customername1)"
 					        + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				PreparedStatement statement = con.prepareStatement(query);    
 				//ResultSet rs = statement.executeQuery(); 
@@ -695,10 +652,10 @@ public class DB {
 				statement.setInt (4, getUserByUsername(o.getSubmitted_by()).getId());
 				statement.setDate (5, o.getUpdate_date());
 				statement.setInt (6, getUserByUsername(o.getUpdated_by()).getId());
-				statement.setInt (7, getCustomerByName(o.getCustomer()).getId());
-				statement.setFloat (8, o.getDiscount());
-				statement.setDate (9, o.getActual_delivery_date());
-				statement.setDate (10, o.getPayment_date());
+				statement.setFloat (7, o.getDiscount());
+				statement.setDate (8, o.getActual_delivery_date());
+				statement.setDate (9, o.getPayment_date());
+				statement.setString(10,  o.getCustomer());
 	
 			      // execute the preparedstatement
 				statement.execute();
@@ -719,12 +676,12 @@ public class DB {
 		if(setConnection()) {
 			try {
 				 String query = "update customer set customername = ?, adress = ?, comment = ? "
-				 		+ "where idcustomer = ?";
+				 		+ "where customername = ?";
 			     PreparedStatement preparedStmt = con.prepareStatement(query);
 			     preparedStmt.setString  (1, c.getCustomerName());
 			     preparedStmt.setString(2, c.getAdress());
 			     preparedStmt.setString(3, c.getComment());
-			     preparedStmt.setInt(4, c.getId());
+			     preparedStmt.setString(4, c.getCustomerName());
 	
 			     // execute the java preparedstatement
 			     preparedStmt.executeUpdate();
@@ -773,7 +730,7 @@ public class DB {
 		return false;
 	}
 
-	public boolean importCustomersFromExcel (File f) {
+	public boolean importCustomersFromXLS (File f) {
 		if(setConnection()) {
 			try {
 				
@@ -825,6 +782,57 @@ public class DB {
 		
 		return false;
 	}
+	
+	public boolean importCustomersFromXLSX (File f) {
+		if(setConnection()) {
+			try {
+				
+				
+				FileInputStream fis = new FileInputStream(f);
+		        XSSFWorkbook wb = new XSSFWorkbook(fis);
+		       
+		        XSSFSheet sheet = wb.getSheetAt(0);
+		          Row row;
+		          for(int i=1; i<=sheet.getLastRowNum(); i++){
+		                row = sheet.getRow(i);
+		                String name = row.getCell(0).getStringCellValue();
+		                String adress = row.getCell(1).getStringCellValue();
+		                String comment = row.getCell(2).getStringCellValue();
+		     
+		                String query = "insert into customer (customername, adress, comment)"
+						        + " values (?, ?, ?)";
+					    PreparedStatement statement = con.prepareStatement(query);    
+					
+					    statement.setString (1, name);
+					    statement.setString (2, adress);
+					    statement.setString (3, comment);
+				
+		
+					    statement.execute();
+					    statement.close();
+		                System.out.println("Import rows "+i);
+		            }
+		            con.close();
+		            System.out.println("Success import excel to mysql table");
+				
+				return true;
+			} catch (MySQLIntegrityConstraintViolationException e) {
+				System.out.println("Duplicated rows");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				 System.out.println("input error");
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+			
+		
+		return false;
+	}
+	
 	
 	
 } 

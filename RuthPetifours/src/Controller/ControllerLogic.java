@@ -1,8 +1,11 @@
 package Controller;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import org.apache.commons.io.FilenameUtils;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
@@ -18,6 +21,7 @@ import Utils.Constants;
 //import Utils.Constants;
 import View.ViewLogic;
 import db.DB;
+
 
 public class ControllerLogic {
 	
@@ -81,7 +85,7 @@ public class ControllerLogic {
 		ControllerLogic.view = view;
 	}
 
-	public HashMap<Integer, Customer> getAllCustomers() {
+	public HashMap<String, Customer> getAllCustomers() {
 		return db.getAllCustomers();	 
 	}
 	
@@ -143,11 +147,7 @@ public class ControllerLogic {
 		return false;
 	}
 	
-	public boolean deleteCustomer (int id) {
-		if(db.deleteCustomer(id))
-				return true;
-		return false;
-	}
+	
 	
 	public boolean deleteCustomer (String s) {
 		if(db.deleteCustomer(s))
@@ -197,8 +197,17 @@ public class ControllerLogic {
 	}
 	
 	public boolean importCustomersFromExcel(File f) {
-		if(db.importCustomersFromExcel(f))
-			return true;
+		String ext2 = FilenameUtils.getExtension(f.getAbsolutePath());
+		if(ext2.equals("xls")) {
+			if(db.importCustomersFromXLS(f))
+				return true;
+		}
+		else {
+			if(db.importCustomersFromXLSX(f)) {
+				return true;
+			}
+		}
+			
 		return false;		
 	}
 
