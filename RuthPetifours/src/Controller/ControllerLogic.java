@@ -210,5 +210,33 @@ public class ControllerLogic {
 			
 		return false;		
 	}
+	
+	public boolean importOrdersFromExcel(File f) {
+		String ext2 = FilenameUtils.getExtension(f.getAbsolutePath());
+		if(ext2.equals("xls")) {
+			if(db.importOrdersFromXLS(f))
+				return true;
+		}
+		else {
+			if(db.importOrdersFromXLSX(f)) 
+				return true;
+		}
+			
+		return false;
+	}
+	
+	public boolean importProductsFromExcel(File f) {
+		String ext2 = FilenameUtils.getExtension(f.getAbsolutePath());
+		if(ext2.equals("xls")) {
+			if(db.importProductsFromXLS(f))
+				return true;
+		}
+		else {
+			if(db.importProductsFromXLSX(f)) 
+				return true;
+		}
+			
+		return false;
+	}
 
 }

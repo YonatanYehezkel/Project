@@ -1,10 +1,14 @@
 package db;
 import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.sql.Date;
+import java.time.LocalDate;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
@@ -503,15 +507,15 @@ public class DB {
 					
 					Order o = new Order(
 							rs.getString(1), 
-							rs.getDate(2), 
-							rs.getDate(3),
+							rs.getDate(2).toLocalDate(), 
+							rs.getDate(3).toLocalDate(),
 							getUserByID(rs.getInt(4)).getUserName(), 
-							rs.getDate(5), 
+							rs.getDate(5).toLocalDate(), 
 							getUserByID(rs.getInt(6)).getUserName(), 
 							rs.getString(10),
 							rs.getFloat(7), 
-							rs.getDate(8), 
-							rs.getDate(9));
+							rs.getDate(8).toLocalDate(), 
+							rs.getDate(9).toLocalDate());
 					//o.setContacts(getContactsOfCustomer(c));
 					orders.put(rs.getString(1), o);
 					//System.out.println(rs.getInt(1));
@@ -647,14 +651,14 @@ public class DB {
 				PreparedStatement statement = con.prepareStatement(query);    
 				//ResultSet rs = statement.executeQuery(); 
 				statement.setString (1, o.getId());
-				statement.setDate (2, o.getSubmitted_date());
-				statement.setDate (3, o.getDelivery_eta());
+				statement.setDate (2, Date.valueOf(o.getSubmitted_date()));
+				statement.setDate (3, Date.valueOf(o.getDelivery_eta()));
 				statement.setInt (4, getUserByUsername(o.getSubmitted_by()).getId());
-				statement.setDate (5, o.getUpdate_date());
+				statement.setDate (5, Date.valueOf(o.getUpdate_date()));
 				statement.setInt (6, getUserByUsername(o.getUpdated_by()).getId());
 				statement.setFloat (7, o.getDiscount());
-				statement.setDate (8, o.getActual_delivery_date());
-				statement.setDate (9, o.getPayment_date());
+				statement.setDate (8, Date.valueOf(o.getActual_delivery_date()));
+				statement.setDate (9, Date.valueOf(o.getPayment_date()));
 				statement.setString(10,  o.getCustomer());
 	
 			      // execute the preparedstatement
@@ -782,6 +786,58 @@ public class DB {
 		
 		return false;
 	}
+	public boolean importOrdersFromXLS (File f) {
+		/*if(setConnection()) {
+			try {
+				
+				  FileInputStream input = new FileInputStream(f);
+		          POIFSFileSystem fs = new POIFSFileSystem(input);
+		          HSSFWorkbook wb = new HSSFWorkbook(fs);
+		          HSSFSheet sheet = wb.getSheetAt(0);
+		          Row row;
+		          for(int i=1; i<=sheet.getLastRowNum(); i++){
+		                row = sheet.getRow(i);
+		                //int id = (int) row.getCell(0).getNumericCellValue();
+		                String name = row.getCell(0).getStringCellValue();
+		                String adress = row.getCell(1).getStringCellValue();
+		                String comment = row.getCell(2).getStringCellValue();
+		                
+		                //String sql = "INSERT INTO tablename customer ('"+id+"','"+name+"','"+address+"')";
+		                String query = "insert into customer (customername, adress, comment)"
+						        + " values (?, ?, ?)";
+					    PreparedStatement statement = con.prepareStatement(query);    
+					
+					    statement.setString (1, name);
+					    statement.setString (2, adress);
+					    statement.setString (3, comment);
+				
+		                //pstm = (PreparedStatement) con.prepareStatement(sql);
+		                //pstm.execute();
+					    statement.execute();
+					    statement.close();
+					    input.close();
+		                System.out.println("Import rows "+i);
+		            }
+		            con.close();
+		            System.out.println("Success import excel to mysql table");
+				
+				return true;
+			} catch (MySQLIntegrityConstraintViolationException e) {
+				System.out.println("Duplicated rows");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				 System.out.println("input error");
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+			*/
+		
+		return false;
+	}
 	
 	public boolean importCustomersFromXLSX (File f) {
 		if(setConnection()) {
@@ -833,6 +889,172 @@ public class DB {
 		return false;
 	}
 	
+	
+	public boolean importOrdersFromXLSX (File f) {
+		if(setConnection()) {
+			try {
+				
+				
+				FileInputStream fis = new FileInputStream(f);
+		        XSSFWorkbook wb = new XSSFWorkbook(fis);
+		       
+		        XSSFSheet sheet = wb.getSheetAt(0);
+		          Row row;
+		          for(int i=1; i<=sheet.getLastRowNum(); i++){
+		                row = sheet.getRow(i);
+		                String idorder = String.valueOf(row.getCell(0).getNumericCellValue());
+		                float discount = (float)row.getCell(1).getNumericCellValue();
+		                String customername = row.getCell(2).getStringCellValue();
+		                int idproduct = ((Double)row.getCell(3).getNumericCellValue()).intValue();
+		                float quantity = (float)row.getCell(4).getNumericCellValue();
+		                
+		                if(i == 1) 
+		                	addNewOrder(new Order(idorder, getSubmitted_date(), "TestUser", getSubmitted_date(), "TestUser",
+		                			customername, discount));
+		                
+		                	
+		     
+		                String query = "insert into order_details (idorder, idproduct, quantity)"
+						        + " values (?, ?, ?)";
+					    PreparedStatement statement = con.prepareStatement(query);    
+					
+					    statement.setString (1, idorder);
+					    statement.setInt (2, idproduct);
+					    statement.setFloat (3, quantity);
+				
+		
+					    statement.execute();
+					    statement.close();
+		                System.out.println("Import rows "+i);
+		            }
+		            con.close();
+		            System.out.println("Success import excel to mysql table");
+				
+				return true;
+			} catch (MySQLIntegrityConstraintViolationException e) {
+				//System.out.println("Duplicated rows");
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				 System.out.println("input error");
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		
+		
+		return false;
+	}
+	
+	public LocalDate getSubmitted_date() {
+		return LocalDate.now();
+	}
+	
+	public boolean importProductsFromXLSX(File f) {
+	if(setConnection()) {
+		try {
+			
+			
+			FileInputStream fis = new FileInputStream(f);
+	        XSSFWorkbook wb = new XSSFWorkbook(fis);
+	       
+	        XSSFSheet sheet = wb.getSheetAt(0);
+	          Row row;
+	          for(int i=1; i<=sheet.getLastRowNum(); i++){
+	                row = sheet.getRow(i);
+	                int idproduct = ((Double)row.getCell(0).getNumericCellValue()).intValue();
+	                String title = row.getCell(1).getStringCellValue();
+	                float price = (float)row.getCell(2).getNumericCellValue();
+	                String unit = row.getCell(3).getStringCellValue();
+	     
+	                String query = "insert into product (idproduct, title, price, unit)"
+					        + " values (?, ?, ?, ?)";
+				    PreparedStatement statement = con.prepareStatement(query);    
+				
+				    statement.setInt (1, idproduct);
+				    statement.setString (2, title);
+				    statement.setFloat (3, price);
+				    statement.setString(4, unit);
+			
+	
+				    statement.execute();
+				    statement.close();
+	                System.out.println("Import rows "+i);
+	            }
+	            con.close();
+	            System.out.println("Success import excel to mysql table");
+			
+			return true;
+		} catch (MySQLIntegrityConstraintViolationException e) {
+			System.out.println("Duplicated rows");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			 System.out.println("input error");
+			e.printStackTrace();
+		}  
+	}
+	else 
+		System.out.println("DB is not available");
+		
+	
+	return false;
+	}
+	
+	public boolean importProductsFromXLS (File f) {
+		if(setConnection()) {
+			try {
+				
+				  FileInputStream input = new FileInputStream(f);
+		          POIFSFileSystem fs = new POIFSFileSystem(input);
+		          HSSFWorkbook wb = new HSSFWorkbook(fs);
+		          HSSFSheet sheet = wb.getSheetAt(0);
+		          Row row;
+		          for(int i=1; i<=sheet.getLastRowNum(); i++){
+		                row = sheet.getRow(i);
+		                int idproduct = ((Double)row.getCell(0).getNumericCellValue()).intValue();
+		                String title = row.getCell(1).getStringCellValue();
+		                float price = (float)row.getCell(2).getNumericCellValue();
+		                String unit = row.getCell(3).getStringCellValue();
+		                
+		                String query = "insert into product (idproduct, title, price, unit)"
+						        + " values (?, ?, ?, ?)";
+					    PreparedStatement statement = con.prepareStatement(query);    
+					
+					    statement.setInt (1, idproduct);
+					    statement.setString (2, title);
+					    statement.setFloat (3, price);
+					    statement.setString(4, unit);
+					    
+					    statement.execute();
+					    statement.close();
+					    input.close();
+		                System.out.println("Import rows "+i);
+		            }
+		            con.close();
+		            System.out.println("Success import excel to mysql table");
+				
+				return true;
+			} catch (MySQLIntegrityConstraintViolationException e) {
+				System.out.println("Duplicated rows");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				 System.out.println("input error");
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+			
+		
+		return false;
+	}
 	
 	
 } 

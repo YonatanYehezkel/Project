@@ -45,7 +45,6 @@ public class CustomersManageController implements Initializable{
 	
 	@FXML Button Remove;
 	
-
 	@FXML Button fromExcel;
 
 	@FXML Button Edit;
@@ -84,7 +83,7 @@ public class CustomersManageController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		
 		controller = new ControllerLogic();
 		
 		customerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
