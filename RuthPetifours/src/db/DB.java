@@ -651,14 +651,14 @@ public class DB {
 				PreparedStatement statement = con.prepareStatement(query);    
 				//ResultSet rs = statement.executeQuery(); 
 				statement.setString (1, o.getId());
-				statement.setDate (2, Date.valueOf(o.getSubmitted_date()));
-				statement.setDate (3, Date.valueOf(o.getDelivery_eta()));
+				statement.setDate (2, fixDate(o.getSubmitted_date()));
+				statement.setDate (3, fixDate(o.getDelivery_eta()));
 				statement.setInt (4, getUserByUsername(o.getSubmitted_by()).getId());
-				statement.setDate (5, Date.valueOf(o.getUpdate_date()));
+				statement.setDate (5, fixDate(o.getUpdate_date()));
 				statement.setInt (6, getUserByUsername(o.getUpdated_by()).getId());
 				statement.setFloat (7, o.getDiscount());
-				statement.setDate (8, Date.valueOf(o.getActual_delivery_date()));
-				statement.setDate (9, Date.valueOf(o.getPayment_date()));
+				statement.setDate (8, fixDate(o.getActual_delivery_date()));
+				statement.setDate (9, fixDate(o.getPayment_date()));
 				statement.setString(10,  o.getCustomer());
 	
 			      // execute the preparedstatement
@@ -673,6 +673,13 @@ public class DB {
 		else 
 			System.out.println("DB is not available");
 		return false;
+	}
+	
+	public Date fixDate(LocalDate d) {
+		if(d.equals(null))
+			return null;
+		else
+			return Date.valueOf(d);
 	}
 	
 	public boolean updateCustomer (Customer c) {
