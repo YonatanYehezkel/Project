@@ -97,6 +97,8 @@ public class DB {
 	}
 	
 	
+
+	
 	
 	
 	public ArrayList<Contact> getContactsOfCustomer(Customer cus) {
@@ -147,7 +149,34 @@ public class DB {
 		return null;
 	}
 	
-	public Customer getCustomerByID(String name) {
+	public float getValueOfOrder(String orderID) {
+		float value = 0;
+		if(setConnection()) {
+			try {
+				
+				PreparedStatement statement = con.prepareStatement("select d.quantity, p.price "
+						+ "from order_details as d "
+						+ "left join product as p "
+						+ "on d.idproduct = p.idproduct "
+						+ "where d.idorder = ?");    
+				statement.setString(1, orderID); 
+				ResultSet rs = statement.executeQuery(); 
+				
+				while(rs.next())  {
+					value = value + rs.getFloat(1) * rs.getFloat(2);
+				}
+				con.close();
+				return value;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return value;
+	}
+	
+	public Customer getCustomerByName(String name) {
 		Customer c = null;
 		if(setConnection()) {
 			try {
@@ -493,6 +522,10 @@ public class DB {
 	
 	
 	
+	//"select * from ruth_db.order as o left join order_details as d on o.ordernum=d.idorder"
+	
+	
+	
 	public  HashMap<String, Order> getAllOrders() {
 		HashMap<String, Order> orders = new HashMap<String, Order>();
 		
@@ -507,15 +540,15 @@ public class DB {
 					
 					Order o = new Order(
 							rs.getString(1), 
-							rs.getDate(2).toLocalDate(), 
-							rs.getDate(3).toLocalDate(),
+							fixDate(rs.getDate(2)), 
+							fixDate(rs.getDate(3)),
 							getUserByID(rs.getInt(4)).getUserName(), 
-							rs.getDate(5).toLocalDate(), 
+							fixDate(rs.getDate(5)), 
 							getUserByID(rs.getInt(6)).getUserName(), 
 							rs.getString(10),
 							rs.getFloat(7), 
-							rs.getDate(8).toLocalDate(), 
-							rs.getDate(9).toLocalDate());
+							fixDate(rs.getDate(8)), 
+							fixDate(rs.getDate(9)));
 					//o.setContacts(getContactsOfCustomer(c));
 					orders.put(rs.getString(1), o);
 					//System.out.println(rs.getInt(1));
@@ -644,12 +677,10 @@ public class DB {
 	public boolean addNewOrder(Order o) {
 		if(setConnection()) {
 			try {
-				String query = "insert into order (ordernum, submitted_date, delivery_eta, "
-						+ "submitted_by, update_date, update_by, discount,"
-						+ "actual_delivery_date, payment_date, customername1)"
+				String query = "insert into ruth_db.order (ordernum, submitted_date, delivery_eta, submitted_by, update_date, update_by, discount, actual_delivery_date, payment_date, customername1)"
 					        + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				PreparedStatement statement = con.prepareStatement(query);    
-				//ResultSet rs = statement.executeQuery(); 
+		
 				statement.setString (1, o.getId());
 				statement.setDate (2, fixDate(o.getSubmitted_date()));
 				statement.setDate (3, fixDate(o.getDelivery_eta()));
@@ -661,7 +692,7 @@ public class DB {
 				statement.setDate (9, fixDate(o.getPayment_date()));
 				statement.setString(10,  o.getCustomer());
 	
-			      // execute the preparedstatement
+			 
 				statement.execute();
 			      
 			    con.close();
@@ -676,10 +707,17 @@ public class DB {
 	}
 	
 	public Date fixDate(LocalDate d) {
-		if(d.equals(null))
+		if(d == null)
 			return null;
 		else
 			return Date.valueOf(d);
+	}
+	
+	public LocalDate fixDate(Date d) {
+		if(d == null)
+			return null;
+		else
+			return d.toLocalDate();
 	}
 	
 	public boolean updateCustomer (Customer c) {
@@ -794,7 +832,7 @@ public class DB {
 		return false;
 	}
 	public boolean importOrdersFromXLS (File f) {
-		/*if(setConnection()) {
+		if(setConnection()) {
 			try {
 				
 				  FileInputStream input = new FileInputStream(f);
@@ -804,23 +842,29 @@ public class DB {
 		          Row row;
 		          for(int i=1; i<=sheet.getLastRowNum(); i++){
 		                row = sheet.getRow(i);
-		                //int id = (int) row.getCell(0).getNumericCellValue();
-		                String name = row.getCell(0).getStringCellValue();
-		                String adress = row.getCell(1).getStringCellValue();
-		                String comment = row.getCell(2).getStringCellValue();
 		                
-		                //String sql = "INSERT INTO tablename customer ('"+id+"','"+name+"','"+address+"')";
-		                String query = "insert into customer (customername, adress, comment)"
+		                String idorder = String.valueOf(row.getCell(0).getNumericCellValue());
+		                float discount = (float)row.getCell(1).getNumericCellValue();
+		                String customername = row.getCell(2).getStringCellValue();
+		                int idproduct = ((Double)row.getCell(3).getNumericCellValue()).intValue();
+		                float quantity = (float)row.getCell(4).getNumericCellValue();
+		                
+		                if(i == 1) 
+		                	addNewOrder(new Order(idorder, getSubmitted_date(), "TestUser", getSubmitted_date(), "TestUser",
+		                			customername, discount));
+		                
+		                String query = "insert into order_details (idorder, idproduct, quantity)"
 						        + " values (?, ?, ?)";
+		                setConnection();
 					    PreparedStatement statement = con.prepareStatement(query);    
 					
-					    statement.setString (1, name);
-					    statement.setString (2, adress);
-					    statement.setString (3, comment);
+					    statement.setString (1, idorder);
+					    statement.setInt (2, idproduct);
+					    statement.setFloat (3, quantity);
 				
-		                //pstm = (PreparedStatement) con.prepareStatement(sql);
-		                //pstm.execute();
-					    statement.execute();
+		
+				
+		                statement.execute();
 					    statement.close();
 					    input.close();
 		                System.out.println("Import rows "+i);
@@ -841,7 +885,7 @@ public class DB {
 		}
 		else 
 			System.out.println("DB is not available");
-			*/
+			
 		
 		return false;
 	}
@@ -923,6 +967,7 @@ public class DB {
 		     
 		                String query = "insert into order_details (idorder, idproduct, quantity)"
 						        + " values (?, ?, ?)";
+		                setConnection();
 					    PreparedStatement statement = con.prepareStatement(query);    
 					
 					    statement.setString (1, idorder);

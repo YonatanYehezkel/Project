@@ -65,7 +65,7 @@ public class MainClass extends Application {
 		//db.getAllCustomers();
 		controller = new ControllerLogic();
 		//System.out.println(controller.getUserByUsername("TestUser").getPassword());
-		//controller.updateUser(new User(2, "AAAA", "a", "a", "a", "a", "a", 1));
+		//controller.addNewOrder(new Order());
 		//System.out.println(controller.getProductByID(1111).getTitle());
 		//System.out.println(controller.getAllOrders().get("1").getCustomer());
 		//System.out.println(controller.getAllCustomers().get(1).getCustomerName());

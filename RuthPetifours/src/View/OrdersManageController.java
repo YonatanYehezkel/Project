@@ -3,15 +3,24 @@ package View;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import Controller.ControllerLogic;
 import Controller.MainClass;
+import Model.Contact;
+import Model.Customer;
+import Model.Order;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
@@ -20,6 +29,14 @@ import javafx.stage.FileChooser.ExtensionFilter;
 public class OrdersManageController implements Initializable{
 	
 @FXML private Button Back;
+@FXML private TableView<Order> OrdersTable;
+@FXML private TableColumn<Order,String> ordernum;
+@FXML private TableColumn<Order,String> customer;
+@FXML private TableColumn<Order,String> city;
+@FXML private TableColumn<Order,String> value;
+@FXML private ObservableList<Order> orders;
+//@FXML private TableColumn<Customer, ArrayList<Contact>> contacts;
+
 
 private ControllerLogic controller;
 
@@ -29,7 +46,34 @@ private ControllerLogic controller;
 		
 		controller = new ControllerLogic();
 		
+		ordernum.setCellValueFactory(new PropertyValueFactory<>("id"));
+		customer.setCellValueFactory(new PropertyValueFactory<>("customer"));
+		city.setCellValueFactory(new PropertyValueFactory<>("adress"));
+		value.setCellValueFactory(new PropertyValueFactory<>("value"));
 		
+		loadDataFromDB();
+		
+		
+	}
+	
+	private void loadDataFromDB(){
+		
+		this.orders = FXCollections.observableArrayList();
+		
+		
+		HashMap<String, Order> rs = controller.getAllOrders();
+		
+		ArrayList<Order> orders1 = new ArrayList<Order>();
+		
+		orders1.addAll(rs.values());
+	
+		for(Order c : orders1) {
+			c.setAdress(controller.getCustomerByName(c.getCustomer()).getAdress());
+			c.setValue(controller.getValueOfOrder(c.getId()));
+			orders.add(c);
+		}
+		
+		OrdersTable.setItems(orders);
 	}
 	
 	@FXML private void goBackToMainMenu(){

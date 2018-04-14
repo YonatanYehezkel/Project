@@ -111,6 +111,12 @@ public class ControllerLogic {
 		return false;
 	}
 	
+	public boolean addNewOrder (Order o) {
+		if(db.addNewOrder(o))
+				return true;
+		return false;
+	}
+	
 	public boolean deleteUser (int id) {
 		if(db.deleteUser(id))
 				return true;
@@ -237,6 +243,16 @@ public class ControllerLogic {
 		}
 			
 		return false;
+	}
+	
+	public Customer getCustomerByName(String name) {
+		if(!db.getCustomerByName(name).equals(null))
+			return db.getCustomerByName(name);
+		return null;
+	}
+	
+	public float getValueOfOrder(String idorder) {
+		return db.getValueOfOrder(idorder);
 	}
 
 }

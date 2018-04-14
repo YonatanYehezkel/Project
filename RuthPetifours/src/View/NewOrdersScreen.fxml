@@ -10,13 +10,13 @@
    <children>
       <ImageView fitHeight="544.0" fitWidth="728.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="Back" layoutX="32.0" layoutY="33.0" mnemonicParsing="false" onAction="#goBackToMainMenu" text="Back" />
-      <Button layoutX="308.0" layoutY="33.0" mnemonicParsing="false" onAction="#importOrderFromExcel" text="Import Orderes" />
-      <TableView layoutX="106.0" layoutY="109.0" prefHeight="344.0" prefWidth="529.0">
+      <Button layoutX="308.0" layoutY="33.0" mnemonicParsing="false" onAction="#importOrderFromExcel" text="Import Orders" />
+      <TableView fx:id="OrdersTable"  layoutX="106.0" layoutY="109.0" prefHeight="344.0" prefWidth="529.0">
         <columns>
-          <TableColumn prefWidth="111.0" text="Customer" />
-          <TableColumn prefWidth="139.0" text="City" />
-            <TableColumn prefWidth="135.0" text="Serial Num" />
-            <TableColumn prefWidth="138.0" text="Order Value" />
+          <TableColumn fx:id="ordernum" prefWidth="111.0" text="OrderID" />
+          <TableColumn fx:id="customer" prefWidth="139.0" text="Customer" />
+          <TableColumn fx:id="city" prefWidth="135.0" text="City" />
+          <TableColumn fx:id="value" prefWidth="138.0" text="Order Value" />
         </columns>
       </TableView>
       <Button layoutX="269.0" layoutY="481.0" mnemonicParsing="false" text="Procced To Orderes Sorting" />

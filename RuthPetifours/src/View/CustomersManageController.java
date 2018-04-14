@@ -3,24 +3,13 @@ package View;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.ResourceBundle;
-
-import javax.swing.filechooser.FileNameExtensionFilter;
-
-import com.mysql.jdbc.Connection;
-
 import Controller.ControllerLogic;
 import Controller.MainClass;
 import Model.Contact;
 import Model.Customer;
-import Model.User;
-import db.DB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
