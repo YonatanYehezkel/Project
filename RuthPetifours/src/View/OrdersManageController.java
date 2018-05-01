@@ -12,6 +12,7 @@ import Controller.MainClass;
 import Model.Contact;
 import Model.Customer;
 import Model.Order;
+import Model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,6 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -29,17 +31,26 @@ import javafx.stage.FileChooser.ExtensionFilter;
 public class OrdersManageController implements Initializable{
 	
 @FXML private Button Back;
+@FXML private Button importProducts;
+@FXML private Button orderSorting;
+@FXML private Button importOrders;
 @FXML private TableView<Order> OrdersTable;
 @FXML private TableColumn<Order,String> ordernum;
 @FXML private TableColumn<Order,String> customer;
 @FXML private TableColumn<Order,String> city;
 @FXML private TableColumn<Order,String> value;
 @FXML private ObservableList<Order> orders;
-//@FXML private TableColumn<Customer, ArrayList<Contact>> contacts;
+@FXML Label cur_user;
 
 
 private ControllerLogic controller;
-
+	
+private User currentUser;
+	
+	public void initData(User u) {
+		this.currentUser = u;
+		cur_user.setText(currentUser.getUserName());
+	  }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -53,6 +64,10 @@ private ControllerLogic controller;
 		
 		loadDataFromDB();
 		
+		controller.setShadowEffect(Back);
+		controller.setShadowEffect(importProducts);
+		controller.setShadowEffect(orderSorting);
+		controller.setShadowEffect(importOrders);
 		
 	}
 	
@@ -83,7 +98,10 @@ private ControllerLogic controller;
 			loader.setLocation(MainMenuController.class.getResource("/View/MainMenuScreen.fxml"));
 			AnchorPane appSet = loader.load();
 			Scene appSetScene = new Scene(appSet);
-			
+			MainMenuController cont = 
+				    loader.<MainMenuController>getController();
+				  cont.initData(currentUser);
+				  
 			MainClass.getPrimaryStage().setScene(appSetScene);
 			//MainClass.getPrimaryStage().setFullScreenExitHint("");
 			//MainClass.getPrimaryStage().setFullScreen(true);
@@ -113,5 +131,9 @@ private ControllerLogic controller;
 		
 		controller.importProductsFromExcel(f);
 	}
+	
+	@FXML private void logOut() {
+		 System.exit(0);
+	 }
 
 }

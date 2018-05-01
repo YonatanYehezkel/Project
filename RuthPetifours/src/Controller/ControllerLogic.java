@@ -21,6 +21,11 @@ import Utils.Constants;
 //import Utils.Constants;
 import View.ViewLogic;
 import db.DB;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 
 
 public class ControllerLogic {
@@ -84,6 +89,25 @@ public class ControllerLogic {
 	public static void setView(ViewLogic view) {
 		ControllerLogic.view = view;
 	}
+	
+	public void setShadowEffect(Button button) {
+		DropShadow shadow = new DropShadow();
+		//Adding the shadow when the mouse cursor is on
+		button.addEventHandler(MouseEvent.MOUSE_ENTERED, 
+		    new EventHandler<MouseEvent>() {
+		        @Override public void handle(MouseEvent e) {
+		        	button.setEffect(shadow);
+		        }
+		});
+		//Removing the shadow when the mouse cursor is off
+		button.addEventHandler(MouseEvent.MOUSE_EXITED, 
+		    new EventHandler<MouseEvent>() {
+		        @Override public void handle(MouseEvent e) {
+		        	button.setEffect(null);
+		        }
+		});
+	}
+	
 
 	public HashMap<String, Customer> getAllCustomers() {
 		return db.getAllCustomers();	 
@@ -203,6 +227,7 @@ public class ControllerLogic {
 	}
 	
 	public boolean importCustomersFromExcel(File f) {
+		if(!f.equals(null)) {
 		String ext2 = FilenameUtils.getExtension(f.getAbsolutePath());
 		if(ext2.equals("xls")) {
 			if(db.importCustomersFromXLS(f))
@@ -213,11 +238,13 @@ public class ControllerLogic {
 				return true;
 			}
 		}
+		}
 			
 		return false;		
 	}
 	
 	public boolean importOrdersFromExcel(File f) {
+		if(f != null) {
 		String ext2 = FilenameUtils.getExtension(f.getAbsolutePath());
 		if(ext2.equals("xls")) {
 			if(db.importOrdersFromXLS(f))
@@ -227,11 +254,13 @@ public class ControllerLogic {
 			if(db.importOrdersFromXLSX(f)) 
 				return true;
 		}
+		}
 			
 		return false;
 	}
 	
 	public boolean importProductsFromExcel(File f) {
+		if(f != null) {
 		String ext2 = FilenameUtils.getExtension(f.getAbsolutePath());
 		if(ext2.equals("xls")) {
 			if(db.importProductsFromXLS(f))
@@ -240,6 +269,7 @@ public class ControllerLogic {
 		else {
 			if(db.importProductsFromXLSX(f)) 
 				return true;
+		}
 		}
 			
 		return false;

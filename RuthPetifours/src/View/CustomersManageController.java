@@ -10,6 +10,7 @@ import Controller.ControllerLogic;
 import Controller.MainClass;
 import Model.Contact;
 import Model.Customer;
+import Model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
@@ -49,8 +51,19 @@ public class CustomersManageController implements Initializable{
 	@FXML private TableColumn<Customer, ArrayList<Contact>> contacts;
 		
 	@FXML private ObservableList<Customer> Customers;
+	
+	@FXML Label cur_user;
+
+		
+	private User currentUser;
 		
 	private ControllerLogic controller;
+	
+	public void initData(User u) {
+		this.currentUser = u;
+		cur_user.setText(currentUser.getUserName());
+	  }
+
 	
 	@FXML private void goBackToMainMenu(){
 		
@@ -59,6 +72,9 @@ public class CustomersManageController implements Initializable{
 			loader.setLocation(MainMenuController.class.getResource("/View/MainMenuScreen.fxml"));
 			AnchorPane appSet = loader.load();
 			Scene appSetScene = new Scene(appSet);
+			MainMenuController cont = 
+				    loader.<MainMenuController>getController();
+				  cont.initData(currentUser);
 			
 			MainClass.getPrimaryStage().setScene(appSetScene);
 			//MainClass.getPrimaryStage().setFullScreenExitHint("");
@@ -81,6 +97,12 @@ public class CustomersManageController implements Initializable{
 		contacts.setCellValueFactory(new PropertyValueFactory<>("contacts"));
 		
 		loadDataFromDB();
+		
+		controller.setShadowEffect(Back);
+		controller.setShadowEffect(Add);
+		controller.setShadowEffect(Remove);
+		controller.setShadowEffect(fromExcel);
+		controller.setShadowEffect(Edit);
 	}
 	
 	@FXML private void loadDataFromDB(){
@@ -109,7 +131,9 @@ public class CustomersManageController implements Initializable{
 			loader.setLocation(MainMenuController.class.getResource("/View/AddNewCustomer.fxml"));
 			AnchorPane appSet = loader.load();
 			Scene appSetScene = new Scene(appSet);
-			
+			AddNewCustomerController cont = 
+				    loader.<AddNewCustomerController>getController();
+				  cont.initData(currentUser);
 			MainClass.getPrimaryStage().setScene(appSetScene);
 			//MainClass.getPrimaryStage().setFullScreenExitHint("");
 			//MainClass.getPrimaryStage().setFullScreen(true);
@@ -192,8 +216,13 @@ public class CustomersManageController implements Initializable{
 		fileChooser.setTitle("Select a file for import");
 		ExtensionFilter filter = new ExtensionFilter("Excel", "*.xlsx", "*.xls");
 		fileChooser.getExtensionFilters().add(filter);
-		File f = fileChooser.showOpenDialog(MainClass.getPrimaryStage());
-		
-		controller.importCustomersFromExcel(f);
+		File f = null;
+		f = fileChooser.showOpenDialog(MainClass.getPrimaryStage());
+		if(f != null)
+			controller.importCustomersFromExcel(f);
 	}
+	
+	@FXML private void logOut() {
+		 System.exit(0);
+	 }
 }

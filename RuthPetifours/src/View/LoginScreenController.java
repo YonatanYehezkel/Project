@@ -74,6 +74,9 @@ public class LoginScreenController {
 				loader.setLocation(MainMenuController.class.getResource("/View/MainMenuScreen.fxml"));
 				AnchorPane appSet = loader.load();
 				Scene appSetScene = new Scene(appSet);
+				MainMenuController cont = 
+						    loader.<MainMenuController>getController();
+						  cont.initData(currentUser);
 				
 				MainClass.getPrimaryStage().setScene(appSetScene);
 				//MainClass.getPrimaryStage().setFullScreenExitHint("");

@@ -1,31 +1,54 @@
 package View;
 
+
 import java.io.IOException;
 
+import Controller.ControllerLogic;
 import Controller.MainClass;
+import Model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 public class MainMenuController {
 	
 	@FXML Button Orders;
-	
 	@FXML Button Customers;
-	
 	@FXML Button Drivers;
-	
 	@FXML Button Users;
-	
 	@FXML Button Vehichles;
+	@FXML Button Vehichles1;
+	@FXML Label cur_user;
 	
-	@FXML Button LogOut;
+	
+	  //ControllerLogic reference pointer
+  	private static ControllerLogic controller;
+  	
+	private User currentUser;
+	
+	public void initData(User u) {
+		this.currentUser = u;
+		cur_user.setText(currentUser.getUserName());
+	  }
 
-	 @FXML private void initialize() {
-		 
+	@FXML private void initialize() {
+	
+		controller = new ControllerLogic();
+		controller.setShadowEffect(Orders);
+		controller.setShadowEffect(Customers);
+		controller.setShadowEffect(Drivers);
+		controller.setShadowEffect(Users);
+		controller.setShadowEffect(Vehichles);
+		controller.setShadowEffect(Vehichles1);
+		
 	 }
+	
+	
+	
+	
 	 
 	 @FXML private void goToOrders() {
 		 
@@ -34,6 +57,9 @@ public class MainMenuController {
 				loader.setLocation(MainMenuController.class.getResource("/View/NewOrdersScreen.fxml"));
 				AnchorPane appSet = loader.load();
 				Scene appSetScene = new Scene(appSet);
+				OrdersManageController cont = 
+					    loader.<OrdersManageController>getController();
+					  cont.initData(currentUser);
 				
 				MainClass.getPrimaryStage().setScene(appSetScene);
 				//MainClass.getPrimaryStage().setFullScreenExitHint("");
@@ -53,6 +79,10 @@ public class MainMenuController {
 				loader.setLocation(MainMenuController.class.getResource("/View/CustomersManageScreen.fxml"));
 				AnchorPane appSet = loader.load();
 				Scene appSetScene = new Scene(appSet);
+				CustomersManageController cont = 
+					    loader.<CustomersManageController>getController();
+					  cont.initData(currentUser);
+				
 				
 				MainClass.getPrimaryStage().setScene(appSetScene);
 				//MainClass.getPrimaryStage().setFullScreenExitHint("");
