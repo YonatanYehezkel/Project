@@ -28,6 +28,7 @@ public class AddNewCustomerController implements Initializable {
 	@FXML private TextField comments;
 	@FXML private Button Save;
 	@FXML private Button cancel;
+	@FXML private Button Back;
 	@FXML Label cur_user;
 	
 	
@@ -39,6 +40,10 @@ public class AddNewCustomerController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		controller = new ControllerLogic();
+		
+		controller.setShadowEffect(Save);
+		controller.setShadowEffect(cancel);
+		controller.setShadowEffect(Back);
 		
 	}
 	
