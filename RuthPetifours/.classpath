@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="google_map/" kind="src" path="src"/>
 	<classpathentry kind="src" path="Images"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
@@ -16,5 +16,11 @@
 	<classpathentry kind="lib" path="external Jars/org-apache-commons-codec.jar"/>
 	<classpathentry kind="lib" path="external Jars/xmlbeans-2.6.0.jar"/>
 	<classpathentry kind="lib" path="external Jars/poi-ooxml-schemas-3.11-beta2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Tolstyak/git/Project2/RuthPetifours/external Jars/joda-time-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Tolstyak/git/Project2/RuthPetifours/external Jars/okio-1.14.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Tolstyak/git/Project2/RuthPetifours/external Jars/okhttp-3.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Tolstyak/git/Project2/RuthPetifours/external Jars/gson-2.6.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Tolstyak/git/Project2/RuthPetifours/external Jars/slf4j-nop-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Tolstyak/git/Project2/RuthPetifours/external Jars/slf4j-api-1.7.10.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
