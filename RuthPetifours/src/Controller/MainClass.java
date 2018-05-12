@@ -16,8 +16,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import exceptions.ApiException;
-import googleMap.GeocodingApi;
-import googleMap.GeocodingResult;
 import googleMap.LatLng;
 import googleMap.PendingResult;
 import googleMap.TravelMode;
@@ -116,7 +114,7 @@ public class MainClass extends Application {
 		//DistanceMatrix m = estimateRouteTime(dt, false, null, LatLng, LatLngHaifa);
 			//System.out.println(m);
 		
-		dir();
+		//dir();
 			
 			
 			

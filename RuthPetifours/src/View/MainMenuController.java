@@ -21,6 +21,7 @@ public class MainMenuController {
 	@FXML Button Users;
 	@FXML Button Vehichles;
 	@FXML Button Vehichles1;
+	@FXML Button buildRoute;
 	@FXML Label cur_user;
 	
 	
@@ -43,6 +44,7 @@ public class MainMenuController {
 		controller.setShadowEffect(Users);
 		controller.setShadowEffect(Vehichles);
 		controller.setShadowEffect(Vehichles1);
+		controller.setShadowEffect(buildRoute);
 		
 	 }
 	
@@ -144,6 +146,27 @@ public class MainMenuController {
 				MainClass.getPrimaryStage().setScene(appSetScene);
 				//MainClass.getPrimaryStage().setFullScreenExitHint("");
 				//MainClass.getPrimaryStage().setFullScreen(true);
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		 
+	 }
+	 
+@FXML private void goToBuildRoute() {
+		 
+		 try {
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(MainMenuController.class.getResource("/View/BestRoute.fxml"));
+				AnchorPane appSet = loader.load();
+				Scene appSetScene = new Scene(appSet);
+				BestRouteController cont = 
+					    loader.<BestRouteController>getController();
+					  cont.initData(currentUser);
+				
+				MainClass.getPrimaryStage().setScene(appSetScene);
+		
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

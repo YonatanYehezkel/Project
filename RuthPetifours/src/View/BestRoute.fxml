@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1" fx:controller="View.BestRouteController">
+
+
+   <children>
+      <ImageView fitHeight="508.0" fitWidth="676.0" layoutX="-8.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="origin" layoutX="256.0" layoutY="138.0" prefHeight="25.0" prefWidth="351.0" promptText="Insert Origin" />
+      <TextField fx:id="destination" layoutX="256.0" layoutY="201.0" prefHeight="25.0" prefWidth="351.0" promptText="Insert Destination" />
+      <TextField fx:id="waypoints" layoutX="256.0" layoutY="264.0" prefHeight="25.0" prefWidth="351.0" promptText="Insert Waypoints" />
+      <AnchorPane layoutY="-1.0" prefHeight="515.0" prefWidth="200.0" style="-fx-background-color: #48D1CC;">
+         <children>
+            <Label alignment="CENTER" layoutX="12.0" layoutY="48.0" prefHeight="50.0" prefWidth="189.0" text="Optimal Route" textFill="#404040">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="167.0" prefHeight="25.0" prefWidth="137.0" text="Ruth Petifours LTD" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="run" layoutX="26.0" layoutY="233.0" mnemonicParsing="false" onAction="#calculateOptimalRoute" prefHeight="25.0" prefWidth="149.0" text="Run" />
+            <Button fx:id="Back" layoutX="26.0" layoutY="279.0" mnemonicParsing="false" onAction="#goBackToMainMenu" prefHeight="25.0" prefWidth="149.0" text="Main Menu" />
+            <ImageView fx:id="log_img" fitHeight="40.0" fitWidth="37.0" layoutX="26.0" layoutY="446.0" onMouseClicked="#logOut" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/logOut.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="cur_user" layoutX="63.0" layoutY="450.0" prefHeight="25.0" prefWidth="117.0" text="User" textFill="#404040">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="98.0" prefHeight="50.0" prefWidth="189.0" text="Calculator" textFill="#404040">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <TextField fx:id="bestRout" layoutX="256.0" layoutY="330.0" prefHeight="25.0" prefWidth="351.0" promptText="Optimal rout will be displayed here" />
+   </children>
+</AnchorPane>
