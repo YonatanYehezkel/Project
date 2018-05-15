@@ -31,32 +31,21 @@ import javafx.stage.FileChooser.ExtensionFilter;
 public class CustomersManageController implements Initializable{
 	
 	@FXML Button Back;
-	
 	@FXML Button Add;
-	
 	@FXML Button Remove;
-	
 	@FXML Button fromExcel;
-
 	@FXML Button Edit;
 	
 	@FXML private TableView<Customer> customersTable;
-	
 	@FXML private TableColumn<Customer,String> customerName;
-	
 	@FXML private TableColumn<Customer,String> adress;
-	
 	@FXML private TableColumn<Customer,String> comment;
-	
 	@FXML private TableColumn<Customer, ArrayList<Contact>> contacts;
-		
 	@FXML private ObservableList<Customer> Customers;
 	
 	@FXML Label cur_user;
 
-		
 	private User currentUser;
-		
 	private ControllerLogic controller;
 	
 	public void initData(User u) {

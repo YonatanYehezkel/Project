@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import Controller.ControllerLogic;
 import Controller.MainClass;
 import Model.Customer;
 import Model.User;
@@ -18,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
@@ -45,9 +47,18 @@ public class UsersManageController implements Initializable{
 	@FXML private TableColumn<User,Integer> idJobRole;
 	
 	@FXML private ObservableList<User> Users;
+		
+	@FXML Label cur_user;
+
+	private User currentUser;
+		
+	private ControllerLogic controller;
 	
-	@FXML private DB DBC;
-	
+	public void initData(User u) {
+		this.currentUser = u;
+		cur_user.setText(currentUser.getUserName());
+	  }
+
 	
 
 	@FXML private void goBackToMainMenu(){
@@ -57,6 +68,9 @@ public class UsersManageController implements Initializable{
 			loader.setLocation(MainMenuController.class.getResource("/View/MainMenuScreen.fxml"));
 			AnchorPane appSet = loader.load();
 			Scene appSetScene = new Scene(appSet);
+			MainMenuController cont = 
+				    loader.<MainMenuController>getController();
+				  cont.initData(currentUser);
 			
 			MainClass.getPrimaryStage().setScene(appSetScene);
 			//MainClass.getPrimaryStage().setFullScreenExitHint("");
@@ -72,23 +86,26 @@ public class UsersManageController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		DBC = new DB();
+		controller = new ControllerLogic();
 		
 		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		userName.setCellValueFactory(new PropertyValueFactory<>("userName"));
 		idJobRole.setCellValueFactory(new PropertyValueFactory<>("idJobRole"));
 		
 		loadDataFromDB();
+		
+		controller.setShadowEffect(Back);
+		controller.setShadowEffect(Add);
+		controller.setShadowEffect(Remove);
+		controller.setShadowEffect(Edit);
 	}
 	
 	@FXML private void loadDataFromDB(){
 		
 		this.Users = FXCollections.observableArrayList();
 		
-		//DBC.setConnection();
 		
-		HashMap<String, User> rs = DBC.getAllUsers();
+		HashMap<String, User> rs = controller.getAllUsers();
 		
 		ArrayList<User> users = new ArrayList<User>();
 		
@@ -108,6 +125,10 @@ public class UsersManageController implements Initializable{
 			loader.setLocation(MainMenuController.class.getResource("/View/AddNewUserScreen.fxml"));
 			AnchorPane appSet = loader.load();
 			Scene appSetScene = new Scene(appSet);
+			AddNewUserController cont = 
+				    loader.<AddNewUserController>getController();
+				  cont.initData(currentUser);
+			
 			
 			MainClass.getPrimaryStage().setScene(appSetScene);
 			//MainClass.getPrimaryStage().setFullScreenExitHint("");
@@ -117,6 +138,10 @@ public class UsersManageController implements Initializable{
 			e.printStackTrace();
 		}
 	}
+	
+	@FXML private void logOut() {
+		 System.exit(0);
+	 }
 	
 	@FXML private void removeUser() {
 		
@@ -130,7 +155,7 @@ public class UsersManageController implements Initializable{
         if(alert.getResult().getText().equals("OK")) {
         	User del = usersTable.getSelectionModel().getSelectedItem();
         	int del_id = del.getId();
-        	if(DBC.deleteUser(del_id)) {
+        	if(controller.deleteUser(del_id)) {
         		int selectedIndex = usersTable.getSelectionModel().getSelectedIndex();
         	    if (selectedIndex >= 0) {
         	    	usersTable.getItems().remove(selectedIndex);

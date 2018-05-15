@@ -28,7 +28,7 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Button fx:id="run" layoutX="26.0" layoutY="233.0" mnemonicParsing="false" onAction="#calculateOptimalRoute" prefHeight="25.0" prefWidth="149.0" text="Run" />
+            <Button fx:id="run" layoutX="26.0" layoutY="233.0" mnemonicParsing="false" onAction="#calculateOptimalRoute" prefHeight="25.0" prefWidth="149.0" text="Build Route" />
             <Button fx:id="Back" layoutX="26.0" layoutY="279.0" mnemonicParsing="false" onAction="#goBackToMainMenu" prefHeight="25.0" prefWidth="149.0" text="Main Menu" />
             <ImageView fx:id="log_img" fitHeight="40.0" fitWidth="37.0" layoutX="26.0" layoutY="446.0" onMouseClicked="#logOut" pickOnBounds="true" preserveRatio="true">
                <image>

@@ -123,6 +123,9 @@ public class MainMenuController {
 				loader.setLocation(MainMenuController.class.getResource("/View/UsersManageScreen.fxml"));
 				AnchorPane appSet = loader.load();
 				Scene appSetScene = new Scene(appSet);
+				UsersManageController cont = 
+					    loader.<UsersManageController>getController();
+					  cont.initData(currentUser);
 				
 				MainClass.getPrimaryStage().setScene(appSetScene);
 				//MainClass.getPrimaryStage().setFullScreenExitHint("");
