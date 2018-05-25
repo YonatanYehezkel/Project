@@ -7,35 +7,38 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.OrdersSortingController">
+<AnchorPane style="-fx-background-position: center;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.OrdersSortingController">
    <children>
-      <ImageView fitHeight="591.0" fitWidth="1147.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="591.0" fitWidth="1205.0" pickOnBounds="true" preserveRatio="true" />
       <Button layoutX="30.0" layoutY="26.0" mnemonicParsing="false" text="Back" />
       <Button layoutX="1054.0" layoutY="26.0" mnemonicParsing="false" text="Log Out" />
-      <TableView fx:id="smallCarTable" layoutX="30.0" layoutY="116.0" prefHeight="392.0" prefWidth="200.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Customer" />
-          <TableColumn prefWidth="75.0" text="Sum" />
-        </columns>
-      </TableView>
-      <TableView fx:id="BigCarTable" layoutX="921.0" layoutY="116.0" prefHeight="392.0" prefWidth="200.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Customer" />
-          <TableColumn prefWidth="75.0" text="Sum" />
-        </columns>
-      </TableView>
-      <TableView fx:id="OrderTable" layoutX="255.0" layoutY="116.0" prefHeight="392.0" prefWidth="637.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Customer" />
-          <TableColumn prefWidth="75.0" text="City" />
-            <TableColumn prefWidth="75.0" text="Serial" />
-            <TableColumn prefWidth="75.0" text="Time limit" />
-            <TableColumn prefWidth="108.0" text="Order value" />
-        </columns>
-      </TableView>
       <Label layoutX="80.0" layoutY="76.0" text="Small Car Driver" />
       <Label layoutX="971.0" layoutY="84.0" text="Big Car Driver" />
-      <Button layoutX="55.0" layoutY="531.0" mnemonicParsing="false" text="Build Small Car Route" />
-      <Button layoutX="953.0" layoutY="531.0" mnemonicParsing="false" text="Build Big Car Route" />
+      <Button fx:id="Build_Small_Car_Route" layoutX="55.0" layoutY="531.0" mnemonicParsing="false" onAction="#buildRout" text="Build Small Car Route" />
+      <Button fx:id="Build_Big_Car_Route" layoutX="953.0" layoutY="531.0" mnemonicParsing="false" text="Build Big Car Route" />
+      <TableView fx:id="smallCarTable" layoutX="30.0" layoutY="116.0" prefHeight="392.0" prefWidth="310.0">
+         <columns>
+            <TableColumn fx:id="orderN_small" prefWidth="75.0" text="OrderN" />
+            <TableColumn fx:id="customer_small" prefWidth="75.0" text="Customer" />
+            <TableColumn fx:id="address_small" prefWidth="75.0" text="Address" />
+            <TableColumn fx:id="sum_small" prefWidth="84.0" text="Sum" />
+         </columns>
+      </TableView>
+      <TableView fx:id="OrderTable" layoutX="361.0" layoutY="116.0" prefHeight="392.0" prefWidth="485.0">
+         <columns>
+            <TableColumn fx:id="orderN" prefWidth="105.0" text="OrderN" />
+            <TableColumn fx:id="customer" prefWidth="118.0" text="Customer" />
+            <TableColumn fx:id="adress" prefWidth="132.0" text="Address" />
+            <TableColumn fx:id="sum" prefWidth="129.0" text="Sum" />
+         </columns>
+      </TableView>
+      <TableView fx:id="bigCarTable" layoutX="872.0" layoutY="116.0" prefHeight="392.0" prefWidth="310.0">
+         <columns>
+            <TableColumn fx:id="orderN_big" prefWidth="75.0" text="OrderN" />
+            <TableColumn fx:id="customer_big" prefWidth="75.0" text="Customer" />
+            <TableColumn fx:id="address_big" prefWidth="75.0" text="Address" />
+            <TableColumn fx:id="sum_big" prefWidth="84.0" text="Sum" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>
