@@ -9,56 +9,77 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane style="-fx-background-position: center;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.OrdersSortingController">
+<AnchorPane style="-fx-background-position: center;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.OrdersSortingController">
    <children>
-      <ImageView fitHeight="591.0" fitWidth="1205.0" layoutX="-189.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="30.0" layoutY="26.0" mnemonicParsing="false" text="Back" />
-      <Button layoutX="1054.0" layoutY="26.0" mnemonicParsing="false" text="Log Out" />
-      <Label layoutX="80.0" layoutY="76.0" text="Small Car Driver" />
-      <Label layoutX="971.0" layoutY="84.0" text="Big Car Driver" />
-      <Button fx:id="Build_Small_Car_Route" layoutX="30.0" layoutY="531.0" mnemonicParsing="false" onAction="#buildRoutSmall" text="Build Small Car Route" />
-      <Button fx:id="Build_Big_Car_Route" layoutX="872.0" layoutY="531.0" mnemonicParsing="false" onAction="#buildRoutBig" text="Build Big Car Route" />
-      <TableView fx:id="smallCarTable" layoutX="30.0" layoutY="116.0" prefHeight="392.0" prefWidth="310.0">
+      <ImageView fitHeight="1080.0" fitWidth="1920.0" layoutX="-4.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="23.0" layoutY="26.0" mnemonicParsing="false" text="Back">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Button layoutX="1766.0" layoutY="26.0" mnemonicParsing="false" text="Log Out">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Label layoutX="222.0" layoutY="78.0" text="Small Car Driver">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <Label layoutX="893.0" layoutY="78.0" text="Big Car Driver">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <Button fx:id="Build_Small_Car_Route" layoutX="207.0" layoutY="734.0" mnemonicParsing="false" onAction="#buildRoutSmall" text="Build Small Car Route">
+         <font>
+            <Font size="22.0" />
+         </font></Button>
+      <Button fx:id="Build_Big_Car_Route" layoutX="843.0" layoutY="734.0" mnemonicParsing="false" onAction="#buildRoutBig" text="Build Big Car Route">
+         <font>
+            <Font size="22.0" />
+         </font></Button>
+      <TableView fx:id="smallCarTable" layoutX="13.0" layoutY="116.0" prefHeight="600.0" prefWidth="600.0">
          <columns>
-            <TableColumn fx:id="orderN_small" prefWidth="75.0" text="OrderN" />
-            <TableColumn fx:id="customer_small" prefWidth="75.0" text="Customer" />
-            <TableColumn fx:id="address_small" prefWidth="75.0" text="Address" />
-            <TableColumn fx:id="sum_small" prefWidth="84.0" text="Sum" />
+            <TableColumn fx:id="orderN_small" prefWidth="104.0" text="OrderN" />
+            <TableColumn fx:id="customer_small" prefWidth="147.0" text="Customer" />
+            <TableColumn fx:id="address_small" prefWidth="158.0" text="Address" />
+            <TableColumn fx:id="sum_small" prefWidth="190.0" text="Sum" />
          </columns>
       </TableView>
-      <TableView fx:id="OrderTable" layoutX="361.0" layoutY="116.0" prefHeight="392.0" prefWidth="485.0">
+      <TableView fx:id="OrderTable" layoutX="656.0" layoutY="116.0" prefHeight="600.0" prefWidth="600.0">
          <columns>
-            <TableColumn fx:id="orderN" prefWidth="105.0" text="OrderN" />
-            <TableColumn fx:id="customer" prefWidth="118.0" text="Customer" />
-            <TableColumn fx:id="adress" prefWidth="132.0" text="Address" />
-            <TableColumn fx:id="sum" prefWidth="129.0" text="Sum" />
+            <TableColumn fx:id="orderN" prefWidth="133.0" text="OrderN" />
+            <TableColumn fx:id="customer" prefWidth="153.0" text="Customer" />
+            <TableColumn fx:id="adress" prefWidth="155.0" text="Address" />
+            <TableColumn fx:id="sum" prefWidth="158.0" text="Sum" />
          </columns>
       </TableView>
-      <TableView fx:id="bigCarTable" layoutX="872.0" layoutY="116.0" prefHeight="392.0" prefWidth="310.0">
+      <TableView fx:id="bigCarTable" layoutX="1289.0" layoutY="116.0" prefHeight="600.0" prefWidth="600.0">
          <columns>
-            <TableColumn fx:id="orderN_big" prefWidth="75.0" text="OrderN" />
-            <TableColumn fx:id="customer_big" prefWidth="75.0" text="Customer" />
-            <TableColumn fx:id="address_big" prefWidth="75.0" text="Address" />
-            <TableColumn fx:id="sum_big" prefWidth="84.0" text="Sum" />
+            <TableColumn fx:id="orderN_big" prefWidth="117.0" text="OrderN" />
+            <TableColumn fx:id="customer_big" prefWidth="163.0" text="Customer" />
+            <TableColumn fx:id="address_big" prefWidth="151.0" text="Address" />
+            <TableColumn fx:id="sum_big" prefWidth="168.0" text="Sum" />
          </columns>
       </TableView>
-      <Label layoutX="185.0" layoutY="514.0" text="SUM:">
+      <Label layoutX="179.0" layoutY="843.0" text="SUM:">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="22.0" />
          </font>
       </Label>
-      <TextField fx:id="sumSmallCar" layoutX="221.0" layoutY="510.0" prefHeight="25.0" prefWidth="119.0" />
-      <Label layoutX="1029.0" layoutY="523.0" text="SUM:">
+      <TextField fx:id="sumSmallCar" layoutX="244.0" layoutY="837.0" prefHeight="45.0" prefWidth="180.0" />
+      <Label layoutX="1450.0" layoutY="844.0" text="SUM:">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="sumBigCar" layoutX="1063.0" layoutY="519.0" prefHeight="25.0" prefWidth="119.0" />
-      <Label layoutX="499.0" layoutY="514.0" text="SUM:">
+      <TextField fx:id="sumBigCar" layoutX="1515.0" layoutY="835.0" prefHeight="45.0" prefWidth="180.0">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font size="22.0" />
+         </font></TextField>
+      <Label layoutX="806.0" layoutY="843.0" text="SUM:">
+         <font>
+            <Font name="System Bold" size="22.0" />
          </font>
       </Label>
-      <TextField fx:id="sumAll" layoutX="544.0" layoutY="510.0" prefHeight="17.0" prefWidth="119.0" />
+      <TextField fx:id="sumAll" layoutX="869.0" layoutY="837.0" prefHeight="45.0" prefWidth="180.0" />
    </children>
 </AnchorPane>

@@ -11,19 +11,19 @@
 <AnchorPane prefHeight="508.0" prefWidth="662.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.AddNewCustomerController">
    <children>
       <ImageView fitHeight="1080.0" fitWidth="1920.0" layoutX="-8.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField fx:id="name" alignment="CENTER" layoutX="824.0" layoutY="97.0" prefHeight="90.0" prefWidth="257.0" promptText="Insert Name">
+      <TextField fx:id="name" alignment="CENTER" layoutX="824.0" layoutY="97.0" prefHeight="90.0" prefWidth="579.0" promptText="Insert Name">
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <TextField fx:id="address" alignment="CENTER" layoutX="824.0" layoutY="312.0" prefHeight="90.0" prefWidth="257.0" promptText="Insert Address">
+      <TextField fx:id="address" alignment="CENTER" layoutX="824.0" layoutY="312.0" prefHeight="90.0" prefWidth="579.0" promptText="Insert Address">
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <TextField fx:id="comments" alignment="CENTER" layoutX="824.0" layoutY="540.0" prefHeight="90.0" prefWidth="257.0" promptText="Insert Comment">
+      <TextField fx:id="comments" alignment="CENTER" layoutX="824.0" layoutY="540.0" prefHeight="90.0" prefWidth="579.0" promptText="Insert Comment">
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <TextField fx:id="contacts" alignment="CENTER" layoutX="820.0" layoutY="768.0" prefHeight="90.0" prefWidth="265.0" promptText="Insert Contacts">
+      <TextField fx:id="contacts" alignment="CENTER" layoutX="820.0" layoutY="768.0" prefHeight="90.0" prefWidth="579.0" promptText="Insert Contacts">
          <font>
             <Font size="24.0" />
          </font></TextField>

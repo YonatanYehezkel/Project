@@ -38,14 +38,14 @@
                <font>
                   <Font size="24.0" />
                </font></Button>
-            <ImageView fx:id="log_img" fitHeight="40.0" fitWidth="37.0" layoutX="83.0" layoutY="1016.0" onMouseClicked="#logOut" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="log_img" fitHeight="44.0" fitWidth="50.0" layoutX="20.0" layoutY="1004.0" onMouseClicked="#logOut" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../Images/logOut.png" />
                </image>
             </ImageView>
-            <Label fx:id="cur_user" layoutX="143.0" layoutY="1020.0" prefHeight="25.0" prefWidth="145.0" text="User" textFill="#404040">
+            <Label fx:id="cur_user" layoutX="87.0" layoutY="1013.0" prefHeight="25.0" prefWidth="145.0" text="User" textFill="#404040">
                <font>
-                  <Font name="Arial" size="20.0" />
+                  <Font name="Arial" size="24.0" />
                </font>
             </Label>
             <Label layoutX="75.0" layoutY="49.0" text="Order Menu" textFill="#404040">
