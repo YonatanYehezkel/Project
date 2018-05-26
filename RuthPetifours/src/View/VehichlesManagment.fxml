@@ -8,26 +8,37 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.VehichlesManageController">
+<AnchorPane style="-fx-background-color: #E0FFFF;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.VehichlesManageController">
    <children>
-      <ImageView fitHeight="716.0" fitWidth="1001.0" pickOnBounds="true" preserveRatio="true" />
-      <TableView layoutX="14.0" layoutY="116.0" prefHeight="484.0" prefWidth="660.0">
+      <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true" />
+      <TableView layoutX="130.0" layoutY="149.0" prefHeight="797.0" prefWidth="1242.0">
         <columns>
-          <TableColumn prefWidth="121.0" text="Vehichle License" />
-          <TableColumn prefWidth="103.0" text="Manufactor" />
-            <TableColumn prefWidth="103.0" text="Size Category" />
-            <TableColumn prefWidth="164.0" text="Min Order Value Load" />
+          <TableColumn prefWidth="207.0" text="Vehichle License" />
+          <TableColumn prefWidth="318.0" text="Manufactor" />
+            <TableColumn prefWidth="325.0" text="Size Category" />
+            <TableColumn prefWidth="390.0" text="Min Order Value Load" />
         </columns>
       </TableView>
-      <Label layoutX="313.0" layoutY="33.0" text="Vehichles Managment">
+      <Label layoutX="772.0" layoutY="25.0" text="Vehichles Managment">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Button fx:id="Back" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#goBackToMainMenu" text="Back" />
-      <Button layoutX="795.0" layoutY="116.0" mnemonicParsing="false" text="Add Vehichle" />
-      <Button layoutX="761.0" layoutY="231.0" mnemonicParsing="false" text="Change Vehichle Details" />
-      <Button layoutX="783.0" layoutY="345.0" mnemonicParsing="false" text="Remove Vehichle" />
-      <Button fx:id="Back1" layoutX="24.0" layoutY="30.0" mnemonicParsing="false" onAction="#goBackToMainMenu" text="Back" />
+      <Button fx:id="Back" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#goBackToMainMenu" prefHeight="52.0" prefWidth="99.0" text="Back">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Button layoutX="1619.0" layoutY="149.0" mnemonicParsing="false" style="-fx-background-color: #7CFC00;" text="Add Vehichle">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Button layoutX="1556.0" layoutY="260.0" mnemonicParsing="false" style="-fx-background-color: #7CFC00;" text="Change Vehichle Details">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Button layoutX="1596.0" layoutY="375.0" mnemonicParsing="false" style="-fx-background-color: #7CFC00;" text="Remove Vehichle">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
    </children>
 </AnchorPane>
