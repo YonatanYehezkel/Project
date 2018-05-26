@@ -9,11 +9,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 <AnchorPane style="-fx-background-position: center; -fx-background-color: #E0FFFF;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.OrdersSortingController">
+=======
+<AnchorPane style="-fx-background-position: center;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.OrdersSortingController">
+>>>>>>> branch 'master' of https://github.com/YonatanYehezkel/Project.git
    <children>
-      <ImageView fitHeight="800.0" fitWidth="1200.0" layoutX="-4.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="800.0" fitWidth="1356.0" layoutX="-152.0" pickOnBounds="true" preserveRatio="true" />
       <Button layoutX="23.0" layoutY="14.0" mnemonicParsing="false" text="Back">
          <font>
+<<<<<<< HEAD
             <Font size="24.0" />
          </font></Button>
       <Button layoutX="1059.0" layoutY="56.0" mnemonicParsing="false" text="Log Out">
@@ -30,9 +35,27 @@
          </font></Label>
       <Button fx:id="Build_Small_Car_Route" layoutX="130.0" layoutY="607.0" mnemonicParsing="false" onAction="#buildRoutSmall" style="-fx-background-color: #7CFC00;" text="Build Small Car Route">
          <font>
+=======
+>>>>>>> branch 'master' of https://github.com/YonatanYehezkel/Project.git
             <Font size="14.0" />
          </font></Button>
+<<<<<<< HEAD
       <Button fx:id="Build_Big_Car_Route" layoutX="570.0" layoutY="607.0" mnemonicParsing="false" onAction="#buildRoutBig" style="-fx-background-color: #7CFC00;" text="Build Big Car Route">
+=======
+      <Label layoutX="126.0" layoutY="40.0" text="Small Car Driver">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <Label layoutX="967.0" layoutY="40.0" text="Big Car Driver">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <Button fx:id="Build_Small_Car_Route" layoutX="101.0" layoutY="673.0" mnemonicParsing="false" onAction="#buildRoutSmall" text="Build Route">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button fx:id="Build_Big_Car_Route" layoutX="917.0" layoutY="673.0" mnemonicParsing="false" onAction="#buildRoutBig" text="Build Route">
+>>>>>>> branch 'master' of https://github.com/YonatanYehezkel/Project.git
          <font>
             <Font size="14.0" />
          </font></Button>
@@ -60,26 +83,51 @@
             <TableColumn fx:id="sum_big" prefWidth="89.0" text="Sum" />
          </columns>
       </TableView>
-      <Label layoutX="75.0" layoutY="652.0" text="SUM:">
+      <Label layoutX="175.0" layoutY="612.0" text="SUM:">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="sumSmallCar" layoutX="129.0" layoutY="647.0" prefHeight="27.0" prefWidth="163.0" />
-      <Label layoutX="923.0" layoutY="650.0" text="SUM:">
+      <TextField fx:id="sumSmallCar" layoutX="245.0" layoutY="609.0" prefHeight="27.0" prefWidth="163.0" />
+      <Label layoutX="973.0" layoutY="612.0" text="SUM:">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="sumBigCar" layoutX="974.0" layoutY="645.0" prefHeight="18.0" prefWidth="148.0">
+      <TextField fx:id="sumBigCar" layoutX="1040.0" layoutY="608.0" prefHeight="18.0" prefWidth="148.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Label layoutX="529.0" layoutY="650.0" text="SUM:">
+      <Label layoutX="620.0" layoutY="612.0" text="SUM:">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="sumAll" layoutX="570.0" layoutY="645.0" prefHeight="28.0" prefWidth="148.0" />
+      <TextField fx:id="sumAll" layoutX="683.0" layoutY="609.0" prefHeight="28.0" prefWidth="148.0" />
+      <Button fx:id="export_Small_Car_Route" layoutX="245.0" layoutY="673.0" mnemonicParsing="false" onAction="#exportRouteSmall" text="Export Route">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="export_Big_Car_Route" layoutX="1040.0" layoutY="673.0" mnemonicParsing="false" onAction="#exportRouteBig" text="Export Route">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="535.0" layoutY="40.0" text="List of Orders">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="opt_label_small" layoutX="34.0" layoutY="87.0" text="Optimal Route:">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="opt_label_big" layoutX="867.0" layoutY="87.0" text="Optimal Route:">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

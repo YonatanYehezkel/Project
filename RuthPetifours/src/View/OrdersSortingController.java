@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import Controller.ControllerLogic;
+import Controller.MainClass;
 import Model.Order;
 import Model.User;
 import googleMap.DirectionsApi;
@@ -27,7 +28,10 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -64,16 +68,19 @@ public class OrdersSortingController implements Initializable{
 	
 	@FXML private Button Build_Small_Car_Route;
 	@FXML private Button Build_Big_Car_Route;
+	@FXML private Button export_Small_Car_Route;
+	@FXML private Button export_Big_Car_Route;
 	@FXML private TextField sumSmallCar;
 	@FXML private TextField sumBigCar;
 	@FXML private TextField sumAll;
+	@FXML private Label opt_label_small;
+	@FXML private Label opt_label_big;
 
 	
 	
 	@FXML private ObservableList<Order> orders;
 	
 	private ControllerLogic controller;
-	private User currentUser;
 	private Integer index = null;
 	private static final DataFormat SERIALIZED_MIME_TYPE = new DataFormat("application/x-java-serialized-object");
 
@@ -104,6 +111,12 @@ public class OrdersSortingController implements Initializable{
 		sum_big.setCellValueFactory(new PropertyValueFactory<>("value"));
 		
 		loadDataFromDB();
+				
+		
+		OrderTable.getSortOrder().setAll(OrderTable.getColumns().get(0));
+	 
+		opt_label_small.setVisible(false);
+		opt_label_big.setVisible(false);
 		
 		simpleDragDrop();
 		}
@@ -178,6 +191,8 @@ public class OrdersSortingController implements Initializable{
                     
                     sumSmallCar.setText(Float.toString(calculateOrdersSum(smallCarTable)));
                     sumAll.setText(Float.toString(calculateOrdersSum(OrderTable)));
+                    
+                    opt_label_small.setVisible(false);
 		    		
 		    	}
 		    		
@@ -199,6 +214,8 @@ public class OrdersSortingController implements Initializable{
                     
                     sumBigCar.setText(Float.toString(calculateOrdersSum(bigCarTable)));
                     sumAll.setText(Float.toString(calculateOrdersSum(OrderTable)));
+                    
+                    opt_label_big.setVisible(false);
 		    		
 		    	}
 		    		
@@ -215,10 +232,17 @@ public class OrdersSortingController implements Initializable{
 		return sum;
 	}
 
-
 	
 	@FXML private void buildRoutSmall() {
+		if(smallCarTable.getItems().size()==0){
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(MainClass.getPrimaryStage());
+            alert.setHeaderText("List is empty!");
+            alert.setContentText("You should add orders to table.");
+            alert.showAndWait();
+		}
 		
+		else {
 		
 		GeoApiContext context = new GeoApiContext.Builder()
 			    .apiKey(API_KEY)
@@ -259,7 +283,9 @@ public class OrdersSortingController implements Initializable{
 		            //bestRout.setText(Arrays.toString(routes[0].waypointOrder));
 			        //System.out.println(gson.toJson(routes));
 		            sortTablebyOptimalRoute(smallCarTable);
-		            controller.exportToExcelRoute(smallCarTable, "smallCar");
+		            		            
+		            opt_label_small.setVisible(true);
+		            
 			        latch.countDown();
 		        }
 
@@ -293,12 +319,19 @@ public class OrdersSortingController implements Initializable{
 			}
 		  
 	
-	
+		}
 }
 	
 	@FXML private void buildRoutBig() {
+		if(bigCarTable.getItems().size()==0){
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(MainClass.getPrimaryStage());
+            alert.setHeaderText("List is empty!");
+            alert.setContentText("You should add orders to table.");
+            alert.showAndWait();
+		}
 		
-		
+		else {
 		GeoApiContext context = new GeoApiContext.Builder()
 			    .apiKey(API_KEY)
 			    .build();
@@ -338,7 +371,9 @@ public class OrdersSortingController implements Initializable{
 		            //bestRout.setText(Arrays.toString(routes[0].waypointOrder));
 			        //System.out.println(gson.toJson(routes));
 		            sortTablebyOptimalRoute(bigCarTable);
-		            controller.exportToExcelRoute(bigCarTable, "bigCar");
+		           
+		            opt_label_big.setVisible(true);
+		            
 			        latch.countDown();
 		        }
 
@@ -371,9 +406,10 @@ public class OrdersSortingController implements Initializable{
 				e1.printStackTrace();
 			}
 		  
-	
+		}
 	
 }
+	
 	
 	private void sortTablebyOptimalRoute(TableView<Order> table) {
 			
@@ -414,6 +450,66 @@ public class OrdersSortingController implements Initializable{
 	public void initData(User currentUser) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	
+	@FXML private void exportRouteSmall() {
+		if(smallCarTable.getItems().size()==0){
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(MainClass.getPrimaryStage());
+            alert.setHeaderText("List is empty!");
+            alert.setContentText("You should add orders and calculate optimal route before export to excel.");
+            alert.showAndWait();
+		}
+		if (opt_label_small.isVisible()) {
+			controller.exportToExcelRoute(smallCarTable, "smallCar");
+			
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.initOwner(MainClass.getPrimaryStage());
+            alert.setHeaderText("Success");
+            alert.setContentText("An optimal route for small car was export to: C:\\Users\\Public\\Documents\\SmallCar.xls.");
+            alert.showAndWait();
+            
+		}
+		else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(MainClass.getPrimaryStage());
+            alert.setHeaderText("Build route!");
+            alert.setContentText("You should build an optimal route before export to excel.");
+            alert.showAndWait();
+		}
+			
+		
+	}
+	
+	
+@FXML private void exportRouteBig() {
+		
+		if(bigCarTable.getItems().size()==0){
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(MainClass.getPrimaryStage());
+            alert.setHeaderText("List is empty!");
+            alert.setContentText("You should add orders and calculate optimal route before export to excel.");
+            alert.showAndWait();
+		}
+		if (opt_label_big.isVisible()) {
+			controller.exportToExcelRoute(bigCarTable, "bigCar");
+			
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.initOwner(MainClass.getPrimaryStage());
+            alert.setHeaderText("Success");
+            alert.setContentText("An optimal route for big car was export to: C:\\Users\\Public\\Documents\\BigCar.xls.");
+            alert.showAndWait();
+            
+		}
+		
+		else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(MainClass.getPrimaryStage());
+            alert.setHeaderText("Build route!");
+            alert.setContentText("You should build an optimal route before export to excel.");
+            alert.showAndWait();
+		}
 	}
 	
 	
