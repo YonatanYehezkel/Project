@@ -64,7 +64,7 @@ public class MainMenuController {
 				
 				MainClass.getPrimaryStage().setScene(appSetScene);
 				MainClass.getPrimaryStage().setFullScreenExitHint("");
-				MainClass.getPrimaryStage().setFullScreen(true);
+				MainClass.getPrimaryStage().setMaximized(true);
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -87,7 +87,7 @@ public class MainMenuController {
 				
 				MainClass.getPrimaryStage().setScene(appSetScene);
 				MainClass.getPrimaryStage().setFullScreenExitHint("");
-				MainClass.getPrimaryStage().setFullScreen(true);
+				MainClass.getPrimaryStage().setMaximized(true);
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -106,7 +106,7 @@ public class MainMenuController {
 				
 				MainClass.getPrimaryStage().setScene(appSetScene);
 				MainClass.getPrimaryStage().setFullScreenExitHint("");
-				MainClass.getPrimaryStage().setFullScreen(true);
+				MainClass.getPrimaryStage().setMaximized(true);
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -128,7 +128,7 @@ public class MainMenuController {
 				
 				MainClass.getPrimaryStage().setScene(appSetScene);
 				MainClass.getPrimaryStage().setFullScreenExitHint("");
-				MainClass.getPrimaryStage().setFullScreen(true);
+				MainClass.getPrimaryStage().setMaximized(true);
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -147,7 +147,7 @@ public class MainMenuController {
 				
 				MainClass.getPrimaryStage().setScene(appSetScene);
 				MainClass.getPrimaryStage().setFullScreenExitHint("");
-				MainClass.getPrimaryStage().setFullScreen(true);
+				MainClass.getPrimaryStage().setMaximized(true);
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

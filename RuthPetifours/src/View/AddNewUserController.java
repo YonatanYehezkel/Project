@@ -75,7 +75,7 @@ public class AddNewUserController implements Initializable{
 					
 					MainClass.getPrimaryStage().setScene(appSetScene);
 					MainClass.getPrimaryStage().setFullScreenExitHint("");
-					MainClass.getPrimaryStage().setFullScreen(true);
+					MainClass.getPrimaryStage().setMaximized(true);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -120,7 +120,7 @@ public class AddNewUserController implements Initializable{
 			
 			MainClass.getPrimaryStage().setScene(appSetScene);
 			MainClass.getPrimaryStage().setFullScreenExitHint("");
-			MainClass.getPrimaryStage().setFullScreen(true);
+			MainClass.getPrimaryStage().setMaximized(true);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -146,7 +146,7 @@ public class AddNewUserController implements Initializable{
 				  
 			MainClass.getPrimaryStage().setScene(appSetScene);
 			MainClass.getPrimaryStage().setFullScreenExitHint("");
-			MainClass.getPrimaryStage().setFullScreen(true);
+			MainClass.getPrimaryStage().setMaximized(true);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

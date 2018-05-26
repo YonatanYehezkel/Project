@@ -51,7 +51,7 @@ public class MainClass extends Application {
 		this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Ruth Petifours");
         this.primaryStage.setFullScreenExitHint("");
-        this.primaryStage.setFullScreen(true);
+        this.primaryStage.setMaximized(true);
        initRootLayout();
      
 	}
