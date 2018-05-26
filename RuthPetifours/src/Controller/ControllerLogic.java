@@ -318,7 +318,7 @@ public class ControllerLogic {
 
 	     FileOutputStream fileOut;
 		try {
-			fileOut = new FileOutputStream(filename + ".xls");
+			fileOut = new FileOutputStream("C:\\Users\\Public\\Documents\\"+ filename + ".xls");
 			workbook.write(fileOut);
 			fileOut.close();
 		} catch (FileNotFoundException e) {
