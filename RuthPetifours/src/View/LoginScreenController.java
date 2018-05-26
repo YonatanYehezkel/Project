@@ -68,8 +68,23 @@ public class LoginScreenController {
 	 
 	 @FXML private void goToMainMenu(){
 		 
+		/* try {
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(OrdersSortingController.class.getResource("/View/OrdersSortingScreen.fxml"));
+				AnchorPane appSet = loader.load();
+				Scene appSetScene = new Scene(appSet);
+				OrdersSortingController cont = 
+					    loader.<OrdersSortingController>getController();
+					  cont.initData(currentUser);
+					  
+				MainClass.getPrimaryStage().setScene(appSetScene);
+			
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
 		 
-		 try {
+		try {
 				FXMLLoader loader = new FXMLLoader();
 				loader.setLocation(MainMenuController.class.getResource("/View/MainMenuScreen.fxml"));
 				AnchorPane appSet = loader.load();

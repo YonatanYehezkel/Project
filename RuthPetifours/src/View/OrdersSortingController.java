@@ -1,19 +1,13 @@
 package View;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.CountDownLatch;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -28,7 +22,6 @@ import googleMap.DirectionsRoute;
 import googleMap.GeoApiContext;
 import googleMap.PendingResult;
 import googleMap.TravelMode;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -38,6 +31,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
@@ -45,7 +39,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
-import javafx.stage.Stage;
+
 
 public class OrdersSortingController implements Initializable{
 	
@@ -70,6 +64,9 @@ public class OrdersSortingController implements Initializable{
 	
 	@FXML private Button Build_Small_Car_Route;
 	@FXML private Button Build_Big_Car_Route;
+	@FXML private TextField sumSmallCar;
+	@FXML private TextField sumBigCar;
+	@FXML private TextField sumAll;
 
 	
 	
@@ -82,6 +79,7 @@ public class OrdersSortingController implements Initializable{
 
 	private String[] wayp;
 	private DirectionsRoute[] routes;
+	private int[] opt_route;
 	private static final String API_KEY = "AIzaSyAIgMRRrFNahxoMfyQdsi7T07SeQ79lEgY";
 	
 	 
@@ -122,6 +120,7 @@ public class OrdersSortingController implements Initializable{
             
                 //db.setDragView(row.snapshot(null, null));
                 
+                                
                 db.setContent(cc);
                 event.consume();
 		    }
@@ -174,6 +173,11 @@ public class OrdersSortingController implements Initializable{
 		    		OrderTable.getItems().remove(index.intValue());
 		    		index = null;
                     event.setDropCompleted(true);
+                    
+                                      
+                    
+                    sumSmallCar.setText(Float.toString(calculateOrdersSum(smallCarTable)));
+                    sumAll.setText(Float.toString(calculateOrdersSum(OrderTable)));
 		    		
 		    	}
 		    		
@@ -191,6 +195,10 @@ public class OrdersSortingController implements Initializable{
 		    		OrderTable.getItems().remove(index.intValue());
 		    		index = null;
                     event.setDropCompleted(true);
+                    
+                    
+                    sumBigCar.setText(Float.toString(calculateOrdersSum(bigCarTable)));
+                    sumAll.setText(Float.toString(calculateOrdersSum(OrderTable)));
 		    		
 		    	}
 		    		
@@ -199,65 +207,19 @@ public class OrdersSortingController implements Initializable{
 		    }
 		});
 	}
-	private void dragAndDrop() {
-		
-		OrderTable.setRowFactory(tv -> {
-	            TableRow<Order> row = new TableRow<>();
+	protected float calculateOrdersSum(TableView<Order> table) {
+		 float sum = 0;
+         for (Order item : table.getItems()) {
+		        sum = sum + item.getValue();
+		    }
+		return sum;
+	}
 
-	            row.setOnDragDetected(event -> {
-	                if (! row.isEmpty()) {
-	                    Integer index = row.getIndex();
-	                    Dragboard db = row.startDragAndDrop(TransferMode.MOVE);
-	                    db.setDragView(row.snapshot(null, null));
-	                    ClipboardContent cc = new ClipboardContent();
-	                    cc.put(SERIALIZED_MIME_TYPE, index);
-	                    db.setContent(cc);
-	                    event.consume();
-	                }
-	            });
 
-	            row.setOnDragOver(event -> {
-	                Dragboard db = event.getDragboard();
-	                if (db.hasContent(SERIALIZED_MIME_TYPE)) {
-	                    if (row.getIndex() != ((Integer)db.getContent(SERIALIZED_MIME_TYPE)).intValue()) {
-	                        event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-	                        event.consume();
-	                    }
-	                }
-	            });
-	            
-	            row.setOnDragDropped(event -> {
-	                Dragboard db = event.getDragboard();
-	                if (db.hasContent(SERIALIZED_MIME_TYPE)) {
-	                    int draggedIndex = (Integer) db.getContent(SERIALIZED_MIME_TYPE);
-	                    Order draggedPerson = OrderTable.getItems().remove(draggedIndex);
-
-	                    int dropIndex ; 
-
-	                    if (row.isEmpty()) {
-	                        dropIndex = OrderTable.getItems().size();
-	                    } else {
-	                        dropIndex = row.getIndex();
-	                    }
-
-	                    OrderTable.getItems().add(dropIndex, draggedPerson);
-	                    //smallCarTable.getItems().add(dropIndex, draggedPerson);
-
-	                    event.setDropCompleted(true);
-	                    OrderTable.getSelectionModel().select(dropIndex);
-	                    //smallCarTable.getSelectionModel().select(dropIndex);
-	                    event.consume();
-	                }
-	            });
-
-	            return row ;
-	        });
-			
-		}
 	
-	@FXML private void buildRout() {
+	@FXML private void buildRoutSmall() {
 		
-		exportToExcel();
+		
 		GeoApiContext context = new GeoApiContext.Builder()
 			    .apiKey(API_KEY)
 			    .build();
@@ -266,11 +228,7 @@ public class OrdersSortingController implements Initializable{
 		    apiRequest.origin("Karmiel");
 		    apiRequest.destination("Karmiel");
 		    apiRequest.optimizeWaypoints(true);
-		   // String[] waypoints = {"32.794044, 34.989571", "32.8499966, 35.249999", "32.109333, 34.855499"};
-			
-		    //List<Order> orders = smallCarTable.getItems();
-		    
-		    //TableColumn<Order, String> column = ... ; // column you want
+	
 
 		    List<String> columnData = new ArrayList<>();
 		    for (Order item : smallCarTable.getItems()) {
@@ -293,16 +251,21 @@ public class OrdersSortingController implements Initializable{
 		           
 		            Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		           //routes[1].waypointOrder.toString();
-		           //System.out.println(Arrays.toString(routes[0].waypointOrder));
+		           System.out.println(Arrays.toString(routes[0].waypointOrder));
+		           opt_route = routes[0].waypointOrder;
 		            /*bestRout.setText(getOptimalRoute()); */
 		            System.out.println(getOptimalRoute());
 		            //getOptimalRoute();
 		            //bestRout.setText(Arrays.toString(routes[0].waypointOrder));
-			        System.out.println(gson.toJson(routes));
+			        //System.out.println(gson.toJson(routes));
+		            sortTablebyOptimalRoute(smallCarTable);
+		            controller.exportToExcelRoute(smallCarTable, "smallCar");
 			        latch.countDown();
 		        }
 
-		        private String getOptimalRoute() {
+		        
+
+				private String getOptimalRoute() {
 					String s ="Optimal route: ";
 		        	//Arrays.toString(routes[0].waypointOrder);
 		        	
@@ -311,7 +274,7 @@ public class OrdersSortingController implements Initializable{
 		        		s = s.concat(wayp[routes[0].waypointOrder[i]].toString()).concat(", ");
 		        	}
 		        	
-		        	
+		        	//System.out.println(routes[0].waypointOrder);
 					return s;
 				}
 
@@ -332,102 +295,102 @@ public class OrdersSortingController implements Initializable{
 	
 	
 }
-
 	
-private void exportToExcel() {
-	 Workbook workbook = new HSSFWorkbook();
-     Sheet spreadsheet = workbook.createSheet("sample");
+	@FXML private void buildRoutBig() {
+		
+		
+		GeoApiContext context = new GeoApiContext.Builder()
+			    .apiKey(API_KEY)
+			    .build();
+		    		
+		    DirectionsApiRequest apiRequest = DirectionsApi.newRequest(context);
+		    apiRequest.origin("Karmiel");
+		    apiRequest.destination("Karmiel");
+		    apiRequest.optimizeWaypoints(true);
+	
 
-     Row row = spreadsheet.createRow(0);
+		    List<String> columnData = new ArrayList<>();
+		    for (Order item : bigCarTable.getItems()) {
+		        columnData.add(item.getAdress());
+		    }
+		    wayp = columnData.toArray(new String[0]);
+		    apiRequest.waypoints(wayp);
+			
+			
+		    apiRequest.mode(TravelMode.DRIVING); 
 
-     for (int j = 0; j < smallCarTable.getColumns().size(); j++) {
-         row.createCell(j).setCellValue(smallCarTable.getColumns().get(j).getText());
-     }
 
-     for (int i = 0; i < smallCarTable.getItems().size(); i++) {
-         row = spreadsheet.createRow(i + 1);
-         for (int j = 0; j < smallCarTable.getColumns().size(); j++) {
-             if(smallCarTable.getColumns().get(j).getCellData(i) != null) { 
-                 row.createCell(j).setCellValue(smallCarTable.getColumns().get(j).getCellData(i).toString()); 
-             }
-             else {
-                 row.createCell(j).setCellValue("");
-             }   
-         }
-     }
+		    final CountDownLatch latch = new CountDownLatch(1);
+		    
+		    apiRequest.setCallback(new PendingResult.Callback<DirectionsResult>() {
+		    	 
+		        @Override
+		        public void onResult(DirectionsResult result) {
+		            routes = result.routes;
+		           
+		            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		           //routes[1].waypointOrder.toString();
+		           System.out.println(Arrays.toString(routes[0].waypointOrder));
+		           opt_route = routes[0].waypointOrder;
+		            /*bestRout.setText(getOptimalRoute()); */
+		            System.out.println(getOptimalRoute());
+		            //getOptimalRoute();
+		            //bestRout.setText(Arrays.toString(routes[0].waypointOrder));
+			        //System.out.println(gson.toJson(routes));
+		            sortTablebyOptimalRoute(bigCarTable);
+		            controller.exportToExcelRoute(bigCarTable, "bigCar");
+			        latch.countDown();
+		        }
 
-     FileOutputStream fileOut;
-	try {
-		fileOut = new FileOutputStream("workbook.xls");
-		workbook.write(fileOut);
-		fileOut.close();
-	} catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-     
-     
+		        
+
+				private String getOptimalRoute() {
+					String s ="Optimal route: ";
+		        	//Arrays.toString(routes[0].waypointOrder);
+		        	
+		        	for( int i = 0; i <= routes[0].waypointOrder.length - 1; i++) {
+		        		//System.out.println(wayp[routes[0].waypointOrder[i]].toString());
+		        		s = s.concat(wayp[routes[0].waypointOrder[i]].toString()).concat(", ");
+		        	}
+		        	
+		        	//System.out.println(routes[0].waypointOrder);
+					return s;
+				}
+
+				@Override
+		        public void onFailure(Throwable e) {
+		        	
+		        }
+		    });
+
+		    // We have to hold the main thread open until callback is called by OkHTTP.
+		    try {
+				latch.await();
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		  
+	
+	
+}
+	
+	private void sortTablebyOptimalRoute(TableView<Order> table) {
+			
+		 ObservableList<Order> orders = FXCollections.observableArrayList();
+		for(int i=0; i<opt_route.length; i++) {
+			orders.add(table.getItems().get(opt_route[i]));
+			
+		}
+		
+		table.setItems(orders);
+		
+		
 		
 	}
+	
 
-private void dragAndDrop2() {
-		
-	smallCarTable.setRowFactory(tv -> {
-            TableRow<Order> row = new TableRow<>();
 
-            row.setOnDragDetected(event -> {
-                if (! row.isEmpty()) {
-                    Integer index = row.getIndex();
-                    Dragboard db = row.startDragAndDrop(TransferMode.MOVE);
-                    db.setDragView(row.snapshot(null, null));
-                    ClipboardContent cc = new ClipboardContent();
-                    cc.put(SERIALIZED_MIME_TYPE, index);
-                    db.setContent(cc);
-                    event.consume();
-                }
-            });
-
-            row.setOnDragOver(event -> {
-                Dragboard db = event.getDragboard();
-                if (db.hasContent(SERIALIZED_MIME_TYPE)) {
-                    if (row.getIndex() != ((Integer)db.getContent(SERIALIZED_MIME_TYPE)).intValue()) {
-                        event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                        event.consume();
-                    }
-                }
-            });
-            
-            row.setOnDragDropped(event -> {
-                Dragboard db = event.getDragboard();
-                if (db.hasContent(SERIALIZED_MIME_TYPE)) {
-                    int draggedIndex = (Integer) db.getContent(SERIALIZED_MIME_TYPE);
-                    Order draggedPerson = OrderTable.getItems().remove(draggedIndex);
-
-                    int dropIndex ; 
-
-                    if (row.isEmpty()) {
-                        dropIndex = smallCarTable.getItems().size();
-                    } else {
-                        dropIndex = row.getIndex();
-                    }
-
-                    smallCarTable.getItems().add(dropIndex, draggedPerson);
-                    //smallCarTable.getItems().add(dropIndex, draggedPerson);
-
-                    event.setDropCompleted(true);
-                    smallCarTable.getSelectionModel().select(dropIndex);
-                    //smallCarTable.getSelectionModel().select(dropIndex);
-                    event.consume();
-                }
-            });
-
-            return row ;
-        });
-		
-	}
 
 	private void loadDataFromDB(){
 		
@@ -444,6 +407,8 @@ private void dragAndDrop2() {
 		}
 		
 		OrderTable.setItems(orders);
+		
+		 sumAll.setText(Float.toString(calculateOrdersSum(OrderTable)));
 	}
 
 	public void initData(User currentUser) {

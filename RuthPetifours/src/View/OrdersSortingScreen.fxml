@@ -4,18 +4,20 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane style="-fx-background-position: center;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.OrdersSortingController">
    <children>
-      <ImageView fitHeight="591.0" fitWidth="1205.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="591.0" fitWidth="1205.0" layoutX="-189.0" pickOnBounds="true" preserveRatio="true" />
       <Button layoutX="30.0" layoutY="26.0" mnemonicParsing="false" text="Back" />
       <Button layoutX="1054.0" layoutY="26.0" mnemonicParsing="false" text="Log Out" />
       <Label layoutX="80.0" layoutY="76.0" text="Small Car Driver" />
       <Label layoutX="971.0" layoutY="84.0" text="Big Car Driver" />
-      <Button fx:id="Build_Small_Car_Route" layoutX="55.0" layoutY="531.0" mnemonicParsing="false" onAction="#buildRout" text="Build Small Car Route" />
-      <Button fx:id="Build_Big_Car_Route" layoutX="953.0" layoutY="531.0" mnemonicParsing="false" text="Build Big Car Route" />
+      <Button fx:id="Build_Small_Car_Route" layoutX="30.0" layoutY="531.0" mnemonicParsing="false" onAction="#buildRoutSmall" text="Build Small Car Route" />
+      <Button fx:id="Build_Big_Car_Route" layoutX="872.0" layoutY="531.0" mnemonicParsing="false" onAction="#buildRoutBig" text="Build Big Car Route" />
       <TableView fx:id="smallCarTable" layoutX="30.0" layoutY="116.0" prefHeight="392.0" prefWidth="310.0">
          <columns>
             <TableColumn fx:id="orderN_small" prefWidth="75.0" text="OrderN" />
@@ -40,5 +42,23 @@
             <TableColumn fx:id="sum_big" prefWidth="84.0" text="Sum" />
          </columns>
       </TableView>
+      <Label layoutX="185.0" layoutY="514.0" text="SUM:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="sumSmallCar" layoutX="221.0" layoutY="510.0" prefHeight="25.0" prefWidth="119.0" />
+      <Label layoutX="1029.0" layoutY="523.0" text="SUM:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="sumBigCar" layoutX="1063.0" layoutY="519.0" prefHeight="25.0" prefWidth="119.0" />
+      <Label layoutX="499.0" layoutY="514.0" text="SUM:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="sumAll" layoutX="544.0" layoutY="510.0" prefHeight="17.0" prefWidth="119.0" />
    </children>
 </AnchorPane>
