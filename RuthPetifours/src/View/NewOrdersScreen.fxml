@@ -9,41 +9,53 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.OrdersManageController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.OrdersManageController">
    <children>
-      <ImageView fitHeight="544.0" fitWidth="917.0" layoutX="-91.0" pickOnBounds="true" preserveRatio="true" />
-      <TableView fx:id="OrdersTable" layoutX="235.0" layoutY="36.0" prefHeight="485.0" prefWidth="558.0">
+      <ImageView fitHeight="1080.0" fitWidth="1920.0" layoutX="-91.0" pickOnBounds="true" preserveRatio="true" />
+      <TableView fx:id="OrdersTable" layoutX="480.0" layoutY="55.0" prefHeight="970.0" prefWidth="1124.0">
         <columns>
-          <TableColumn fx:id="ordernum" prefWidth="111.0" text="OrderID" />
-          <TableColumn fx:id="customer" prefWidth="139.0" text="Customer" />
-          <TableColumn fx:id="city" prefWidth="135.0" text="City" />
-          <TableColumn fx:id="value" prefWidth="138.0" text="Order Value" />
+          <TableColumn fx:id="ordernum" prefWidth="156.0" text="OrderID" />
+          <TableColumn fx:id="customer" prefWidth="417.0" text="Customer" />
+          <TableColumn fx:id="city" prefWidth="242.0" text="City" />
+          <TableColumn fx:id="value" prefWidth="308.0" text="Order Value" />
         </columns>
       </TableView>
-      <AnchorPane layoutY="-6.0" prefHeight="552.0" prefWidth="200.0" style="-fx-background-color: #48D1CC;">
+      <AnchorPane layoutY="-6.0" prefHeight="1090.0" prefWidth="365.0" style="-fx-background-color: #48D1CC;">
          <children>
-            <Button fx:id="Back" layoutX="29.0" layoutY="210.0" mnemonicParsing="false" onAction="#goBackToMainMenu" prefHeight="25.0" prefWidth="163.0" text="Main Menu" />
-            <Button fx:id="importOrders" layoutX="29.0" layoutY="322.0" mnemonicParsing="false" onAction="#importOrderFromExcel" prefHeight="25.0" prefWidth="163.0" text="Import Order" />
-            <Button fx:id="importProducts" layoutX="29.0" layoutY="364.0" mnemonicParsing="false" onAction="#importProductsFromExcel" prefHeight="25.0" prefWidth="163.0" text="Import Product" />
-            <Button fx:id="orderSorting" layoutX="29.0" layoutY="253.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="163.0" text="Order Sorting" onAction="#goToOrdersSortingView"/>
-            <ImageView fx:id="log_img" fitHeight="40.0" fitWidth="37.0" layoutX="17.0" layoutY="492.0" onMouseClicked="#logOut" pickOnBounds="true" preserveRatio="true">
+            <Button fx:id="Back" layoutX="39.0" layoutY="200.0" mnemonicParsing="false" onAction="#goBackToMainMenu" prefHeight="87.0" prefWidth="286.0" text="Main Menu">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
+            <Button fx:id="importOrders" layoutX="39.0" layoutY="545.0" mnemonicParsing="false" onAction="#importOrderFromExcel" prefHeight="87.0" prefWidth="286.0" text="Import Order">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
+            <Button fx:id="importProducts" layoutX="39.0" layoutY="715.0" mnemonicParsing="false" onAction="#importProductsFromExcel" prefHeight="87.0" prefWidth="286.0" text="Import Product">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
+            <Button fx:id="orderSorting" layoutX="39.0" layoutY="369.0" mnemonicParsing="false" onAction="#goToOrdersSortingView" prefHeight="87.0" prefWidth="286.0" text="Order Sorting">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
+            <ImageView fx:id="log_img" fitHeight="40.0" fitWidth="37.0" layoutX="83.0" layoutY="1016.0" onMouseClicked="#logOut" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../Images/logOut.png" />
                </image>
             </ImageView>
-            <Label fx:id="cur_user" layoutX="69.0" layoutY="496.0" prefHeight="25.0" prefWidth="145.0" text="User" textFill="#404040">
+            <Label fx:id="cur_user" layoutX="143.0" layoutY="1020.0" prefHeight="25.0" prefWidth="145.0" text="User" textFill="#404040">
                <font>
                   <Font name="Arial" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="35.0" layoutY="74.0" text="Order Menu" textFill="#404040">
+            <Label layoutX="75.0" layoutY="49.0" text="Order Menu" textFill="#404040">
                <font>
-                  <Font size="28.0" />
+                  <Font size="36.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="126.0" prefHeight="25.0" prefWidth="137.0" text="Ruth Petifours LTD" textAlignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="95.0" layoutY="122.0" prefHeight="27.0" prefWidth="163.0" text="Ruth Petifours LTD" textAlignment="CENTER">
                <font>
-                  <Font name="Arial" size="14.0" />
+                  <Font name="Arial" size="18.0" />
                </font>
             </Label>
          </children>

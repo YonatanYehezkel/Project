@@ -10,23 +10,35 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.DriversManageController">
    <children>
-      <ImageView fitHeight="569.0" fitWidth="897.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
-      <TableView layoutX="14.0" layoutY="107.0" prefHeight="454.0" prefWidth="599.0">
+      <ImageView fitHeight="1080.0" fitWidth="1920.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+      <TableView layoutX="420.0" layoutY="183.0" prefHeight="848.0" prefWidth="1311.0">
         <columns>
-          <TableColumn prefWidth="106.0" text="Driver ID" />
-          <TableColumn prefWidth="111.0" text="Driver Name" />
-            <TableColumn prefWidth="160.0" text="Vehichle Permission" />
-            <TableColumn prefWidth="160.0" text="Default Vehichle" />
+          <TableColumn prefWidth="297.0" text="Driver ID" />
+          <TableColumn prefWidth="415.0" text="Driver Name" />
+            <TableColumn prefWidth="349.0" text="Vehichle Permission" />
+            <TableColumn prefWidth="248.0" text="Default Vehichle" />
         </columns>
       </TableView>
-      <Label layoutX="283.0" layoutY="33.0" text="Drivers Managment">
+      <Label layoutX="648.0" layoutY="35.0" text="Drivers Managment">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Button layoutX="717.0" layoutY="107.0" mnemonicParsing="false" text="Add Drivre" />
-      <Button layoutX="683.0" layoutY="195.0" mnemonicParsing="false" text="Change Driver Details" />
-      <Button layoutX="705.0" layoutY="288.0" mnemonicParsing="false" text="Remove Driver" />
-      <Button fx:id="Back" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#goBackToMainMenu" text="Back" />
+      <Button layoutX="19.0" layoutY="183.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="301.0" text="Add Drivre">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Button layoutX="19.0" layoutY="321.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="301.0" text="Change Driver Details">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Button layoutX="19.0" layoutY="453.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="301.0" text="Remove Driver">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Button fx:id="Back" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#goBackToMainMenu" prefHeight="75.0" prefWidth="152.0" text="Back">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
    </children>
 </AnchorPane>

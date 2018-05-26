@@ -8,19 +8,24 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
-	<classpathentry kind="lib" path="external Jars/com.mysql.jdbc_5.1.5.jar"/>
-	<classpathentry kind="lib" path="external Jars/mysql-connector-java-5.1.46-bin.jar"/>
-	<classpathentry kind="lib" path="external Jars/commons-io-2.6.jar"/>
-	<classpathentry kind="lib" path="external Jars/poi-ooxml-3.11-beta2.jar"/>
-	<classpathentry kind="lib" path="external Jars/poi-3.11.jar"/>
-	<classpathentry kind="lib" path="external Jars/org-apache-commons-codec.jar"/>
-	<classpathentry kind="lib" path="external Jars/xmlbeans-2.6.0.jar"/>
-	<classpathentry kind="lib" path="external Jars/poi-ooxml-schemas-3.11-beta2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tolstyak/git/Project2/RuthPetifours/external Jars/joda-time-2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tolstyak/git/Project2/RuthPetifours/external Jars/okio-1.14.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tolstyak/git/Project2/RuthPetifours/external Jars/okhttp-3.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tolstyak/git/Project2/RuthPetifours/external Jars/gson-2.6.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tolstyak/git/Project2/RuthPetifours/external Jars/slf4j-nop-1.6.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tolstyak/git/Project2/RuthPetifours/external Jars/slf4j-api-1.7.10.jar"/>
+	<classpathentry kind="lib" path="/Users/yonatanyehezkel/git/Project/RuthPetifours/external Jars/com.mysql.jdbc_5.1.5.jar"/>
+	<classpathentry kind="lib" path="/Users/yonatanyehezkel/git/Project/RuthPetifours/external Jars/commons-io-2.6.jar"/>
+	<classpathentry kind="lib" path="/Users/yonatanyehezkel/git/Project/RuthPetifours/external Jars/gson-2.6.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/yonatanyehezkel/git/Project/RuthPetifours/external Jars/gson-2.6.2.jar"/>
+	<classpathentry kind="lib" path="/Users/yonatanyehezkel/git/Project/RuthPetifours/external Jars/javafx-0.2.jar"/>
+	<classpathentry kind="lib" path="/Users/yonatanyehezkel/git/Project/RuthPetifours/external Jars/joda-time-2.4.jar"/>
+	<classpathentry kind="lib" path="/Users/yonatanyehezkel/git/Project/RuthPetifours/external Jars/mysql-connector-java-5.1.46-bin.jar"/>
+	<classpathentry kind="lib" path="/Users/yonatanyehezkel/git/Project/RuthPetifours/external Jars/mysql-connector-java-5.1.46.jar"/>
+	<classpathentry kind="lib" path="/Users/yonatanyehezkel/git/Project/RuthPetifours/external Jars/okhttp-3.1.2.jar"/>
+	<classpathentry kind="lib" path="/Users/yonatanyehezkel/git/Project/RuthPetifours/external Jars/okio-1.14.1.jar"/>
+	<classpathentry kind="lib" path="/Users/yonatanyehezkel/git/Project/RuthPetifours/external Jars/org-apache-commons-codec.jar"/>
+	<classpathentry kind="lib" path="/Users/yonatanyehezkel/git/Project/RuthPetifours/external Jars/poi-3.7.jar"/>
+	<classpathentry kind="lib" path="/Users/yonatanyehezkel/git/Project/RuthPetifours/external Jars/poi-3.11.jar"/>
+	<classpathentry kind="lib" path="/Users/yonatanyehezkel/git/Project/RuthPetifours/external Jars/poi-ooxml-3.11-beta2.jar"/>
+	<classpathentry kind="lib" path="/Users/yonatanyehezkel/git/Project/RuthPetifours/external Jars/poi-ooxml-schemas-3.11-beta2.jar"/>
+	<classpathentry kind="lib" path="/Users/yonatanyehezkel/git/Project/RuthPetifours/external Jars/slf4j-api-1.7.10.jar"/>
+	<classpathentry kind="lib" path="/Users/yonatanyehezkel/git/Project/RuthPetifours/external Jars/slf4j-nop-1.6.1.jar"/>
+	<classpathentry kind="lib" path="/Users/yonatanyehezkel/git/Project/RuthPetifours/external Jars/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="lib" path="/Users/yonatanyehezkel/git/Project/RuthPetifours/external Jars/mysql-connector-java-8.0.11.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

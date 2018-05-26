@@ -8,45 +8,64 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1" fx:controller="View.BestRouteController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.BestRouteController">
 
 
    <children>
-      <ImageView fitHeight="508.0" fitWidth="676.0" layoutX="-8.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField fx:id="origin" layoutX="256.0" layoutY="138.0" prefHeight="25.0" prefWidth="351.0" promptText="Insert Origin" />
-      <TextField fx:id="destination" layoutX="256.0" layoutY="201.0" prefHeight="25.0" prefWidth="351.0" promptText="Insert Destination" />
-      <TextField fx:id="waypoints" layoutX="256.0" layoutY="264.0" prefHeight="25.0" prefWidth="351.0" promptText="Insert Waypoints" />
-      <AnchorPane layoutY="-1.0" prefHeight="515.0" prefWidth="200.0" style="-fx-background-color: #48D1CC;">
+      <ImageView fitHeight="1080.0" fitWidth="1920.0" layoutX="-8.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="origin" layoutX="781.0" layoutY="135.0" prefHeight="95.0" prefWidth="433.0" promptText="Insert Origin">
+         <font>
+            <Font size="24.0" />
+         </font></TextField>
+      <TextField fx:id="destination" layoutX="786.0" layoutY="317.0" prefHeight="95.0" prefWidth="433.0" promptText="Insert Destination">
+         <font>
+            <Font size="24.0" />
+         </font></TextField>
+      <TextField fx:id="waypoints" layoutX="786.0" layoutY="502.0" prefHeight="95.0" prefWidth="433.0" promptText="Insert Waypoints">
+         <font>
+            <Font size="24.0" />
+         </font></TextField>
+      <AnchorPane layoutY="-1.0" prefHeight="1080.0" prefWidth="373.0" style="-fx-background-color: #48D1CC;">
          <children>
-            <Label alignment="CENTER" layoutX="12.0" layoutY="48.0" prefHeight="50.0" prefWidth="189.0" text="Optimal Route" textFill="#404040">
+            <Label alignment="CENTER" layoutX="55.0" layoutY="48.0" prefHeight="50.0" prefWidth="266.0" text="Optimal Route" textFill="#404040">
                <font>
-                  <Font size="28.0" />
+                  <Font size="36.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="167.0" prefHeight="25.0" prefWidth="137.0" text="Ruth Petifours LTD" textAlignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="60.0" layoutY="185.0" prefHeight="27.0" prefWidth="232.0" text="Ruth Petifours LTD" textAlignment="CENTER">
                <font>
-                  <Font name="Arial" size="14.0" />
+                  <Font name="Arial" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="run" layoutX="26.0" layoutY="233.0" mnemonicParsing="false" onAction="#calculateOptimalRoute" prefHeight="25.0" prefWidth="149.0" text="Build Route" />
-            <Button fx:id="Back" layoutX="26.0" layoutY="279.0" mnemonicParsing="false" onAction="#goBackToMainMenu" prefHeight="25.0" prefWidth="149.0" text="Main Menu" />
-            <ImageView fx:id="log_img" fitHeight="40.0" fitWidth="37.0" layoutX="26.0" layoutY="446.0" onMouseClicked="#logOut" pickOnBounds="true" preserveRatio="true">
+            <Button fx:id="Back" layoutX="81.0" layoutY="384.0" mnemonicParsing="false" onAction="#goBackToMainMenu" prefHeight="73.0" prefWidth="189.0" text="Main Menu">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
+            <ImageView fx:id="log_img" fitHeight="42.0" fitWidth="49.0" layoutX="80.0" layoutY="570.0" onMouseClicked="#logOut" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../Images/logOut.png" />
                </image>
             </ImageView>
-            <Label fx:id="cur_user" layoutX="63.0" layoutY="450.0" prefHeight="25.0" prefWidth="117.0" text="User" textFill="#404040">
+            <Label fx:id="cur_user" layoutX="129.0" layoutY="574.0" prefHeight="25.0" prefWidth="117.0" text="User" textFill="#404040">
                <font>
-                  <Font name="Arial" size="20.0" />
+                  <Font name="Arial" size="36.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="98.0" prefHeight="50.0" prefWidth="189.0" text="Calculator" textFill="#404040">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="92.0" layoutY="98.0" prefHeight="50.0" prefWidth="189.0" text="Calculator" textFill="#404040">
                <font>
-                  <Font size="28.0" />
+                  <Font size="36.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <TextField fx:id="bestRout" layoutX="256.0" layoutY="330.0" prefHeight="25.0" prefWidth="351.0" promptText="Optimal rout will be displayed here" />
+      <TextField fx:id="bestRout" layoutX="786.0" layoutY="883.0" prefHeight="95.0" prefWidth="433.0" promptText="Optimal rout will be displayed here">
+         <font>
+            <Font size="24.0" />
+         </font></TextField>
+      <Button fx:id="run" layoutX="913.0" layoutY="682.0" mnemonicParsing="false" onAction="#calculateOptimalRoute" prefHeight="73.0" prefWidth="189.0" style="-fx-background-color: green;" text="Build Route" textFill="#e8e0e0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

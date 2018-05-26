@@ -45,7 +45,6 @@ public class MainMenuController {
 		controller.setShadowEffect(Vehichles);
 		controller.setShadowEffect(Vehichles1);
 		controller.setShadowEffect(buildRoute);
-		
 	 }
 	
 	
@@ -64,8 +63,8 @@ public class MainMenuController {
 					  cont.initData(currentUser);
 				
 				MainClass.getPrimaryStage().setScene(appSetScene);
-				//MainClass.getPrimaryStage().setFullScreenExitHint("");
-				//MainClass.getPrimaryStage().setFullScreen(true);
+				MainClass.getPrimaryStage().setFullScreenExitHint("");
+				MainClass.getPrimaryStage().setFullScreen(true);
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -87,8 +86,8 @@ public class MainMenuController {
 				
 				
 				MainClass.getPrimaryStage().setScene(appSetScene);
-				//MainClass.getPrimaryStage().setFullScreenExitHint("");
-				//MainClass.getPrimaryStage().setFullScreen(true);
+				MainClass.getPrimaryStage().setFullScreenExitHint("");
+				MainClass.getPrimaryStage().setFullScreen(true);
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -106,8 +105,8 @@ public class MainMenuController {
 				Scene appSetScene = new Scene(appSet);
 				
 				MainClass.getPrimaryStage().setScene(appSetScene);
-				//MainClass.getPrimaryStage().setFullScreenExitHint("");
-				//MainClass.getPrimaryStage().setFullScreen(true);
+				MainClass.getPrimaryStage().setFullScreenExitHint("");
+				MainClass.getPrimaryStage().setFullScreen(true);
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -128,8 +127,8 @@ public class MainMenuController {
 					  cont.initData(currentUser);
 				
 				MainClass.getPrimaryStage().setScene(appSetScene);
-				//MainClass.getPrimaryStage().setFullScreenExitHint("");
-				//MainClass.getPrimaryStage().setFullScreen(true);
+				MainClass.getPrimaryStage().setFullScreenExitHint("");
+				MainClass.getPrimaryStage().setFullScreen(true);
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -147,8 +146,8 @@ public class MainMenuController {
 				Scene appSetScene = new Scene(appSet);
 				
 				MainClass.getPrimaryStage().setScene(appSetScene);
-				//MainClass.getPrimaryStage().setFullScreenExitHint("");
-				//MainClass.getPrimaryStage().setFullScreen(true);
+				MainClass.getPrimaryStage().setFullScreenExitHint("");
+				MainClass.getPrimaryStage().setFullScreen(true);
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

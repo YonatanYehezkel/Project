@@ -66,8 +66,8 @@ public class CustomersManageController implements Initializable{
 				  cont.initData(currentUser);
 			
 			MainClass.getPrimaryStage().setScene(appSetScene);
-			//MainClass.getPrimaryStage().setFullScreenExitHint("");
-			//MainClass.getPrimaryStage().setFullScreen(true);
+			MainClass.getPrimaryStage().setFullScreenExitHint("");
+			MainClass.getPrimaryStage().setFullScreen(true);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -124,8 +124,8 @@ public class CustomersManageController implements Initializable{
 				    loader.<AddNewCustomerController>getController();
 				  cont.initData(currentUser);
 			MainClass.getPrimaryStage().setScene(appSetScene);
-			//MainClass.getPrimaryStage().setFullScreenExitHint("");
-			//MainClass.getPrimaryStage().setFullScreen(true);
+			MainClass.getPrimaryStage().setFullScreenExitHint("");
+			MainClass.getPrimaryStage().setFullScreen(true);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

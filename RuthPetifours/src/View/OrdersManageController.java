@@ -103,8 +103,8 @@ private User currentUser;
 				  cont.initData(currentUser);
 				  
 			MainClass.getPrimaryStage().setScene(appSetScene);
-			//MainClass.getPrimaryStage().setFullScreenExitHint("");
-			//MainClass.getPrimaryStage().setFullScreen(true);
+			MainClass.getPrimaryStage().setFullScreenExitHint("");
+			MainClass.getPrimaryStage().setFullScreen(true);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

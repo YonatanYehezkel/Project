@@ -8,42 +8,42 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="648.0" prefWidth="1057.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenuController">
+<AnchorPane prefHeight="648.0" prefWidth="1057.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenuController">
    <children>
-      <AnchorPane layoutX="290.0" prefHeight="648.0" prefWidth="771.0" style="-fx-background-color: #E0FFFF;">
+      <AnchorPane layoutX="290.0" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #E0FFFF;">
          <children>
-            <Button fx:id="Orders" layoutX="104.0" layoutY="154.0" mnemonicParsing="false" onAction="#goToOrders" prefHeight="46.0" prefWidth="243.0" stylesheets="@../../style/style.css" text="ORDERS" textAlignment="CENTER" textFill="#404040">
+            <Button fx:id="Orders" layoutX="104.0" layoutY="154.0" mnemonicParsing="false" onAction="#goToOrders" prefHeight="118.0" prefWidth="344.0" stylesheets="@../../style/style.css" text="ORDERS" textAlignment="CENTER" textFill="#404040">
                <font>
                   <Font name="Arial" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="Customers" layoutX="104.0" layoutY="257.0" mnemonicParsing="false" onAction="#goToCustomers" prefHeight="46.0" prefWidth="243.0" stylesheets="@../../style/style.css" text="CUSTOMERS" />
-            <Button fx:id="Drivers" layoutX="424.0" layoutY="257.0" mnemonicParsing="false" onAction="#goToDrivers" prefHeight="46.0" prefWidth="243.0" stylesheets="@../../style/style.css" text="DRIVERS" />
-            <Button fx:id="Users" layoutX="424.0" layoutY="154.0" mnemonicParsing="false" onAction="#goToUsers" prefHeight="46.0" prefWidth="243.0" stylesheets="@../../style/style.css" text="USERS" />
-            <Button fx:id="Vehichles" layoutX="424.0" layoutY="351.0" mnemonicParsing="false" onAction="#goToVehichles" prefHeight="46.0" prefWidth="243.0" stylesheets="@../../style/style.css" text="VEHICHLES" />
-            <Button fx:id="Vehichles1" layoutX="266.0" layoutY="481.0" mnemonicParsing="false" onAction="#goToVehichles" prefHeight="46.0" prefWidth="243.0" stylesheets="@../../style/style.css" text="REPORTS" />
-            <Button fx:id="buildRoute" layoutX="104.0" layoutY="351.0" mnemonicParsing="false" onAction="#goToBuildRoute" prefHeight="46.0" prefWidth="243.0" stylesheets="@../../style/style.css" text="BUILD ROUTE" />
+            <Button fx:id="Customers" layoutX="104.0" layoutY="424.0" mnemonicParsing="false" onAction="#goToCustomers" prefHeight="118.0" prefWidth="344.0" stylesheets="@../../style/style.css" text="CUSTOMERS" />
+            <Button fx:id="Drivers" layoutX="1164.0" layoutY="424.0" mnemonicParsing="false" onAction="#goToDrivers" prefHeight="118.0" prefWidth="377.0" stylesheets="@../../style/style.css" text="DRIVERS" />
+            <Button fx:id="Users" layoutX="1164.0" layoutY="154.0" mnemonicParsing="false" onAction="#goToUsers" prefHeight="118.0" prefWidth="377.0" stylesheets="@../../style/style.css" text="USERS" />
+            <Button fx:id="Vehichles" layoutX="1164.0" layoutY="666.0" mnemonicParsing="false" onAction="#goToVehichles" prefHeight="118.0" prefWidth="377.0" stylesheets="@../../style/style.css" text="VEHICHLES" />
+            <Button fx:id="Vehichles1" layoutX="626.0" layoutY="897.0" mnemonicParsing="false" onAction="#goToVehichles" prefHeight="118.0" prefWidth="377.0" stylesheets="@../../style/style.css" text="REPORTS" />
+            <Button fx:id="buildRoute" layoutX="104.0" layoutY="666.0" mnemonicParsing="false" onAction="#goToBuildRoute" prefHeight="118.0" prefWidth="344.0" stylesheets="@../../style/style.css" text="BUILD ROUTE" />
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="648.0" prefWidth="290.0" style="-fx-background-color: #48D1CC;">
+      <AnchorPane prefHeight="1080.0" prefWidth="290.0" style="-fx-background-color: #48D1CC;">
          <children>
-            <BorderPane layoutX="24.0" layoutY="166.0" prefHeight="142.0" prefWidth="243.0" style="-fx-border-color: #404040;" />
-            <Label layoutX="54.0" layoutY="193.0" text="Main Menu" textFill="#404040">
+            <BorderPane layoutX="24.0" layoutY="19.0" prefHeight="142.0" prefWidth="243.0" style="-fx-border-color: #404040;" />
+            <Label layoutX="54.0" layoutY="34.0" text="Main Menu" textFill="#404040">
                <font>
                   <Font size="36.0" />
                </font>
             </Label>
-            <ImageView fx:id="log_img" fitHeight="40.0" fitWidth="37.0" layoutX="42.0" layoutY="464.0" onMouseClicked="#logOut" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="log_img" fitHeight="40.0" fitWidth="37.0" layoutX="36.0" layoutY="186.0" onMouseClicked="#logOut" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../Images/logOut.png" />
                </image>
             </ImageView>
-            <Label fx:id="cur_user" layoutX="95.0" layoutY="468.0" prefHeight="25.0" prefWidth="195.0" text="User" textFill="#404040">
+            <Label fx:id="cur_user" layoutX="101.0" layoutY="190.0" prefHeight="25.0" prefWidth="195.0" text="User" textFill="#404040">
                <font>
                   <Font name="Arial" size="20.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="256.0" prefHeight="25.0" prefWidth="182.0" text="Ruth Petifours LTD" textAlignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="108.0" prefHeight="25.0" prefWidth="182.0" text="Ruth Petifours LTD" textAlignment="CENTER">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>

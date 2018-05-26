@@ -51,7 +51,7 @@ public class MainClass extends Application {
 		this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Ruth Petifours");
         this.primaryStage.setFullScreenExitHint("");
-        //this.primaryStage.setFullScreen(true);
+        this.primaryStage.setFullScreen(true);
        initRootLayout();
      
 	}
@@ -68,7 +68,7 @@ public class MainClass extends Application {
 	            Scene scene = new Scene(rootLayout);
 	            primaryStage.setScene(scene);
 	            primaryStage.setFullScreenExitHint("");
-	            //primaryStage.setFullScreen(true);
+	            primaryStage.setFullScreen(true);
 	            primaryStage.show();
 	        } catch (IOException e) {
 	            e.printStackTrace();
