@@ -10,55 +10,55 @@
 
 <AnchorPane prefHeight="508.0" prefWidth="662.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.AddNewCustomerController">
    <children>
-      <ImageView fitHeight="1080.0" fitWidth="1920.0" layoutX="-8.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField fx:id="name" alignment="CENTER" layoutX="824.0" layoutY="97.0" prefHeight="90.0" prefWidth="579.0" promptText="Insert Name">
+      <ImageView fitHeight="800.0" fitWidth="1200.0" layoutX="-8.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="name" alignment="CENTER" layoutX="596.0" layoutY="98.0" prefHeight="45.0" prefWidth="392.0" promptText="Insert Name">
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <TextField fx:id="address" alignment="CENTER" layoutX="824.0" layoutY="312.0" prefHeight="90.0" prefWidth="579.0" promptText="Insert Address">
+      <TextField fx:id="address" alignment="CENTER" layoutX="596.0" layoutY="176.0" prefHeight="45.0" prefWidth="392.0" promptText="Insert Address">
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <TextField fx:id="comments" alignment="CENTER" layoutX="824.0" layoutY="540.0" prefHeight="90.0" prefWidth="579.0" promptText="Insert Comment">
+      <TextField fx:id="comments" alignment="CENTER" layoutX="596.0" layoutY="254.0" prefHeight="45.0" prefWidth="392.0" promptText="Insert Comment">
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <TextField fx:id="contacts" alignment="CENTER" layoutX="820.0" layoutY="768.0" prefHeight="90.0" prefWidth="579.0" promptText="Insert Contacts">
+      <TextField fx:id="contacts" alignment="CENTER" layoutX="596.0" layoutY="349.0" prefHeight="51.0" prefWidth="392.0" promptText="Insert Contacts">
          <font>
             <Font size="24.0" />
          </font></TextField>
       <AnchorPane layoutY="-1.0" prefHeight="1080.0" prefWidth="327.0" style="-fx-background-color: #48D1CC;">
          <children>
-            <Label layoutX="69.0" layoutY="35.0" text="Add Customer" textFill="#404040">
+            <Label layoutX="69.0" layoutY="13.0" text="Add Customer" textFill="#404040">
                <font>
                   <Font size="28.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="96.0" layoutY="93.0" prefHeight="25.0" prefWidth="137.0" text="Ruth Petifours LTD" textAlignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="96.0" layoutY="58.0" prefHeight="25.0" prefWidth="137.0" text="Ruth Petifours LTD" textAlignment="CENTER">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Button fx:id="Save" layoutX="35.0" layoutY="156.0" mnemonicParsing="false" onAction="#addNewCustomerToDB" prefHeight="90.0" prefWidth="257.0" text="Save">
+            <Button fx:id="Save" layoutX="83.0" layoutY="100.0" mnemonicParsing="false" onAction="#addNewCustomerToDB" prefHeight="45.0" prefWidth="162.0" text="Save">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font></Button>
-            <Button fx:id="cancel" layoutX="35.0" layoutY="317.0" mnemonicParsing="false" onAction="#cancelAndGoBack" prefHeight="90.0" prefWidth="257.0" text="Cancel">
+            <Button fx:id="cancel" layoutX="84.0" layoutY="208.0" mnemonicParsing="false" onAction="#cancelAndGoBack" prefHeight="45.0" prefWidth="162.0" text="Cancel">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font></Button>
-            <Button fx:id="Back" layoutX="35.0" layoutY="495.0" mnemonicParsing="false" onAction="#goBackToMainMenu" prefHeight="90.0" prefWidth="257.0" text="Main Menu">
+            <Button fx:id="Back" layoutX="84.0" layoutY="321.0" mnemonicParsing="false" onAction="#goBackToMainMenu" prefHeight="45.0" prefWidth="162.0" text="Main Menu">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font></Button>
-            <ImageView fx:id="log_img" fitHeight="51.0" fitWidth="65.0" layoutX="50.0" layoutY="668.0" onMouseClicked="#logOut" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="log_img" fitHeight="45.0" fitWidth="40.0" layoutX="90.0" layoutY="420.0" onMouseClicked="#logOut" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../Images/logOut.png" />
                </image>
             </ImageView>
-            <Label fx:id="cur_user" layoutX="124.0" layoutY="672.0" prefHeight="25.0" prefWidth="117.0" text="User" textFill="#404040">
+            <Label fx:id="cur_user" layoutX="164.0" layoutY="424.0" prefHeight="25.0" prefWidth="117.0" text="User" textFill="#404040">
                <font>
-                  <Font name="Arial" size="36.0" />
+                  <Font name="Arial" size="24.0" />
                </font>
             </Label>
          </children>

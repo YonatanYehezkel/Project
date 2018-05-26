@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #E0FFFF;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #E0FFFF;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane layoutX="-248.0" layoutY="-236.0" prefHeight="367.0" prefWidth="367.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -16,26 +16,26 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="14.0" layoutY="14.0" prefHeight="778.0" prefWidth="1878.0">
+                        <TableView layoutX="14.0" layoutY="14.0" prefHeight="567.0" prefWidth="1069.0">
                            <columns>
-                              <TableColumn prefWidth="154.0" text="Number" />
-                              <TableColumn prefWidth="185.0" text="Customer" />
-                              <TableColumn prefWidth="322.0" text="Address" />
-                              <TableColumn prefWidth="279.0" text="Contact" />
-                              <TableColumn prefWidth="351.0" text="Order Num" />
-                              <TableColumn prefWidth="342.0" text="Time limit" />
-                              <TableColumn prefWidth="243.0" text="Sum" />
+                              <TableColumn prefWidth="85.0" text="Number" />
+                              <TableColumn prefWidth="114.99996948242188" text="Customer" />
+                              <TableColumn prefWidth="154.00003051757812" text="Address" />
+                              <TableColumn prefWidth="175.99996948242188" text="Contact" />
+                              <TableColumn prefWidth="171.0" text="Order Num" />
+                              <TableColumn prefWidth="211.0" text="Time limit" />
+                              <TableColumn prefWidth="151.0" text="Sum" />
                            </columns>
                         </TableView>
-                        <Button layoutX="557.0" layoutY="868.0" mnemonicParsing="false" text="Export To Excel">
+                        <Button layoutX="78.0" layoutY="639.0" mnemonicParsing="false" style="-fx-background-color: #7CFC00;" text="Export To Excel">
                            <font>
                               <Font size="24.0" />
                            </font></Button>
-                        <Button layoutX="929.0" layoutY="868.0" mnemonicParsing="false" text="Print for driver">
+                        <Button layoutX="443.0" layoutY="639.0" mnemonicParsing="false" style="-fx-background-color: #7CFC00;" text="Print for driver">
                            <font>
                               <Font size="24.0" />
                            </font></Button>
-                        <Button layoutX="1276.0" layoutY="868.0" mnemonicParsing="false" text="Save">
+                        <Button layoutX="794.0" layoutY="639.0" mnemonicParsing="false" style="-fx-background-color: #7CFC00;" text="Save">
                            <font>
                               <Font size="24.0" />
                            </font></Button>

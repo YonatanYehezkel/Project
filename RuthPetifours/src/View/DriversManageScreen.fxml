@@ -8,37 +8,37 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.DriversManageController">
+<AnchorPane style="-fx-background-color: #E0FFFF;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.DriversManageController">
    <children>
-      <ImageView fitHeight="1080.0" fitWidth="1920.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
-      <TableView layoutX="420.0" layoutY="183.0" prefHeight="848.0" prefWidth="1311.0">
+      <ImageView fitHeight="800.0" fitWidth="1200.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+      <TableView layoutX="294.0" layoutY="108.0" prefHeight="518.0" prefWidth="751.0">
         <columns>
-          <TableColumn prefWidth="297.0" text="Driver ID" />
-          <TableColumn prefWidth="415.0" text="Driver Name" />
-            <TableColumn prefWidth="349.0" text="Vehichle Permission" />
-            <TableColumn prefWidth="248.0" text="Default Vehichle" />
+          <TableColumn prefWidth="133.0" text="Driver ID" />
+          <TableColumn prefWidth="195.0" text="Driver Name" />
+            <TableColumn prefWidth="235.0" text="Vehichle Permission" />
+            <TableColumn prefWidth="185.0" text="Default Vehichle" />
         </columns>
       </TableView>
-      <Label layoutX="648.0" layoutY="35.0" text="Drivers Managment">
+      <Label layoutX="406.0" layoutY="35.0" text="Drivers Managment">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Button layoutX="19.0" layoutY="183.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="301.0" text="Add Drivre">
+      <Button layoutX="16.0" layoutY="108.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="213.0" style="-fx-background-color: #7CFC00;" text="Add Drivre">
          <font>
-            <Font size="24.0" />
+            <Font size="18.0" />
          </font></Button>
-      <Button layoutX="19.0" layoutY="321.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="301.0" text="Change Driver Details">
+      <Button layoutX="16.0" layoutY="183.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="213.0" style="-fx-background-color: #7CFC00;" text="Change Driver Details">
          <font>
-            <Font size="24.0" />
+            <Font size="18.0" />
          </font></Button>
-      <Button layoutX="19.0" layoutY="453.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="301.0" text="Remove Driver">
+      <Button layoutX="16.0" layoutY="260.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="213.0" style="-fx-background-color: #7CFC00;" text="Remove Driver">
          <font>
-            <Font size="24.0" />
+            <Font size="18.0" />
          </font></Button>
-      <Button fx:id="Back" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#goBackToMainMenu" prefHeight="75.0" prefWidth="152.0" text="Back">
+      <Button fx:id="Back" layoutX="14.0" layoutY="38.0" mnemonicParsing="false" onAction="#goBackToMainMenu" prefHeight="37.0" prefWidth="152.0" text="Back">
          <font>
-            <Font size="24.0" />
+            <Font size="18.0" />
          </font></Button>
    </children>
 </AnchorPane>
