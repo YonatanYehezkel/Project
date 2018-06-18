@@ -372,8 +372,8 @@ public class DB {
 	public boolean addNewContact (Contact contact, Customer customer) {
 		if(setConnection()) {
 			try {
-				String query = "insert into contact (name, phonenumber1, phonenumber1, email1, "
-						+ "email1, jobrole, customer)"
+				String query = "insert into contact (name, phonenumber1, phonenumber2, email1, "
+						+ "email2, jobrole, customer)"
 					        + " values (?, ?, ?, ?, ?, ?, ?)";
 				PreparedStatement statement = con.prepareStatement(query);    
 				//ResultSet rs = statement.executeQuery(); 
@@ -421,6 +421,28 @@ public class DB {
 		return false;
 	}
 	
+	public boolean deleteContactsOfCustomer(String customer) {
+		if(setConnection()) {
+			try {
+				String query = "DELETE FROM contact WHERE customer = ?";
+				PreparedStatement statement = con.prepareStatement(query);    
+				//ResultSet rs = statement.executeQuery(); 
+				statement.setString(1, customer);
+
+			      // execute the preparedstatement
+				statement.execute();
+			      
+			    con.close();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return false;
+	}
+	
 	public boolean addNewCustomer (Customer customer) {
 		if(setConnection()) {
 			try {
@@ -449,7 +471,9 @@ public class DB {
 
 	
 	public boolean deleteCustomer (String s) {
+		deleteContactsOfCustomer(s);
 		if(setConnection()) {
+			
 			try {
 				String query = "DELETE FROM customer WHERE customername = ?";
 				PreparedStatement statement = con.prepareStatement(query);    

@@ -15,7 +15,8 @@ public class Contact {
 	/*
 	 * full constructor
 	 */
-	public Contact(String contactName, int phoneNumber1, int phoneNumber2, String email1, String email2, String jobRole, String CompanyName) {
+	public Contact(String contactName, int phoneNumber1, int phoneNumber2, String email1, 
+			String email2, String jobRole, String CompanyName) {
 		super();
 		this.contactName = contactName;
 		this.phoneNumber1 = phoneNumber1;
@@ -25,6 +26,8 @@ public class Contact {
 		this.jobRole = jobRole;
 		this.CompanyName = CompanyName;
 	}
+	
+	
 
 	public String getContactName() {
 		return contactName;

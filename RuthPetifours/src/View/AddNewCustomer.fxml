@@ -2,66 +2,179 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="508.0" prefWidth="662.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.AddNewCustomerController">
+<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.AddNewCustomerController">
    <children>
-      <ImageView fitHeight="800.0" fitWidth="1200.0" layoutX="-8.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField fx:id="name" alignment="CENTER" layoutX="596.0" layoutY="98.0" prefHeight="45.0" prefWidth="392.0" promptText="Insert Name">
+      <ImageView fitHeight="500.0" fitWidth="800.0" layoutX="-8.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="name" alignment="BOTTOM_LEFT" layoutX="421.0" layoutY="102.0" prefHeight="30.0" prefWidth="351.0">
          <font>
-            <Font size="24.0" />
+            <Font name="System Italic" size="14.0" />
          </font></TextField>
-      <TextField fx:id="address" alignment="CENTER" layoutX="596.0" layoutY="176.0" prefHeight="45.0" prefWidth="392.0" promptText="Insert Address">
-         <font>
-            <Font size="24.0" />
-         </font></TextField>
-      <TextField fx:id="comments" alignment="CENTER" layoutX="596.0" layoutY="254.0" prefHeight="45.0" prefWidth="392.0" promptText="Insert Comment">
-         <font>
-            <Font size="24.0" />
-         </font></TextField>
-      <TextField fx:id="contacts" alignment="CENTER" layoutX="596.0" layoutY="349.0" prefHeight="51.0" prefWidth="392.0" promptText="Insert Contacts">
-         <font>
-            <Font size="24.0" />
-         </font></TextField>
-      <AnchorPane layoutY="-1.0" prefHeight="1080.0" prefWidth="327.0" style="-fx-background-color: #48D1CC;">
+      <AnchorPane layoutY="-1.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: #48D1CC;">
          <children>
-            <Label layoutX="69.0" layoutY="13.0" text="Add Customer" textFill="#404040">
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="96.0" layoutY="58.0" prefHeight="25.0" prefWidth="137.0" text="Ruth Petifours LTD" textAlignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="59.0" prefHeight="25.0" prefWidth="137.0" text="Ruth Petifours LTD" textAlignment="CENTER">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Button fx:id="Save" layoutX="83.0" layoutY="100.0" mnemonicParsing="false" onAction="#addNewCustomerToDB" prefHeight="45.0" prefWidth="162.0" text="Save">
+            <Button fx:id="Save" layoutX="57.0" layoutY="260.0" mnemonicParsing="false" onAction="#addNewCustomerToDB" prefHeight="30.0" prefWidth="117.0" text="Save">
                <font>
-                  <Font size="24.0" />
+                  <Font size="14.0" />
                </font></Button>
-            <Button fx:id="cancel" layoutX="84.0" layoutY="208.0" mnemonicParsing="false" onAction="#cancelAndGoBack" prefHeight="45.0" prefWidth="162.0" text="Cancel">
+            <Button fx:id="cancel" layoutX="57.0" layoutY="311.0" mnemonicParsing="false" onAction="#cancelAndGoBack" prefHeight="30.0" prefWidth="117.0" text="Cancel">
                <font>
-                  <Font size="24.0" />
+                  <Font size="14.0" />
                </font></Button>
-            <Button fx:id="Back" layoutX="84.0" layoutY="321.0" mnemonicParsing="false" onAction="#goBackToMainMenu" prefHeight="45.0" prefWidth="162.0" text="Main Menu">
+            <Button fx:id="Back" layoutX="57.0" layoutY="362.0" mnemonicParsing="false" onAction="#goBackToMainMenu" prefHeight="30.0" prefWidth="117.0" text="Main Menu">
                <font>
-                  <Font size="24.0" />
+                  <Font size="14.0" />
                </font></Button>
-            <ImageView fx:id="log_img" fitHeight="45.0" fitWidth="40.0" layoutX="90.0" layoutY="420.0" onMouseClicked="#logOut" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="log_img" fitHeight="45.0" fitWidth="40.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#logOut" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../Images/logOut.png" />
                </image>
             </ImageView>
-            <Label fx:id="cur_user" layoutX="164.0" layoutY="424.0" prefHeight="25.0" prefWidth="117.0" text="User" textFill="#404040">
+            <Label fx:id="cur_user" layoutX="62.0" layoutY="18.0" prefHeight="27.0" prefWidth="168.0" text="User" textFill="#404040">
                <font>
                   <Font name="Arial" size="24.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
+      <Label layoutX="342.0" layoutY="107.0" text="*Company:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TabPane layoutX="342.0" layoutY="149.0" prefHeight="209.0" prefWidth="433.0" style="-fx-border-color: grey;" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Adress:">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="323.0">
+                     <children>
+                        <Label layoutX="34.0" layoutY="31.0" text="*Street:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="34.0" layoutY="80.0" text="*City:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="35.0" layoutY="125.0" text="Post code:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="street" layoutX="121.0" layoutY="29.0" prefHeight="25.0" prefWidth="295.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="city" layoutX="121.0" layoutY="78.0" prefHeight="25.0" prefWidth="295.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="postCode" layoutX="121.0" layoutY="123.0" prefHeight="25.0" prefWidth="295.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Contact1">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="33.0" layoutY="28.0" prefHeight="17.0" prefWidth="51.0" text="Name:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="28.0" layoutY="64.0" text="Phone:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="37.0" layoutY="129.0" text="Job:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="contact1Name" layoutX="110.0" layoutY="25.0" prefHeight="25.0" prefWidth="295.0" />
+                        <TextField fx:id="contact1Phone" layoutX="110.0" layoutY="61.0" prefHeight="25.0" prefWidth="295.0" />
+                        <TextField fx:id="contact1Job" layoutX="110.0" layoutY="127.0" prefHeight="25.0" prefWidth="295.0" />
+                        <Label layoutX="31.0" layoutY="96.0" text="Email:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="contact1Email" layoutX="110.0" layoutY="94.0" prefHeight="25.0" prefWidth="295.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Contact2">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="26.0" layoutY="21.0" prefHeight="17.0" prefWidth="51.0" text="Name:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="30.0" layoutY="57.0" text="Phone:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="30.0" layoutY="125.0" text="Job:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="contact2Name" layoutX="108.0" layoutY="19.0" prefHeight="25.0" prefWidth="295.0" />
+                        <TextField fx:id="contact2NamePhone" layoutX="108.0" layoutY="55.0" prefHeight="25.0" prefWidth="295.0" />
+                        <TextField fx:id="contact2Job" layoutX="108.0" layoutY="123.0" prefHeight="25.0" prefWidth="295.0" />
+                        <Label layoutX="24.0" layoutY="89.0" text="Email:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="contact2Email" layoutX="108.0" layoutY="87.0" prefHeight="25.0" prefWidth="295.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Label layoutX="341.0" layoutY="383.0" text="Comment:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="comment_new" layoutX="433.0" layoutY="383.0" prefHeight="86.0" prefWidth="342.0" />
+      <Label layoutX="468.0" layoutY="27.0" text="New Company" textFill="#404040">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="246.0" layoutY="469.0" text="* mandatory fields">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

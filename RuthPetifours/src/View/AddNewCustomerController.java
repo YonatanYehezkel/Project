@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import Controller.ControllerLogic;
 import Controller.MainClass;
+import Model.Contact;
 import Model.Customer;
 import Model.User;
 import javafx.fxml.FXML;
@@ -18,14 +19,25 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
 public class AddNewCustomerController implements Initializable {
 	
 	//@FXML private TextField id;
 	
 	@FXML private TextField name;
-	@FXML private TextField address;
-	@FXML private TextField comments;
+	@FXML private TextField street;
+	@FXML private TextField city;
+	@FXML private TextField postCode;
+	@FXML private TextField contact1Name;
+	@FXML private TextField contact1Phone;
+	@FXML private TextField contact1Job;
+	@FXML private TextField contact1Email;
+	@FXML private TextField contact2Name;
+	@FXML private TextField contact2Phone;
+	@FXML private TextField contact2Job;
+	@FXML private TextField contact2Email;
+	@FXML private TextArea comment_new;
 	@FXML private Button Save;
 	@FXML private Button cancel;
 	@FXML private Button Back;
@@ -33,6 +45,7 @@ public class AddNewCustomerController implements Initializable {
 	
 	
 	private User currentUser;
+	private Customer cus;
 	
 	private ControllerLogic controller;
 	
@@ -51,15 +64,47 @@ public class AddNewCustomerController implements Initializable {
 		this.currentUser = u;
 		cur_user.setText(currentUser.getUserName());
 	  }
+	
+	private String isEmptyField(TextField t) {
+		String s;
+		if(t.getText().isEmpty())
+			s = null;
+		else
+			s = t.getText();
+		return s;
+	}
+	
+	private String isEmptyField(TextArea t) {
+		String s;
+		if(t.getText().isEmpty())
+			s = null;
+		else
+			s = t.getText();
+		return s;
+	}
+	
+
+	
+	private void addNewContact() {
+		if(!isEmptyField(contact1Name).isEmpty()){
+			Contact c = new Contact(contact1Name.getText(), 
+					Integer.valueOf(contact1Phone.getText()), 0, contact1Email.getText()
+					, null, contact1Job.getText(), name.getText());
+			controller.addNewContact(c, cus);
+		}
+	}
 
 	@FXML private void addNewCustomerToDB(){
 		
 		
-		if(!name.getText().isEmpty() && !address.getText().isEmpty() && !comments.getText().isEmpty()) {
+		String ad = street.getText() +" " + city.getText() + " " + postCode.getText();
+	
+		
+		if(!name.getText().isEmpty()) {
 			
-			Customer c = new Customer (name.getText(),address.getText(),comments.getText());
+			cus = new Customer (name.getText(), ad, isEmptyField(comment_new));
 			
-			if(controller.addNewCustomer(c)) {
+			if(controller.addNewCustomer(cus)) {
 				
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.initOwner(MainClass.getPrimaryStage());
@@ -67,6 +112,7 @@ public class AddNewCustomerController implements Initializable {
 	            alert.setHeaderText("Customer Action");
 	            alert.setContentText("New Customer has been added successfulyl");
 	            alert.showAndWait();
+	            addNewContact();
 	            
 	            try {
 	            	FXMLLoader loader = new FXMLLoader();
@@ -86,7 +132,7 @@ public class AddNewCustomerController implements Initializable {
 				
 			}
 			
-			else if (!controller.addNewCustomer(c)) {
+			else if (!controller.addNewCustomer(cus)) {
 				
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.initOwner(MainClass.getPrimaryStage());
