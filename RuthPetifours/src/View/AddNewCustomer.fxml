@@ -11,14 +11,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.AddNewCustomerController">
+<AnchorPane prefHeight="561.0" prefWidth="792.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.AddNewCustomerController">
    <children>
-      <ImageView fitHeight="500.0" fitWidth="800.0" layoutX="-8.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField fx:id="name" alignment="BOTTOM_LEFT" layoutX="421.0" layoutY="102.0" prefHeight="30.0" prefWidth="351.0">
+      <ImageView fitHeight="561.0" fitWidth="800.0" layoutX="-8.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="name" onKeyTyped="#nameAction" alignment="BOTTOM_LEFT" layoutX="421.0" layoutY="102.0" prefHeight="30.0" prefWidth="351.0">
          <font>
             <Font name="System Italic" size="14.0" />
          </font></TextField>
-      <AnchorPane layoutY="-1.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: #48D1CC;">
+      <AnchorPane layoutY="-1.0" prefHeight="561.0" prefWidth="230.0" style="-fx-background-color: #48D1CC;">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="59.0" prefHeight="25.0" prefWidth="137.0" text="Ruth Petifours LTD" textAlignment="CENTER">
                <font>
@@ -37,7 +37,7 @@
                <font>
                   <Font size="14.0" />
                </font></Button>
-            <ImageView fx:id="log_img" fitHeight="45.0" fitWidth="40.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#logOut" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="log_img" fitHeight="45.0" fitWidth="40.0" layoutX="14.0" layoutY="14.0" onKeyTyped="#logOut" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../Images/logOut.png" />
                </image>
@@ -75,12 +75,12 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="street" layoutX="121.0" layoutY="29.0" prefHeight="25.0" prefWidth="295.0">
+                        <TextField fx:id="street" onKeyTyped="#streetAction" layoutX="121.0" layoutY="29.0" prefHeight="25.0" prefWidth="295.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="city" layoutX="121.0" layoutY="78.0" prefHeight="25.0" prefWidth="295.0">
+                        <TextField fx:id="city" onKeyTyped="#cityAction" layoutX="121.0" layoutY="78.0" prefHeight="25.0" prefWidth="295.0">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -174,6 +174,11 @@
       <Label layoutX="246.0" layoutY="469.0" text="* mandatory fields">
          <font>
             <Font name="System Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="error_message" layoutX="246.0" layoutY="500.0" prefHeight="17.0" prefWidth="472.0" text="error message" textFill="#db140b">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
    </children>

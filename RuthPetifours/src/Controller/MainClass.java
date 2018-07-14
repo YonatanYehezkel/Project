@@ -27,6 +27,8 @@ import googleMap.DistanceMatrix;
 import googleMap.DistanceMatrixApi;
 import googleMap.DistanceMatrixApiRequest;
 import googleMap.GeoApiContext;
+import googleMap.GeocodingApi;
+import googleMap.GeocodingResult;
 
 
 
@@ -38,7 +40,7 @@ public class MainClass extends Application {
   //ControllerLogic reference pointer
   	private static ControllerLogic controller;
   	
-	private static final String API_KEY = "YOUR_API_KEY";
+	private static final String API_KEY = "AIzaSyAIgMRRrFNahxoMfyQdsi7T07SeQ79lEgY";
 	//private static final GeoApiContext context = new GeoApiContext().setApiKey(API_KEY);
 
   	
@@ -92,19 +94,20 @@ public class MainClass extends Application {
 	    //updated_date = timestamp;
 		//System.out.println(updated_date);
 		
-		/*GeoApiContext context = new GeoApiContext.Builder()
-			    .apiKey("AIzaSyBgZxet8V_vUHpGyO9qmLaM46z6kTxDahs")
+		GeoApiContext context = new GeoApiContext.Builder()
+			    .apiKey("AIzaSyAIgMRRrFNahxoMfyQdsi7T07SeQ79lEgY")
 			    .build();
 		GeocodingResult[] results = null;
 			try {
 				results = GeocodingApi.geocode(context,
-				    "1600 Amphitheatre Parkway Mountain View, CA 94043").await();
+				    "sdfsdf").await();
 			} catch (ApiException | InterruptedException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			System.out.println(gson.toJson(results[0].addressComponents));*/
+			
+			System.out.println(gson.toJson(results[0].addressComponents));
 			
 		LatLng LatLng = new LatLng(32.919945, 35.290146);
 		LatLng LatLngHaifa = new LatLng(32.794044, 34.989571);
