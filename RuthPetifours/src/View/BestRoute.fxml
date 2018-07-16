@@ -12,7 +12,7 @@
 
 
    <children>
-      <ImageView fitHeight="800.0" fitWidth="1200.0" layoutX="-8.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="601.0" fitWidth="1200.0" layoutX="-8.0" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="origin" layoutX="568.0" layoutY="33.0" prefHeight="50.0" prefWidth="324.0" promptText="Insert Origin">
          <font>
             <Font size="18.0" />
@@ -25,7 +25,7 @@
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <AnchorPane layoutY="-1.0" prefHeight="1080.0" prefWidth="373.0" style="-fx-background-color: #48D1CC;">
+      <AnchorPane layoutY="-1.0" prefHeight="601.0" prefWidth="373.0" style="-fx-background-color: #48D1CC;">
          <children>
             <Label alignment="CENTER" layoutX="55.0" layoutY="16.0" prefHeight="50.0" prefWidth="266.0" text="Optimal Route" textFill="#404040">
                <font>

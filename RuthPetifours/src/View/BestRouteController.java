@@ -2,7 +2,6 @@ package View;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.concurrent.CountDownLatch;
 
@@ -17,7 +16,6 @@ import googleMap.DirectionsApiRequest;
 import googleMap.DirectionsResult;
 import googleMap.DirectionsRoute;
 import googleMap.GeoApiContext;
-import googleMap.LatLng;
 import googleMap.PendingResult;
 import googleMap.TravelMode;
 import javafx.fxml.FXML;
@@ -29,7 +27,19 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-public class BestRouteController implements Initializable{
+import com.lynden.gmapsfx.GoogleMapView;
+import com.lynden.gmapsfx.MapComponentInitializedListener;
+import com.lynden.gmapsfx.javascript.object.DirectionsPane;
+import com.lynden.gmapsfx.javascript.object.GoogleMap;
+import com.lynden.gmapsfx.javascript.object.LatLong;
+import com.lynden.gmapsfx.javascript.object.MapOptions;
+import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
+import com.lynden.gmapsfx.service.directions.DirectionStatus;
+import com.lynden.gmapsfx.service.directions.DirectionsService;
+import com.lynden.gmapsfx.service.directions.DirectionsServiceCallback;
+
+
+public class BestRouteController implements Initializable, MapComponentInitializedListener,DirectionsServiceCallback{
 	
 	@FXML private TextField origin;
 	@FXML private TextField destination;
@@ -38,7 +48,12 @@ public class BestRouteController implements Initializable{
 	@FXML private Button run;
 	@FXML private Button Back;
 	@FXML private Label cur_user;
-	
+	//@FXML private GoogleMapView mapView = new GoogleMapView();
+	//private GoogleMap map = new GoogleMap();
+
+	protected DirectionsService directionsService;
+    protected DirectionsPane directionsPane;
+    	
 	private ControllerLogic controller;
 	private User currentUser;
 	private String[] wayp;
@@ -145,5 +160,30 @@ public class BestRouteController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		controller = new ControllerLogic();
+        //mapView.addMapInitializedListener(this);
+
+	}
+
+	@Override
+	public void mapInitialized() {
+		// TODO Auto-generated method stub
+		MapOptions options = new MapOptions();
+
+        options.center(new LatLong(47.606189, -122.335842))
+                .zoomControl(true)
+                .zoom(12)
+                .overviewMapControl(false)
+                .mapType(MapTypeIdEnum.ROADMAP);
+        //GoogleMap map = mapView.createMap(options);
+        directionsService = new DirectionsService();
+        //directionsPane = mapView.getDirec();
+		
+	}
+
+	@Override
+	public void directionsReceived(com.lynden.gmapsfx.service.directions.DirectionsResult results,
+			DirectionStatus status) {
+		// TODO Auto-generated method stub
+		
 	}
 }

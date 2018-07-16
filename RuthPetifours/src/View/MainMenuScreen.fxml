@@ -10,19 +10,15 @@
 
 <AnchorPane prefHeight="648.0" prefWidth="1057.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenuController">
    <children>
-      <AnchorPane layoutX="290.0" prefHeight="1080.0" prefWidth="1178.0" style="-fx-background-color: #E0FFFF;">
+      <AnchorPane layoutX="295.0" prefHeight="1080.0" prefWidth="1173.0" style="-fx-background-color: #E0FFFF;">
          <children>
-            <Button fx:id="Orders" layoutX="177.0" layoutY="154.0" mnemonicParsing="false" onAction="#goToOrders" prefHeight="65.0" prefWidth="170.0" style="-fx-background-color: #7CFC00;" stylesheets="@../../style/style.css" text="ORDERS" textAlignment="CENTER" textFill="#404040">
-               <font>
-                  <Font name="Arial" size="20.0" />
-               </font>
-            </Button>
-            <Button fx:id="Customers" layoutX="177.0" layoutY="359.0" mnemonicParsing="false" onAction="#goToCustomers" prefHeight="65.0" prefWidth="170.0" style="-fx-background-color: #7CFC00;" stylesheets="@../../style/style.css" text="CUSTOMERS" />
-            <Button fx:id="Drivers" layoutX="580.0" layoutY="359.0" mnemonicParsing="false" onAction="#goToDrivers" prefHeight="65.0" prefWidth="170.0" style="-fx-background-color: #7CFC00;" stylesheets="@../../style/style.css" text="DRIVERS" />
-            <Button fx:id="Users" layoutX="580.0" layoutY="154.0" mnemonicParsing="false" onAction="#goToUsers" prefHeight="65.0" prefWidth="170.0" style="-fx-background-color: #7CFC00;" stylesheets="@../../style/style.css" text="USERS" />
-            <Button fx:id="Vehichles" layoutX="580.0" layoutY="560.0" mnemonicParsing="false" onAction="#goToVehichles" prefHeight="65.0" prefWidth="170.0" style="-fx-background-color: #7CFC00;" stylesheets="@../../style/style.css" text="VEHICHLES" />
+            <Button fx:id="Orders" layoutX="177.0" layoutY="154.0" mnemonicParsing="false" onAction="#goToOrders" pickOnBounds="false" prefHeight="65.0" prefWidth="170.0" style="-fx-background-color: white; -fx-background-insets: 0,1,2,3,0; -fx-background-radius: 30; -fx-text-fill: #654b00; -fx-font-weight: bold; -fx-padding: 10 20 10 20; -fx-border-color: none;" stylesheets="@../../style/style.css" text="Orders" textAlignment="CENTER" textOverrun="CLIP" />
+            <Button fx:id="Customers" layoutX="177.0" layoutY="359.0" mnemonicParsing="false" onAction="#goToCustomers" prefHeight="65.0" prefWidth="170.0" style="-fx-background-color: white;" stylesheets="@../../style/style.css" text="Customers" />
+            <Button fx:id="Drivers" layoutX="580.0" layoutY="359.0" mnemonicParsing="false" onAction="#goToDrivers" prefHeight="65.0" prefWidth="170.0" style="-fx-background-color: white;" stylesheets="@../../style/style.css" text="Drivers" />
+            <Button fx:id="Users" layoutX="580.0" layoutY="154.0" mnemonicParsing="false" onAction="#goToUsers" prefHeight="65.0" prefWidth="170.0" style="-fx-background-color: white;" stylesheets="@../../style/style.css" text="Users" />
+            <Button fx:id="Vehichles" layoutX="580.0" layoutY="560.0" mnemonicParsing="false" onAction="#goToVehichles" prefHeight="65.0" prefWidth="170.0" style="-fx-background-color: white;" stylesheets="@../../style/style.css" text="Vehichles" />
             <Button fx:id="Vehichles1" layoutX="328.0" layoutY="718.0" mnemonicParsing="false" onAction="#goToVehichles" prefHeight="65.0" prefWidth="170.0" style="-fx-background-color: orange;" stylesheets="@../../style/style.css" text="REPORTS" />
-            <Button fx:id="buildRoute" layoutX="177.0" layoutY="560.0" mnemonicParsing="false" onAction="#goToBuildRoute" prefHeight="65.0" prefWidth="170.0" style="-fx-background-color: #7CFC00;" stylesheets="@../../style/style.css" text="BUILD ROUTE" />
+            <Button fx:id="buildRoute" layoutX="177.0" layoutY="560.0" mnemonicParsing="false" onAction="#goToBuildRoute" prefHeight="65.0" prefWidth="170.0" style="-fx-background-color: white;" stylesheets="@../../style/style.css" text="Build Route" />
             <ImageView fitHeight="65.0" fitWidth="95.0" layoutX="45.0" layoutY="154.0">
                <image>
                   <Image url="@../../Images/orders.jpg" />

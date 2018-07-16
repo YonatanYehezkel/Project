@@ -1,11 +1,14 @@
 package Controller;
 
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import java.time.LocalDateTime;
 import java.util.concurrent.CountDownLatch;
@@ -61,16 +64,39 @@ public class MainClass extends Application {
 	
 
 	public static void initRootLayout() {
+		
 		 try {
+			   
+			    GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+			    int screenWidth = gd.getDisplayMode().getWidth();
+			    int screenHeight = gd.getDisplayMode().getHeight();
+			    
+			    //int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
+			    //int screenHeight = (int) Screen.getPrimary().getBounds().getHeight();
+			   
+			    int sceneWidth = 0;
+		        int sceneHeight = 0;
+		        
+		        if (screenWidth <= 800 && screenHeight <= 600) {
+		            sceneWidth = 600;
+		            sceneHeight = 350;
+		        } else if (screenWidth <= 1280 && screenHeight <= 768) {
+		            sceneWidth = 800;
+		            sceneHeight = 450;
+		        } else if (screenWidth <= 1920 && screenHeight <= 1080) {
+		            sceneWidth = 1000;
+		            sceneHeight = 650;
+		        }
+			 
 	            // Load root layout from fxml file.
 	            FXMLLoader loader = new FXMLLoader();
 	            loader.setLocation(MainClass.class.getResource("/View/LoginScreen.fxml"));
 	            rootLayout = (AnchorPane) loader.load();
 	            // Show the scene containing the root layout.
-	            Scene scene = new Scene(rootLayout);
+	            Scene scene = new Scene(rootLayout,sceneWidth,sceneHeight);
 	            primaryStage.setScene(scene);
-	            primaryStage.setFullScreenExitHint("");
-	            primaryStage.setMaximized(true);
+	            //primaryStage.setFullScreenExitHint("");
+	            //primaryStage.setMaximized(true);
 	            primaryStage.show();
 	        } catch (IOException e) {
 	            e.printStackTrace();
