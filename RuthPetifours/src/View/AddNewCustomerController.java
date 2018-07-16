@@ -19,11 +19,15 @@ import googleMap.GeocodingResult;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -50,7 +54,10 @@ public class AddNewCustomerController implements Initializable {
 	@FXML private Button Back;
 	@FXML Label cur_user;
 	@FXML private Label error_message;
-	
+	@FXML private VBox buttonBox;
+	@FXML private VBox leftVBox;
+	@FXML private VBox rightVBox;
+	@FXML private HBox mainVBox;
 	
 	private User currentUser;
 	private Customer cus;
@@ -67,6 +74,19 @@ public class AddNewCustomerController implements Initializable {
 		controller.setShadowEffect(Back);
 		error_message.setVisible(false);
 		
+		layoutDesign();
+		
+	}
+	
+	private void layoutDesign() {
+		
+		Save.setMaxWidth(Double.MAX_VALUE);
+		cancel.setMaxWidth(Double.MAX_VALUE);
+		Back.setMaxWidth(Double.MAX_VALUE);
+	
+		buttonBox.setSpacing(10);
+		buttonBox.setPadding(new Insets(0, 20, 10, 20)); 
+		VBox.setVgrow(leftVBox, Priority.ALWAYS);
 	}
 	
 	public void initData(User u) {

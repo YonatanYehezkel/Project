@@ -135,10 +135,16 @@ public class CustomersManageController implements Initializable{
 			AddNewCustomerController cont = 
 				    loader.<AddNewCustomerController>getController();
 				  cont.initData(currentUser);
-		
-				  MainClass.getPrimaryStage().setScene(appSetScene);
-					MainClass.getPrimaryStage().setFullScreenExitHint("");
-					MainClass.getPrimaryStage().setMaximized(true);
+			Stage s = new Stage ();
+			s.setScene(appSetScene);
+			s.setFullScreenExitHint("");
+			s.show();
+			s.setMaximized(true);
+			
+				  //MainClass.getPrimaryStage().setScene(appSetScene);
+					//MainClass.getPrimaryStage().setFullScreenExitHint("");
+					//MainClass.getPrimaryStage().show();
+					//MainClass.getPrimaryStage().setMaximized(true);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
