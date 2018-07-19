@@ -32,6 +32,7 @@ import javax.swing.JOptionPane;
 import Controller.ControllerLogic;
 import Controller.MainClass;
 import Model.User;
+import NewMenu.NewMenu;
 import View.MainMenuController;
 import View.RestorePasswordController;
 
@@ -183,7 +184,10 @@ public class Controller implements Initializable {
 					e.printStackTrace();
 				}*/
 			 
+		 //NewMenu m = new NewMenu();
 			try {
+				
+				
 					FXMLLoader loader = new FXMLLoader();
 					loader.setLocation(MainMenuController.class.getResource("/View/MainMenuScreen.fxml"));
 					AnchorPane appSet = loader.load();

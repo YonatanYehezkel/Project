@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane fx:id="apSide" id="anchorpaneSidebar" prefWidth="250" maxWidth="250" xmlns:fx="http://javafx.com/fxml/1" >
+	<BorderPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+		<!-- FLEX NAVI -->
+		<top>
+			<AnchorPane styleClass="Headbar" >
+				<StackPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+					<HBox StackPane.alignment="CENTER_LEFT" alignment="CENTER_LEFT" >
+						<Button fx:id="btnCollapse" id="btnCollapse" />
+					</HBox>
+				</StackPane>
+			</AnchorPane>
+		</top>
+		<!-- FLEX NAVI END -->
+		<!-- CONTENT -->
+		<left>
+			<ScrollPane hbarPolicy="NEVER" fx:id="spSide">
+				<BorderPane fx:id="bpSide">
+					<top>
+						<!-- SPACE FOR HEADLINE OR SOMETHING ELSE -->
+					</top>
+					<left>
+						<VBox>
+							<TitledPane fx:id="tpMainData" text="MAIN ITEMS" id="tbSidenavigation">
+								<VBox styleClass="VboxContent">
+									<Button fx:id="btnCustomer" text="USERS" id="btnSidebar" />
+									<Button fx:id="btnArticle" text="PRODUCTS" id="btnSidebar" />
+									<Button fx:id="btnSupplier" text="ORDERS" id="btnSidebar" />
+									<Button fx:id="btnStock" text="CUSTOMERS" id="btnSidebar" />
+								</VBox>
+							</TitledPane>
+							<TitledPane fx:id="tpDocuments" text="REPORTS" id="tbSidenavigation">
+								<VBox styleClass="VboxContent">
+									<Button fx:id="btnOffer" text="ORDERS" id="btnSidebar" />
+									<Button fx:id="btnOrder" text="CUSTOMERS" id="btnSidebar" />
+									<Button fx:id="btnDeliverybill" text="todo" id="btnSidebar" />
+									<Button fx:id="btnInvoice" text="todo" id="btnSidebar" />
+								</VBox>
+							</TitledPane>
+						</VBox>
+					</left>
+				</BorderPane>
+			</ScrollPane>
+		</left>
+	</BorderPane>
+</AnchorPane>
+

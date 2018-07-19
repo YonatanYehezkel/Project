@@ -1,22 +1,38 @@
 package Controller;
 
+import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
+import java.io.File;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.CountDownLatch;
+
+import javax.imageio.ImageIO;
 
 import org.joda.time.DateTime;
 
@@ -37,7 +53,9 @@ import googleMap.DistanceMatrixApiRequest;
 import googleMap.GeoApiContext;
 import googleMap.GeocodingApi;
 import googleMap.GeocodingResult;
-
+import View.RadialGlobalMenu;
+import RadioMenu.DemoUtil;
+import RadioMenu.RadialSettingsMenu;
 
 
 public class MainClass extends Application {
@@ -54,13 +72,18 @@ public class MainClass extends Application {
 	private static final String API_KEY = "AIzaSyAIgMRRrFNahxoMfyQdsi7T07SeQ79lEgY";
 	//private static final GeoApiContext context = new GeoApiContext().setApiKey(API_KEY);
 
+
+    private Group container;
+    private RadialSettingsMenu radialMenu;
+    private boolean visible = false;
+
   	
   	public static Stage getPrimaryStage() {
         return primaryStage;
     }
 
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(final Stage primaryStage) {
 		this.primaryStage = primaryStage;
         /*this.primaryStage.setTitle("Ruth Petifours");
         this.primaryStage.setFullScreenExitHint("");
@@ -73,8 +96,72 @@ public class MainClass extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		/* radial menu */
+		/*container = new Group();
+		
+		final Scene scene = new Scene(container, Color.TRANSPARENT);
+		primaryStage.setResizable(true);
+		primaryStage.setScene(scene);
+		primaryStage.setWidth(350);
+		primaryStage.setHeight(380);
+		primaryStage.setAlwaysOnTop(true);
+		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+		primaryStage.setX(primaryScreenBounds.getMinX());
+		primaryStage.setY(primaryScreenBounds.getMinY());
+		//primaryStage.centerOnScreen();
+		primaryStage.setTitle("Radial Settings Menu Demo");
+		primaryStage.initStyle(StageStyle.TRANSPARENT);
+		primaryStage.show();
+
+		radialMenu = new RadialSettingsMenu();
+		container.getChildren().addAll(radialMenu);
+
+		scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+		    @Override
+		    public void handle(final MouseEvent event) {
+			if (event.isSecondaryButtonDown()) {
+			    radialMenu.setTranslateX(event.getX());
+			    radialMenu.setTranslateY(event.getY());
+			}
+		    }
+		});
+
+		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+		    @Override
+		    public void handle(final KeyEvent event) {
+			System.out.println(event);
+			if (event.getCode() == KeyCode.F5) {
+				MainClass.this.takeSnapshot(scene);
+			}
+		    }
+		});
+*/
+	    
      
 	}
+	
+	/*int snapshotCounter = 0;
+
+	    private void takeSnapshot(final Scene scene) {
+		// Take snapshot of the scene
+		final WritableImage writableImage = scene.snapshot(null);
+
+		// Write snapshot to file system as a .png image
+		final File outFile = new File("snapshot/radialmenu-snapshot-"
+			+ snapshotCounter + ".png");
+		outFile.getParentFile().mkdirs();
+		try {
+		    ImageIO.write(SwingFXUtils.fromFXImage(writableImage, null), "png",
+			    outFile);
+		} catch (final IOException ex) {
+		    System.out.println(ex.getMessage());
+		}
+
+		snapshotCounter++;
+	    }*/
 	
 	private void openNewLogIn() throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("/logIn/profile.fxml"));

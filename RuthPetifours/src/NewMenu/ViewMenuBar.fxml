@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="NewMenu.ControllerMenuBar" style="-fx-background-color: -fx-accent-darkgrey">
+	<MenuBar>
+		<Menu text="File">
+			<MenuItem text="Close" />
+		</Menu>
+		<Menu  text="Main Items">
+			<MenuItem fx:id="itemCustomer" text="Users" />
+			<MenuItem fx:id="itemArticle" text="Products" />
+			<MenuItem fx:id="itemSupplier" text="Orders" />
+			<MenuItem fx:id="itemStock" text="Customers" />
+		</Menu>
+		<Menu text="Reports">
+			<MenuItem fx:id="itemOffer" text="Orders" />
+		</Menu>
+		<Menu text="Settings">
+			<MenuItem fx:id="itemProperties" text="Change language" />
+		</Menu>
+	</MenuBar>
+</AnchorPane>
+
