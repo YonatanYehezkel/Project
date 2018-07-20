@@ -1,5 +1,12 @@
 package NewMenu;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import Controller.ControllerLogic;
+import Model.Customer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 //import de.michaprogs.crm.GraphicButton;
 //import de.michaprogs.crm.InitCombos;
 //import de.michaprogs.crm.Validate;
@@ -10,6 +17,7 @@ package NewMenu;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -21,34 +29,26 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class ControllerCustomerSearch {
 
 	@FXML private Label lblSubHeadline;
 	
-	@FXML private TextField tfCustomerID;
+
 	@FXML private TextField tfName1;
 	@FXML private TextField tfName2;
 	@FXML private TextField tfStreet;
 	@FXML private ComboBox<String> cbLand;
-	@FXML private TextField tfZip;
-	@FXML private TextField tfLocation;
-	@FXML private TextField tfPhone;
-	@FXML private TextField tfMobile;
-	@FXML private TextField tfFax;
-	@FXML private TextField tfEmail;
-	@FXML private ComboBox<String> cbCategory;
 	
-	@FXML private TableView<ModelCustomer> tvCustomerSearch;
-	@FXML private TableColumn<ModelCustomer, Integer> tcCustomerID;
-	@FXML private TableColumn<ModelCustomer, String> tcName1;
-	@FXML private TableColumn<ModelCustomer, String> tcName2;
-	@FXML private TableColumn<ModelCustomer, String> tcStreet;
-	@FXML private TableColumn<ModelCustomer, String> tcLand;
-	@FXML private TableColumn<ModelCustomer, String> tcZip;
-	@FXML private TableColumn<ModelCustomer, String> tcLocation;
-	@FXML private TableColumn<ModelCustomer, String> tcPhone;
+
+	
+	@FXML private TableView<Customer> tvCustomerSearch;
+	@FXML private TableColumn<Customer, String> tcCustomerID;
+	@FXML private TableColumn<Customer, String> tcName1;
+	@FXML private TableColumn<Customer, String> tcName2;
+	
  	
 	@FXML private Button btnSearch;
 	@FXML private Button btnReset;
@@ -56,7 +56,10 @@ public class ControllerCustomerSearch {
 	@FXML private Button btnAbort;
 	
 	private Stage stage;
-	private int selectedCustomerID = 0;
+	private String selectedCustomer = null;
+	
+	private ControllerLogic controller;
+	private ObservableList<Customer> Customers;
 	
 	public ControllerCustomerSearch(){}
 	
@@ -66,8 +69,8 @@ public class ControllerCustomerSearch {
 		
 		//cbCategory.setItems(new SelectCustomerCategory(new ModelCustomerCategory()).getModelCustomerCategory().getObsListCustomerCategoriesComboBox());
 		
-		tfCustomerID.setText("");
-		tfZip.setText("");
+		controller = new ControllerLogic(); 
+		
 		
 		initBtnSearch();
 		initBtnReset();
@@ -78,7 +81,28 @@ public class ControllerCustomerSearch {
 		
 		initTableCustomerSearch();
 		
+		loadDataFromDB();
+		
+		
 	}
+	
+	private void loadDataFromDB(){
+		
+		this.Customers = FXCollections.observableArrayList();
+		
+		
+		HashMap<String, Customer> rs = controller.getAllCustomers();
+		ArrayList<Customer> customers = new ArrayList<Customer>();
+		customers.addAll(rs.values());
+		
+		for(Customer c : customers) {
+			Customers.add(c);
+		}
+		
+		System.out.println(Customers.get(2).getAdress());
+		tvCustomerSearch.setItems(Customers);
+	}
+		
 	
 	/*
 	 * BUTTONS
@@ -144,14 +168,11 @@ public class ControllerCustomerSearch {
 	 */
 	private void initTableCustomerSearch(){
 		
-		this.tcCustomerID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-		this.tcName1.setCellValueFactory(new PropertyValueFactory<>("name1"));
-		this.tcName2.setCellValueFactory(new PropertyValueFactory<>("name2"));
-		this.tcStreet.setCellValueFactory(new PropertyValueFactory<>("street"));
-		this.tcLand.setCellValueFactory(new PropertyValueFactory<>("land"));
-		this.tcZip.setCellValueFactory(new PropertyValueFactory<>("zip"));
-		this.tcLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
-		this.tcPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+		this.tcCustomerID.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+		this.tcName1.setCellValueFactory(new PropertyValueFactory<>("adress"));
+		this.tcName2.setCellValueFactory(new PropertyValueFactory<>("comment"));
+		
+
 		
 		tvCustomerSearch.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -181,6 +202,11 @@ public class ControllerCustomerSearch {
 		
 	}
 	
+	public void fitTableToStage() {
+		tvCustomerSearch.prefHeightProperty().bind(stage.heightProperty());
+		tvCustomerSearch.prefWidthProperty().bind(stage.widthProperty());
+	}
+	
 	/*
 	 * TEXTFIELDS
 	 */
@@ -198,16 +224,10 @@ public class ControllerCustomerSearch {
 			}
 		};
 		
-		tfCustomerID.setOnKeyPressed(ke);
+		
 		tfName1.setOnKeyPressed(ke);
 		tfName2.setOnKeyPressed(ke);
 		tfStreet.setOnKeyPressed(ke);
-		tfZip.setOnKeyPressed(ke);
-		tfLocation.setOnKeyPressed(ke);
-		tfPhone.setOnKeyPressed(ke);
-		tfMobile.setOnKeyPressed(ke);
-		tfFax.setOnKeyPressed(ke);
-		tfEmail.setOnKeyPressed(ke);
 		
 	}
 	
@@ -249,7 +269,7 @@ public class ControllerCustomerSearch {
 	private void select(){
 		
 		if(tvCustomerSearch.getSelectionModel().getSelectedItems().size() == 1 ){
-			selectedCustomerID = tvCustomerSearch.getItems().get(tvCustomerSearch.getSelectionModel().getSelectedIndex()).getCustomerID();
+			selectedCustomer = tvCustomerSearch.getItems().get(tvCustomerSearch.getSelectionModel().getSelectedIndex()).getCustomerName();
 			
 			if(stage != null){
 				stage.close();
@@ -268,18 +288,13 @@ public class ControllerCustomerSearch {
 	 */
 	private void reset(){
 		
-		tfCustomerID.clear();
+		
 		tfName1.clear();
 		tfName2.clear();
 		tfStreet.clear();
 		cbLand.getSelectionModel().select("");
-		tfZip.clear();
-		tfLocation.clear();
-		tfPhone.clear();
-		tfMobile.clear();
-		tfFax.clear();
-		tfEmail.clear();
-		cbCategory.getSelectionModel().select("");
+	
+	
 		
 		tvCustomerSearch.getItems().clear();
 		
@@ -294,8 +309,8 @@ public class ControllerCustomerSearch {
 		this.stage = stage;
 	}
 	
-	public int getSelectedCustomerID(){
-		return selectedCustomerID;
+	public String getSelectedCustomer(){
+		return selectedCustomer;
 	}
 	
 }

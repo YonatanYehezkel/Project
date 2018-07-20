@@ -2,7 +2,11 @@ package NewMenu;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 
+import Controller.ControllerLogic;
+import Model.Customer;
 //import de.michaprogs.crm.DeleteAlert;
 //import de.michaprogs.crm.GraphicButton;
 //import de.michaprogs.crm.Main;
@@ -33,6 +37,8 @@ import java.time.LocalDate;
 //import de.michaprogs.crm.documents.offer.add.LoadOfferAdd;
 //import de.michaprogs.crm.documents.offer.data.LoadOfferData;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -76,33 +82,33 @@ public class ControllerCustomerData {
 	@FXML private Label lblLastChange;
 	
 	/* OFFER */
-	@FXML private TableView<ModelOffer> tvOffer;
-	@FXML private TableColumn<ModelOffer, Integer> tcOfferID;
-	@FXML private TableColumn<ModelOffer, String> tcOfferClerk;
-	@FXML private TableColumn<ModelOffer, String> tcOfferRequest;
-	@FXML private TableColumn<ModelOffer, String> tcOfferDate;
-	@FXML private TableColumn<ModelDeliverybill, Integer> tcOfferAmountOfPositions;
-	@FXML private TableColumn<ModelDeliverybill, BigDecimal> tcOfferTotal;
+	@FXML private TableView<Customer> tvOffer;
+	
+	@FXML private TableColumn<Customer,String> tcOfferClerk;
+	@FXML private TableColumn<Customer,String> tcOfferRequest;
+	@FXML private TableColumn<Customer,String> tcOfferDate;
+
+	private ObservableList<Customer> Customers;
 	
 	/* DELIVERYBILL */
-	@FXML private TableView<ModelDeliverybill> tvDeliverybill;
-	@FXML private TableColumn<ModelDeliverybill, Integer> tcDeliverybillID;
-	@FXML private TableColumn<ModelDeliverybill, String> tcDeliverybillClerk;
-	@FXML private TableColumn<ModelDeliverybill, String> tcDeliverybillRequest;
-	@FXML private TableColumn<ModelDeliverybill, String> tcDeliverybillDate;
-	@FXML private TableColumn<ModelDeliverybill, Integer> tcDeliverybillAmountOfPositions;
-	@FXML private TableColumn<ModelDeliverybill, BigDecimal> tcDeliverybillTotal;
-	@FXML private TableColumn<ModelDeliverybill, Boolean> tcDeliverybillState;
+//	@FXML private TableView<ModelDeliverybill> tvDeliverybill;
+//	@FXML private TableColumn<ModelDeliverybill, Integer> tcDeliverybillID;
+//	@FXML private TableColumn<ModelDeliverybill, String> tcDeliverybillClerk;
+//	@FXML private TableColumn<ModelDeliverybill, String> tcDeliverybillRequest;
+//	@FXML private TableColumn<ModelDeliverybill, String> tcDeliverybillDate;
+//	@FXML private TableColumn<ModelDeliverybill, Integer> tcDeliverybillAmountOfPositions;
+//	@FXML private TableColumn<ModelDeliverybill, BigDecimal> tcDeliverybillTotal;
+//	@FXML private TableColumn<ModelDeliverybill, Boolean> tcDeliverybillState;
 	
 	/* INVOICE */
-	@FXML private TableView<ModelInvoice> tvInvoice;
-	@FXML private TableColumn<ModelInvoice, Integer> tcInvoiceID;
-	@FXML private TableColumn<ModelInvoice, String> tcInvoiceDate;
-	@FXML private TableColumn<ModelInvoice, String> tcInvoiceClerk;
-	@FXML private TableColumn<ModelInvoice, Integer> tcInvoiceDeliverybillID;
-	@FXML private TableColumn<ModelInvoice, String> tcInvoiceDeliveryDate;
-	@FXML private TableColumn<ModelInvoice, Integer> tcInvoiceAmountOfPositions;
-	@FXML private TableColumn<ModelInvoice, BigDecimal> tcInvoiceTotal;
+//	@FXML private TableView<ModelInvoice> tvInvoice;
+//	@FXML private TableColumn<ModelInvoice, Integer> tcInvoiceID;
+//	@FXML private TableColumn<ModelInvoice, String> tcInvoiceDate;
+//	@FXML private TableColumn<ModelInvoice, String> tcInvoiceClerk;
+//	@FXML private TableColumn<ModelInvoice, Integer> tcInvoiceDeliverybillID;
+//	@FXML private TableColumn<ModelInvoice, String> tcInvoiceDeliveryDate;
+//	@FXML private TableColumn<ModelInvoice, Integer> tcInvoiceAmountOfPositions;
+//	@FXML private TableColumn<ModelInvoice, BigDecimal> tcInvoiceTotal;
 	
 	/* BUTTONS */
 	@FXML private Button btnSearch;
@@ -119,10 +125,13 @@ public class ControllerCustomerData {
 	private Stage stage;
 	private NewMenu main;
 	
+	private ControllerLogic controller;
+	
 	public ControllerCustomerData(){}
 	
 	@FXML private void initialize(){
 		
+		controller = new ControllerLogic(); 
 		//deliveryAdressController.showSearchButtonSmall(false);
 		
 		/* BUTTONS */
@@ -135,8 +144,13 @@ public class ControllerCustomerData {
 		
 		/* TABLES */
 		initTableOffer();
-		initTableDeliverybill();
-		initTableInvoice();
+		
+		
+		
+//		initTableDeliverybill();
+//		initTableInvoice();
+		
+		loadDataFromDB();
 		
 		setButtonState();
 		
@@ -154,9 +168,9 @@ public class ControllerCustomerData {
 			public void handle(ActionEvent event) {
 				
 				LoadCustomerSearch customerSearch = new LoadCustomerSearch(true);
-				if(customerSearch.getController().getSelectedCustomerID() != 0){
-					selectCustomer(customerSearch.getController().getSelectedCustomerID());
-				}
+//				if(customerSearch.getController().getSelectedCustomerID() != 0){
+//					selectCustomer(customerSearch.getController().getSelectedCustomerID());
+//				}
 				
 			}
 		});
@@ -171,7 +185,7 @@ public class ControllerCustomerData {
 			@Override
 			public void handle(ActionEvent event) {
 				
-//				LoadCustomerAdd customerAdd = new LoadCustomerAdd(true);
+				LoadCustomerAdd customerAdd = new LoadCustomerAdd(true);
 //				if(customerAdd.getController().getCreatedCustomerID() != 0){
 //					selectCustomer(customerAdd.getController().getCreatedCustomerID());
 //				}
@@ -320,15 +334,20 @@ public class ControllerCustomerData {
 	 */
 	private void initTableOffer(){
 		
-		tcOfferID.setCellValueFactory(new PropertyValueFactory<>("offerID"));
-		tcOfferClerk.setCellValueFactory(new PropertyValueFactory<>("clerk"));
-		tcOfferRequest.setCellValueFactory(new PropertyValueFactory<>("request"));
-		tcOfferDate.setCellValueFactory(new PropertyValueFactory<>("offerDate"));
-		tcOfferAmountOfPositions.setCellValueFactory(new PropertyValueFactory<>("amountOfPositions"));
-		tcOfferTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
+	
+		
+		tcOfferClerk.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+		tcOfferRequest.setCellValueFactory(new PropertyValueFactory<>("adress"));
+		tcOfferDate.setCellValueFactory(new PropertyValueFactory<>("comment"));
 		
 		tvOffer.setContextMenu(new ContextMenuTableOffer());
 		
+		
+		
+		
+		tvOffer.prefHeightProperty().bind(main.getStage().heightProperty());
+		tvOffer.prefWidthProperty().bind(main.getStage().widthProperty());
+        
 		tvOffer.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -342,57 +361,73 @@ public class ControllerCustomerData {
 		});
 		
 	}
+	
+	private void loadDataFromDB(){
+		
+		this.Customers = FXCollections.observableArrayList();
+		
+		
+		HashMap<String, Customer> rs = controller.getAllCustomers();
+		ArrayList<Customer> customers = new ArrayList<Customer>();
+		customers.addAll(rs.values());
+		
+		for(Customer c : customers) {
+			Customers.add(c);
+		}
+		
+		tvOffer.setItems(Customers);
+	}
 		
 	private void initTableDeliverybill(){
 		
-		tcDeliverybillID.setCellValueFactory(new PropertyValueFactory<>("deliverybillID"));
-		tcDeliverybillClerk.setCellValueFactory(new PropertyValueFactory<>("clerk"));
-		tcDeliverybillRequest.setCellValueFactory(new PropertyValueFactory<>("request"));
-		tcDeliverybillDate.setCellValueFactory(new PropertyValueFactory<>("deliverybillDate"));
-		tcDeliverybillAmountOfPositions.setCellValueFactory(new PropertyValueFactory<>("amountOfPositions"));
-		tcDeliverybillTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
-		tcDeliverybillState.setCellValueFactory(new PropertyValueFactory<>("deliverystate"));
+//		tcDeliverybillID.setCellValueFactory(new PropertyValueFactory<>("deliverybillID"));
+//		tcDeliverybillClerk.setCellValueFactory(new PropertyValueFactory<>("clerk"));
+//		tcDeliverybillRequest.setCellValueFactory(new PropertyValueFactory<>("request"));
+//		tcDeliverybillDate.setCellValueFactory(new PropertyValueFactory<>("deliverybillDate"));
+//		tcDeliverybillAmountOfPositions.setCellValueFactory(new PropertyValueFactory<>("amountOfPositions"));
+//		tcDeliverybillTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
+//		tcDeliverybillState.setCellValueFactory(new PropertyValueFactory<>("deliverystate"));
 //		tcDeliverybillState.setCellFactory(CheckBoxTableCell.forTableColumn(tcDeliverybillState));TODO
 		
 		//tvDeliverybill.setContextMenu(new ContextMenuTableDeliverybill());
 		
-		tvDeliverybill.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-
-				if(event.getClickCount() == 2){
-					goToDeliverybill();
-				}
-				
-			}
-		});
-		
+//		tvDeliverybill.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//
+//			@Override
+//			public void handle(MouseEvent event) {
+//
+//				if(event.getClickCount() == 2){
+//					goToDeliverybill();
+//				}
+//				
+//			}
+//		});
+//		
 	}
 	
 	private void initTableInvoice(){
 		
-		tcInvoiceID.setCellValueFactory(new PropertyValueFactory<>("invoiceID"));
-		tcInvoiceDate.setCellValueFactory(new PropertyValueFactory<>("invoiceDate"));
-		tcInvoiceClerk.setCellValueFactory(new PropertyValueFactory<>("clerk"));
-		tcInvoiceDeliverybillID.setCellValueFactory(new PropertyValueFactory<>("deliverybillID"));
-		tcInvoiceDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
-		tcInvoiceAmountOfPositions.setCellValueFactory(new PropertyValueFactory<>("amountOfPositions"));
-		tcInvoiceTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
+//		tcInvoiceID.setCellValueFactory(new PropertyValueFactory<>("invoiceID"));
+//		tcInvoiceDate.setCellValueFactory(new PropertyValueFactory<>("invoiceDate"));
+//		tcInvoiceClerk.setCellValueFactory(new PropertyValueFactory<>("clerk"));
+//		tcInvoiceDeliverybillID.setCellValueFactory(new PropertyValueFactory<>("deliverybillID"));
+//		tcInvoiceDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
+//		tcInvoiceAmountOfPositions.setCellValueFactory(new PropertyValueFactory<>("amountOfPositions"));
+//		tcInvoiceTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
 		
 		//tvInvoice.setContextMenu(new ContextMenuTableInvoice());
 		
-		tvInvoice.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-
-				if(event.getClickCount() == 2){
-					goToInvoice();
-				}
-				
-			}
-		});
+//		tvInvoice.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//
+//			@Override
+//			public void handle(MouseEvent event) {
+//
+//				if(event.getClickCount() == 2){
+//					goToInvoice();
+//				}
+//				
+//			}
+//		});
 		
 	}
 	
