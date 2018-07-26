@@ -237,7 +237,7 @@
 #btnSearchSmall{
 	-fx-background-color: -fx-accent-blue;
 	-fx-border-color: transparent;
-	-fx-graphic: url("../resources/icon_search_15_white.png");
+	-fx-graphic: url("../Images/icon_search_15_white.png");
 }
 
 #btnSearchSmall:hover{

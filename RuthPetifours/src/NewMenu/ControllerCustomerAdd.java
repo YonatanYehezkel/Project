@@ -2,6 +2,8 @@ package NewMenu;
 
 import java.time.LocalDate;
 
+import Controller.MainClass;
+import Model.Customer;
 //import de.michaprogs.crm.AbortAlert;
 //import de.michaprogs.crm.DeleteAlert;
 //import de.michaprogs.crm.GraphicButton;
@@ -22,17 +24,19 @@ import java.time.LocalDate;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class ControllerCustomerAdd {
 	
 //	/* DELIVERYADRESS - NESTED CONTROLLER */
-//	@FXML private ControllerDeliveryAdress deliveryAdressController; //fx:id + 'Controller'
+	@FXML private ControllerDeliveryAdress deliveryAdressController; //fx:id + 'Controller'
 //	
 //	/* BILLINGADRESS - NESTED CONTROLLER */
 //	@FXML private ControllerBillingAdress billingAdressController; //fx:id + 'Controller'
@@ -49,22 +53,24 @@ public class ControllerCustomerAdd {
 	/* BUTTONS */
 	@FXML private Button btnSave;
 	@FXML private Button btnAbort;
+	@FXML private Button btnClear;
 	
 	@FXML private Button btnBillingAdd;
 	@FXML private Button btnBillingDelete;
 	
 	private Stage stage;
-	private int createdCustomerID = 0;
+	private Customer createdCustomer = null;
 	
 	public ControllerCustomerAdd(){}
 	
 	@FXML private void initialize(){
 		
-//		deliveryAdressController.showSearchButtonSmall(false);
-//		deliveryAdressController.enableFields();
+		//deliveryAdressController.showSearchButtonSmall(true);
+		deliveryAdressController.enableFields();
 		
 		initBtnSave();
 		initBtnAbort();
+		initBtnClear();
 		
 	}
 	
@@ -74,65 +80,56 @@ public class ControllerCustomerAdd {
 	private void initBtnSave(){
 	
 		btnSave.setGraphic(new GraphicButton("save_32.png").getGraphicButton());
-//		btnSave.setOnAction(new EventHandler<ActionEvent>() {
+		btnSave.setOnAction(new EventHandler<ActionEvent>() {
 
-//			@Override
-//			public void handle(ActionEvent event) {
-//				
-//				if(new ValidateCustomerSave(	new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfCustomerID().getText()), 
-//												deliveryAdressController.getTfName1().getText()).isValid()){
-//					
-//					InsertCustomer insert = new InsertCustomer(
-//						new ModelCustomer(
-//							new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfCustomerID().getText()), 
-//							deliveryAdressController.getCbSalutation().getSelectionModel().getSelectedItem(),
-//							deliveryAdressController.getTfName1().getText(), 
-//							deliveryAdressController.getTfName2().getText(), 
-//							deliveryAdressController.getTfStreet().getText(), 
-//							deliveryAdressController.getCbLand().getSelectionModel().getSelectedItem(), 
-//							new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfZip().getText()), 
-//							deliveryAdressController.getTfLocation().getText(), 
-//							
-//							deliveryAdressController.getTfPhone().getText(), 
-//							deliveryAdressController.getTfMobile().getText(),
-//							deliveryAdressController.getTfFax().getText(), 
-//							deliveryAdressController.getTfEmail().getText(), 
-//							deliveryAdressController.getTfWeb().getText(), 
-//							deliveryAdressController.getTfTaxID().getText(), 
-//							deliveryAdressController.getTfUstID().getText(), 
-//							
-//							deliveryAdressController.getCbPayment().getSelectionModel().getSelectedItem(), 
-//							deliveryAdressController.getTfIBAN().getText(), 
-//							deliveryAdressController.getTfBIC().getText(), 
-//							deliveryAdressController.getTfBank().getText(), 
-//							new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfPaymentSkonto().getText()),
-//							new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfPaymentNetto().getText()),
-//							new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfSkonto().getText()),
-//							deliveryAdressController.getCbCategory().getSelectionModel().getSelectedItem(),
-//							
-//							String.valueOf(LocalDate.now()),
-//							taNotes.getText(),
-//							
-//							new Validate().new ValidateOnlyInteger().validateOnlyInteger(billingAdressController.getTfCustomerIDBilling().getText())),
-//						contactDataController.getObsListContact()
-//					);					
-//					
-//					if(insert.wasSuccessful()){
-//						
-//						createdCustomerID = new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfCustomerID().getText());						
-//						if(stage != null){
-//							stage.close();
-//						}else{
-//							//TODO RESET FIELDS
-//						}
-//						
-//					}
-//					
-//				}
-//				
-//			}
-//			
-//		});
+			@Override
+			public void handle(ActionEvent event) {
+				
+				if(deliveryAdressController.getTfCustomerID().getText().isEmpty()
+						|| deliveryAdressController.getTfStreet().getText().isEmpty()
+						|| deliveryAdressController.getTfLocation().getText().isEmpty()
+						) {
+					deliveryAdressController.getMessage().setVisible(true);
+					
+				}
+				else {
+					String ad = deliveryAdressController.getTfStreet().getText() +" " 
+							+ deliveryAdressController.getTfLocation().getText() + " " 
+							+ deliveryAdressController.getTfZip().getText();
+					
+					String comment = null;
+					if(!deliveryAdressController.gettfComment().getText().isEmpty()) {
+						comment = deliveryAdressController.gettfComment().getText();
+					}
+					createdCustomer = new Customer (deliveryAdressController.getTfCustomerID().getText(), ad, comment);
+					
+					if(deliveryAdressController.checkAdress(ad)) {
+						if(deliveryAdressController.getController().addNewCustomer(createdCustomer)) {
+							
+							Alert alert = new Alert(AlertType.CONFIRMATION);
+							alert.initOwner(MainClass.getPrimaryStage());
+				            alert.setTitle("New Customer has been added successfuly");
+				            alert.setHeaderText("Customer Action");
+				            alert.setContentText("New Customer has been added successfulyl");
+				            alert.showAndWait();
+						}
+						else {
+							Alert alert = new Alert(AlertType.CONFIRMATION);
+							alert.initOwner(MainClass.getPrimaryStage());
+				            alert.setTitle("There was a problem adding new customer");
+				            alert.setHeaderText("Customer Action");
+				            alert.setContentText("There was a problem adding new customer");
+				            alert.showAndWait();
+						}
+					}
+					else {
+						System.out.println("adress not valid");
+					}
+				}
+				
+			}
+			
+		});
 		
 	}
 	
@@ -144,14 +141,31 @@ public class ControllerCustomerAdd {
 			@Override
 			public void handle(ActionEvent event) {
 				
-				AbortAlert abort = new AbortAlert();
-				if(abort.getAbort()){
-					if(stage != null){
-						stage.close();
-					}else{
-						//TODO RESET FIELDS
-					}
-				}
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.initOwner(MainClass.getPrimaryStage());
+		        alert.setHeaderText("Confirm before closing.");
+		        alert.setContentText("Are you sure yo want to close this window without saving?");
+		        alert.showAndWait();
+		        
+		        if(alert.getResult().getText().equals("OK")) {
+		        	
+		        	stage.close();
+		        }
+								
+			}
+		});
+		
+	}
+	
+private void initBtnClear(){
+		
+		btnClear.setGraphic(new GraphicButton("clear_32.png").getGraphicButton());
+		btnClear.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				
+				deliveryAdressController.clearFields();
 				
 			}
 		});
@@ -165,8 +179,12 @@ public class ControllerCustomerAdd {
 		this.stage = stage;
 	}
 	
-	public int getCreatedCustomerID(){
-		return createdCustomerID;
+	public Customer getCreatedCustomer(){
+		return createdCustomer;
+	}
+	
+	public ControllerDeliveryAdress getControllerDeliveryAdress() {
+		return deliveryAdressController;
 	}
 	
 }

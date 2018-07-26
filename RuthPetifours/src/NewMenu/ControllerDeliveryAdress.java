@@ -1,5 +1,18 @@
 package NewMenu;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import Controller.ControllerLogic;
+import Model.Contact;
+import Model.Customer;
+import exceptions.ApiException;
+import googleMap.GeoApiContext;
+import googleMap.GeocodingApi;
+import googleMap.GeocodingResult;
 //import de.michaprogs.crm.InitCombos;
 //import de.michaprogs.crm.customer.ModelCustomer;
 //import de.michaprogs.crm.customer.SelectCustomer;
@@ -12,39 +25,47 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
 public class ControllerDeliveryAdress {
 
 	/* MAIN DATA */
 	@FXML private TextField tfCustomerID;
-	@FXML private ComboBox<String> cbSalutation;
-	@FXML private TextField tfName1;
-	@FXML private TextField tfName2;
+	//@FXML private ComboBox<String> cbSalutation;
+
+	//@FXML private TextField tfName2;
 	@FXML private TextField tfStreet;
-	@FXML private ComboBox<String> cbLand;
+	//@FXML private ComboBox<String> cbLand;
 	@FXML private TextField tfZip;
 	@FXML private TextField tfLocation;
-	
-	/* CONTACT DATA */
 	@FXML private TextField tfPhone;
 	@FXML private TextField tfMobile;
 	@FXML private TextField tfFax;
 	@FXML private TextField tfEmail;
 	@FXML private TextField tfWeb;
-	@FXML private TextField tfTaxID;
-	@FXML private TextField tfUstID;
 	
-	/* PAYMENT DATA */
-	@FXML private ComboBox<String> cbPayment;
-	@FXML private TextField tfIBAN;
-	@FXML private TextField tfBIC;
-	@FXML private TextField tfBank;
-	@FXML private TextField tfPaymentSkonto;
-	@FXML private TextField tfPaymentNetto;
-	@FXML private TextField tfSkonto;
-	@FXML private ComboBox<String> cbCategory;
+	@FXML private Label message;
+	
+	/* CONTACT1 DATA */
+
+	@FXML private TextField tfTitle1;
+	@FXML private TextField tfName1;
+	@FXML private TextField tfPhone1;
+	@FXML private TextField tfEmail1;
+
+	/* CONTACT2 DATA */
+
+	@FXML private TextField tfTitle2;
+	@FXML private TextField tfName2;
+	@FXML private TextField tfPhone2;
+	@FXML private TextField tfEmail2;
+	
+	@FXML private TextArea tfComment;
+
 	
 	/* BILLING */
 	private int billingID;
@@ -55,30 +76,67 @@ public class ControllerDeliveryAdress {
 	
 	private int selectedCustomerID;
 	
+	private ControllerLogic controller;
+	
 	public ControllerDeliveryAdress(){}
 	
 	@FXML private void initialize(){
-		
-		new InitCombos().initComboLand(cbLand);
-		new InitCombos().initComboPayment(cbPayment);
-		new InitCombos().initComboSalutation(cbSalutation);
-		
-		//cbCategory.setItems(new SelectCustomerCategory(new ModelCustomerCategory()).getModelCustomerCategory().getObsListCustomerCategoriesComboBox());
+		controller = new ControllerLogic(); 
 		
 		initBtnCustomerSearch();
 		
+		initTextFields();
 	}
+	
+	private void initTextFields() {
+		
+		EventHandler<MouseEvent> event = new EventHandler<MouseEvent>() {
+			
+			@Override
+			public void handle(MouseEvent event) {
+				message.setVisible(false);
+			}
+		};
+		
+		tfCustomerID.setOnMouseClicked(event);
+		tfStreet.setOnMouseClicked(event);
+		tfZip.setOnMouseClicked(event);
+		tfLocation.setOnMouseClicked(event);
+		tfPhone.setOnMouseClicked(event);
+		tfMobile.setOnMouseClicked(event);
+		tfFax.setOnMouseClicked(event);
+		tfEmail.setOnMouseClicked(event);
+		tfWeb.setOnMouseClicked(event);
+		
+
+		tfTitle1.setOnMouseClicked(event);
+		tfName1.setOnMouseClicked(event);
+		tfPhone1.setOnMouseClicked(event);
+		tfEmail1.setOnMouseClicked(event);
+
+		/* CONTACT2 DATA */
+
+		tfTitle2.setOnMouseClicked(event);
+		tfName2.setOnMouseClicked(event);
+		tfPhone2.setOnMouseClicked(event);
+		tfEmail2.setOnMouseClicked(event);
+		
+		tfComment.setOnMouseClicked(event);
+		
+	}
+	
 	
 	/*
 	 * BUTTONS
 	 */
 	private void initBtnCustomerSearch(){
 		
+		
 		btnCustomerSearch.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
 			public void handle(ActionEvent event) {
-				searchDeliveryAdress();
+				searchCompany();
 			}
 		});
 		
@@ -87,12 +145,29 @@ public class ControllerDeliveryAdress {
 	/*
 	 * DATABASE METHODS
 	 */
-	public void searchDeliveryAdress(){
-		
+	public void searchCompany(){
+		Customer s = controller.getCustomerByName(tfCustomerID.getText());
+	
+		if(s == null) {
+			
+		}
+		else 
+			loadCustomer(s);
 //		LoadCustomerSearch customerSearch = new LoadCustomerSearch(true);
 //		if(customerSearch.getController().getSelectedCustomerID() != 0){
 //			selectDeliveryAdress(customerSearch.getController().getSelectedCustomerID());	
 //		}
+		
+	}
+	
+	private void loadCustomer(Customer s) {
+		ArrayList <Contact> arr = s.getContacts();
+		tfCustomerID.setText(s.getCustomerName());
+		tfStreet.setText(s.adress);
+		tfComment.setText(s.getComment());
+		if(arr.size()>1) {
+			tfTitle1.setText(arr.get(0).jobRole);
+		}
 		
 	}
 	
@@ -130,6 +205,36 @@ public class ControllerDeliveryAdress {
 //		billingID = customer.getBillingID();
 //		
 	}
+	
+	public boolean checkAdress(String s) {
+		GeoApiContext context = new GeoApiContext.Builder()
+			    .apiKey("AIzaSyAIgMRRrFNahxoMfyQdsi7T07SeQ79lEgY")
+			    .build();
+		GeocodingResult[] results = null;
+			try {
+				results = GeocodingApi.geocode(context,
+				    s).await();
+				
+				
+			} catch (ArrayIndexOutOfBoundsException | ApiException | InterruptedException | IOException e) {
+				
+				message.setText("Adress is not valid.");
+				message.setVisible(true);
+				tfStreet.setFocusTraversable(true);
+				return false;
+			}
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			try {
+			System.out.println(gson.toJson(results[0].addressComponents));
+			}catch (ArrayIndexOutOfBoundsException e) {
+								
+				message.setText("Adress is not valid.");
+				message.setVisible(true);
+				tfStreet.requestFocus();
+				return false;
+			}
+			return true;
+	}
 		
 	/*
 	 * UI METHODS
@@ -137,11 +242,7 @@ public class ControllerDeliveryAdress {
 	public void enableFields(){
 		
 		tfCustomerID.setDisable(false);
-		cbSalutation.setDisable(false);
-		tfName1.setDisable(false);
-		tfName2.setDisable(false);
 		tfStreet.setDisable(false);
-		cbLand.setDisable(false);
 		tfZip.setDisable(false);
 		tfLocation.setDisable(false);
 		
@@ -150,29 +251,25 @@ public class ControllerDeliveryAdress {
 		tfFax.setDisable(false);
 		tfEmail.setDisable(false);
 		tfWeb.setDisable(false);
-		tfTaxID.setDisable(false);
-		tfUstID.setDisable(false);
 		
-		cbPayment.setDisable(false);
-		tfBank.setDisable(false);
-		tfIBAN.setDisable(false);
-		tfBIC.setDisable(false);
-		tfBank.setDisable(false);
-		tfPaymentSkonto.setDisable(false);
-		tfPaymentNetto.setDisable(false);
-		tfSkonto.setDisable(false);
-		cbCategory.setDisable(false);
+		tfTitle1.setDisable(false);
+		tfName1.setDisable(false);
+		tfPhone1.setDisable(false);
+		tfEmail1.setDisable(false);
+		
+		tfTitle2.setDisable(false);
+		tfName2.setDisable(false);
+		tfPhone2.setDisable(false);
+		tfEmail2.setDisable(false);
+		tfComment.setDisable(false);
+		
 		
 	}
 	
 	public void disableFields(){
 		
 		tfCustomerID.setDisable(true);
-		cbSalutation.setDisable(true);
-		tfName1.setDisable(true);
-		tfName2.setDisable(true);
 		tfStreet.setDisable(true);
-		cbLand.setDisable(true);
 		tfZip.setDisable(true);
 		tfLocation.setDisable(true);
 		
@@ -181,19 +278,18 @@ public class ControllerDeliveryAdress {
 		tfFax.setDisable(true);
 		tfEmail.setDisable(true);
 		tfWeb.setDisable(true);
-		tfTaxID.setDisable(true);
-		tfUstID.setDisable(true);
 		
-		cbPayment.setDisable(true);
-		tfBank.setDisable(true);
-		tfIBAN.setDisable(true);
-		tfBIC.setDisable(true);
-		tfBank.setDisable(true);
-		tfPaymentSkonto.setDisable(true);
-		tfPaymentNetto.setDisable(true);
-		tfSkonto.setDisable(true);
-		cbCategory.setDisable(true);
+		tfTitle1.setDisable(true);
+		tfName1.setDisable(true);
+		tfPhone1.setDisable(true);
+		tfEmail1.setDisable(true);
 		
+		tfTitle2.setDisable(true);
+		tfName2.setDisable(true);
+		tfPhone2.setDisable(true);
+		tfEmail2.setDisable(true);
+		tfComment.setDisable(true);
+
 	}
 	
 	/**
@@ -213,11 +309,7 @@ public class ControllerDeliveryAdress {
 	public void clearFields(){
 		
 		tfCustomerID.clear();
-		cbSalutation.getSelectionModel().select("");
-		tfName1.clear();
-		tfName2.clear();
 		tfStreet.clear();
-		cbLand.getSelectionModel().select("");
 		tfZip.clear();
 		tfLocation.clear();
 		
@@ -226,18 +318,18 @@ public class ControllerDeliveryAdress {
 		tfFax.clear();
 		tfEmail.clear();
 		tfWeb.clear();
-		tfTaxID.clear();
-		tfUstID.clear();
 		
-		cbPayment.getSelectionModel().select("");
-		tfBank.clear();
-		tfIBAN.clear();
-		tfBIC.clear();
-		tfBank.clear();
-		tfPaymentSkonto.clear();
-		tfPaymentNetto.clear();
-		tfSkonto.clear();
-		cbCategory.getSelectionModel().select("");
+		tfTitle1.clear();
+		tfName1.clear();
+		tfPhone1.clear();
+		tfEmail1.clear();
+		
+		tfTitle2.clear();
+		tfName2.clear();
+		tfPhone2.clear();
+		tfEmail2.clear();
+		tfComment.clear();
+
 		
 	}
 
@@ -252,29 +344,10 @@ public class ControllerDeliveryAdress {
 		this.tfCustomerID = tfCustomerID;
 	}
 
-	public ComboBox<String> getCbSalutation() {
-		return cbSalutation;
-	}
 
-	public void setCbSalutation(ComboBox<String> cbSalutation) {
-		this.cbSalutation = cbSalutation;
-	}
 
-	public TextField getTfName1() {
-		return tfName1;
-	}
 
-	public void setTfName1(TextField tfName1) {
-		this.tfName1 = tfName1;
-	}
 
-	public TextField getTfName2() {
-		return tfName2;
-	}
-
-	public void setTfName2(TextField tfName2) {
-		this.tfName2 = tfName2;
-	}
 
 	public TextField getTfStreet() {
 		return tfStreet;
@@ -284,13 +357,7 @@ public class ControllerDeliveryAdress {
 		this.tfStreet = tfStreet;
 	}
 
-	public ComboBox<String> getCbLand() {
-		return cbLand;
-	}
 
-	public void setCbLand(ComboBox<String> cbLand) {
-		this.cbLand = cbLand;
-	}
 
 	public TextField getTfZip() {
 		return tfZip;
@@ -343,89 +410,96 @@ public class ControllerDeliveryAdress {
 	public TextField getTfWeb() {
 		return tfWeb;
 	}
+	
+	public Label getMessage() {
+		return message;
+	}
+
+	public void setMessage(Label message) {
+		this.message = message;
+	}
+	
+	public TextField gettfTitle1() {
+		return tfTitle1;
+	}
 
 	public void setTfWeb(TextField tfWeb) {
 		this.tfWeb = tfWeb;
 	}
-
-	public TextField getTfTaxID() {
-		return tfTaxID;
+	
+	public void settfTitle1(TextField tfTitle1) {
+		this.tfTitle1 = tfTitle1;
+	}
+	
+	public TextField getTfName1() {
+		return tfName1;
+	}
+	
+	public ControllerLogic getController() {
+		return controller;
 	}
 
-	public void setTfTaxID(TextField tfTaxID) {
-		this.tfTaxID = tfTaxID;
+	public void setTfName1(TextField tfName1) {
+		this.tfName1 = tfName1;
 	}
 
-	public TextField getTfUstID() {
-		return tfUstID;
+	public TextField gettfPhone1() {
+		return tfPhone1;
 	}
 
-	public void setTfUstID(TextField tfUstID) {
-		this.tfUstID = tfUstID;
+	public void settfPhone1(TextField tfPhone1) {
+		this.tfPhone1 = tfPhone1;
 	}
 
-	public ComboBox<String> getCbPayment() {
-		return cbPayment;
+	public TextField gettfEmail1() {
+		return tfEmail1;
 	}
 
-	public void setCbPayment(ComboBox<String> cbPayment) {
-		this.cbPayment = cbPayment;
+	public void settfEmail1(TextField tfEmail1) {
+		this.tfEmail1 = tfEmail1;
+	}
+	
+	
+	public TextField gettfTitle2() {
+		return tfTitle2;
+	}
+	
+	public void settfTitle2(TextField tfTitle2) {
+		this.tfTitle2 = tfTitle2;
+	}
+	
+	public TextField getTfName2() {
+		return tfName2;
 	}
 
-	public TextField getTfIBAN() {
-		return tfIBAN;
+	public void setTfName2(TextField tfName2) {
+		this.tfName2 = tfName2;
 	}
 
-	public void setTfIBAN(TextField tfIBAN) {
-		this.tfIBAN = tfIBAN;
+	public TextField gettfPhone2() {
+		return tfPhone2;
 	}
 
-	public TextField getTfBIC() {
-		return tfBIC;
+	public void settfPhone2(TextField tfPhone2) {
+		this.tfPhone2 = tfPhone2;
 	}
 
-	public void setTfBIC(TextField tfBIC) {
-		this.tfBIC = tfBIC;
+	public TextField gettfEmail2() {
+		return tfEmail2;
 	}
 
-	public TextField getTfBank() {
-		return tfBank;
+	public void settfEmail2(TextField tfEmail2) {
+		this.tfEmail2 = tfEmail2;
 	}
 
-	public void setTfBank(TextField tfBank) {
-		this.tfBank = tfBank;
+	
+	
+	public TextArea gettfComment() {
+		return tfComment;
 	}
 
-	public TextField getTfPaymentSkonto() {
-		return tfPaymentSkonto;
-	}
-
-	public void setTfPaymentSkonto(TextField tfPaymentSkonto) {
-		this.tfPaymentSkonto = tfPaymentSkonto;
-	}
-
-	public TextField getTfPaymentNetto() {
-		return tfPaymentNetto;
-	}
-
-	public void setTfPaymentNetto(TextField tfPaymentNetto) {
-		this.tfPaymentNetto = tfPaymentNetto;
-	}
-
-	public TextField getTfSkonto() {
-		return tfSkonto;
-	}
-
-	public void setTfSkonto(TextField tfSkonto) {
-		this.tfSkonto = tfSkonto;
-	}
-
-	public ComboBox<String> getCbCategory() {
-		return cbCategory;
-	}
-
-	public void setCbCategory(ComboBox<String> cbCategory) {
-		this.cbCategory = cbCategory;
+	public void settfComment(TextArea tfComment) {
+		this.tfComment = tfComment;
 	}
 
 	public Button getBtnCustomerSearch() {

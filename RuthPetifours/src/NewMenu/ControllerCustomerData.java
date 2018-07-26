@@ -1,12 +1,16 @@
 package NewMenu;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import Controller.ControllerLogic;
+import Controller.MainClass;
 import Model.Customer;
+import View.MainMenuController;
+import View.ShowCustomerDetails;
 //import de.michaprogs.crm.DeleteAlert;
 //import de.michaprogs.crm.GraphicButton;
 //import de.michaprogs.crm.Main;
@@ -42,7 +46,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
@@ -54,9 +61,12 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -154,7 +164,16 @@ public class ControllerCustomerData {
 		
 		setButtonState();
 		
+		tvOffer.setOnMouseClicked(( event) -> {
+	        if (event.getButton().equals(MouseButton.SECONDARY)) {
+	            
+	        	LoadCustomerAdd customerAdd = new LoadCustomerAdd(tvOffer.getSelectionModel().getSelectedItem());
+	        	}
+	    });
+		
 	}
+	
+
 	
 	/*
 	 * BUTTONS
@@ -186,9 +205,10 @@ public class ControllerCustomerData {
 			public void handle(ActionEvent event) {
 				
 				LoadCustomerAdd customerAdd = new LoadCustomerAdd(true);
-//				if(customerAdd.getController().getCreatedCustomerID() != 0){
-//					selectCustomer(customerAdd.getController().getCreatedCustomerID());
-//				}
+				if(customerAdd.getController().getCreatedCustomer() != null){
+					Customers.add(customerAdd.getController().getCreatedCustomer());
+					//selectCustomer(customerAdd.getController().getCreatedCustomerID());
+				}
 				
 			}
 		});
@@ -202,9 +222,22 @@ public class ControllerCustomerData {
 
 			@Override
 			public void handle(ActionEvent event) {
+				
+				if(tvOffer.getSelectionModel().getSelectedItem() != null) {
+					LoadCustomerAdd customerAdd = new LoadCustomerAdd(tvOffer.getSelectionModel().getSelectedItem());
+				}
+				else {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.initOwner(MainClass.getPrimaryStage());
+		        
+		            alert.setContentText("Select a customer for editing.");
+		            alert.showAndWait();
+				}
+				
+				
 			
-				hboxBtnTopbar.getChildren().add(hboxBtnTopbar.getChildren().indexOf(btnEdit) + 1, btnEditSave);
-				hboxBtnTopbar.getChildren().add(hboxBtnTopbar.getChildren().indexOf(btnEdit) + 2, btnEditAbort);
+//				hboxBtnTopbar.getChildren().add(hboxBtnTopbar.getChildren().indexOf(btnEdit) + 1, btnEditSave);
+//				hboxBtnTopbar.getChildren().add(hboxBtnTopbar.getChildren().indexOf(btnEdit) + 2, btnEditAbort);
 				
 				enableFields();				
 				setButtonState();
@@ -311,17 +344,38 @@ public class ControllerCustomerData {
 
 			@Override
 			public void handle(ActionEvent event) {
-//				
-//				DeleteAlert delete = new DeleteAlert();
-//				if(delete.getDelete()){
-//					
-//					new DeleteCustomer(new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfCustomerID().getText()));
-//					
-//					resetFields();
-//					setButtonState();
-//					
-//				}
-				
+				if(tvOffer.getSelectionModel().getSelectedItem() != null) {
+					Alert alert = new Alert(AlertType.CONFIRMATION);
+					alert.initOwner(MainClass.getPrimaryStage());
+			        alert.setHeaderText("Confirm before delete");
+			        alert.setContentText("Are you sure yo want to remove the customer from the system?");
+			        alert.showAndWait();
+			       
+			        if(alert.getResult().getText().equals("OK")) {
+			        	Customer del = tvOffer.getSelectionModel().getSelectedItem();
+			        	String del_id = del.getCustomerName();
+			        	if(controller.deleteCustomer(del_id)) {
+			        		int selectedIndex = tvOffer.getSelectionModel().getSelectedIndex();
+			        	    if (selectedIndex >= 0) {
+			        	    	tvOffer.getItems().remove(selectedIndex);
+			        	    }
+			        	    
+			        	    Alert alert2 = new Alert(AlertType.INFORMATION);
+			        	    alert2.initOwner(MainClass.getPrimaryStage());
+			        	  
+			        	    alert2.setHeaderText("Delete Confirmation");
+			        	    alert2.setContentText("Selected customer has been successfully removed.");
+			        	    alert2.showAndWait();	    	
+			        	}
+			        }
+				}
+				else {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.initOwner(MainClass.getPrimaryStage());
+		        
+		            alert.setContentText("Select a customer for deletion.");
+		            alert.showAndWait();
+				}
 			}
 		});
 		
@@ -867,5 +921,7 @@ public class ControllerCustomerData {
 		}
 		
 	}
+	
+	
 	
 }

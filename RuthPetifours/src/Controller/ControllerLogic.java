@@ -284,7 +284,7 @@ public class ControllerLogic {
 	}
 	
 	public Customer getCustomerByName(String name) {
-		if(!db.getCustomerByName(name).equals(null))
+		if(db.getCustomerByName(name) != (null))
 			return db.getCustomerByName(name);
 		return null;
 	}
