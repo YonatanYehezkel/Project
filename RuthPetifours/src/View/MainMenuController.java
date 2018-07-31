@@ -176,6 +176,25 @@ public class MainMenuController {
 			}
 		 
 	 }
+
+	@FXML private void goToReportsScreen() {
+		
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainMenuController.class.getResource("/View/ReportsOptionsScreen.fxml‬"));
+			AnchorPane appSet = loader.load();
+			Scene appSetScene = new Scene(appSet);
+			
+			MainClass.getPrimaryStage().setScene(appSetScene);
+			MainClass.getPrimaryStage().setFullScreenExitHint("");
+			MainClass.getPrimaryStage().setMaximized(true);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	 
 	 @FXML private void logOut() {
 		 System.exit(0);
