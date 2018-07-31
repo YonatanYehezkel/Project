@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.lynden.gmapsfx.GoogleMapView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -13,18 +14,19 @@
 
    <children>
       <ImageView fitHeight="601.0" fitWidth="1200.0" layoutX="-8.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField fx:id="origin" layoutX="568.0" layoutY="33.0" prefHeight="50.0" prefWidth="324.0" promptText="Insert Origin">
+      <TextField fx:id="origin" layoutX="392.0" layoutY="25.0" prefHeight="50.0" prefWidth="324.0" promptText="Insert Origin">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="destination" layoutX="569.0" layoutY="123.0" prefHeight="57.0" prefWidth="324.0" promptText="Insert Destination">
+      <TextField fx:id="destination" layoutX="392.0" layoutY="93.0" prefHeight="57.0" prefWidth="324.0" promptText="Insert Destination">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="waypoints" layoutX="569.0" layoutY="213.0" prefHeight="57.0" prefWidth="324.0" promptText="Insert Waypoints">
+      <TextField fx:id="waypoints" layoutX="392.0" layoutY="164.0" prefHeight="57.0" prefWidth="324.0" promptText="Insert Waypoints">
          <font>
             <Font size="18.0" />
          </font></TextField>
+      <GoogleMapView fx:id="map" layoutX="738.0" prefHeight="600.0" prefWidth="453.0" />
       <AnchorPane layoutY="-1.0" prefHeight="601.0" prefWidth="373.0" style="-fx-background-color: #48D1CC;">
          <children>
             <Label alignment="CENTER" layoutX="55.0" layoutY="16.0" prefHeight="50.0" prefWidth="266.0" text="Optimal Route" textFill="#404040">
@@ -58,11 +60,11 @@
             </Label>
          </children>
       </AnchorPane>
-      <TextField fx:id="bestRout" layoutX="569.0" layoutY="443.0" prefHeight="57.0" prefWidth="324.0" promptText="Optimal rout will be displayed here">
+      <TextField fx:id="bestRout" layoutX="393.0" layoutY="375.0" prefHeight="57.0" prefWidth="324.0" promptText="Optimal rout will be displayed here">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <Button fx:id="run" layoutX="629.0" layoutY="327.0" mnemonicParsing="false" onAction="#calculateOptimalRoute" prefHeight="73.0" prefWidth="189.0" style="-fx-background-color: green;" text="Build Route" textFill="#e8e0e0">
+      <Button fx:id="run" layoutX="460.0" layoutY="263.0" mnemonicParsing="false" onAction="#calculateOptimalRoute" prefHeight="73.0" prefWidth="189.0" style="-fx-background-color: green;" text="Build Route" textFill="#e8e0e0">
          <font>
             <Font size="24.0" />
          </font>
