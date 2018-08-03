@@ -65,6 +65,7 @@ public class DB {
 		while(rs.next())  
 		System.out.println(rs.getInt(1)+"  "+rs.getInt(2));  
 		con.close();  */
+		
 		return true;
 		}catch(Exception e){ 
 			System.out.println(e);} 
@@ -621,6 +622,53 @@ public class DB {
 			System.out.println("DB is not available");
 		return null;
 	}
+	
+	// this method is for report number 1 - best selling products
+	public ArrayList <Product> getBestSelllingProducts(){
+		
+		ArrayList <Product> products = new ArrayList<Product>();
+		
+		if(setConnection()) {
+			try {
+				stmt = con.createStatement();
+				ResultSet rs=stmt.executeQuery("SELECT order_details.idproduct,product.title,quantity\r\n" + 
+											   "FROM order_details,product\r\n" + 
+											   "where order_details.idproduct = product.idproduct\r\n" + 
+											   "group by order_details.idproduct,order_details.quantity\r\n" + 
+											   "order by order_details.quantity\r\n" +  
+											   "Desc;");  
+				
+				while(rs.next())  {
+					
+					Product p = new Product (rs.getInt(1), rs.getString(2), rs.getFloat(3));
+					products.add(p);
+					
+					//System.out.println(rs.getString(1) + rs.getDate(2) + rs.getDate(3) +rs.getInt(4)  +
+						//	rs.getDate(5) + rs.getInt(6) + rs.getInt(7)+  rs.getFloat(8) + rs.getDate(9) +
+							//rs.getDate(10));  
+					
+					//Product p = new Product(
+						//	rs.getString(1), 
+							//rs.getInt(2), 
+							//rs.getFloat(3)
+						//);
+					//o.setContacts(getContactsOfCustomer(c));
+					//orders.put(rs.getString(1), o);
+					//System.out.println(rs.getInt(1));
+				
+				}
+				con.close();
+				return products;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return null;
+	}
+	
+	
 	
 	public Product getProductByID(int id) {
 		Product p = null;

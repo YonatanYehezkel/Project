@@ -6,6 +6,7 @@ public class Product {
 	public String title;
 	public float price;
 	public float quantity;
+	public float salesQuantity;
 	public String unit;
 	
 	/*
@@ -28,7 +29,12 @@ public class Product {
 		this.unit = unit;
 	}
 	
-	
+	public Product (int id, String title,float salesQuantity) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.salesQuantity = salesQuantity;
+	}
 	
 	public float getQuantity() {
 		return quantity;
@@ -70,7 +76,17 @@ public class Product {
 		this.price = price;
 	}
 	
-	
-	
+	public float getSalesQuantity() {
+		return salesQuantity;
+	}
+
+	public void setSalesQuantity(float salesQuantity) {
+		this.salesQuantity = salesQuantity;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", salesQuantity=" + salesQuantity + "]";
+	}
 	
 }

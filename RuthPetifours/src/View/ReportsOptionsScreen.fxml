@@ -12,11 +12,12 @@
       <ImageView fitHeight="398.0" fitWidth="624.0" layoutX="-6.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true" />
       <Text fontSmoothingType="LCD" layoutX="96.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Analytical Reports" textAlignment="CENTER" />
       <Text fontSmoothingType="LCD" layoutX="399.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informational Reports" textAlignment="CENTER" />
-      <Button layoutX="107.0" layoutY="82.0" mnemonicParsing="false" text="Best Sellers" textAlignment="CENTER" />
-      <Button layoutX="65.0" layoutY="161.0" mnemonicParsing="false" text="Most Profitable Customers" />
-      <Button layoutX="75.0" layoutY="243.0" mnemonicParsing="false" text="Most Demnding Areas" />
-      <Button layoutX="403.0" layoutY="82.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-text-fill: #2980b9;" text="Orders By Peroids" textAlignment="CENTER" />
-      <Button layoutX="408.0" layoutY="161.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-text-fill: #2980b9;" text="Orders By Value" textAlignment="CENTER" />
-      <Button layoutX="411.0" layoutY="243.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-text-fill: #2980b9;" text="Routes History" textAlignment="CENTER" />
+      <Button fx:id="bestSelling" layoutX="78.0" layoutY="82.0" mnemonicParsing="false" onAction="#goToBestSellingReport" text="Best Selling Products" textAlignment="CENTER" />
+      <Button fx:id="mostProfitable" layoutX="65.0" layoutY="161.0" mnemonicParsing="false" onAction="#goToMostProfitableReport" text="Most Profitable Customers" />
+      <Button fx:id="mostDemanding" layoutX="75.0" layoutY="243.0" mnemonicParsing="false" onAction="#goToMostDemandingReport" text="Most Demnding Areas" />
+      <Button fx:id="ordersByPeriods" layoutX="403.0" layoutY="82.0" mnemonicParsing="false" onAction="#goToOrdersByPeriodsReport" style="-fx-background-color: white; -fx-text-fill: #2980b9;" text="Orders By Peroids" textAlignment="CENTER" />
+      <Button fx:id="ordersByValue" layoutX="408.0" layoutY="161.0" mnemonicParsing="false" onAction="#goToOrdersByValueReport" style="-fx-background-color: white; -fx-text-fill: #2980b9;" text="Orders By Value" textAlignment="CENTER" />
+      <Button fx:id="routesHistory" layoutX="411.0" layoutY="243.0" mnemonicParsing="false" onAction="#goToRouteHistoryReport" style="-fx-background-color: white; -fx-text-fill: #2980b9;" text="Routes History" textAlignment="CENTER" />
+      <Button fx:id="back" layoutX="280.0" layoutY="323.0" mnemonicParsing="false" onAction="#goBackToMainMenu" style="-fx-background-color: yellow; -fx-text-fill: black;" text="Back" />
    </children>
 </AnchorPane>

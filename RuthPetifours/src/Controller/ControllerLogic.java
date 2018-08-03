@@ -116,7 +116,10 @@ public class ControllerLogic {
 		});
 	}
 	
-
+	public ArrayList<Product> getBestSelllingProducts() {
+		return db.getBestSelllingProducts();	 
+	}
+	
 	public HashMap<String, Customer> getAllCustomers() {
 		return db.getAllCustomers();	 
 	}

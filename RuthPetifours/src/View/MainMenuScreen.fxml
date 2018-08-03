@@ -17,7 +17,7 @@
             <Button fx:id="Drivers" layoutX="580.0" layoutY="359.0" mnemonicParsing="false" onAction="#goToDrivers" prefHeight="65.0" prefWidth="170.0" style="-fx-background-color: white;" stylesheets="@../../style/style.css" text="Drivers" />
             <Button fx:id="Users" layoutX="580.0" layoutY="154.0" mnemonicParsing="false" onAction="#goToUsers" prefHeight="65.0" prefWidth="170.0" style="-fx-background-color: white;" stylesheets="@../../style/style.css" text="Users" />
             <Button fx:id="Vehichles" layoutX="580.0" layoutY="560.0" mnemonicParsing="false" onAction="#goToVehichles" prefHeight="65.0" prefWidth="170.0" style="-fx-background-color: white;" stylesheets="@../../style/style.css" text="Vehichles" />
-            <Button fx:id="Vehichles1" layoutX="328.0" layoutY="718.0" mnemonicParsing="false" onAction="#goToReportsScreen" prefHeight="65.0" prefWidth="170.0" style="-fx-background-color: orange;" stylesheets="@../../style/style.css" text="REPORTS" />
+            <Button fx:id="Vehichles1" layoutX="378.0" layoutY="560.0" mnemonicParsing="false" onAction="#goToReportsScreen" prefHeight="65.0" prefWidth="170.0" style="-fx-background-color: orange;" stylesheets="@../../style/style.css" text="REPORTS" />
             <Button fx:id="buildRoute" layoutX="177.0" layoutY="560.0" mnemonicParsing="false" onAction="#goToBuildRoute" prefHeight="65.0" prefWidth="170.0" style="-fx-background-color: white;" stylesheets="@../../style/style.css" text="Build Route" />
             <ImageView fitHeight="65.0" fitWidth="95.0" layoutX="45.0" layoutY="154.0">
                <image>

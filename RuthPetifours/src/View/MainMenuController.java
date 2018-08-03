@@ -48,9 +48,6 @@ public class MainMenuController {
 	 }
 	
 	
-	
-	
-	 
 	 @FXML private void goToOrders() {
 		 
 		 try {
@@ -178,7 +175,7 @@ public class MainMenuController {
 	 }
 
 	@FXML private void goToReportsScreen() {
-		
+				
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainMenuController.class.getResource("/View/ReportsOptionsScreen.fxml‬"));
@@ -186,8 +183,8 @@ public class MainMenuController {
 			Scene appSetScene = new Scene(appSet);
 			
 			MainClass.getPrimaryStage().setScene(appSetScene);
-			MainClass.getPrimaryStage().setFullScreenExitHint("");
-			MainClass.getPrimaryStage().setMaximized(true);
+			//MainClass.getPrimaryStage().setFullScreenExitHint("");
+			//MainClass.getPrimaryStage().setMaximized(true);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
