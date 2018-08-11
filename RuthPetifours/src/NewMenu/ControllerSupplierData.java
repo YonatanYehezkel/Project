@@ -3,15 +3,31 @@ package NewMenu;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import Controller.ControllerLogic;
+import Controller.MainClass;
 import Model.Order;
+import googleMap.DirectionsApi;
+import googleMap.DirectionsApiRequest;
+import googleMap.DirectionsResult;
+import googleMap.DirectionsRoute;
+import googleMap.GeoApiContext;
+import googleMap.PendingResult;
+import googleMap.TravelMode;
+import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
@@ -20,8 +36,14 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -50,6 +72,32 @@ public class ControllerSupplierData {
 	@FXML private TableColumn<Order, String> tcClerk;
 
 	
+	/* Sorting */
+	@FXML private TableView<Order> tvOrder2;
+	@FXML private TableColumn<Order, String> tcOrderID2;
+	@FXML private TableColumn<Order, String> tcOrderRequest2;
+	@FXML private TableColumn<Order, String> tcOrderDate2;
+	@FXML private TableColumn<Order, String> tcClerk2;
+	
+	@FXML private TableView<Order> tvOrder1;
+	@FXML private TableColumn<Order, String> tcOrderID1;
+	@FXML private TableColumn<Order, String> tcOrderRequest1;
+	@FXML private TableColumn<Order, String> tcOrderDate1;
+	@FXML private TableColumn<Order, String> tcClerk1;
+	
+	@FXML private TableView<Order> tvOrder3;
+	@FXML private TableColumn<Order, String> tcOrderID3;
+	@FXML private TableColumn<Order, String> tcOrderRequest3;
+	@FXML private TableColumn<Order, String> tcOrderDate3;
+	@FXML private TableColumn<Order, String> tcClerk3;
+	
+	@FXML private TextField sumTbl1;
+	@FXML private TextField sumTbl2;
+	@FXML private TextField sumTbl3;
+	
+	@FXML private Button buildTbl1;
+	@FXML private Button buildTbl3;
+	
 	/* CONTACTS - NESTED CONTROLLER! */
 	//@FXML private ControllerContactData contactDataController; //fx:id + 'Controller'
 		
@@ -69,6 +117,16 @@ public class ControllerSupplierData {
 	
 	private ObservableList<Order> orders;
 	private ControllerLogic controller;
+	
+	
+	private Integer index = null;
+	private static final DataFormat SERIALIZED_MIME_TYPE = new DataFormat("application/x-java-serialized-object");
+
+	private String[] wayp;
+	private DirectionsRoute[] routes;
+	private int[] opt_route;
+	private static final String API_KEY = "AIzaSyAIgMRRrFNahxoMfyQdsi7T07SeQ79lEgY";
+	
 	
 	public ControllerSupplierData(){}
 	
@@ -91,14 +149,22 @@ public class ControllerSupplierData {
 		initBtnEditSave();
 		initBtnEditAbort();
 		initBtnDelete();
+		initBtnBuildRouteTbl1();
+		initBtnBuildRouteTbl3();
 		
 		//TABLES
 		initTableOrder();
+		initTableOrder1();
+		initTableOrder2();
+		initTableOrder3();
+		
+		simpleDragDrop();
 		
 		//disable all fields from beginning
 		disableAllFields();
 		
 		setButtonState();
+		
 		
 	}
 	
@@ -120,6 +186,7 @@ public class ControllerSupplierData {
 		}
 		
 		tvOrder.setItems(orders);
+		tvOrder2.setItems(orders);
 	}
 	
 	/*
@@ -285,6 +352,35 @@ public class ControllerSupplierData {
 		
 	}
 	
+	
+	private void initBtnBuildRouteTbl1(){
+		
+		//btnNew.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
+		buildTbl1.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+
+				buildRouteTbl1();
+			}
+		});
+		
+	}
+	
+	private void initBtnBuildRouteTbl3(){
+		
+		//btnNew.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
+		buildTbl3.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+
+				buildRouteTbl3();
+			}
+		});
+		
+	}
+	
 	/*
 	 * TABLES
 	 */
@@ -295,10 +391,94 @@ public class ControllerSupplierData {
 		tcOrderDate.setCellValueFactory(new PropertyValueFactory<>("adress"));
 		tcClerk.setCellValueFactory(new PropertyValueFactory<>("value"));
 		
+		tvOrder.prefHeightProperty().bind(NewMenu.getStage().heightProperty());
+		tvOrder.prefWidthProperty().bind(NewMenu.getStage().widthProperty());
 				
 		tvOrder.setContextMenu(new ContextMenuTableOrder());
 		
 		tvOrder.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+
+				if(event.getClickCount() == 2){
+					goToOrder(); 
+				}
+				
+			}
+		});
+		
+	}
+	
+	private void initTableOrder1(){
+		
+		tcOrderID1.setCellValueFactory(new PropertyValueFactory<>("id"));
+		tcOrderRequest1.setCellValueFactory(new PropertyValueFactory<>("customer"));
+		tcOrderDate1.setCellValueFactory(new PropertyValueFactory<>("adress"));
+		tcClerk1.setCellValueFactory(new PropertyValueFactory<>("value"));
+	
+		
+		sumTbl1.setEditable(false);
+		tvOrder1.prefWidth(500);
+		
+				
+		tvOrder1.setContextMenu(new ContextMenuTableOrder());
+		
+		tvOrder1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+
+				if(event.getClickCount() == 2){
+					goToOrder(); 
+				}
+				
+			}
+		});
+		
+	}
+	
+	private void initTableOrder2(){
+		
+		tcOrderID2.setCellValueFactory(new PropertyValueFactory<>("id"));
+		tcOrderRequest2.setCellValueFactory(new PropertyValueFactory<>("customer"));
+		tcOrderDate2.setCellValueFactory(new PropertyValueFactory<>("adress"));
+		tcClerk2.setCellValueFactory(new PropertyValueFactory<>("value"));
+	
+		
+		tvOrder2.prefWidth(500);
+		
+				
+		tvOrder2.setContextMenu(new ContextMenuTableOrder());
+		
+		tvOrder2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+
+				if(event.getClickCount() == 2){
+					goToOrder(); 
+				}
+				
+			}
+		});
+		
+	}
+	
+	private void initTableOrder3(){
+		
+		tcOrderID3.setCellValueFactory(new PropertyValueFactory<>("id"));
+		tcOrderRequest3.setCellValueFactory(new PropertyValueFactory<>("customer"));
+		tcOrderDate3.setCellValueFactory(new PropertyValueFactory<>("adress"));
+		tcClerk3.setCellValueFactory(new PropertyValueFactory<>("value"));
+	
+		
+		tvOrder3.prefWidth(500);
+		
+				
+		tvOrder3.setContextMenu(new ContextMenuTableOrder());
+		
+		tvOrder3.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event) {
@@ -577,5 +757,309 @@ public class ControllerSupplierData {
 		
 	}
 	
+	private void simpleDragDrop() {
+
+		tvOrder2.setOnDragDetected(new EventHandler<MouseEvent>() {
+		    public void handle(MouseEvent event) {
+		   
+		    	index = tvOrder2.getSelectionModel().getSelectedIndex();
+		    	ClipboardContent cc = new ClipboardContent();
+                cc.put(SERIALIZED_MIME_TYPE, index);
+                Dragboard db = tvOrder2.startDragAndDrop(TransferMode.MOVE);
+            
+                //db.setDragView(row.snapshot(null, null));
+                
+                                
+                db.setContent(cc);
+                event.consume();
+		    }
+		});
+		
+		tvOrder1.setOnDragOver(new EventHandler<DragEvent>() {
+		    public void handle(DragEvent event) {
+		    	  
+		              Dragboard db = event.getDragboard();
+		              if (db.hasContent(SERIALIZED_MIME_TYPE)) {
+		             
+		                  event.acceptTransferModes( TransferMode.MOVE );
+		              }
+		           
+		        event.consume();
+		    }
+		});
+		
+		tvOrder3.setOnDragOver(new EventHandler<DragEvent>() {
+		    public void handle(DragEvent event) {
+		    	  
+		              Dragboard db = event.getDragboard();
+		              if (db.hasContent(SERIALIZED_MIME_TYPE)) {
+		             
+		                  event.acceptTransferModes( TransferMode.MOVE );
+		              }
+		           
+		        event.consume();
+		    }
+		});
+		
+		tvOrder1.setOnDragEntered(new EventHandler<DragEvent>() {
+		    public void handle(DragEvent event) {
+				    	
+		         if (event.getGestureSource() != tvOrder1 &&
+		                 event.getDragboard().hasString()) {
+		        	 tvOrder1.setVisible(false);
+		         }
+		                
+		         event.consume();
+		    }
+		});
+		
+		tvOrder1.setOnDragDropped(new EventHandler<DragEvent>() {
+		    public void handle(DragEvent event) {
+	
+		    	if(event.getGestureSource() == tvOrder2 && !index.equals(null) ) {
+		    		tvOrder1.getItems().add(tvOrder2.getItems().get(index));
+           
+		    		tvOrder2.getItems().remove(index.intValue());
+		    		index = null;
+                    event.setDropCompleted(true);
+                    
+                                      
+                    
+                    sumTbl1.setText(Float.toString(calculateOrdersSum(tvOrder1)));
+                    sumTbl2.setText(Float.toString(calculateOrdersSum(tvOrder2)));
+                    
+                    //opt_label_small.setVisible(false);
+		    		
+		    	}
+		    		
+		                
+		         event.consume();
+		    }
+		});
+		
+		tvOrder3.setOnDragDropped(new EventHandler<DragEvent>() {
+		    public void handle(DragEvent event) {
+	
+		    	if(event.getGestureSource() == tvOrder2 && !index.equals(null) ) {
+		    		tvOrder3.getItems().add(tvOrder2.getItems().get(index));
+           
+		    		tvOrder2.getItems().remove(index.intValue());
+		    		index = null;
+                    event.setDropCompleted(true);
+                    
+                    
+                    sumTbl3.setText(Float.toString(calculateOrdersSum(tvOrder3)));
+                    sumTbl2.setText(Float.toString(calculateOrdersSum(tvOrder)));
+                    
+                    //opt_label_big.setVisible(false);
+		    		
+		    	}
+		    		
+		                
+		         event.consume();
+		    }
+		});
+	}
+	
+	protected float calculateOrdersSum(TableView<Order> table) {
+		 float sum = 0;
+        for (Order item : table.getItems()) {
+		        sum = sum + item.getValue();
+		    }
+		return sum;
+	}
+	
+	
+	private void buildRouteTbl1() {
+		if(tvOrder1.getItems().size()==0){
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(MainClass.getPrimaryStage());
+            alert.setHeaderText("List is empty!");
+            alert.setContentText("You should add orders to table.");
+            alert.showAndWait();
+		}
+		
+		else {
+		
+		GeoApiContext context = new GeoApiContext.Builder()
+			    .apiKey(API_KEY)
+			    .build();
+		    		
+		    DirectionsApiRequest apiRequest = DirectionsApi.newRequest(context);
+		    apiRequest.origin("Karmiel");
+		    apiRequest.destination("Karmiel");
+		    apiRequest.optimizeWaypoints(true);
+	
+
+		    List<String> columnData = new ArrayList<>();
+		    for (Order item : tvOrder1.getItems()) {
+		        columnData.add(item.getAdress());
+		    }
+		    wayp = columnData.toArray(new String[0]);
+		    apiRequest.waypoints(wayp);
+			
+			
+		    apiRequest.mode(TravelMode.DRIVING); 
+
+
+		    final CountDownLatch latch = new CountDownLatch(1);
+		    
+		    apiRequest.setCallback(new PendingResult.Callback<DirectionsResult>() {
+		    	 
+		        @Override
+		        public void onResult(DirectionsResult result) {
+		            routes = result.routes;
+		           
+		            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		           //routes[1].waypointOrder.toString();
+		           System.out.println(Arrays.toString(routes[0].waypointOrder));
+		           opt_route = routes[0].waypointOrder;
+		            /*bestRout.setText(getOptimalRoute()); */
+		            System.out.println(getOptimalRoute());
+		            //getOptimalRoute();
+		            //bestRout.setText(Arrays.toString(routes[0].waypointOrder));
+			        //System.out.println(gson.toJson(routes));
+		            sortTablebyOptimalRoute(tvOrder1);
+		            		            
+		            //opt_label_small.setVisible(true);
+		            
+			        latch.countDown();
+		        }
+
+		        
+
+				private String getOptimalRoute() {
+					String s ="Optimal route: ";
+		        	//Arrays.toString(routes[0].waypointOrder);
+		        	
+		        	for( int i = 0; i <= routes[0].waypointOrder.length - 1; i++) {
+		        		//System.out.println(wayp[routes[0].waypointOrder[i]].toString());
+		        		s = s.concat(wayp[routes[0].waypointOrder[i]].toString()).concat(", ");
+		        	}
+		        	
+		        	//System.out.println(routes[0].waypointOrder);
+					return s;
+				}
+
+				@Override
+		        public void onFailure(Throwable e) {
+		        	
+		        }
+		    });
+
+		    // We have to hold the main thread open until callback is called by OkHTTP.
+		    try {
+				latch.await();
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		  
+	
+		}
+	}
+	
+	private void buildRouteTbl3() {
+		if(tvOrder3.getItems().size()==0){
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(MainClass.getPrimaryStage());
+            alert.setHeaderText("List is empty!");
+            alert.setContentText("You should add orders to table.");
+            alert.showAndWait();
+		}
+		
+		else {
+		
+		GeoApiContext context = new GeoApiContext.Builder()
+			    .apiKey(API_KEY)
+			    .build();
+		    		
+		    DirectionsApiRequest apiRequest = DirectionsApi.newRequest(context);
+		    apiRequest.origin("Karmiel");
+		    apiRequest.destination("Karmiel");
+		    apiRequest.optimizeWaypoints(true);
+	
+
+		    List<String> columnData = new ArrayList<>();
+		    for (Order item : tvOrder3.getItems()) {
+		        columnData.add(item.getAdress());
+		    }
+		    wayp = columnData.toArray(new String[0]);
+		    apiRequest.waypoints(wayp);
+			
+			
+		    apiRequest.mode(TravelMode.DRIVING); 
+
+
+		    final CountDownLatch latch = new CountDownLatch(1);
+		    
+		    apiRequest.setCallback(new PendingResult.Callback<DirectionsResult>() {
+		    	 
+		        @Override
+		        public void onResult(DirectionsResult result) {
+		            routes = result.routes;
+		           
+		            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		           //routes[1].waypointOrder.toString();
+		           System.out.println(Arrays.toString(routes[0].waypointOrder));
+		           opt_route = routes[0].waypointOrder;
+		            /*bestRout.setText(getOptimalRoute()); */
+		            System.out.println(getOptimalRoute());
+		            //getOptimalRoute();
+		            //bestRout.setText(Arrays.toString(routes[0].waypointOrder));
+			        //System.out.println(gson.toJson(routes));
+		            sortTablebyOptimalRoute(tvOrder1);
+		            		            
+		            //opt_label_small.setVisible(true);
+		            
+			        latch.countDown();
+		        }
+
+		        
+
+				private String getOptimalRoute() {
+					String s ="Optimal route: ";
+		        	//Arrays.toString(routes[0].waypointOrder);
+		        	
+		        	for( int i = 0; i <= routes[0].waypointOrder.length - 1; i++) {
+		        		//System.out.println(wayp[routes[0].waypointOrder[i]].toString());
+		        		s = s.concat(wayp[routes[0].waypointOrder[i]].toString()).concat(", ");
+		        	}
+		        	
+		        	//System.out.println(routes[0].waypointOrder);
+					return s;
+				}
+
+				@Override
+		        public void onFailure(Throwable e) {
+		        	
+		        }
+		    });
+
+		    // We have to hold the main thread open until callback is called by OkHTTP.
+		    try {
+				latch.await();
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		  
+	
+		}
+	}
+	
+	private void sortTablebyOptimalRoute(TableView<Order> table) {
+		
+		 ObservableList<Order> orders = FXCollections.observableArrayList();
+		for(int i=0; i<opt_route.length; i++) {
+			orders.add(table.getItems().get(opt_route[i]));
+			
+		}
+		
+		table.setItems(orders);
+		
+		System.out.println("kkkkkkkkkkk");
+		
+	}
 }
 

@@ -426,8 +426,8 @@ public class ControllerCustomerData {
 		
 		
 		
-		tvOffer.prefHeightProperty().bind(main.getStage().heightProperty());
-		tvOffer.prefWidthProperty().bind(main.getStage().widthProperty());
+		tvOffer.prefHeightProperty().bind(NewMenu.getStage().heightProperty());
+		tvOffer.prefWidthProperty().bind(NewMenu.getStage().widthProperty());
         
 		tvOffer.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
