@@ -178,7 +178,7 @@ public class MainMenuController {
 				
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainMenuController.class.getResource("/View/ReportsOptionsScreen.fxml‬"));
+			loader.setLocation(MainMenuController.class.getResource("/View/ReportsOptionsScreen.fxml"));
 			AnchorPane appSet = loader.load();
 			Scene appSetScene = new Scene(appSet);
 			

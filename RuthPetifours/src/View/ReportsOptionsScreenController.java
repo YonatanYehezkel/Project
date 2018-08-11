@@ -35,7 +35,7 @@ public class ReportsOptionsScreenController {
 				
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainMenuController.class.getResource("/View/BestSellingReport.fxml‬"));
+			loader.setLocation(MainMenuController.class.getResource("/View/BestSellingReport.fxml"));
 			AnchorPane appSet = loader.load();
 			Scene appSetScene = new Scene(appSet);
 			
@@ -54,7 +54,7 @@ public class ReportsOptionsScreenController {
 		
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainMenuController.class.getResource("/View/MostProfitableReport.fxml‬‬"));
+			loader.setLocation(MainMenuController.class.getResource("/View/MostProfitableReport.fxml"));
 			AnchorPane appSet = loader.load();
 			Scene appSetScene = new Scene(appSet);
 			
@@ -73,7 +73,7 @@ public class ReportsOptionsScreenController {
 		
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainMenuController.class.getResource("/View/MostDemandingReport.fxml‬‬"));
+			loader.setLocation(MainMenuController.class.getResource("/View/MostDemandingReport.fxml"));
 			AnchorPane appSet = loader.load();
 			Scene appSetScene = new Scene(appSet);
 			
@@ -94,7 +94,7 @@ public class ReportsOptionsScreenController {
 		
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainMenuController.class.getResource("/View/OrdersByPeriodsReport.fxml‬‬"));
+			loader.setLocation(MainMenuController.class.getResource("/View/OrdersByPeriodsReport.fxml"));
 			AnchorPane appSet = loader.load();
 			Scene appSetScene = new Scene(appSet);
 			
@@ -113,7 +113,7 @@ public class ReportsOptionsScreenController {
 		
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainMenuController.class.getResource("/View/OrdersByValueReport.fxml‬‬"));
+			loader.setLocation(MainMenuController.class.getResource("/View/OrdersByValueReport.fxml"));
 			AnchorPane appSet = loader.load();
 			Scene appSetScene = new Scene(appSet);
 			
@@ -132,7 +132,7 @@ public class ReportsOptionsScreenController {
 		
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainMenuController.class.getResource("/View/RouteHistoryReport.fxml‬‬"));
+			loader.setLocation(MainMenuController.class.getResource("/View/RouteHistoryReport.fxml"));
 			AnchorPane appSet = loader.load();
 			Scene appSetScene = new Scene(appSet);
 			
@@ -151,7 +151,7 @@ public class ReportsOptionsScreenController {
 		
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainMenuController.class.getResource("/View/MainMenuScreen.fxml‬‬"));
+			loader.setLocation(MainMenuController.class.getResource("/View/MainMenuScreen.fxml"));
 			AnchorPane appSet = loader.load();
 			Scene appSetScene = new Scene(appSet);
 			

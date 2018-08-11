@@ -1,5 +1,6 @@
 package NewMenu;
 
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -68,8 +69,10 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.Callback;
 
 public class ControllerCustomerData {
@@ -127,6 +130,7 @@ public class ControllerCustomerData {
 	      private Button btnEditSave = new Button("Speichern");
 	      private Button btnEditAbort = new Button("Abbrechen");
 	@FXML private Button btnDelete;
+	@FXML private Button btnImport;
 	
 	
 	
@@ -151,6 +155,7 @@ public class ControllerCustomerData {
 		initBtnEditSave();
 		initBtnEditAbort();
 		initBtnDelete();
+		initBtnImport();
 		
 		/* TABLES */
 		initTableOffer();
@@ -209,6 +214,28 @@ public class ControllerCustomerData {
 					Customers.add(customerAdd.getController().getCreatedCustomer());
 					//selectCustomer(customerAdd.getController().getCreatedCustomerID());
 				}
+				
+			}
+		});
+		
+	}
+	
+	private void initBtnImport(){
+		
+		btnImport.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
+		btnImport.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				
+				FileChooser fileChooser = new FileChooser();
+				fileChooser.setTitle("Select a file for import");
+				ExtensionFilter filter = new ExtensionFilter("Excel", "*.xlsx", "*.xls");
+				fileChooser.getExtensionFilters().add(filter);
+				File f = null;
+				f = fileChooser.showOpenDialog(MainClass.getPrimaryStage());
+				if(f != null)
+					controller.importCustomersFromExcel(f);
 				
 			}
 		});
