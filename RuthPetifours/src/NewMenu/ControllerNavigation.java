@@ -42,6 +42,7 @@ public class ControllerNavigation {
 	private LoadCustomerData customerData;
 //	private LoadArticleData articleData;
 	private LoadSupplierData supplierData;
+	private LoadUserData userData;
 //	private LoadStockAdd stockAdd = new LoadStockAdd(false);
 //	private LoadOfferData offerData;
 //	private LoadOrderData orderData;
@@ -57,6 +58,7 @@ public class ControllerNavigation {
 		customerData = new LoadCustomerData(false, main);
 		//articleData = new LoadArticleData(false, 0, main);
 		supplierData = new LoadSupplierData(false, 0, main);
+		userData = new LoadUserData(false, main);
 //		offerData = new LoadOfferData(false,0,0, main);
 //		orderData = new LoadOrderData(false, 0, 0, main);
 //		deliverybillData = new LoadDeliverybillData(false, 0, 0, main);
@@ -138,7 +140,7 @@ public class ControllerNavigation {
 
 			@Override
 			public void handle(ActionEvent event) {					
-				main.getContentPane().setCenter(customerData.getContent());
+				main.getContentPane().setCenter(userData.getContent());
 				main.getStage().setTitle(main.getProgramName() + " - Users");
 				setSizeToScene();
 			}
@@ -184,7 +186,7 @@ public class ControllerNavigation {
 			@Override
 			public void handle(ActionEvent event) {
 				main.getContentPane().setCenter(customerData.getContent());
-				main.getStage().setTitle(main.getProgramName() + " - Customer");
+				main.getStage().setTitle(main.getProgramName() + " - Customers");
 				setSizeToScene();
 			}
 		});

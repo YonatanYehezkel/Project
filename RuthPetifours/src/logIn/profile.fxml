@@ -73,7 +73,7 @@
       </ImageView>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="310.0" style="-fx-background-color: #ffff80;">
          <children>
-            <AnchorPane fx:id="Login" layoutY="419.0" onMouseClicked="#validateUserInput" prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #43bb73;">
+            <AnchorPane fx:id="Login" layoutY="419.0" onMouseClicked="#validateUserInput" prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #2980b9;">
                <children>
                   <Label fx:id="login" layoutX="133.0" layoutY="11.0" onMouseClicked="#validateUserInput" prefHeight="17.0" prefWidth="45.0" text="Lo0gin" textFill="#fefefe">
                      <font>

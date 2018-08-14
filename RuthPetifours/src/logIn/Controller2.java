@@ -54,6 +54,7 @@ public class Controller2 implements Initializable {
 	@FXML private ComboBox<String> userList;
 	@FXML private PasswordField password;
 	@FXML private AnchorPane Login;
+	@FXML private AnchorPane pane;
 	@FXML private Label errorUser;
 	@FXML private Label errorPassword;
 
@@ -106,6 +107,7 @@ public class Controller2 implements Initializable {
 
                 login.setText("Login");
                 
+                pane.setStyle("-fx-border-color: black");
                 
                 fillComboBox();
         		currentUser = new User();

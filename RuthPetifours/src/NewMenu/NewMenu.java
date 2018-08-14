@@ -47,11 +47,14 @@ public class NewMenu extends Application {
 				
 				LoadMenuBar menubar = new LoadMenuBar(false, this);			
 				LoadNavigation navigation = new LoadNavigation(this);			
-				LoadCustomerData customerData = new LoadCustomerData(false, this);	
+				//LoadCustomerData customerData = new LoadCustomerData(false, this);	
+				LoadSupplierData supplierData  =new LoadSupplierData(false, 0, this);
 				
 				contentPane.setTop(menubar.getContent());
 				contentPane.setLeft(navigation.getContent());			
-				contentPane.setCenter(customerData.getContent());
+				//contentPane.setCenter(customerData.getContent());
+				contentPane.setCenter(supplierData.getContent());
+				
 				
 				Scene scene = new Scene(contentPane);
 				scene.getStylesheets().add("style.css");
@@ -62,6 +65,7 @@ public class NewMenu extends Application {
 				stage.setWidth(1200);
 				stage.setHeight(600);
 				stage.setMaximized(true);
+				getStage().setTitle(this.getProgramName() + " - Orders");
 				//stage.show();
 				
 			} catch(Exception e) {

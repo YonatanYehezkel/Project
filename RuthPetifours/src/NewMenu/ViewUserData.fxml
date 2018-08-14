@@ -29,13 +29,9 @@
 			<AnchorPane styleClass="Headbar">
 				<StackPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 					<HBox fx:id="hboxBtnTopbar" StackPane.alignment="CENTER_LEFT" alignment="CENTER_LEFT">
-						<!-- <Button fx:id="btnSearch" text="Search" styleClass="btnTopbar" /> -->
 						<Button fx:id="btnNew" text="New" styleClass="btnTopbar" />
 						<Button fx:id="btnEdit" text="Edit" styleClass="btnTopbar" />
-						<!-- BtnEditSave is added with Java-Code -->
-						<!-- BtnEditAbort is added with Java-Code -->
 						<Button fx:id="btnDelete" text="Delete" styleClass="btnTopbar" />
-						<Button fx:id="btnImport" text="Import" styleClass="btnTopbar" />
 					</HBox>
 				</StackPane>
 			</AnchorPane>
@@ -47,7 +43,7 @@
 				<BorderPane>
 					<top>
 						<HBox spacing="10" alignment="CENTER_LEFT">
-							<Label id="lblHeadline" text="Customers" />
+							<Label id="lblHeadline" text="Users" />
 							<Label fx:id="lblSubHeadline" id="lblSubHeadline" />
 						<padding>
 							<Insets bottom="10" />
@@ -68,10 +64,8 @@
 													<ColumnConstraints halignment="RIGHT" />
 													<ColumnConstraints halignment="LEFT" />
 												</columnConstraints>
-												<Label text="Status" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+												<Label text="Role" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 												<TextField fx:id="tfSupplierID" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-												<Label text="User:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-												<TextField fx:id="tfName1"  GridPane.columnIndex="1" GridPane.rowIndex="1" />
 												
 											<padding>
 												<Insets top="10" bottom="10" left="10" right="10" />
@@ -84,51 +78,31 @@
 													<ColumnConstraints halignment="RIGHT" />
 													<ColumnConstraints halignment="LEFT" />
 												</columnConstraints>
-												<Label text="Date of shipping:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+												<Label text="UserName:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 												<TextField fx:id="tfPhone" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-												<Label text="Date:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-												<TextField fx:id="tfFax" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 											
 											<padding>
 												<Insets top="10" bottom="10" left="10" right="10" />
 											</padding>	
-											</GridPane>
-										
-											<!-- Third Block -->
-											<GridPane hgap="10" vgap="5">	
-												<columnConstraints>
-													<ColumnConstraints halignment="RIGHT" />
-													<ColumnConstraints halignment="LEFT" />
-												</columnConstraints>
-												<Label text="TODO:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-												<ComboBox fx:id="cbPayment" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-												<Label text="TODO:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-												<TextField fx:id="tfIBAN" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-											<padding>
-												<Insets top="10" bottom="10" left="10" right="10" />
-											</padding>	
-											</GridPane>																		
+											</GridPane>																	
 										</HBox>
-									
-									
-									
-							
 							</TitledPane>							
 							
 							<!-- LONGTEXT / NOTES -->
 							<TabPane>
 								<tabs>
 																		
-									<Tab text="Adress" closable="false">
+									<Tab text="List of Users" closable="false">
 										<AnchorPane>
 											<TableView fx:id="tvOffer" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" prefHeight="200">
 												<columnResizePolicy>
 						                  			<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
 						               			</columnResizePolicy>
 												<columns>
-											    	<TableColumn fx:id="tcOfferClerk" text="Customer" />
-													<TableColumn fx:id="tcOfferRequest" text="Adress" />
-													<TableColumn fx:id="tcOfferDate" text="Notes" />
+													<TableColumn fx:id="tcOfferRole" text="Role" />
+											    	<TableColumn fx:id="tcOfferUser" text="UserName" />
+													<TableColumn fx:id="tcOfferQuestion1" text="First question" />
+													<TableColumn fx:id="tcOfferQuestion2" text="Second question" />
 												</columns>
 											</TableView>
 										</AnchorPane>

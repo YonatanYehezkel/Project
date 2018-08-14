@@ -9,9 +9,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="310.0" style="-fx-background-color: #ffdb4d;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logIn.Controller2">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="310.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logIn.Controller2">
    <children>
-      <AnchorPane layoutY="419.0" prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #ffdb4d;">
+      <AnchorPane fx:id="pane"  layoutY="419.0" prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #e6e6e6;">
          <children>
             <Label layoutX="133.0" layoutY="11.0" onMouseClicked="#back" prefHeight="17.0" prefWidth="45.0" text="Log23in">
                <font>
@@ -20,7 +20,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #ffdb4d;">
+      <AnchorPane prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #e6e6e6;">
          <children>
             <Label layoutX="131.0" layoutY="14.0" text="Ruth Petifours" textFill="#8c90b3">
                <font>
@@ -71,9 +71,9 @@
             <Image url="@pic.jpg" />
          </image>
       </ImageView>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="310.0" style="-fx-background-color: #ffff80;">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="310.0" style="-fx-background-color: #e6e6e6;">
          <children>
-            <AnchorPane fx:id="Login" layoutY="419.0" onMouseClicked="#validateUserInput" prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #43bb73;">
+            <AnchorPane fx:id="Login" layoutY="419.0" onMouseClicked="#validateUserInput" prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #2980b9">
                <children>
                   <Label fx:id="login" layoutX="133.0" layoutY="11.0" onMouseClicked="#validateUserInput" prefHeight="17.0" prefWidth="45.0" text="Lo0gin" textFill="#fefefe">
                      <font>
@@ -82,13 +82,13 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #ffff80;">
+            <AnchorPane prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: white;">
                <children>
-                  <Label alignment="CENTER" layoutX="106.0" layoutY="14.0" prefHeight="20.0" prefWidth="113.0" text="LOG IN" textAlignment="CENTER" textFill="#0000cc">
+                <!--   <Label alignment="CENTER" layoutX="106.0" layoutY="14.0" prefHeight="20.0" prefWidth="113.0" text="LOG IN" textAlignment="CENTER" textFill="#0000cc">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
-                  </Label>
+                  </Label> --> 
                   <Circle fx:id="close" fill="#fa4771" layoutX="16.0" layoutY="24.0" onMouseClicked="#closeclick" radius="5.0" stroke="#fa4771" strokeType="INSIDE" />
                   <Circle fx:id="min" fill="#ffc965" layoutX="30.0" layoutY="24.0" onMouseClicked="#minclick" radius="5.0" stroke="#ffc965" strokeType="INSIDE" />
                   <Circle fill="#42cf9b" layoutX="45.0" layoutY="24.0" radius="5.0" stroke="#42cf9b" strokeType="INSIDE" />
@@ -96,12 +96,12 @@
             </AnchorPane>
             <AnchorPane layoutX="19.0" layoutY="222.0" prefHeight="50.0" prefWidth="270.0" style="-fx-border-radius: 2;">
                <children>
-                  <ComboBox fx:id="userList" onAction="#setSelectedUser" prefHeight="48.0" prefWidth="270.0" style="-fx-background-color: #ffff80; -fx-border-color: #0000cc;" />
+                  <ComboBox fx:id="userList" onAction="#setSelectedUser" prefHeight="48.0" prefWidth="270.0" style="-fx-background-color: white; -fx-border-color: #0000cc;" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="20.0" layoutY="298.0" prefHeight="50.0" prefWidth="270.0" style="-fx-border-radius: 2;">
                <children>
-                  <PasswordField fx:id="password" layoutX="-2.0" layoutY="2.0" prefHeight="48.0" prefWidth="270.0" style="-fx-background-color: #ffff80; -fx-border-color: #0000cc;" />
+                  <PasswordField fx:id="password" layoutX="-2.0" layoutY="2.0" prefHeight="48.0" prefWidth="270.0" style="-fx-background-color: white; -fx-border-color: #0000cc;" />
                </children>
             </AnchorPane>
             <ImageView fx:id="ic" fitHeight="107.0" fitWidth="140.0" layoutX="85.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">

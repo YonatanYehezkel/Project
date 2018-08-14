@@ -10,6 +10,7 @@ import java.util.HashMap;
 import Controller.ControllerLogic;
 import Controller.MainClass;
 import Model.Customer;
+import Model.User;
 import View.MainMenuController;
 import View.ShowCustomerDetails;
 //import de.michaprogs.crm.DeleteAlert;
@@ -75,7 +76,7 @@ import javafx.stage.WindowEvent;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.Callback;
 
-public class ControllerCustomerData {
+public class ControllerUserData {
 
 	@FXML private Label lblSubHeadline;
 	
@@ -95,13 +96,14 @@ public class ControllerCustomerData {
 	@FXML private Label lblLastChange;
 	
 	/* OFFER */
-	@FXML private TableView<Customer> tvOffer;
+	@FXML private TableView<User> tvOffer;
 	
-	@FXML private TableColumn<Customer,String> tcOfferClerk;
-	@FXML private TableColumn<Customer,String> tcOfferRequest;
-	@FXML private TableColumn<Customer,String> tcOfferDate;
+	@FXML private TableColumn<User,Integer> tcOfferRole;
+	@FXML private TableColumn<User,String> tcOfferUser;
+	@FXML private TableColumn<User,String> tcOfferQuestion1;
+	@FXML private TableColumn<User,String> tcOfferQuestion2;
 
-	private ObservableList<Customer> Customers;
+	private ObservableList<User> users;
 	
 	/* DELIVERYBILL */
 //	@FXML private TableView<ModelDeliverybill> tvDeliverybill;
@@ -130,7 +132,7 @@ public class ControllerCustomerData {
 	      private Button btnEditSave = new Button("Speichern");
 	      private Button btnEditAbort = new Button("Abbrechen");
 	@FXML private Button btnDelete;
-	@FXML private Button btnImport;
+	//@FXML private Button btnImport;
 	
 	
 	
@@ -141,7 +143,7 @@ public class ControllerCustomerData {
 	
 	private ControllerLogic controller;
 	
-	public ControllerCustomerData(){}
+	public ControllerUserData(){}
 	
 	@FXML private void initialize(){
 		
@@ -155,7 +157,7 @@ public class ControllerCustomerData {
 		initBtnEditSave();
 		initBtnEditAbort();
 		initBtnDelete();
-		initBtnImport();
+//		initBtnImport();
 		
 		/* TABLES */
 		initTableOffer();
@@ -169,12 +171,12 @@ public class ControllerCustomerData {
 		
 		setButtonState();
 		
-		tvOffer.setOnMouseClicked(( event) -> {
-	        if (event.getButton().equals(MouseButton.SECONDARY)) {
-	            
-	        	LoadCustomerAdd customerAdd = new LoadCustomerAdd(tvOffer.getSelectionModel().getSelectedItem());
-	        	}
-	    });
+//		tvOffer.setOnMouseClicked(( event) -> {
+//	        if (event.getButton().equals(MouseButton.SECONDARY)) {
+//	            
+//	        	LoadCustomerAdd customerAdd = new LoadCustomerAdd(tvOffer.getSelectionModel().getSelectedItem());
+//	        	}
+//	    });
 		
 	}
 	
@@ -204,73 +206,73 @@ public class ControllerCustomerData {
 	private void initBtnNew(){
 		
 		btnNew.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
-		btnNew.setOnAction(new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent event) {
-				
-				LoadCustomerAdd customerAdd = new LoadCustomerAdd(true);
-				if(customerAdd.getController().getCreatedCustomer() != null){
-					Customers.add(customerAdd.getController().getCreatedCustomer());
-					//selectCustomer(customerAdd.getController().getCreatedCustomerID());
-				}
-				
-			}
-		});
+//		btnNew.setOnAction(new EventHandler<ActionEvent>() {
+//			
+//			@Override
+//			public void handle(ActionEvent event) {
+//				
+//				LoadCustomerAdd customerAdd = new LoadCustomerAdd(true);
+//				if(customerAdd.getController().getCreatedCustomer() != null){
+//					users.add(customerAdd.getController().getCreatedCustomer());
+//					//selectCustomer(customerAdd.getController().getCreatedCustomerID());
+//				}
+//				
+//			}
+//		});
 		
 	}
 	
-	private void initBtnImport(){
-		
-		btnImport.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
-		btnImport.setOnAction(new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent event) {
-				
-				FileChooser fileChooser = new FileChooser();
-				fileChooser.setTitle("Select a file for import");
-				ExtensionFilter filter = new ExtensionFilter("Excel", "*.xlsx", "*.xls");
-				fileChooser.getExtensionFilters().add(filter);
-				File f = null;
-				f = fileChooser.showOpenDialog(MainClass.getPrimaryStage());
-				if(f != null)
-					controller.importCustomersFromExcel(f);
-				
-			}
-		});
-		
-	}
+//	private void initBtnImport(){
+//		
+//		btnImport.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
+//		btnImport.setOnAction(new EventHandler<ActionEvent>() {
+//			
+//			@Override
+//			public void handle(ActionEvent event) {
+//				
+//				FileChooser fileChooser = new FileChooser();
+//				fileChooser.setTitle("Select a file for import");
+//				ExtensionFilter filter = new ExtensionFilter("Excel", "*.xlsx", "*.xls");
+//				fileChooser.getExtensionFilters().add(filter);
+//				File f = null;
+//				f = fileChooser.showOpenDialog(MainClass.getPrimaryStage());
+//				if(f != null)
+//					controller.importCustomersFromExcel(f);
+//				
+//			}
+//		});
+//		
+//	}
 	
 	private void initBtnEdit(){
 		
 		btnEdit.setGraphic(new GraphicButton("edit_32.png").getGraphicButton());
-		btnEdit.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				
-				if(tvOffer.getSelectionModel().getSelectedItem() != null) {
-					LoadCustomerAdd customerAdd = new LoadCustomerAdd(tvOffer.getSelectionModel().getSelectedItem());
-				}
-				else {
-					Alert alert = new Alert(AlertType.WARNING);
-					alert.initOwner(MainClass.getPrimaryStage());
-		        
-		            alert.setContentText("Select a customer for editing.");
-		            alert.showAndWait();
-				}
-				
-				
-			
+//		btnEdit.setOnAction(new EventHandler<ActionEvent>() {
+//
+//			@Override
+//			public void handle(ActionEvent event) {
+//				
+//				if(tvOffer.getSelectionModel().getSelectedItem() != null) {
+//					LoadCustomerAdd customerAdd = new LoadCustomerAdd(tvOffer.getSelectionModel().getSelectedItem());
+//				}
+//				else {
+//					Alert alert = new Alert(AlertType.WARNING);
+//					alert.initOwner(MainClass.getPrimaryStage());
+//		        
+//		            alert.setContentText("Select a customer for editing.");
+//		            alert.showAndWait();
+//				}
+//				
+//				
+//			
 //				hboxBtnTopbar.getChildren().add(hboxBtnTopbar.getChildren().indexOf(btnEdit) + 1, btnEditSave);
 //				hboxBtnTopbar.getChildren().add(hboxBtnTopbar.getChildren().indexOf(btnEdit) + 2, btnEditAbort);
-				
-				enableFields();				
-				setButtonState();
-				
-			}
-		});		
+//				
+//				enableFields();				
+//				setButtonState();
+//				
+//			}
+//		});		
 		
 	}
 	
@@ -367,44 +369,44 @@ public class ControllerCustomerData {
 	private void initBtnDelete(){
 		
 		btnDelete.setGraphic(new GraphicButton("delete_32.png").getGraphicButton());
-		btnDelete.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				if(tvOffer.getSelectionModel().getSelectedItem() != null) {
-					Alert alert = new Alert(AlertType.CONFIRMATION);
-					alert.initOwner(MainClass.getPrimaryStage());
-			        alert.setHeaderText("Confirm before delete");
-			        alert.setContentText("Are you sure yo want to remove the customer from the system?");
-			        alert.showAndWait();
-			       
-			        if(alert.getResult().getText().equals("OK")) {
-			        	Customer del = tvOffer.getSelectionModel().getSelectedItem();
-			        	String del_id = del.getCustomerName();
-			        	if(controller.deleteCustomer(del_id)) {
-			        		int selectedIndex = tvOffer.getSelectionModel().getSelectedIndex();
-			        	    if (selectedIndex >= 0) {
-			        	    	tvOffer.getItems().remove(selectedIndex);
-			        	    }
-			        	    
-			        	    Alert alert2 = new Alert(AlertType.INFORMATION);
-			        	    alert2.initOwner(MainClass.getPrimaryStage());
-			        	  
-			        	    alert2.setHeaderText("Delete Confirmation");
-			        	    alert2.setContentText("Selected customer has been successfully removed.");
-			        	    alert2.showAndWait();	    	
-			        	}
-			        }
-				}
-				else {
-					Alert alert = new Alert(AlertType.WARNING);
-					alert.initOwner(MainClass.getPrimaryStage());
-		        
-		            alert.setContentText("Select a customer for deletion.");
-		            alert.showAndWait();
-				}
-			}
-		});
+//		btnDelete.setOnAction(new EventHandler<ActionEvent>() {
+//
+//			@Override
+//			public void handle(ActionEvent event) {
+//				if(tvOffer.getSelectionModel().getSelectedItem() != null) {
+//					Alert alert = new Alert(AlertType.CONFIRMATION);
+//					alert.initOwner(MainClass.getPrimaryStage());
+//			        alert.setHeaderText("Confirm before delete");
+//			        alert.setContentText("Are you sure yo want to remove the customer from the system?");
+//			        alert.showAndWait();
+//			       
+//			        if(alert.getResult().getText().equals("OK")) {
+//			        	Customer del = tvOffer.getSelectionModel().getSelectedItem();
+//			        	String del_id = del.getCustomerName();
+//			        	if(controller.deleteCustomer(del_id)) {
+//			        		int selectedIndex = tvOffer.getSelectionModel().getSelectedIndex();
+//			        	    if (selectedIndex >= 0) {
+//			        	    	tvOffer.getItems().remove(selectedIndex);
+//			        	    }
+//			        	    
+//			        	    Alert alert2 = new Alert(AlertType.INFORMATION);
+//			        	    alert2.initOwner(MainClass.getPrimaryStage());
+//			        	  
+//			        	    alert2.setHeaderText("Delete Confirmation");
+//			        	    alert2.setContentText("Selected customer has been successfully removed.");
+//			        	    alert2.showAndWait();	    	
+//			        	}
+//			        }
+//				}
+//				else {
+//					Alert alert = new Alert(AlertType.WARNING);
+//					alert.initOwner(MainClass.getPrimaryStage());
+//		        
+//		            alert.setContentText("Select a customer for deletion.");
+//		            alert.showAndWait();
+//				}
+//			}
+//		});
 		
 	}
 	
@@ -416,12 +418,12 @@ public class ControllerCustomerData {
 	private void initTableOffer(){
 		
 	
+		tcOfferRole.setCellValueFactory(new PropertyValueFactory<>("id"));
+		tcOfferUser.setCellValueFactory(new PropertyValueFactory<>("userName"));
+		tcOfferQuestion1.setCellValueFactory(new PropertyValueFactory<>("question1"));
+		tcOfferQuestion2.setCellValueFactory(new PropertyValueFactory<>("question2"));
 		
-		tcOfferClerk.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-		tcOfferRequest.setCellValueFactory(new PropertyValueFactory<>("adress"));
-		tcOfferDate.setCellValueFactory(new PropertyValueFactory<>("comment"));
-		
-		tvOffer.setContextMenu(new ContextMenuTableOffer());
+		//tvOffer.setContextMenu(new ContextMenuTableOffer());
 		
 		
 		
@@ -435,7 +437,7 @@ public class ControllerCustomerData {
 			public void handle(MouseEvent event) {
 
 				if(event.getClickCount() == 2){
-					goToOffer();
+					//goToOffer();
 				}
 				
 			}
@@ -445,18 +447,20 @@ public class ControllerCustomerData {
 	
 	private void loadDataFromDB(){
 		
-		this.Customers = FXCollections.observableArrayList();
+		this.users = FXCollections.observableArrayList();
 		
 		
-		HashMap<String, Customer> rs = controller.getAllCustomers();
-		ArrayList<Customer> customers = new ArrayList<Customer>();
-		customers.addAll(rs.values());
+		HashMap<String, User> rs = controller.getAllUsers();
+		ArrayList<User> us = new ArrayList<User>();
+		us.addAll(rs.values());
 		
-		for(Customer c : customers) {
-			Customers.add(c);
+		for(User c : us) {
+			users.add(c);
 		}
 		
-		tvOffer.setItems(Customers);
+		tvOffer.setItems(users);
+		
+		System.out.println(users.get(1).getUserName());
 	}
 		
 	private void initTableDeliverybill(){
