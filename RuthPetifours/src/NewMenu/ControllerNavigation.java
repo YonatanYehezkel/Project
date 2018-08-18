@@ -1,5 +1,7 @@
 package NewMenu;
 
+import Controller.MainClass;
+import View.MainMenuController;
 //import de.michaprogs.crm.GraphicButton;
 //import de.michaprogs.crm.Main;
 //import de.michaprogs.crm.article.data.LoadArticleData;
@@ -26,7 +28,7 @@ public class ControllerNavigation {
 	@FXML private BorderPane bpSide;
 	
 	@FXML private Button btnCollapse;
-	
+	@FXML private Button bestSellersReport;
 	@FXML private Button btnCustomer;
 	@FXML private Button btnArticle;
 	@FXML private Button btnSupplier;
@@ -254,6 +256,25 @@ public class ControllerNavigation {
 	private void setSizeToScene(){
 		if(! main.getStage().isMaximized())
 			main.getStage().sizeToScene();
+	}
+	
+	@FXML private void goToBestSellingReport() {
+		
+		try {
+			javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader();
+			loader.setLocation(MainMenuController.class.getResource("/View/BestSellingReport.fxml"));
+			AnchorPane appSet = loader.load();
+			javafx.scene.Scene appSetScene = new javafx.scene.Scene(appSet);
+			
+			MainClass.getPrimaryStage().setScene(appSetScene);
+			//MainClass.getPrimaryStage().setFullScreenExitHint("");
+			//MainClass.getPrimaryStage().setMaximized(true);
+			
+		} catch (java.io.IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

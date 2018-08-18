@@ -4,12 +4,21 @@ import java.util.ArrayList;
 
 public class Customer {
 	
-
 	public String customerName;
 	public String adress;
 	public String comment;
 	public ArrayList<Contact> contacts;
 	public int ordersAmount;
+	public float ordersSum;
+	
+	/*
+	 * Customer constructor for profitability report
+	 */
+	public Customer(String customerName, float ordersSum) {
+		super();
+		this.customerName = customerName;
+		this.ordersSum = ordersSum;
+	}
 	
 	/*
 	 * Customer constructor w/o list of contacts
@@ -34,7 +43,7 @@ public class Customer {
 
 
 	public String getCustomerName() {
-		return customerName;
+		return customerName.toString();
 	}
 
 	public void setCustomerName(String customerName) {
@@ -65,6 +74,10 @@ public class Customer {
 		this.contacts = contacts;
 	}
 	
+	public float getOrdersSum() {
+		return (ordersSum);
+	}
+
 	@Override
 	public String toString() {
 		return "Customer [customerName=" + customerName + ", adress=" + adress + ", comment=" + comment

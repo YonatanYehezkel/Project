@@ -7,11 +7,11 @@ import java.sql.*;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.sql.Date;
 import java.time.LocalDate;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
+import Model.City;
 import Model.Contact;
 import Model.Customer;
 import Model.JobRole;
@@ -71,6 +71,7 @@ public class DB {
 			System.out.println(e);} 
 	return false;
 	}
+	
 	
 	public  HashMap<String, Customer> getAllCustomers() {
 		HashMap<String, Customer> customers = new HashMap<String, Customer>();
@@ -668,7 +669,69 @@ public class DB {
 		return null;
 	}
 	
-	
+	// this method is for report number 2 - most profitable customers
+			public ArrayList <Customer> getMostProfitableCustomers(){
+				
+				ArrayList <Customer> Customers = new ArrayList<Customer>();
+				
+				if(setConnection()) {
+					try {
+						stmt = con.createStatement();
+						ResultSet rs=stmt.executeQuery("SELECT customername1, sum(order_sum) FROM ruth_db.order\r\n" + 
+													   "group by customername1\r\n" + 
+													   "order by sum(order_sum) Desc;");  
+						
+						while(rs.next())  {
+							
+							Customer c = new Customer (rs.getString(1), rs.getFloat(2));
+							Customers.add(c);
+							
+						}
+						con.close();
+						return Customers;
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}  
+				}
+				else 
+					System.out.println("DB is not available");
+				return null;
+		}
+			
+		// this method is for report number 3 - most profitable customers
+		public ArrayList <City> getDemandByLocation(){
+				
+				ArrayList <City> Cities = new ArrayList<City>();
+				
+				if(setConnection()) {
+					try {
+						
+						stmt = con.createStatement();
+						
+						ResultSet rs=stmt.executeQuery("select count(city),city\r\n" + 
+													   "from customer\r\n" + 
+													   "group by city\r\n" + 
+													   "order by count(city) desc;");  
+						
+						while(rs.next())  {
+							
+							City c = new City (rs.getString(2), rs.getDouble(1));
+							
+							Cities.add(c);
+							
+						}
+						
+						con.close();
+						return Cities;
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}  
+				}
+				else 
+					System.out.println("DB is not available");
+				return null;
+	}
+		
 	
 	public Product getProductByID(int id) {
 		Product p = null;

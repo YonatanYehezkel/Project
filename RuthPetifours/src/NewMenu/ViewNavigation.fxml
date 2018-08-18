@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="apSide" id="anchorpaneSidebar" prefWidth="250" maxWidth="250" xmlns:fx="http://javafx.com/fxml/1" >
-	<BorderPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+<AnchorPane id="anchorpaneSidebar" fx:id="apSide" maxWidth="250" prefWidth="250" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+	<BorderPane prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 		<!-- FLEX NAVI -->
 		<top>
-			<AnchorPane styleClass="Headbar" >
+			<AnchorPane styleClass="Headbar">
 				<StackPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
-					<HBox StackPane.alignment="CENTER_LEFT" alignment="CENTER_LEFT" >
-						<Button fx:id="btnCollapse" id="btnCollapse" />
+					<HBox alignment="CENTER_LEFT" StackPane.alignment="CENTER_LEFT">
+						<Button id="btnCollapse" fx:id="btnCollapse" />
 					</HBox>
 				</StackPane>
 			</AnchorPane>
@@ -26,29 +24,30 @@
 		<!-- FLEX NAVI END -->
 		<!-- CONTENT -->
 		<left>
-			<ScrollPane hbarPolicy="NEVER" fx:id="spSide">
+			<ScrollPane fx:id="spSide" hbarPolicy="NEVER">
 				<BorderPane fx:id="bpSide">
 					<top>
 						<!-- SPACE FOR HEADLINE OR SOMETHING ELSE -->
 					</top>
 					<left>
 						<VBox>
-							<TitledPane fx:id="tpMainData" text="MAIN ITEMS" id="tbSidenavigation">
+							<TitledPane id="tbSidenavigation" fx:id="tpMainData" text="MAIN ITEMS">
 								<VBox styleClass="VboxContent">
-									<Button fx:id="btnSupplier" text="ORDERS" id="btnSidebar" />
-									<Button fx:id="btnStock" text="CUSTOMERS" id="btnSidebar" />
-									<Button fx:id="btnArticle" text="PRODUCTS" id="btnSidebar" />
-									<Button fx:id="btnCustomer" text="USERS" id="btnSidebar" />
+									<Button id="btnSidebar" fx:id="btnSupplier" text="ORDERS" />
+									<Button id="btnSidebar" fx:id="btnStock" text="CUSTOMERS" />
+									<Button id="btnSidebar" fx:id="btnArticle" text="PRODUCTS" />
+									<Button id="btnSidebar" fx:id="btnCustomer" text="USERS" />
 									
 									
 								</VBox>
 							</TitledPane>
-							<TitledPane fx:id="tpDocuments" text="REPORTS" id="tbSidenavigation">
+							<TitledPane id="tbSidenavigation" fx:id="tpDocuments" text="REPORTS">
 								<VBox styleClass="VboxContent">
-									<Button fx:id="btnOffer" text="ORDERS" id="btnSidebar" />
-									<Button fx:id="btnOrder" text="CUSTOMERS" id="btnSidebar" />
-									<Button fx:id="btnDeliverybill" text="todo" id="btnSidebar" />
-									<Button fx:id="btnInvoice" text="todo" id="btnSidebar" />
+									<Button id="btnSidebar" fx:id="btnOffer" text="ORDERS" />
+									<Button id="btnSidebar" fx:id="btnOrder" text="CUSTOMERS" />
+									<Button id="btnSidebar" fx:id="btnDeliverybill" text="todo" />
+									<Button id="btnSidebar" fx:id="btnInvoice" text="todo" />
+                           <Button id="btnSidebar" text="bb" />
 								</VBox>
 							</TitledPane>
 						</VBox>
@@ -58,4 +57,3 @@
 		</left>
 	</BorderPane>
 </AnchorPane>
-
