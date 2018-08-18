@@ -15,6 +15,8 @@ import View.MainMenuController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
@@ -28,7 +30,7 @@ public class ControllerNavigation {
 	@FXML private BorderPane bpSide;
 	
 	@FXML private Button btnCollapse;
-	@FXML private Button bestSellersReport;
+	@FXML private Button btnbestSellersReport;
 	@FXML private Button btnCustomer;
 	@FXML private Button btnArticle;
 	@FXML private Button btnSupplier;
@@ -68,7 +70,7 @@ public class ControllerNavigation {
 //		
 		//Buttons
 		initBtnCollapse();
-		
+		initBtnbestSellersReport();
 		initBtnCustomer();
 		initBtnArticle();
 		initBtnSupplier();
@@ -258,15 +260,31 @@ public class ControllerNavigation {
 			main.getStage().sizeToScene();
 	}
 	
-	@FXML private void goToBestSellingReport() {
+	private void initBtnbestSellersReport(){
+		
+		//TODO setGraphic
+		btnbestSellersReport.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+//				main.getContentPane().setCenter(orderData.getContent());
+//				main.getStage().setTitle(main.getProgramName() + " - Bestellung");
+//				setSizeToScene();
+				goToBestSellingReport();
+			}
+		});
+		
+	}
+	
+	private void goToBestSellingReport() {
 		
 		try {
-			javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader();
-			loader.setLocation(MainMenuController.class.getResource("/View/BestSellingReport.fxml"));
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(NewMenu.class.getResource("/View/BestSellingReport.fxml‬"));
 			AnchorPane appSet = loader.load();
-			javafx.scene.Scene appSetScene = new javafx.scene.Scene(appSet);
+			Scene appSetScene = new Scene(appSet);
 			
-			MainClass.getPrimaryStage().setScene(appSetScene);
+			main.getPrimaryStage().setScene(appSetScene);
 			//MainClass.getPrimaryStage().setFullScreenExitHint("");
 			//MainClass.getPrimaryStage().setMaximized(true);
 			
