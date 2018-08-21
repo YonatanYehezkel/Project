@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -159,11 +160,19 @@ public class ControllerLogic {
 		return db.searchAwaitingPaimentOrders(customer);
 	}
 	
+	public HashMap<String, Order> searchAwaitingPaimentOrders(String customer, Date d) {
+		return db.searchAwaitingPaimentOrders(customer, d);
+	}
+	
 	public HashMap<String, Order> searchAwaitingShipmentOrders(String customer) {
 		return db.searchAwaitingShipmentOrders(customer);
 	}
 	public HashMap<String, Order> searchShippedOrders(String customer) {
 		return db.searchShippedOrders(customer);
+	}
+	
+	public HashMap<String, Order> searchByShipOrders(String s, Date d) {
+		return db.searchByShipOrders(s, d);
 	}
 	
 	public boolean deleteUser (int id) {

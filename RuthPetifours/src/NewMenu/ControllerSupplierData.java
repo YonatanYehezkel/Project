@@ -2,6 +2,9 @@ package NewMenu;
 
 
 
+import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -227,9 +230,36 @@ public class ControllerSupplierData {
 			s = "%";
 		else
 			s = "%"+s+"%";
+		
+		//LocalDate localDate = datePicker.getValue();
+		
+//		if(datePicker.getValue() != null) {
+//			Date ship_d = Date.valueOf(datePicker.getValue());
+//			rs = controller.searchByShipOrders(s, ship_d);
+//		}
+		
+		
+		//if(ship_d != null )
+		
 		String flag=defineStatus();
 		if (flag == payment_date) {
-			rs = controller.searchAwaitingPaimentOrders(s);
+			if(datePicker.getValue() != null && datePicker2.getValue() == null && datePicker3.getValue() == null) {
+				Date ship_d = Date.valueOf(datePicker.getValue());
+				//rs = controller.searchByShipOrders(s, ship_d);
+				rs = controller.searchAwaitingPaimentOrders(s, ship_d);
+			}
+			
+			if(datePicker.getValue() != null && datePicker2.getValue() != null && datePicker3.getValue() == null) {
+//				Date ship_d = Date.valueOf(datePicker.getValue());
+//				Date pay_d = Date.valueOf(datePicker2.getValue());
+//				//rs = controller.searchByShipOrders(s, ship_d);
+//				rs = controller.searchAwaitingPaimentOrders(s, ship_d);
+			}
+			
+			else
+				rs = controller.searchAwaitingPaimentOrders(s);
+			
+			
 		}
 		if (flag == wait_shipment_date) {
 			rs = controller.searchAwaitingShipmentOrders(s);
@@ -244,7 +274,10 @@ public class ControllerSupplierData {
 		//HashMap<String, Order> rs = new HashMap<String, Order>();
 		ArrayList<Order> orders1 = new ArrayList<Order>();
 		
-		orders1.addAll(rs.values());
+		if(rs != null) {
+			orders1.addAll(rs.values());
+		}
+		
 	
 		for(Order c : orders1) {
 			c.setAdress(controller.getCustomerByName(c.getCustomer()).getAdress());
@@ -258,6 +291,9 @@ public class ControllerSupplierData {
 	
 	private String defineStatus() {
 		String s=null;
+		if(tfSupplierID.getSelectionModel().getSelectedItem() != null) {
+			
+		
 		if(tfSupplierID.getSelectionModel().getSelectedItem().toString().equals(OrderStatus.values()[0].name())) {
 			return payment_date;
 		}
@@ -266,6 +302,7 @@ public class ControllerSupplierData {
 		}
 		if(tfSupplierID.getSelectionModel().getSelectedItem().toString().equals(OrderStatus.values()[2].name())) {
 			return shipment_date;
+		}
 		}
 		return s;
 	}
@@ -495,6 +532,15 @@ public class ControllerSupplierData {
 	
 	private void initStatuses() {
 		tfSupplierID.getItems().setAll(OrderStatus.values());
+		
+		tfSupplierID.valueProperty().addListener((ev) -> {
+			//System.out.println(defineStatus());
+	            if (defineStatus() == payment_date) {
+	            	datePicker2.setDisable(true);
+	            } 
+	            if (defineStatus() != payment_date)
+	            	datePicker2.setDisable(false);
+	        });
 	}
 	
 	/*

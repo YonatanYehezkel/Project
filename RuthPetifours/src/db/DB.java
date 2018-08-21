@@ -1297,8 +1297,53 @@ public class DB {
 				//ResultSet rs=stmt.executeQuery("select * from ruth_db.order where customername1 = ?");  
 				
 				
-				PreparedStatement statement = con.prepareStatement("select * from ruth_db.order where customername1 like ? and payment_date is not null");    
+				PreparedStatement statement = con.prepareStatement("select * from ruth_db.order where customername1 like ? and payment_date is null");    
 				statement.setString(1, customer); 
+				ResultSet rs = statement.executeQuery(); 
+				while(rs.next())  {
+					//System.out.println(rs.getString(1) + rs.getDate(2) + rs.getDate(3) +rs.getInt(4)  +
+						//	rs.getDate(5) + rs.getInt(6) + rs.getInt(7)+  rs.getFloat(8) + rs.getDate(9) +
+							//rs.getDate(10));  
+					
+					Order o = new Order(
+							rs.getString(1), 
+							fixDate(rs.getDate(2)), 
+							fixDate(rs.getDate(3)),
+							getUserByID(rs.getInt(4)).getUserName(), 
+							fixDate(rs.getDate(5)), 
+							getUserByID(rs.getInt(6)).getUserName(), 
+							rs.getString(10),
+							rs.getFloat(7), 
+							fixDate(rs.getDate(8)), 
+							fixDate(rs.getDate(9)));
+					//o.setContacts(getContactsOfCustomer(c));
+					orders.put(rs.getString(1), o);
+					//System.out.println(rs.getInt(1));
+				
+				}
+				con.close();
+				return orders;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return null;
+	}
+	
+	public  HashMap<String, Order> searchAwaitingPaimentOrders(String customer, Date d) {
+		HashMap<String, Order> orders = new HashMap<String, Order>();
+		
+		if(setConnection()) {
+			try {
+				//stmt = con.createStatement();
+				//ResultSet rs=stmt.executeQuery("select * from ruth_db.order where customername1 = ?");  
+				
+				
+				PreparedStatement statement = con.prepareStatement("select * from ruth_db.order where customername1 like ? and payment_date is null and actual_delivery_date = ?");    
+				statement.setString(1, customer); 
+				statement.setDate(2, d); 
 				ResultSet rs = statement.executeQuery(); 
 				while(rs.next())  {
 					//System.out.println(rs.getString(1) + rs.getDate(2) + rs.getDate(3) +rs.getInt(4)  +
@@ -1419,6 +1464,54 @@ public class DB {
 			System.out.println("DB is not available");
 		return null;
 	}
+	
+	public  HashMap<String, Order> searchByShipOrders(String s, Date d) {
+		HashMap<String, Order> orders = new HashMap<String, Order>();
+		
+		if(setConnection()) {
+			try {
+				//stmt = con.createStatement();
+				//ResultSet rs=stmt.executeQuery("select * from ruth_db.order where customername1 = ?");  
+				
+				
+				PreparedStatement statement = con.prepareStatement("select * from ruth_db.order where actual_delivery_date = ? and customername1 like ?");    
+				statement.setDate(1, d); 
+				statement.setString(2, s); 
+				ResultSet rs = statement.executeQuery(); 
+				while(rs.next())  {
+					//System.out.println(rs.getString(1) + rs.getDate(2) + rs.getDate(3) +rs.getInt(4)  +
+						//	rs.getDate(5) + rs.getInt(6) + rs.getInt(7)+  rs.getFloat(8) + rs.getDate(9) +
+							//rs.getDate(10));  
+					
+					Order o = new Order(
+							rs.getString(1), 
+							fixDate(rs.getDate(2)), 
+							fixDate(rs.getDate(3)),
+							getUserByID(rs.getInt(4)).getUserName(), 
+							fixDate(rs.getDate(5)), 
+							getUserByID(rs.getInt(6)).getUserName(), 
+							rs.getString(10),
+							rs.getFloat(7), 
+							fixDate(rs.getDate(8)), 
+							fixDate(rs.getDate(9)));
+					//o.setContacts(getContactsOfCustomer(c));
+					orders.put(rs.getString(1), o);
+					//System.out.println(rs.getInt(1));
+				
+				}
+				con.close();
+				return orders;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return null;
+	}
+	
+	
+	
 } 
 
 		
