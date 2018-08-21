@@ -22,6 +22,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class ControllerNavigation {
 	
@@ -280,11 +281,12 @@ public class ControllerNavigation {
 		
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(NewMenu.class.getResource("/View/BestSellingReport.fxml‬"));
+			loader.setLocation(NewMenu.class.getResource("/View/BestSellingReport.fxml"));
 			AnchorPane appSet = loader.load();
 			Scene appSetScene = new Scene(appSet);
-			
-			main.getPrimaryStage().setScene(appSetScene);
+			Stage s = new Stage();
+			s.setScene(appSetScene);
+			s.show();
 			//MainClass.getPrimaryStage().setFullScreenExitHint("");
 			//MainClass.getPrimaryStage().setMaximized(true);
 			

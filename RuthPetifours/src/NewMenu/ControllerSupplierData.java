@@ -31,6 +31,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
@@ -52,16 +53,20 @@ public class ControllerSupplierData {
 
 	@FXML private Label lblSubHeadline;
 	
-	@FXML private TextField tfSupplierID;
+	@FXML private ComboBox tfSupplierID;
 	@FXML private TextField tfName1;
 
 	
-	@FXML private TextField tfPhone;
-	@FXML private TextField tfFax;
+	@FXML private HBox tfPhone;
+	@FXML private HBox tfFax;
 
+	private DatePicker datePicker;
+	private DatePicker datePicker2;
+	private DatePicker datePicker3;
 	
-	@FXML private ComboBox<String> cbPayment;
-	@FXML private TextField tfIBAN;
+	
+	@FXML private HBox cbPayment;
+	//@FXML private TextField tfIBAN;
 
 	
 	/* ORDER */
@@ -97,6 +102,8 @@ public class ControllerSupplierData {
 	
 	@FXML private Button buildTbl1;
 	@FXML private Button buildTbl3;
+	@FXML private Button btnSearch;
+	@FXML private Button btnRemovefilters;
 	
 	/* CONTACTS - NESTED CONTROLLER! */
 	//@FXML private ControllerContactData contactDataController; //fx:id + 'Controller'
@@ -121,7 +128,10 @@ public class ControllerSupplierData {
 	
 	private Integer index = null;
 	private static final DataFormat SERIALIZED_MIME_TYPE = new DataFormat("application/x-java-serialized-object");
-
+	private static final String payment_date = "payment_date";
+	private static final String wait_shipment_date = "wait_shipment_date";
+	private static final String shipment_date = "shipment_date";
+	
 	private String[] wayp;
 	private DirectionsRoute[] routes;
 	private int[] opt_route;
@@ -136,14 +146,15 @@ public class ControllerSupplierData {
 		
 		loadDataFromDB();
 		
-		tfSupplierID.setText(""); //The custom component 'TextFieldOnlyInteger' sets 0 automatically
+		//tfSupplierID.setText(""); //The custom component 'TextFieldOnlyInteger' sets 0 automatically
 		
 		//ComboBoxes
+		initStatuses();
 		//new InitCombos().initComboLand(cbLand);
-		new InitCombos().initComboPayment(cbPayment);
+		//new InitCombos().initComboPayment(cbPayment);
 		
 		//Buttons
-		//initBtnSearch();
+	
 		initBtnNew();
 		initBtnEdit();
 		initBtnEditSave();
@@ -151,6 +162,10 @@ public class ControllerSupplierData {
 		initBtnDelete();
 		initBtnBuildRouteTbl1();
 		initBtnBuildRouteTbl3();
+		initBtnSearch();
+		initBtnRemovefilters();
+		
+		initDatePicker();
 		
 		//TABLES
 		initTableOrder();
@@ -161,11 +176,23 @@ public class ControllerSupplierData {
 		simpleDragDrop();
 		
 		//disable all fields from beginning
-		disableAllFields();
+		//disableAllFields();
 		
 		setButtonState();
 		
 		
+	}
+	
+	private void initDatePicker() {
+		 datePicker = new DatePicker();
+		 tfPhone.getChildren().addAll(datePicker);
+		 
+		 datePicker2 = new DatePicker();
+		 tfFax.getChildren().addAll(datePicker2);
+		 
+		 datePicker3 = new DatePicker();
+		 cbPayment.getChildren().addAll(datePicker3);
+		 
 	}
 	
 	private void loadDataFromDB(){
@@ -189,6 +216,59 @@ public class ControllerSupplierData {
 		tvOrder2.setItems(orders);
 	}
 	
+	private void loadNewDataFromDB(){
+		
+		HashMap<String, Order> rs = null;
+		
+		this.orders = FXCollections.observableArrayList();
+		
+		String s = tfName1.getText();
+		if(s.isEmpty())
+			s = "%";
+		else
+			s = "%"+s+"%";
+		String flag=defineStatus();
+		if (flag == payment_date) {
+			rs = controller.searchAwaitingPaimentOrders(s);
+		}
+		if (flag == wait_shipment_date) {
+			rs = controller.searchAwaitingShipmentOrders(s);
+		}
+		if (flag == shipment_date) {
+			rs = controller.searchShippedOrders(s);
+		}
+			
+		
+		
+		//rs = controller.searchOrders(s);
+		//HashMap<String, Order> rs = new HashMap<String, Order>();
+		ArrayList<Order> orders1 = new ArrayList<Order>();
+		
+		orders1.addAll(rs.values());
+	
+		for(Order c : orders1) {
+			c.setAdress(controller.getCustomerByName(c.getCustomer()).getAdress());
+			c.setValue(controller.getValueOfOrder(c.getId()));
+			orders.add(c);
+		}
+		
+		tvOrder.setItems(orders);
+		tvOrder2.setItems(orders);
+	}
+	
+	private String defineStatus() {
+		String s=null;
+		if(tfSupplierID.getSelectionModel().getSelectedItem().toString().equals(OrderStatus.values()[0].name())) {
+			return payment_date;
+		}
+		if(tfSupplierID.getSelectionModel().getSelectedItem().toString().equals(OrderStatus.values()[1].name())) {
+			return wait_shipment_date;
+		}
+		if(tfSupplierID.getSelectionModel().getSelectedItem().toString().equals(OrderStatus.values()[2].name())) {
+			return shipment_date;
+		}
+		return s;
+	}
 	/*
 	 * BUTTONS
 	 */
@@ -381,6 +461,42 @@ public class ControllerSupplierData {
 		
 	}
 	
+	private void initBtnSearch(){
+		
+		//btnNew.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
+		btnSearch.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				loadNewDataFromDB();
+				//buildRouteTbl3();
+			}
+		});
+		
+	}
+	
+	private void initBtnRemovefilters(){
+		
+		//btnNew.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
+		btnRemovefilters.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				resetAllFields();
+				loadDataFromDB();
+				
+			}
+		});
+		
+	}
+	/*
+	 * ComboBox
+	 */
+	
+	private void initStatuses() {
+		tfSupplierID.getItems().setAll(OrderStatus.values());
+	}
+	
 	/*
 	 * TABLES
 	 */
@@ -560,10 +676,10 @@ public class ControllerSupplierData {
 		
 		this.tfSupplierID.setDisable(true);
 		this.tfName1.setDisable(true);
-		this.tfPhone.setDisable(true);
+		//this.tfPhone.setDisable(true);
 		this.tfFax.setDisable(true);
-		this.cbPayment.setDisable(true);
-		this.tfIBAN.setDisable(true);
+//		this.cbPayment.setDisable(true);
+//		this.tfIBAN.setDisable(true);
 		
 	}
 	
@@ -576,14 +692,14 @@ public class ControllerSupplierData {
 //		this.cbLand.setDisable(false);
 //		this.tfZip.setDisable(false);
 //		this.tfLocation.setDisable(false);
-		this.tfPhone.setDisable(false);
+		//this.tfPhone.setDisable(false);
 		this.tfFax.setDisable(false);
 //		this.tfEmail.setDisable(false);
 //		this.tfWeb.setDisable(false);
 //		this.tfContact.setDisable(false);
 //		this.tfUstID.setDisable(false);
-		this.cbPayment.setDisable(false);
-		this.tfIBAN.setDisable(false);
+//		this.cbPayment.setDisable(false);
+//		this.tfIBAN.setDisable(false);
 //		this.tfBIC.setDisable(false);
 //		this.tfBank.setDisable(false);
 //		this.tfPaymentSkonto.setDisable(false);
@@ -595,12 +711,16 @@ public class ControllerSupplierData {
 	
 	private void resetAllFields(){
 		
-		this.tfSupplierID.clear();
+		this.tfSupplierID.getSelectionModel().clearSelection();
 		this.tfName1.clear();
-		this.tfPhone.clear();
-		this.tfFax.clear();
-		this.cbPayment.getSelectionModel().selectFirst();
-		this.tfIBAN.clear();
+		datePicker.getEditor().clear();
+		datePicker2.getEditor().clear();
+		datePicker3.getEditor().clear();
+		//this.tfPhone
+		//this.tfFax.clear();
+	
+//		this.cbPayment.getSelectionModel().selectFirst();
+//		this.tfIBAN.clear();
 		
 	}
 	
@@ -696,33 +816,33 @@ public class ControllerSupplierData {
 			this.getItems().addAll(	itemGoTo,
 									itemNew);
 			
-			this.setOnShowing(new EventHandler<WindowEvent>() {
-
-				@Override
-				public void handle(WindowEvent event) {
-					
-					if(tfSupplierID.getText().equals("")){
-						itemNew.setDisable(true);
-						itemGoTo.setDisable(true);
-					}else{
-						
-						if(	hboxBtnTopbar.getChildren().contains(btnEditAbort) &&
-							hboxBtnTopbar.getChildren().contains(btnEditSave)){
-							itemNew.setDisable(true);
-							itemGoTo.setDisable(true);
-						}else{
-						
-							itemNew.setDisable(false);
-							if(tvOrder.getItems().size() > 0){
-								itemGoTo.setDisable(false);
-							}else{
-								itemGoTo.setDisable(true);
-							}
-						}
-					}
-					
-				}
-			});
+//			this.setOnShowing(new EventHandler<WindowEvent>() {
+//
+//				@Override
+//				public void handle(WindowEvent event) {
+//					
+//					if(tfSupplierID.getText().equals("")){
+//						itemNew.setDisable(true);
+//						itemGoTo.setDisable(true);
+//					}else{
+//						
+//						if(	hboxBtnTopbar.getChildren().contains(btnEditAbort) &&
+//							hboxBtnTopbar.getChildren().contains(btnEditSave)){
+//							itemNew.setDisable(true);
+//							itemGoTo.setDisable(true);
+//						}else{
+//						
+//							itemNew.setDisable(false);
+//							if(tvOrder.getItems().size() > 0){
+//								itemGoTo.setDisable(false);
+//							}else{
+//								itemGoTo.setDisable(true);
+//							}
+//						}
+//					}
+//					
+//				}
+//			});
 			
 		}
 		

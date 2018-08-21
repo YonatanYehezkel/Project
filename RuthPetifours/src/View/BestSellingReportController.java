@@ -24,28 +24,11 @@ public class BestSellingReportController implements Initializable {
 	
     @FXML PieChart chart;
 	
-	@FXML private Button goBack;
+
 	
 	ArrayList<Product> ProductsToShow;
 	
-	@FXML private void goBack() {
-		
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainMenuController.class.getResource("/View/ReportsOptionsScreen.fxml‬"));
-			AnchorPane appSet = loader.load();
-			Scene appSetScene = new Scene(appSet);
-			
-			MainClass.getPrimaryStage().setScene(appSetScene);
-			//MainClass.getPrimaryStage().setFullScreenExitHint("");
-			//MainClass.getPrimaryStage().setMaximized(true);
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

@@ -152,6 +152,20 @@ public class ControllerLogic {
 		return false;
 	}
 	
+	public HashMap<String, Order> searchOrders(String customer) {
+		return db.searchOrders(customer);
+	}
+	public HashMap<String, Order> searchAwaitingPaimentOrders(String customer) {
+		return db.searchAwaitingPaimentOrders(customer);
+	}
+	
+	public HashMap<String, Order> searchAwaitingShipmentOrders(String customer) {
+		return db.searchAwaitingShipmentOrders(customer);
+	}
+	public HashMap<String, Order> searchShippedOrders(String customer) {
+		return db.searchShippedOrders(customer);
+	}
+	
 	public boolean deleteUser (int id) {
 		if(db.deleteUser(id))
 				return true;

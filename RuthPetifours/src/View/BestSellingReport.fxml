@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="439.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.BestSellingReportController">
    <children>
-      <Button fx:id="goBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
+      
       <PieChart fx:id="chart" layoutX="73.0" layoutY="20.0" title="Top 5 Selling Products">
          <effect>
             <Glow />
