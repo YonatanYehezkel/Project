@@ -54,7 +54,7 @@ public class DB {
 	try{  
 		Class.forName("com.mysql.jdbc.Driver");  
 		con=DriverManager.getConnection(  
-		"jdbc:mysql://localhost:3306/ruth_db","root","1234"
+		"jdbc:mysql://localhost:3306/ruth_db?useSSL=false","root","Longshot747"
 			/*"jdbc:mysql://localhost:3306/ruth_db?useSSL=false","root","Longshot747"*/
 		 );  
 		 
@@ -637,13 +637,15 @@ public class DB {
 											   "where order_details.idproduct = product.idproduct\r\n" + 
 											   "group by order_details.idproduct,order_details.quantity\r\n" + 
 											   "order by order_details.quantity\r\n" +  
-											   "Desc;");  
+											   "Desc");
 				
-				while(rs.next())  {
+				int i=0;
+				
+				while(rs.next() && i<10)  {
 					
 					Product p = new Product (rs.getInt(1), rs.getString(2), rs.getFloat(3));
 					products.add(p);
-					
+					i++;
 					//System.out.println(rs.getString(1) + rs.getDate(2) + rs.getDate(3) +rs.getInt(4)  +
 						//	rs.getDate(5) + rs.getInt(6) + rs.getInt(7)+  rs.getFloat(8) + rs.getDate(9) +
 							//rs.getDate(10));  

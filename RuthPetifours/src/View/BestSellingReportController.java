@@ -26,7 +26,7 @@ public class BestSellingReportController implements Initializable {
 	
 
 	
-	ArrayList<Product> ProductsToShow;
+	ArrayList<Product> ProductsToShow = new ArrayList<Product>();
 	
 
 
