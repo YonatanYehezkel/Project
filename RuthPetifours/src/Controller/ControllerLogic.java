@@ -17,6 +17,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
+import Model.City;
 import Model.Contact;
 import Model.Customer;
 import Model.I_ModelLogic;
@@ -119,6 +120,10 @@ public class ControllerLogic {
 	
 	public ArrayList<Product> getBestSelllingProducts() {
 		return db.getBestSelllingProducts();	 
+	}
+	
+	public ArrayList<City> getDemandByLocation() {
+		return db.getDemandByLocation();	 
 	}
 	
 	public HashMap<String, Customer> getAllCustomers() {

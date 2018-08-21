@@ -32,6 +32,7 @@ public class ControllerNavigation {
 	
 	@FXML private Button btnCollapse;
 	@FXML private Button btnbestSellersReport;
+	@FXML private Button btnareasDemand;
 	@FXML private Button btnCustomer;
 	@FXML private Button btnArticle;
 	@FXML private Button btnSupplier;
@@ -72,6 +73,7 @@ public class ControllerNavigation {
 		//Buttons
 		initBtnCollapse();
 		initBtnbestSellersReport();
+		initBtnareasDemand();
 		initBtnCustomer();
 		initBtnArticle();
 		initBtnSupplier();
@@ -294,6 +296,42 @@ public class ControllerNavigation {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+	
+	private void goToMostDemandingArea() {
+		
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(NewMenu.class.getResource("/View/MostDemandingAreas.fxml"));
+			AnchorPane appSet = loader.load();
+			Scene appSetScene = new Scene(appSet);
+			Stage s = new Stage();
+			s.setScene(appSetScene);
+			s.show();
+			//MainClass.getPrimaryStage().setFullScreenExitHint("");
+			//MainClass.getPrimaryStage().setMaximized(true);
+			
+		} catch (java.io.IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private void initBtnareasDemand() {
+		
+		//TODO setGraphic
+		btnareasDemand.setOnAction(new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent event) {
+//						main.getContentPane().setCenter(orderData.getContent());
+//						main.getStage().setTitle(main.getProgramName() + " - Bestellung");
+//						setSizeToScene();
+						goToMostDemandingArea();
+					}
+				});
 		
 	}
 	
