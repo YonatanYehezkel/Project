@@ -118,6 +118,10 @@ public class ControllerLogic {
 		});
 	}
 	
+	public ArrayList<Customer> getMostProfitableCustomers() {
+		return db.getMostProfitableCustomers();	 
+	}
+	
 	public ArrayList<Product> getBestSelllingProducts() {
 		return db.getBestSelllingProducts();	 
 	}
