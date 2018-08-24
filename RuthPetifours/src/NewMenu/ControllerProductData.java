@@ -99,10 +99,10 @@ public class ControllerProductData {
 	/* OFFER */
 	@FXML private TableView<Product> tvOffer;
 	
-	@FXML private TableColumn<User,Integer> tcOfferRole;
-	@FXML private TableColumn<User,String> tcOfferUser;
-	@FXML private TableColumn<User,String> tcOfferQuestion1;
-	@FXML private TableColumn<User,String> tcOfferQuestion2;
+	@FXML private TableColumn<Product,Integer> tcOfferRole;
+	@FXML private TableColumn<Product,String> tcOfferUser;
+	@FXML private TableColumn<Product,Float> tcOfferQuestion1;
+	@FXML private TableColumn<Product,Float> tcOfferQuestion2;
 
 	private ObservableList<Product> products;
 	

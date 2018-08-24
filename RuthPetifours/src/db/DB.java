@@ -107,8 +107,7 @@ public class DB {
 				stmt = con.createStatement();
 				ResultSet rs=stmt.executeQuery("select * from product");  
 				while(rs.next())  {
-					//System.out.println(rs.getString(1)+"  "+rs.getString(2)+"  "+rs.getString(3));  
-					Product p = new Product (rs.getInt(1), rs.getString(2), rs.getFloat(3));
+					Product p = new Product (rs.getInt(1), rs.getString(2), rs.getFloat(3), rs.getFloat(4));
 					System.out.println(p.toString());
 					//c.setContacts(getContactsOfCustomer(c));
 					products.put(rs.getInt(1), p);
@@ -670,18 +669,6 @@ public class DB {
 					Product p = new Product (rs.getInt(1), rs.getString(2), rs.getFloat(3));
 					products.add(p);
 					i++;
-					//System.out.println(rs.getString(1) + rs.getDate(2) + rs.getDate(3) +rs.getInt(4)  +
-						//	rs.getDate(5) + rs.getInt(6) + rs.getInt(7)+  rs.getFloat(8) + rs.getDate(9) +
-							//rs.getDate(10));  
-					
-					//Product p = new Product(
-						//	rs.getString(1), 
-							//rs.getInt(2), 
-							//rs.getFloat(3)
-						//);
-					//o.setContacts(getContactsOfCustomer(c));
-					//orders.put(rs.getString(1), o);
-					//System.out.println(rs.getInt(1));
 				
 				}
 				con.close();

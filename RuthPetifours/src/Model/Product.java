@@ -36,6 +36,14 @@ public class Product {
 		this.salesQuantity = salesQuantity;
 	}
 	
+	public Product (int id, String title,float price, float quantity) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.price = price;
+		this.quantity = quantity;
+	}
+	
 	public float getQuantity() {
 		return quantity;
 	}
