@@ -99,7 +99,31 @@ public class DB {
 	}
 	
 	
-
+	public  HashMap<Integer, Product> getAllProducts() {
+		HashMap<Integer, Product> products = new HashMap<Integer, Product>();
+		
+		if(setConnection()) {
+			try {
+				stmt = con.createStatement();
+				ResultSet rs=stmt.executeQuery("select * from product");  
+				while(rs.next())  {
+					//System.out.println(rs.getString(1)+"  "+rs.getString(2)+"  "+rs.getString(3));  
+					Product p = new Product (rs.getInt(1), rs.getString(2), rs.getFloat(3));
+					System.out.println(p.toString());
+					//c.setContacts(getContactsOfCustomer(c));
+					products.put(rs.getInt(1), p);
+					
+				}
+				con.close();
+				return products;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return null;
+	}
 	
 	
 	

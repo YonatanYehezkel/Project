@@ -19,20 +19,16 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="441.0" prefWidth="464.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
 	<BorderPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 		<!-- FLEX NAVI -->
 		<top>
 			<AnchorPane styleClass="Headbar">
 				<StackPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 					<HBox fx:id="hboxBtnTopbar" alignment="CENTER_LEFT" StackPane.alignment="CENTER_LEFT">
-						<!-- <Button fx:id="btnSearch" text="Search" styleClass="btnTopbar" /> -->
 						<Button fx:id="btnNew" styleClass="btnTopbar" text="New" />
 						<Button fx:id="btnEdit" styleClass="btnTopbar" text="Edit" />
-						<!-- BtnEditSave is added with Java-Code -->
-						<!-- BtnEditAbort is added with Java-Code -->
 						<Button fx:id="btnDelete" styleClass="btnTopbar" text="Delete" />
-						<Button fx:id="btnImport" styleClass="btnTopbar" text="Import" />
 					</HBox>
 				</StackPane>
 			</AnchorPane>
@@ -43,7 +39,7 @@
 			<ScrollPane>
 				<BorderPane>
 					<top>
-						<HBox alignment="CENTER_LEFT" spacing="10">
+						<HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="432.0" spacing="10">
 							<Label id="lblHeadline" text="Products" />
 							<Label id="lblSubHeadline" fx:id="lblSubHeadline" />
 						<padding>
@@ -54,7 +50,7 @@
 					<left>						
 						<VBox spacing="10">
 							
-							<TitledPane fx:id="pane" text="Search">
+							<TitledPane fx:id="pane" prefHeight="95.0" prefWidth="434.0" text="Search">
 								
 								
 								
@@ -65,16 +61,12 @@
 													<ColumnConstraints halignment="RIGHT" />
 													<ColumnConstraints halignment="LEFT" />
 												</columnConstraints>
-												<Label text="Id:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-												<TextField fx:id="tfSupplierID" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-												<Label text="Title:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-												<TextField fx:id="tfName1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+												<Label GridPane.columnIndex="0" GridPane.rowIndex="0" />
 												
 											<padding>
 												<Insets bottom="10" left="10" right="10" top="10" />
 											</padding>
                               <rowConstraints>
-                                 <RowConstraints />
                                  <RowConstraints />
                               </rowConstraints>	
 											</GridPane>	
@@ -85,56 +77,34 @@
 													<ColumnConstraints halignment="RIGHT" />
 													<ColumnConstraints halignment="LEFT" />
 												</columnConstraints>
-												<Label text="Date of shipping:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+												<Label text="Product Title:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 												<TextField fx:id="tfPhone" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-												<Label text="Date:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-												<TextField fx:id="tfFax" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 											
 											<padding>
 												<Insets bottom="10" left="10" right="10" top="10" />
 											</padding>
                               <rowConstraints>
                                  <RowConstraints />
-                                 <RowConstraints />
                               </rowConstraints>	
-											</GridPane>
-										
-											<!-- Third Block -->
-											<GridPane hgap="10" vgap="5">	
-												<columnConstraints>
-													<ColumnConstraints halignment="RIGHT" />
-													<ColumnConstraints halignment="LEFT" />
-												</columnConstraints>
-											<padding>
-												<Insets bottom="10" left="10" right="10" top="10" />
-											</padding>
-                              <rowConstraints>
-                                 <RowConstraints />
-                                 <RowConstraints />
-                                 <RowConstraints />
-                              </rowConstraints>	
-											</GridPane>																		
+											</GridPane>																	
 										</HBox>
-									
-									
-									
-							
 							</TitledPane>							
 							
 							<!-- LONGTEXT / NOTES -->
 							<TabPane>
 								<tabs>
 																		
-									<Tab closable="false" text="Products List">
+									<Tab closable="false" text="List of Products">
 										<AnchorPane>
 											<TableView fx:id="tvOffer" prefHeight="200" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 												<columnResizePolicy>
 						                  			<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
 						               			</columnResizePolicy>
 												<columns>
-											    	<TableColumn fx:id="tcOfferClerk" text="Product Title" />
-													<TableColumn fx:id="tcOfferRequest" text="Price" />
-													<TableColumn fx:id="tcOfferDate" text="Inventory Quantity" />
+													<TableColumn fx:id="tcOfferRole" text="Id" />
+											    	<TableColumn fx:id="tcOfferUser" text="Title" />
+													<TableColumn fx:id="tcOfferQuestion1" text="Price" />
+                                       <TableColumn fx:id="tcOfferQuestion2" text="Inventory Quantity" />
 												</columns>
 											</TableView>
 										</AnchorPane>
@@ -187,7 +157,7 @@
 							
 							<!-- LAST CHANGE (ALWAYS LAST ENTRY) -->
 							<HBox alignment="CENTER_RIGHT">
-								<Label text="Last change:" />
+								<Label text="Last Change:" />
 								<Label fx:id="lblLastChange" />
 							</HBox>
 							

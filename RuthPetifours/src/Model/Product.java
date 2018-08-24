@@ -84,9 +84,13 @@ public class Product {
 		this.salesQuantity = salesQuantity;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", salesQuantity=" + salesQuantity + "]";
+		return "Product [id=" + id + ", title=" + title + ", price=" + price + ", quantity=" + quantity
+				+ ", salesQuantity=" + salesQuantity + ", unit=" + unit + "]";
 	}
 	
 }

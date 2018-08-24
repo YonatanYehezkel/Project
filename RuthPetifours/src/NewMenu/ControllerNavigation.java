@@ -50,6 +50,7 @@ public class ControllerNavigation {
 //	private LoadArticleData articleData;
 	private LoadSupplierData supplierData;
 	private LoadUserData userData;
+	private LoadProductData productsData;
 //	private LoadStockAdd stockAdd = new LoadStockAdd(false);
 //	private LoadOfferData offerData;
 //	private LoadOrderData orderData;
@@ -66,6 +67,7 @@ public class ControllerNavigation {
 		//articleData = new LoadArticleData(false, 0, main);
 		supplierData = new LoadSupplierData(false, 0, main);
 		userData = new LoadUserData(false, main);
+		productsData = new LoadProductData(false, main);
 //		offerData = new LoadOfferData(false,0,0, main);
 //		orderData = new LoadOrderData(false, 0, 0, main);
 //		deliverybillData = new LoadDeliverybillData(false, 0, 0, main);
@@ -164,9 +166,9 @@ public class ControllerNavigation {
 
 			@Override
 			public void handle(ActionEvent event) {
-//				main.getContentPane().setCenter(articleData.getContent());
-//				main.getStage().setTitle(main.getProgramName() + " - Artikelstamm");
-//				setSizeToScene();
+				main.getContentPane().setCenter(productsData.getContent());
+				main.getStage().setTitle(main.getProgramName() + " - Products");
+				setSizeToScene();
 			}
 		});
 		

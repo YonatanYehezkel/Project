@@ -150,6 +150,10 @@ public class ControllerLogic {
 		return db.getAllUsers();		
 	}
 	
+	public HashMap<Integer, Product> getAllProducts(){
+		return db.getAllProducts();		
+	}
+	
 	public boolean addNewUser (User u) {
 		if(db.addNewUser(u))
 				return true;
