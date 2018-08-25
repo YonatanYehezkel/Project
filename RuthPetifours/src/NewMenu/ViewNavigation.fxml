@@ -33,10 +33,10 @@
 						<VBox>
 							<TitledPane id="tbSidenavigation" fx:id="tpMainData" text="MAIN ITEMS">
 								<VBox styleClass="VboxContent">
-									<Button id="btnSidebar" fx:id="btnSupplier" text="ORDERS" />
-									<Button id="btnSidebar" fx:id="btnStock" text="CUSTOMERS" />
-									<Button id="btnSidebar" fx:id="btnArticle" text="PRODUCTS" />
-									<Button id="btnSidebar" fx:id="btnCustomer" text="USERS" />
+									<Button id="btnSidebar" fx:id="btnSupplier" text="Orders" />
+									<Button id="btnSidebar" fx:id="btnStock" text="Customers" />
+									<Button id="btnSidebar" fx:id="btnArticle" text="Products" />
+									<Button id="btnSidebar" fx:id="btnCustomer" text="Users" />
 									
 									
 								</VBox>
