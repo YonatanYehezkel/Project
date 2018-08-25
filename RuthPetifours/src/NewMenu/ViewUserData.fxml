@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
 	<BorderPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 		<!-- FLEX NAVI -->
 		<top>
@@ -102,10 +102,10 @@
 						                  			<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
 						               			</columnResizePolicy>
 												<columns>
-													<TableColumn fx:id="tcOfferRole" text="Role" />
-											    	<TableColumn fx:id="tcOfferUser" text="UserName" />
-													<TableColumn fx:id="tcOfferQuestion1" text="First question" />
-													<TableColumn fx:id="tcOfferQuestion2" text="Second question" />
+													<TableColumn fx:id="tcOfferRole" style="-fx-alignment: CENTER;" text="Role" />
+											    	<TableColumn fx:id="tcOfferUser" style="-fx-alignment: CENTER;" text="UserName" />
+													<TableColumn fx:id="tcOfferQuestion1" style="-fx-alignment: CENTER;" text="First question" />
+													<TableColumn fx:id="tcOfferQuestion2" style="-fx-alignment: CENTER;" text="Second question" />
 												</columns>
 											</TableView>
 										</AnchorPane>

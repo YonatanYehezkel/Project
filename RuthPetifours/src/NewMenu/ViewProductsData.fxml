@@ -101,10 +101,10 @@
 						                  			<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
 						               			</columnResizePolicy>
 												<columns>
-													<TableColumn fx:id="tcOfferRole" text="Id" />
-											    	<TableColumn fx:id="tcOfferUser" text="Title" />
-													<TableColumn fx:id="tcOfferQuestion1" text="Price" />
-                                       <TableColumn fx:id="tcOfferQuestion2" text="Inventory Quantity" />
+													<TableColumn fx:id="tcOfferRole" style="-fx-alignment: CENTER;" text="Id" />
+											    	<TableColumn fx:id="tcOfferUser" style="-fx-alignment: CENTER;" text="Title" />
+													<TableColumn fx:id="tcOfferQuestion1" style="-fx-alignment: CENTER;" text="Price" />
+                                       <TableColumn fx:id="tcOfferQuestion2" style="-fx-alignment: CENTER;" text="Inventory Quantity" />
 												</columns>
 											</TableView>
 										</AnchorPane>

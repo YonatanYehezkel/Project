@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
 	<BorderPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 		<!-- FLEX NAVI -->
 		<top>
 			<AnchorPane styleClass="Headbar">
 				<StackPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
-					<HBox fx:id="hboxBtnTopbar" StackPane.alignment="CENTER_LEFT" alignment="CENTER_LEFT">
+					<HBox fx:id="hboxBtnTopbar" alignment="CENTER_LEFT" StackPane.alignment="CENTER_LEFT">
 					
-						<Button fx:id="btnNew" text="Import" styleClass="btnTopbar" />
-						<Button fx:id="btnEdit" text="Edit" styleClass="btnTopbar" />
+						<Button fx:id="btnNew" styleClass="btnTopbar" text="Import" />
+						<Button fx:id="btnEdit" styleClass="btnTopbar" text="Edit" />
 						<!-- BtnEditSave is added with Java-Code -->
 						<!-- BtnEditAbort is added with Java-Code -->
-						<Button fx:id="btnDelete" text="Delete" styleClass="btnTopbar" />
+						<Button fx:id="btnDelete" styleClass="btnTopbar" text="Delete" />
 					</HBox>
 				</StackPane>
 			</AnchorPane>
@@ -43,15 +43,15 @@
 			<ScrollPane>
 				<BorderPane>
 					<top>
-						<HBox spacing="10" alignment="CENTER_LEFT">
-							<Label fx:id="lblSubHeadline" id="lblSubHeadline" />
+						<HBox alignment="CENTER_LEFT" spacing="10">
+							<Label id="lblSubHeadline" fx:id="lblSubHeadline" />
 						<padding>
 							<Insets bottom="10" />
 						</padding>
 						</HBox>
 					</top>
 					<left>
-						<VBox spacing="10" > 
+						<VBox spacing="10"> 
 						
 							<TitledPane fx:id="pane" text="Search">
 								
@@ -67,15 +67,20 @@
 												<Label text="Status" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 												<ComboBox fx:id="tfSupplierID" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 												<Label text="Customer:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-												<TextField fx:id="tfName1"  GridPane.columnIndex="1" GridPane.rowIndex="1" />
-												<Button fx:id="btnSearch" text="Search" styleClass="btnTopbar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+												<TextField fx:id="tfName1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+												<Button fx:id="btnSearch" styleClass="btnTopbar" text="Search" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 											<padding>
-												<Insets top="10" bottom="10" left="10" right="10" />
-											</padding>	
+												<Insets bottom="10" left="10" right="10" top="10" />
+											</padding>
+                              <rowConstraints>
+                                 <RowConstraints />
+                                 <RowConstraints />
+                                 <RowConstraints />
+                              </rowConstraints>	
 											</GridPane>	
 										
 											<!-- Second Block -->
-											<GridPane hgap="10" vgap="5" >
+											<GridPane hgap="10" vgap="5">
 												<columnConstraints>
 													<ColumnConstraints halignment="RIGHT" />
 													<ColumnConstraints halignment="LEFT" />
@@ -84,11 +89,16 @@
 												<HBox fx:id="tfPhone" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 												<Label text="Date of payment:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
 												<HBox fx:id="tfFax" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-												<Button fx:id="btnRemovefilters" text="Remove filters" styleClass="btnTopbar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+												<Button fx:id="btnRemovefilters" styleClass="btnTopbar" text="Remove filters" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 											
 											<padding>
-												<Insets top="10" bottom="10" left="10" right="10" />
-											</padding>	
+												<Insets bottom="10" left="10" right="10" top="10" />
+											</padding>
+                              <rowConstraints>
+                                 <RowConstraints />
+                                 <RowConstraints />
+                                 <RowConstraints />
+                              </rowConstraints>	
 											</GridPane>
 										
 											<!-- Third Block -->
@@ -104,8 +114,12 @@
 												<TextField fx:id="tfIBAN" GridPane.columnIndex="1" GridPane.rowIndex="2" /> -->
 												
 											<padding>
-												<Insets top="10" bottom="10" left="10" right="10" />
-											</padding>	
+												<Insets bottom="10" left="10" right="10" top="10" />
+											</padding>
+                              <rowConstraints>
+                                 <RowConstraints />
+                                 <RowConstraints />
+                              </rowConstraints>	
 											</GridPane>																		
 										</HBox>
 									
@@ -117,19 +131,19 @@
 							<TabPane>
 								<tabs>
 								
-									<Tab text="List of Orders" closable="false">
+									<Tab closable="false" text="List of Orders">
 										<AnchorPane>
 											
-											<TableView fx:id="tvOrder"  AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" prefHeight="400">
+											<TableView fx:id="tvOrder" prefHeight="400" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 											<!--  <TableView fx:id="tvOrder" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" prefHeight="400">-->
 												<columnResizePolicy>
 						                  			<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
 						               			</columnResizePolicy>
 												<columns>
-													<TableColumn fx:id="tcOrderID" text="OrderID" />
-													<TableColumn fx:id="tcOrderRequest" text="Customer" />
-													<TableColumn fx:id="tcOrderDate" text="City" />
-													<TableColumn fx:id="tcClerk" text="Order Sum" />
+													<TableColumn fx:id="tcOrderID" style="-fx-alignment: CENTER;" text="OrderID" />
+													<TableColumn fx:id="tcOrderRequest" style="-fx-alignment: CENTER;" text="Customer" />
+													<TableColumn fx:id="tcOrderDate" style="-fx-alignment: CENTER;" text="City" />
+													<TableColumn fx:id="tcClerk" style="-fx-alignment: CENTER;" text="Order Sum" />
 													
 												</columns>
 											</TableView>
@@ -137,7 +151,7 @@
 										</AnchorPane>
 									</Tab>
 									
-									<Tab text="Sorting" closable="false">
+									<Tab closable="false" text="Sorting">
 									<HBox>
 										<AnchorPane>
 											<VBox>
@@ -147,13 +161,17 @@
 												<columnConstraints>
 													<ColumnConstraints halignment="RIGHT" />
 													<ColumnConstraints halignment="LEFT" />
+                                                <ColumnConstraints />
 												</columnConstraints>
 												<Label text="SUM:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 												<TextField fx:id="sumTbl1" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-												<Button fx:id="buildTbl1" text="Get Route" GridPane.columnIndex="2" GridPane.rowIndex="0"/>												
+												<Button fx:id="buildTbl1" text="Get Route" GridPane.columnIndex="2" GridPane.rowIndex="0" />												
 											<padding>
-												<Insets top="10" bottom="10" left="10" right="10" />
-											</padding>	
+												<Insets bottom="10" left="10" right="10" top="10" />
+											</padding>
+                                             <rowConstraints>
+                                                <RowConstraints />
+                                             </rowConstraints>	
 											</GridPane>	
 											</HBox>
 											<TableView fx:id="tvOrder1">
@@ -161,10 +179,10 @@
 						                  			<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
 						               			</columnResizePolicy>
 												<columns>
-													<TableColumn fx:id="tcOrderID1" text="OrderID" />
-													<TableColumn fx:id="tcOrderRequest1" text="Customer" />
-													<TableColumn fx:id="tcOrderDate1" text="City" />
-													<TableColumn fx:id="tcClerk1" text="Order Sum" />
+													<TableColumn fx:id="tcOrderID1" style="-fx-alignment: CENTER;" text="OrderID" />
+													<TableColumn fx:id="tcOrderRequest1" style="-fx-alignment: CENTER;" text="Customer" />
+													<TableColumn fx:id="tcOrderDate1" style="-fx-alignment: CENTER;" text="City" />
+													<TableColumn fx:id="tcClerk1" style="-fx-alignment: CENTER;" text="Order Sum" />
 												</columns>
 											</TableView>
 											</VBox>
@@ -182,8 +200,11 @@
 												<TextField fx:id="sumTbl2" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 																								
 											<padding>
-												<Insets top="10" bottom="10" left="10" right="10" />
-											</padding>	
+												<Insets bottom="10" left="10" right="10" top="10" />
+											</padding>
+                                             <rowConstraints>
+                                                <RowConstraints />
+                                             </rowConstraints>	
 											</GridPane>	
 											</HBox>
 											<TableView fx:id="tvOrder2">
@@ -191,10 +212,10 @@
 						                  			<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
 						               			</columnResizePolicy>
 												<columns>
-													<TableColumn fx:id="tcOrderID2" text="OrderID" />
-													<TableColumn fx:id="tcOrderRequest2" text="Customer" />
-													<TableColumn fx:id="tcOrderDate2" text="City" />
-													<TableColumn fx:id="tcClerk2" text="Order Sum" />
+													<TableColumn fx:id="tcOrderID2" style="-fx-alignment: CENTER;" text="OrderID" />
+													<TableColumn fx:id="tcOrderRequest2" style="-fx-alignment: CENTER;" text="Customer" />
+													<TableColumn fx:id="tcOrderDate2" style="-fx-alignment: CENTER;" text="City" />
+													<TableColumn fx:id="tcClerk2" style="-fx-alignment: CENTER;" text="Order Sum" />
 												</columns>
 											</TableView>
 											</VBox>
@@ -207,14 +228,18 @@
 												<columnConstraints>
 													<ColumnConstraints halignment="RIGHT" />
 													<ColumnConstraints halignment="LEFT" />
+                                                <ColumnConstraints />
 												</columnConstraints>
 												<Label text="SUM:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 												<TextField fx:id="sumTbl3" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-												<Button fx:id="buildTbl3" text="Get Route" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+												<Button fx:id="buildTbl3" text="Get Route" GridPane.columnIndex="2" GridPane.rowIndex="0" />
 																								
 											<padding>
-												<Insets top="10" bottom="10" left="10" right="10" />
-											</padding>	
+												<Insets bottom="10" left="10" right="10" top="10" />
+											</padding>
+                                             <rowConstraints>
+                                                <RowConstraints />
+                                             </rowConstraints>	
 											</GridPane>	
 											</HBox>
 											<TableView fx:id="tvOrder3">
@@ -222,10 +247,10 @@
 						                  			<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
 						               			</columnResizePolicy>
 												<columns>
-													<TableColumn fx:id="tcOrderID3" text="OrderID" />
-													<TableColumn fx:id="tcOrderRequest3" text="Customer" />
-													<TableColumn fx:id="tcOrderDate3" text="City" />
-													<TableColumn fx:id="tcClerk3" text="Order Sum" />
+													<TableColumn fx:id="tcOrderID3" style="-fx-alignment: CENTER;" text="OrderID" />
+													<TableColumn fx:id="tcOrderRequest3" style="-fx-alignment: CENTER;" text="Customer" />
+													<TableColumn fx:id="tcOrderDate3" style="-fx-alignment: CENTER;" text="City" />
+													<TableColumn fx:id="tcClerk3" style="-fx-alignment: CENTER;" text="Order Sum" />
 												</columns>
 											</TableView>
 											</VBox>
@@ -246,4 +271,3 @@
 		</center>
 	</BorderPane>
 </AnchorPane>
-
