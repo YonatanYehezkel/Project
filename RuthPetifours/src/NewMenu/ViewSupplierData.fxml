@@ -140,10 +140,10 @@
 						                  			<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
 						               			</columnResizePolicy>
 												<columns>
-													<TableColumn fx:id="tcOrderID" style="-fx-alignment: CENTER;" text="OrderID" />
-													<TableColumn fx:id="tcOrderRequest" style="-fx-alignment: CENTER;" text="Customer" />
-													<TableColumn fx:id="tcOrderDate" style="-fx-alignment: CENTER;" text="City" />
-													<TableColumn fx:id="tcClerk" style="-fx-alignment: CENTER;" text="Order Sum" />
+													<TableColumn fx:id="tcOrderID" text="OrderID" />
+													<TableColumn fx:id="tcOrderRequest" text="Customer" />
+													<TableColumn fx:id="tcOrderDate" text="City" />
+													<TableColumn fx:id="tcClerk" text="Order Sum" />
 													
 												</columns>
 											</TableView>

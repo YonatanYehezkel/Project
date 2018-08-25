@@ -137,9 +137,9 @@
 						                  			<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
 						               			</columnResizePolicy>
 												<columns>
-											    	<TableColumn fx:id="tcOfferClerk" style="-fx-alignment: CENTER;" text="Customer" />
-													<TableColumn fx:id="tcOfferRequest" style="-fx-alignment: CENTER;" text="Adress" />
-													<TableColumn fx:id="tcOfferDate" style="-fx-alignment: CENTER;" text="Notes" />
+											    	<TableColumn fx:id="tcOfferClerk" text="Customer" />
+													<TableColumn fx:id="tcOfferRequest" text="Adress" />
+													<TableColumn fx:id="tcOfferDate" text="Notes" />
 												</columns>
 											</TableView>
 										</AnchorPane>

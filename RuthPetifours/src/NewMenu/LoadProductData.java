@@ -16,7 +16,7 @@ public class LoadProductData {
 		
 		try{
 			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewProductsData.fxml‬"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewProductsData.fxml"));
 			controller.setMain(main);
 			loader.setController(controller);
 			root = loader.load();

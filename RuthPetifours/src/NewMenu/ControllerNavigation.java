@@ -37,10 +37,10 @@ public class ControllerNavigation {
 	@FXML private Button btnCustomer;
 	@FXML private Button btnArticle;
 	@FXML private Button btnSupplier;
-	@FXML private Button btnOffer;
-	@FXML private Button btnOrder;
-	@FXML private Button btnDeliverybill;
-	@FXML private Button btnInvoice;
+	//@FXML private Button btnOffer;
+	//@FXML private Button btnOrder;
+	//@FXML private Button btnDeliverybill;
+	//@FXML private Button btnInvoice;
 	@FXML private Button btnStock;
 	
 	@FXML private TitledPane tpMainData;
@@ -82,10 +82,10 @@ public class ControllerNavigation {
 		initBtnArticle();
 		initBtnSupplier();
 		initBtnStock();
-		initBtnOffer();
-		initBtnOrder();
-		initBtnDeliverybill();
-		initBtnInvoice();
+		//initBtnOffer();
+		//initBtnOrder();
+		//initBtnDeliverybill();
+		//initBtnInvoice();
 		
 	}
 	
@@ -114,8 +114,8 @@ public class ControllerNavigation {
 					btnCustomer.setText("");
 					btnArticle.setText("");
 					btnSupplier.setText("");
-					btnOffer.setText("");
-					btnOrder.setText("");
+					//btnOffer.setText("");
+					//btnOrder.setText("");
 					btnStock.setText("");
 					
 					spSide.setPrefWidth(90);
@@ -130,8 +130,8 @@ public class ControllerNavigation {
 					btnStock.setText("CUSTOMERS");
 					
 					tpDocuments.setText("REPORTS");
-					btnOffer.setText("ORDERS");
-					btnOrder.setText("CUSTOMERS");
+					//btnOffer.setText("ORDERS");
+					//btnOrder.setText("CUSTOMERS");
 					/* SAME WIDTH AS IN THE FXML FILE */
 					spSide.setPrefWidth(250);
 					bpSide.setPrefWidth(250);
@@ -204,63 +204,63 @@ public class ControllerNavigation {
 		
 	}
 	
-	private void initBtnOffer(){
-		
-		btnOffer.setGraphic(new GraphicButton("offer_32_blue.png").getGraphicButton());
-		btnOffer.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
+//	private void initBtnOffer(){
+//		
+//		btnOffer.setGraphic(new GraphicButton("offer_32_blue.png").getGraphicButton());
+//		btnOffer.setOnAction(new EventHandler<ActionEvent>() {
+//
+//			@Override
+//			public void handle(ActionEvent event) {
 //				main.getContentPane().setCenter(offerData.getContent());
 //				main.getStage().setTitle(main.getProgramName() + " - Angebot");
 //				setSizeToScene();
-			}
-		});
-		
-	}
+//			}
+//		});
+//		
+//	}
 	
-	private void initBtnDeliverybill(){
-		
-		btnDeliverybill.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
+//	private void initBtnDeliverybill(){
+//		
+//		btnDeliverybill.setOnAction(new EventHandler<ActionEvent>() {
+//
+//			@Override
+//			public void handle(ActionEvent event) {
 //				main.getContentPane().setCenter(deliverybillData.getContent());
 //				main.getStage().setTitle(main.getProgramName() + " - Lieferschein");
 //				setSizeToScene();
-			}
-		});
-		
-	}
+//			}
+//		});
+//		
+//	}
 	
-	private void initBtnInvoice(){
-		
-		btnInvoice.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
+//	private void initBtnInvoice(){
+//		
+//		btnInvoice.setOnAction(new EventHandler<ActionEvent>() {
+//
+//			@Override
+//			public void handle(ActionEvent event) {
 //				main.getContentPane().setCenter(invoiceData.getContent());
 //				main.getStage().setTitle(main.getProgramName() + " - Rechnung");
 //				setSizeToScene();
-			}
-		});
-		
-	}
+//			}
+//		});
+//		
+//	}
 	
-	private void initBtnOrder(){
-		
-		//TODO setGraphic
-		btnOrder.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
+//	private void initBtnOrder(){
+//		
+//		//TODO setGraphic
+//		btnOrder.setOnAction(new EventHandler<ActionEvent>() {
+//
+//			@Override
+//			public void handle(ActionEvent event) {
 //				main.getContentPane().setCenter(orderData.getContent());
 //				main.getStage().setTitle(main.getProgramName() + " - Bestellung");
 //				setSizeToScene();
-			}
-		});
-		
-	}
+//			}
+//		});
+//		
+//	}
 	
 	private void setSizeToScene(){
 		if(! main.getStage().isMaximized())

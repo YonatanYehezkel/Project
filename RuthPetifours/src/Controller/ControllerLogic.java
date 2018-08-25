@@ -177,6 +177,21 @@ public class ControllerLogic {
 		return db.searchAwaitingPaimentOrders(customer, d);
 	}
 	
+	public HashMap<String, Order> searchAwaitingShipOrders(String customer, Date d) {
+		return db.searchAwaitingShipOrders(customer, d);
+	}
+	
+	public HashMap<String, Order> searchAwaitingPaimentOrders_eta(String customer, Date d, Date d2) {
+		return db.searchAwaitingPaimentOrders_eta(customer, d, d2);
+	}
+	public HashMap<String, Order> searchAwaitingShipOrders_eta(String customer, Date d, Date d2) {
+		return db.searchAwaitingShipOrders_eta(customer, d, d2);
+	}
+	
+	public HashMap<String, Order> searchAwaitingPaimentOrders_eta(String customer, Date d2) {
+		return db.searchAwaitingPaimentOrders_eta(customer, d2);
+	}
+	
 	public HashMap<String, Order> searchAwaitingShipmentOrders(String customer) {
 		return db.searchAwaitingShipmentOrders(customer);
 	}
