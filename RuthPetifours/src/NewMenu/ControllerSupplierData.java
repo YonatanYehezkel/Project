@@ -242,9 +242,63 @@ public class ControllerSupplierData {
 		//if(ship_d != null )
 		
 		String flag=defineStatus();
+		if(flag == null) {
+			if(datePicker.getValue() == null && datePicker2.getValue() == null && datePicker3.getValue() == null) {
+				rs = controller.searchOrders(s);
+			}
+
+			if(datePicker.getValue() != null && datePicker3.getValue() == null && datePicker3.getValue() == null) {
+				Date ship_d = Date.valueOf(datePicker.getValue());
+				rs = controller.searchOrders(s, ship_d);
+			}
+			
+			if(datePicker.getValue() != null && datePicker2.getValue() != null && datePicker3.getValue() == null) {
+			
+				Date ship_d = Date.valueOf(datePicker.getValue());
+				Date pay_d = Date.valueOf(datePicker2.getValue());
+				rs = controller.searchOrders(s, ship_d, pay_d);
+			}
+			
+			if(datePicker.getValue() != null && datePicker2.getValue() != null && datePicker3.getValue() != null) {
+			
+				Date ship_d = Date.valueOf(datePicker.getValue());
+				Date pay_d = Date.valueOf(datePicker2.getValue());
+				Date eta_d = Date.valueOf(datePicker3.getValue());
+				rs = controller.searchOrders(s, ship_d, pay_d, eta_d);
+			}
+			
+			if(datePicker.getValue() == null && datePicker2.getValue() != null && datePicker3.getValue() == null) {
+				
+				Date pay_d = Date.valueOf(datePicker2.getValue());
+				rs = controller.searchOrders2(s, pay_d);
+			}
+			if(datePicker.getValue() == null && datePicker2.getValue() != null && datePicker3.getValue() != null) {
+				
+				Date pay_d = Date.valueOf(datePicker2.getValue());
+				Date eta_d = Date.valueOf(datePicker3.getValue());
+				rs = controller.searchOrders2(s, pay_d, eta_d);
+			}
+			
+			if(datePicker.getValue() == null && datePicker2.getValue() == null && datePicker3.getValue() != null) {
+				
+				Date eta_d = Date.valueOf(datePicker3.getValue());
+				rs = controller.searchOrders3(s, eta_d);
+			}
+			
+			if(datePicker.getValue() != null && datePicker2.getValue() == null && datePicker3.getValue() != null) {
+				Date ship_d = Date.valueOf(datePicker.getValue());
+				Date eta_d = Date.valueOf(datePicker3.getValue());
+				rs = controller.searchOrders4(s,ship_d, eta_d);
+			}
+		}
 		if (flag == payment_date) {
+			if(datePicker.getValue() == null && datePicker3.getValue() == null) {
+				rs = controller.searchAwaitingPaimentOrders(s);
+			}
+			
 			if(datePicker.getValue() != null && datePicker3.getValue() == null) {
 				Date ship_d = Date.valueOf(datePicker.getValue());
+				//System.out.println(ship_d.toString());
 				rs = controller.searchAwaitingPaimentOrders(s, ship_d);
 			}
 			
@@ -258,11 +312,13 @@ public class ControllerSupplierData {
 				Date eta_d = Date.valueOf(datePicker3.getValue());
 				rs = controller.searchAwaitingPaimentOrders_eta(s, eta_d);
 			}
-//			else 
-//				rs = controller.searchAwaitingPaimentOrders(s);
+
 			
 		}
 		if (flag == wait_shipment_date) {
+			if(datePicker2.getValue() == null && datePicker3.getValue() == null) {
+				rs = controller.searchAwaitingShipOrders(s);
+			}
 			
 			if(datePicker2.getValue() != null && datePicker3.getValue() == null) {
 				Date pay_d = Date.valueOf(datePicker2.getValue());
@@ -272,7 +328,6 @@ public class ControllerSupplierData {
 			if(datePicker2.getValue() != null && datePicker3.getValue() != null) {
 				Date pay_d = Date.valueOf(datePicker2.getValue());
 				Date eta_d = Date.valueOf(datePicker3.getValue());
-				//rs = controller.searchByShipOrders(s, ship_d);
 				rs = controller.searchAwaitingShipOrders_eta(s, pay_d, eta_d);
 			}
 			
@@ -282,23 +337,53 @@ public class ControllerSupplierData {
 			}
 		}
 		if (flag == shipment_date) {
-			//rs = controller.searchShippedOrders(s);
-//			if(datePicker2.getValue() != null && datePicker3.getValue() == null) {
-//				Date pay_d = Date.valueOf(datePicker2.getValue());
-//				rs = controller.searchAwaitingShipOrders(s, pay_d);
-//			}
-//			
-//			if(datePicker2.getValue() != null && datePicker3.getValue() != null) {
-//				Date pay_d = Date.valueOf(datePicker2.getValue());
-//				Date eta_d = Date.valueOf(datePicker3.getValue());
-//				//rs = controller.searchByShipOrders(s, ship_d);
-//				rs = controller.searchAwaitingShipOrders_eta(s, pay_d, eta_d);
-//			}
-//			
-//			if(datePicker2.getValue() == null && datePicker3.getValue() != null) {
-//				Date eta_d = Date.valueOf(datePicker3.getValue());
-//				rs = controller.searchAwaitingPaimentOrders_eta(s, eta_d);
-//			}
+			if(datePicker.getValue() == null && datePicker2.getValue() == null && datePicker3.getValue() == null) {
+				rs = controller.searchShippedOrders(s);
+			}
+
+			if(datePicker.getValue() != null && datePicker3.getValue() == null && datePicker3.getValue() == null) {
+				Date ship_d = Date.valueOf(datePicker.getValue());
+				rs = controller.searchShippedOrders(s, ship_d);
+			}
+			
+			if(datePicker.getValue() != null && datePicker2.getValue() != null && datePicker3.getValue() == null) {
+			
+				Date ship_d = Date.valueOf(datePicker.getValue());
+				Date pay_d = Date.valueOf(datePicker2.getValue());
+				rs = controller.searchShippedOrders(s, ship_d, pay_d);
+			}
+			
+			if(datePicker.getValue() != null && datePicker2.getValue() != null && datePicker3.getValue() != null) {
+			
+				Date ship_d = Date.valueOf(datePicker.getValue());
+				Date pay_d = Date.valueOf(datePicker2.getValue());
+				Date eta_d = Date.valueOf(datePicker3.getValue());
+				rs = controller.searchShippedOrders(s, ship_d, pay_d, eta_d);
+			}
+			
+			if(datePicker.getValue() == null && datePicker2.getValue() != null && datePicker3.getValue() == null) {
+				
+				Date pay_d = Date.valueOf(datePicker2.getValue());
+				rs = controller.searchShippedOrders2(s, pay_d);
+			}
+			if(datePicker.getValue() == null && datePicker2.getValue() != null && datePicker3.getValue() != null) {
+				
+				Date pay_d = Date.valueOf(datePicker2.getValue());
+				Date eta_d = Date.valueOf(datePicker3.getValue());
+				rs = controller.searchShippedOrders2(s, pay_d, eta_d);
+			}
+			
+			if(datePicker.getValue() == null && datePicker2.getValue() == null && datePicker3.getValue() != null) {
+				
+				Date eta_d = Date.valueOf(datePicker3.getValue());
+				rs = controller.searchShippedOrders3(s, eta_d);
+			}
+			
+			if(datePicker.getValue() != null && datePicker2.getValue() == null && datePicker3.getValue() != null) {
+				Date ship_d = Date.valueOf(datePicker.getValue());
+				Date eta_d = Date.valueOf(datePicker3.getValue());
+				rs = controller.searchShippedOrders4(s,ship_d, eta_d);
+			}
 		}
 			
 		
@@ -569,13 +654,13 @@ public class ControllerSupplierData {
 		tfSupplierID.valueProperty().addListener((ev) -> {
 			//System.out.println(defineStatus());
 	            if (defineStatus() == payment_date) {
-	            	datePicker2.getEditor().clear();
+	            	datePicker2.setValue(null);
 	            	datePicker2.setDisable(true);
 	            	datePicker.setDisable(false);
 	            } 
 	      
 	            if(defineStatus() == wait_shipment_date) {
-	            	datePicker.getEditor().clear();
+	            	datePicker.setValue(null);
 	            	datePicker.setDisable(true);
 	            	datePicker2.setDisable(false);
 	            }
@@ -802,12 +887,18 @@ public class ControllerSupplierData {
 		
 		this.tfSupplierID.getSelectionModel().clearSelection();
 		this.tfName1.clear();
-		datePicker.getEditor().clear();
-		datePicker2.getEditor().clear();
-		datePicker3.getEditor().clear();
+
+		datePicker.setValue(null);
+		datePicker2.setValue(null);
+		datePicker3.setValue(null);
 		datePicker.setDisable(false);
 		datePicker2.setDisable(false);
 		datePicker3.setDisable(false);
+		
+		loadDataFromDB();
+		
+
+	
 		//this.tfPhone
 		//this.tfFax.clear();
 	

@@ -169,12 +169,44 @@ public class ControllerLogic {
 	public HashMap<String, Order> searchOrders(String customer) {
 		return db.searchOrders(customer);
 	}
+	
+	public HashMap<String, Order> searchOrders(String customer, Date d) {
+		return db.searchOrders(customer, d);
+	}
+	
+	public HashMap<String, Order> searchOrders3(String customer, Date d) {
+		return db.searchOrders3(customer, d);
+	}
+	public HashMap<String, Order> searchOrders2(String customer, Date d) {
+		return db.searchOrders2(customer, d);
+	}
+	
+	public HashMap<String, Order> searchOrders(String customer, Date d1, Date d2) {
+		return db.searchOrders(customer, d1, d2);
+	}
+	
+	public HashMap<String, Order> searchOrders4(String customer, Date d1, Date d2) {
+		return db.searchOrders4(customer, d1, d2);
+	}
+	
+	public HashMap<String, Order> searchOrders2(String customer, Date d1, Date d2) {
+		return db.searchOrders2(customer, d1, d2);
+	}
+	
+	public HashMap<String, Order> searchOrders(String customer, Date d1, Date d2, Date d3) {
+		return db.searchOrders(customer, d1, d2, d3);
+	}
+	
 	public HashMap<String, Order> searchAwaitingPaimentOrders(String customer) {
 		return db.searchAwaitingPaimentOrders(customer);
 	}
 	
 	public HashMap<String, Order> searchAwaitingPaimentOrders(String customer, Date d) {
 		return db.searchAwaitingPaimentOrders(customer, d);
+	}
+	
+	public HashMap<String, Order> searchAwaitingShipOrders(String customer) {
+		return db.searchAwaitingShipOrders(customer);
 	}
 	
 	public HashMap<String, Order> searchAwaitingShipOrders(String customer, Date d) {
@@ -199,8 +231,33 @@ public class ControllerLogic {
 		return db.searchShippedOrders(customer);
 	}
 	
-	public HashMap<String, Order> searchByShipOrders(String s, Date d) {
-		return db.searchByShipOrders(s, d);
+	public HashMap<String, Order> searchShippedOrders(String customer, Date d) {
+		return db.searchShippedOrders(customer, d);
+	}
+	
+	public HashMap<String, Order> searchShippedOrders2(String customer, Date d) {
+		return db.searchShippedOrders2(customer, d);
+	}
+	
+	public HashMap<String, Order> searchShippedOrders3(String customer, Date d) {
+		return db.searchShippedOrders2(customer, d);
+	}
+	
+	public HashMap<String, Order> searchShippedOrders2(String customer, Date d2, Date d3) {
+		return db.searchShippedOrders2(customer, d2, d3);
+	}
+	
+	public HashMap<String, Order> searchShippedOrders(String s, Date d1, Date d2) {
+		return db.searchShippedOrders(s, d1, d2);
+	}
+	
+	public HashMap<String, Order> searchShippedOrders4(String s, Date d1, Date d2) {
+		return db.searchShippedOrders(s, d1, d2);
+	}
+	
+	
+	public HashMap<String, Order> searchShippedOrders(String s, Date d1, Date d2, Date d3) {
+		return db.searchShippedOrders(s, d1, d2, d3);
 	}
 	
 	public boolean deleteUser (int id) {

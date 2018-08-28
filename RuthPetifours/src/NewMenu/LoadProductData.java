@@ -14,21 +14,21 @@ public class LoadProductData {
 	
 	public LoadProductData(boolean createDialog, NewMenu main){
 		
-		try{
-			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewProductsData.fxml"));
-			controller.setMain(main);
-			loader.setController(controller);
-			root = loader.load();
-			
-			if(createDialog){
-				controller.setStage(stage);
-				new CreateDialog("", stage, new Scene(root));
-			}
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+//		try{
+//			
+//			FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewProductsData.fxml"));
+//			controller.setMain(main);
+//			loader.setController(controller);
+//			root = loader.load();
+//			
+//			if(createDialog){
+//				controller.setStage(stage);
+//				new CreateDialog("", stage, new Scene(root));
+//			}
+//			
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}
 		
 	}
 	
