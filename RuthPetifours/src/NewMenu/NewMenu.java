@@ -47,12 +47,12 @@ public class NewMenu extends Application {
 				
 				LoadMenuBar menubar = new LoadMenuBar(false, this);			
 				LoadNavigation navigation = new LoadNavigation(this);			
-				//LoadCustomerData customerData = new LoadCustomerData(false, this);	
+				LoadCustomerData customerData = new LoadCustomerData(false, this);	
 				LoadSupplierData supplierData  =new LoadSupplierData(false, 0, this);
 				
 				contentPane.setTop(menubar.getContent());
 				contentPane.setLeft(navigation.getContent());			
-				//contentPane.setCenter(customerData.getContent());
+				contentPane.setCenter(customerData.getContent());
 				contentPane.setCenter(supplierData.getContent());
 				
 				
