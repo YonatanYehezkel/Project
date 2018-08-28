@@ -63,7 +63,8 @@
 												</columnConstraints>
 												<Label text="Role" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 												<TextField fx:id="tfSupplierID" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-												
+												<Button fx:id="btnRemovefilters" styleClass="btnTopbar" text="Remove filters" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+																			
 											<padding>
 												<Insets bottom="10" left="10" right="10" top="10" />
 											</padding>
@@ -80,6 +81,7 @@
 												</columnConstraints>
 												<Label text="User Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 												<TextField fx:id="tfPhone" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+											    <Button fx:id="btnSearch" styleClass="btnTopbar" text="Search" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 											
 											<padding>
 												<Insets bottom="10" left="10" right="10" top="10" />
@@ -102,57 +104,18 @@
 						                  			<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
 						               			</columnResizePolicy>
 												<columns>
-													<TableColumn fx:id="tcOfferRole" style="-fx-alignment: CENTER;" text="Role" />
-											    	<TableColumn fx:id="tcOfferUser" style="-fx-alignment: CENTER;" text="UserName" />
-													<TableColumn fx:id="tcOfferQuestion1" style="-fx-alignment: CENTER;" text="First question" />
-													<TableColumn fx:id="tcOfferQuestion2" style="-fx-alignment: CENTER;" text="Second question" />
+													<TableColumn fx:id="tcOfferID" text="ID" />
+													<TableColumn fx:id="tcOfferRole" text="Role" />
+											    	<TableColumn fx:id="tcOfferUser" text="UserName" />
+													<TableColumn fx:id="tcOfferQuestion1" text="First question" />
+													<TableColumn fx:id="tcOfferAnswer1" text="First answer" />
+													<TableColumn fx:id="tcOfferQuestion2" text="Second question" />
+													<TableColumn fx:id="tcOfferAnswer2" text="Second answer" />
+													<TableColumn fx:id="tcOfferPassword" text="Password" />
 												</columns>
 											</TableView>
 										</AnchorPane>
 									</Tab>
-									
-									<!-- <Tab text="LIEFERSCHEINE" closable="false">
-										<AnchorPane>
-											<TableView fx:id="tvDeliverybill" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" prefHeight="200">
-												<columnResizePolicy>
-						                  			<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-						               			</columnResizePolicy>
-												<columns>
-													<TableColumn fx:id="tcDeliverybillID" text="Lieferschein-Nr." />
-													<TableColumn fx:id="tcDeliverybillClerk" text="Sachbearbeiter" />
-													<TableColumn fx:id="tcDeliverybillRequest" text="Bestellung" />
-													<TableColumn fx:id="tcDeliverybillDate" text="Datum" />
-													<TableColumn fx:id="tcDeliverybillAmountOfPositions" text="Positionen" />
-													<TableColumn fx:id="tcDeliverybillTotal" text="Auftragswert" />
-													<TableColumn fx:id="tcDeliverybillState" text="Status" />
-												</columns>
-											</TableView>
-										</AnchorPane>
-									</Tab>
-									
-									<Tab text="RECHNUNGEN" closable="false">
-										<AnchorPane>
-											<TableView fx:id="tvInvoice" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" prefHeight="200">
-												<columnResizePolicy>
-						                  			<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-						               			</columnResizePolicy>
-												<columns>
-													<TableColumn fx:id="tcInvoiceID" text="Rechnungs-Nr." />
-													<TableColumn fx:id="tcInvoiceDate" text="Rechnungsdatum" />
-													<TableColumn fx:id="tcInvoiceClerk" text="Sachbearbeiter" />
-													<TableColumn fx:id="tcInvoiceDeliverybillID" text="Lieferschein-Nr." />
-													<TableColumn fx:id="tcInvoiceDeliveryDate" text="Lieferdatum" />
-													<TableColumn fx:id="tcInvoiceAmountOfPositions" text="Positionen" />
-													<TableColumn fx:id="tcInvoiceTotal" text="Rechnungsbetrag (netto)" />
-												</columns>
-											</TableView>
-										</AnchorPane>
-									</Tab> 
-									
-									<Tab text="FIBU" closable="false">
-										<Label text="FOLGT" />
-									</Tab> -->
-									
 								</tabs>
 							</TabPane>
 							

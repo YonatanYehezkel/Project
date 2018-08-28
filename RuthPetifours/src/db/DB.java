@@ -98,6 +98,39 @@ public class DB {
 		return null;
 	}
 	
+	public  HashMap<String, Customer> searchCustomers(String customer, String address, String comment) {
+		HashMap<String, Customer> customers = new HashMap<String, Customer>();
+		
+		if(setConnection()) {
+			try {
+//				stmt = con.createStatement();
+//				ResultSet rs=stmt.executeQuery("select * from customer"); 
+				
+				PreparedStatement statement = con.prepareStatement("select * from customer where customername like ? "
+						+ "and adress like ? and comment like ?");    
+				statement.setString(1, "%" + customer + "%"); 
+				statement.setString(2, "%" + address + "%");
+				statement.setString(3, "%" + comment + "%");
+				ResultSet rs = statement.executeQuery(); 
+				
+				while(rs.next())  {
+			
+					Customer c = new Customer(rs.getString(1),rs.getString(2), rs.getString(3));
+					c.setContacts(getContactsOfCustomer(c));
+					customers.put(rs.getString(1), c);
+					
+				}
+				con.close();
+				return customers;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return null;
+	}
+	
 	
 	public  HashMap<Integer, Product> getAllProducts() {
 		HashMap<Integer, Product> products = new HashMap<Integer, Product>();
@@ -241,6 +274,33 @@ public class DB {
 				}
 				con.close();
 				return roles;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return null;
+	}
+	
+	public HashMap<String, User> getAllUsersWithRole (){
+		HashMap<String, User> users = new HashMap<String, User>();
+		if(setConnection()) {
+			try {
+				
+				PreparedStatement statement = con.prepareStatement("select iduser, username, password, question1,"
+						+ "question2, answer1, answer2,jobrole, jobRolecol from ruth_db.user u "
+						+ "left join ruth_db.jobrole r on u.jobrole = r.idjobRole");    
+				ResultSet rs = statement.executeQuery(); 
+				while(rs.next())  {
+					  
+					User u = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+							rs.getString(6), rs.getString(7), rs.getInt(8), rs.getString(9));
+					users.put(u.getUserName(), u);
+					
+				}
+				con.close();
+				return users;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}  

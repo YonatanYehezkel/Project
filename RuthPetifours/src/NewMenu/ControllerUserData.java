@@ -80,15 +80,6 @@ public class ControllerUserData {
 
 	@FXML private Label lblSubHeadline;
 	
-	/* DELIVERYADRESS - NESTED CONTROLLER */
-	//@FXML private ControllerDeliveryAdress deliveryAdressController; //fx:id + 'Controller'
-	
-	/* BILLINGADRESS - NESTED CONTROLLER */
-	//@FXML private ControllerBillingAdress billingAdressController; //fx:id + 'Controller'
-	
-	/* CONTACTS - NESTED CONTROLLER */
-	//@FXML private ControllerContactData contactDataController; //fx:id + 'Controller'
-	
 	/* NOTES */
 	@FXML private TextArea taNotes;
 	
@@ -98,10 +89,14 @@ public class ControllerUserData {
 	/* OFFER */
 	@FXML private TableView<User> tvOffer;
 	
-	@FXML private TableColumn<User,Integer> tcOfferRole;
+	@FXML private TableColumn<User,Integer> tcOfferID;
+	@FXML private TableColumn<User,String> tcOfferRole;
 	@FXML private TableColumn<User,String> tcOfferUser;
 	@FXML private TableColumn<User,String> tcOfferQuestion1;
+	@FXML private TableColumn<User,String> tcOfferAnswer1;
 	@FXML private TableColumn<User,String> tcOfferQuestion2;
+	@FXML private TableColumn<User,String> tcOfferAnswer2;
+	@FXML private TableColumn<User,String> tcOfferPassword;
 
 	private ObservableList<User> users;
 	
@@ -417,11 +412,14 @@ public class ControllerUserData {
 	 */
 	private void initTableOffer(){
 		
-	
-		tcOfferRole.setCellValueFactory(new PropertyValueFactory<>("id"));
+		tcOfferID.setCellValueFactory(new PropertyValueFactory<>("id"));
+		tcOfferRole.setCellValueFactory(new PropertyValueFactory<>("JobRole"));
 		tcOfferUser.setCellValueFactory(new PropertyValueFactory<>("userName"));
 		tcOfferQuestion1.setCellValueFactory(new PropertyValueFactory<>("question1"));
+		tcOfferAnswer1.setCellValueFactory(new PropertyValueFactory<>("answer1"));
 		tcOfferQuestion2.setCellValueFactory(new PropertyValueFactory<>("question2"));
+		tcOfferAnswer2.setCellValueFactory(new PropertyValueFactory<>("answer2"));
+		tcOfferPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
 		
 		//tvOffer.setContextMenu(new ContextMenuTableOffer());
 		
@@ -437,7 +435,7 @@ public class ControllerUserData {
 			public void handle(MouseEvent event) {
 
 				if(event.getClickCount() == 2){
-					//goToOffer();
+					goToOffer();
 				}
 				
 			}
@@ -450,7 +448,7 @@ public class ControllerUserData {
 		this.users = FXCollections.observableArrayList();
 		
 		
-		HashMap<String, User> rs = controller.getAllUsers();
+		HashMap<String, User> rs = controller.getAllUsersWithRole();
 		ArrayList<User> us = new ArrayList<User>();
 		us.addAll(rs.values());
 		
@@ -460,7 +458,7 @@ public class ControllerUserData {
 		
 		tvOffer.setItems(users);
 		
-		System.out.println(users.get(1).getUserName());
+		System.out.println(users.get(1).getId());
 	}
 		
 	private void initTableDeliverybill(){
@@ -684,16 +682,35 @@ public class ControllerUserData {
 	
 	private void goToOffer(){
 		
-//		if(tvOffer.getSelectionModel().getSelectedItems().size() == 1){
-//			main.getContentPane().setCenter(new LoadOfferData(	false, 
-//																tvOffer.getItems().get(tvOffer.getSelectionModel().getSelectedIndex()).getOfferID(), 
-//																Integer.valueOf(deliveryAdressController.getTfCustomerID().getText()),
-//																main
-//											).getContent());				
-//		}else{
-//			System.out.println("Bitte 1 Zeile markieren!");
-//		}
-//		
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.initOwner(MainClass.getPrimaryStage());
+        alert.setTitle("Confirm before changes");
+        alert.setHeaderText("Customer Action");
+        alert.setContentText("Are you sure yo want to change this customer's details?");
+        alert.showAndWait();
+		
+        if(alert.getResult().getText().equals("OK")) {
+        	
+        	
+        	tvOffer.setEditable(true);
+        	User edit = tvOffer.getSelectionModel().getSelectedItem();
+        	//int edit_id = edit.getId();
+        	
+        	if(controller.updateUser(edit)) {
+        		
+        		loadDataFromDB();
+        		
+        	    Alert alert2 = new Alert(AlertType.INFORMATION);
+        	    alert2.initOwner(MainClass.getPrimaryStage());
+        	    alert2.setTitle("Edit Confirmation");
+        	    alert2.setHeaderText("Customer Action");
+        	    alert2.setContentText("Selected customer's details has been successfully updated");
+        	    alert2.showAndWait();
+        	    
+            	//customersTable.setEditable(false);
+
+        	}
+        }
 	}
 	
 	private void goToDeliverybill(){

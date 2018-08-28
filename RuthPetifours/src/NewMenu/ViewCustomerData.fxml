@@ -56,9 +56,6 @@
 						<VBox spacing="10">
 							
 							<TitledPane fx:id="pane" text="Search">
-								
-								
-								
 										<HBox spacing="10" styleClass="HboxContent">							
 											<!-- First Block -->
 											<GridPane hgap="10" vgap="5">
@@ -66,10 +63,10 @@
 													<ColumnConstraints halignment="RIGHT" />
 													<ColumnConstraints halignment="LEFT" />
 												</columnConstraints>
-												<Label text="Status" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+												<Label text="Customer:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 												<TextField fx:id="tfSupplierID" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-												<Label text="User:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-												<TextField fx:id="tfName1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+												<Button fx:id="btnRemovefilters" styleClass="btnTopbar" text="Remove filters" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+								
 												
 											<padding>
 												<Insets bottom="10" left="10" right="10" top="10" />
@@ -86,10 +83,10 @@
 													<ColumnConstraints halignment="RIGHT" />
 													<ColumnConstraints halignment="LEFT" />
 												</columnConstraints>
-												<Label text="Date of shipping:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+												<Label text="Address:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 												<TextField fx:id="tfPhone" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-												<Label text="Date:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-												<TextField fx:id="tfFax" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+												<Button fx:id="btnSearch" styleClass="btnTopbar" text="Search" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+											
 											
 											<padding>
 												<Insets bottom="10" left="10" right="10" top="10" />
@@ -106,10 +103,9 @@
 													<ColumnConstraints halignment="RIGHT" />
 													<ColumnConstraints halignment="LEFT" />
 												</columnConstraints>
-												<Label text="TODO:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-												<ComboBox fx:id="cbPayment" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-												<Label text="TODO:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-												<TextField fx:id="tfIBAN" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+												<Label text="Comment:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+												<TextField fx:id="cbPayment" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+										
 											<padding>
 												<Insets bottom="10" left="10" right="10" top="10" />
 											</padding>
@@ -130,7 +126,7 @@
 							<TabPane>
 								<tabs>
 																		
-									<Tab closable="false" text="Customers List">
+									<Tab closable="false" text="List of Customers">
 										<AnchorPane>
 											<TableView fx:id="tvOffer" prefHeight="200" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 												<columnResizePolicy>

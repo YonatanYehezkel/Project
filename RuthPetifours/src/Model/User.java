@@ -10,9 +10,24 @@ public class User {
 	public String answer1;
 	public String answer2;
 	public int idJobRole;
+	public String JobRole;
 	
 	public User() {
 		super();		
+	}
+	
+	public User(int id, String userName, String password, String question1, String question2, String answer1,
+			String answer2, int idJobRole, String JobRole) {
+		super();
+		this.id = id;
+		this.userName = userName;
+		this.password = password;
+		this.question1 = question1;
+		this.question2 = question2;
+		this.answer1 = answer1;
+		this.answer2 = answer2;
+		this.idJobRole = idJobRole;
+		this.JobRole = JobRole;
 	}
 	
 	public User(int id, String userName, String password, String question1, String question2, String answer1,
@@ -102,6 +117,10 @@ public class User {
 
 	public void setIdJobRole(int idJobRole) {
 		this.idJobRole = idJobRole;
+	}
+	
+	public String getJobRole() {
+		return JobRole;
 	}
 	
 	

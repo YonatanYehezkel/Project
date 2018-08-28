@@ -150,6 +150,10 @@ public class ControllerLogic {
 		return db.getAllUsers();		
 	}
 	
+	public HashMap<String, User> getAllUsersWithRole(){
+		return db.getAllUsersWithRole();		
+	}
+	
 	public HashMap<Integer, Product> getAllProducts(){
 		return db.getAllProducts();		
 	}
@@ -172,6 +176,10 @@ public class ControllerLogic {
 	
 	public HashMap<String, Order> searchOrders(String customer, Date d) {
 		return db.searchOrders(customer, d);
+	}
+	
+	public HashMap<String, Customer> searchCustomers(String customer, String address, String comment) {
+		return db.searchCustomers(customer, address, comment);
 	}
 	
 	public HashMap<String, Order> searchOrders3(String customer, Date d) {

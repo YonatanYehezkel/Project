@@ -64,11 +64,11 @@
 													<ColumnConstraints halignment="RIGHT" />
 													<ColumnConstraints halignment="LEFT" />
 												</columnConstraints>
-												<Label text="Status" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+												<Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 												<ComboBox fx:id="tfSupplierID" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 												<Label text="Customer:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
 												<TextField fx:id="tfName1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-												<Button fx:id="btnSearch" styleClass="btnTopbar" text="Search" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+												<Button fx:id="btnRemovefilters" styleClass="btnTopbar" text="Remove filters" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 											<padding>
 												<Insets bottom="10" left="10" right="10" top="10" />
 											</padding>
@@ -89,8 +89,8 @@
 												<HBox fx:id="tfPhone" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 												<Label text="Date of payment:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
 												<HBox fx:id="tfFax" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-												<Button fx:id="btnRemovefilters" styleClass="btnTopbar" text="Remove filters" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-											
+												<Button fx:id="btnSearch" styleClass="btnTopbar" text="Search" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+																							
 											<padding>
 												<Insets bottom="10" left="10" right="10" top="10" />
 											</padding>

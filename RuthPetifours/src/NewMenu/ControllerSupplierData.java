@@ -632,6 +632,7 @@ public class ControllerSupplierData {
 	
 	private void initBtnRemovefilters(){
 		
+		btnRemovefilters.setStyle("-fx-background-color: #669999;");
 		//btnNew.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
 		btnRemovefilters.setOnAction(new EventHandler<ActionEvent>() {
 			
