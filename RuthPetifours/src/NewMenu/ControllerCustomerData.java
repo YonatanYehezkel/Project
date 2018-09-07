@@ -284,13 +284,13 @@ public class ControllerCustomerData {
 				
 				FileChooser fileChooser = new FileChooser();
 				fileChooser.setTitle("Select a file for import");
-				ExtensionFilter filter = new ExtensionFilter("Excel", "*.xlsx", "*.xls");
+				ExtensionFilter filter = new ExtensionFilter("Excel", "*.xlsx", "*.xls", "csv");
 				fileChooser.getExtensionFilters().add(filter);
 				File f = null;
 				f = fileChooser.showOpenDialog(MainClass.getPrimaryStage());
 				if(f != null)
 					controller.importCustomersFromExcel(f);
-				
+					loadNewDataFromDB();
 			}
 		});
 		
@@ -611,7 +611,7 @@ public class ControllerCustomerData {
 //		if(customerID != 0){
 //			tvOffer.setItems(new SelectOffer(new ModelOffer(customerID), OfferSelection.ALL_OFFER_FROM_CUSTOMER).getObsListOffer());
 //		}else{
-//			System.out.println("Bitte gültige Kundennummer wählen!");
+//			System.out.println("Bitte gï¿½ltige Kundennummer wï¿½hlen!");
 //		}
 		
 	}
@@ -621,7 +621,7 @@ public class ControllerCustomerData {
 //		if(customerID != 0){
 //			tvDeliverybill.setItems(new SelectDeliverybill(new ModelDeliverybill(customerID), DeliverybillSelection.ALL_DELIVERYBILL_FROM_CUSTOMER).getObsListDeliverybill());
 //		}else{
-//			System.out.println("Bitte gültige Kundennummer wählen!");
+//			System.out.println("Bitte gï¿½ltige Kundennummer wï¿½hlen!");
 //		}
 //		
 	}
@@ -631,7 +631,7 @@ public class ControllerCustomerData {
 //		if(customerID != 0){
 //			tvInvoice.setItems(new SelectInvoice(new ModelInvoice(customerID), InvoiceSelection.ALL_INVOICE_FROM_CUSTOMER).getModelInvoice().getObsListCustomerInvoice());
 //		}else{
-//			System.out.println("Bitte gültige Kundennummer wählen!");
+//			System.out.println("Bitte gï¿½ltige Kundennummer wï¿½hlen!");
 //		}
 		
 	}
@@ -659,7 +659,7 @@ public class ControllerCustomerData {
 //		billingAdressController.clearFields();
 //		
 //		taNotes.clear();
-//		lblLastChange.setText("Letzte Änderung: "); //Same is in the FXML-File
+//		lblLastChange.setText("Letzte ï¿½nderung: "); //Same is in the FXML-File
 //		
 //		lblSubHeadline.setText("");
 		
@@ -793,7 +793,7 @@ public class ControllerCustomerData {
 	private class ContextMenuTableOffer extends ContextMenu{
 		
 		private MenuItem itemGoTo = new MenuItem("Gehe zu..");
-		private MenuItem itemNew = new MenuItem("Hinzufügen..");
+		private MenuItem itemNew = new MenuItem("Hinzufï¿½gen..");
 		
 		public ContextMenuTableOffer(){
 			
@@ -864,7 +864,7 @@ public class ControllerCustomerData {
 	private class ContextMenuTableDeliverybill extends ContextMenu{
 		
 		private MenuItem itemGoTo = new MenuItem("Gehe zu..");
-		private MenuItem itemNew = new MenuItem("Hinzufügen..");
+		private MenuItem itemNew = new MenuItem("Hinzufï¿½gen..");
 		
 		public ContextMenuTableDeliverybill(){
 			
@@ -935,7 +935,7 @@ public class ControllerCustomerData {
 	private class ContextMenuTableInvoice extends ContextMenu{
 		
 		private MenuItem itemGoTo = new MenuItem("Gehe zu..");
-		private MenuItem itemNew = new MenuItem("Hinzufügen..");
+		private MenuItem itemNew = new MenuItem("Hinzufï¿½gen..");
 		
 		public ContextMenuTableInvoice(){
 			
