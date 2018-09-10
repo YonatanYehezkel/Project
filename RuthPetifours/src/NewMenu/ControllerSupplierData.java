@@ -3,6 +3,7 @@ package NewMenu;
 
 
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -49,8 +50,10 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class ControllerSupplierData {
 
@@ -460,6 +463,16 @@ public class ControllerSupplierData {
 //					selectSupplier(createdSupplierID);
 //				}
 				
+				FileChooser fileChooser = new FileChooser();
+				fileChooser.setTitle("Select a file for import");
+				ExtensionFilter filter = new ExtensionFilter("Excel", "*.xlsx", "*.xls", "csv");
+				fileChooser.getExtensionFilters().add(filter);
+				File f = null;
+				f = fileChooser.showOpenDialog(MainClass.getPrimaryStage());
+				if(f != null)
+					controller.importOrdersFromExcel(f);
+					loadNewDataFromDB();
+				
 			}
 		});
 		
@@ -839,7 +852,7 @@ public class ControllerSupplierData {
 //			tvOrder.setItems(new SelectOrder(new ModelOrder(_supplierID), OrderSelection.ALL_ORDER_TO_SUPPLIER).getModelOrder().getObsListSupplierOrder());
 //			
 //		}else{
-//			System.out.println("Bitte gültige Kundennummer wählen!");
+//			System.out.println("Bitte gï¿½ltige Kundennummer wï¿½hlen!");
 //		}
 //		
 	}
@@ -990,7 +1003,7 @@ public class ControllerSupplierData {
 	private class ContextMenuTableOrder extends ContextMenu{
 		
 		private MenuItem itemGoTo = new MenuItem("Gehe zu..");
-		private MenuItem itemNew = new MenuItem("Hinzufügen..");
+		private MenuItem itemNew = new MenuItem("Hinzufï¿½gen..");
 		
 		public ContextMenuTableOrder(){
 			
