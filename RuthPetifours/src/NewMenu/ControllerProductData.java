@@ -131,7 +131,6 @@ public class ControllerProductData {
 	}
 	
 
-	
 	/*
 	 * BUTTONS
 	 */
@@ -188,7 +187,7 @@ public class ControllerProductData {
 				f = fileChooser.showOpenDialog(MainClass.getPrimaryStage());
 				if(f != null)
 					controller.importProductsFromExcel(f);
-				
+					
 			}
 		});
 		
@@ -371,7 +370,7 @@ public class ControllerProductData {
 		tcOfferRole.setCellValueFactory(new PropertyValueFactory<>("Id"));
 		tcOfferUser.setCellValueFactory(new PropertyValueFactory<>("Title"));
 		tcOfferQuestion1.setCellValueFactory(new PropertyValueFactory<>("Price"));
-		//tcOfferQuestion2.setCellValueFactory(new PropertyValueFactory<>("Inventory Quantity"));
+		tcOfferQuestion2.setCellValueFactory(new PropertyValueFactory<>("Unit"));
 		
 		//tvOffer.setContextMenu(new ContextMenuTableOffer());
 		
