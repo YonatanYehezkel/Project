@@ -1,9 +1,11 @@
 package NewMenu;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import Controller.ControllerLogic;
+import Controller.MainClass;
 import Model.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +22,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 public class ControllerProductData {
@@ -47,7 +51,7 @@ public class ControllerProductData {
 	@FXML private TableColumn<Product,Integer> tcOfferRole;
 	@FXML private TableColumn<Product,String> tcOfferUser;
 	@FXML private TableColumn<Product,Float> tcOfferQuestion1;
-	@FXML private TableColumn<Product,Float> tcOfferQuestion2;
+	@FXML private TableColumn<Product,String> tcOfferQuestion2;
 
 	private ObservableList<Product> products;
 	
@@ -78,7 +82,7 @@ public class ControllerProductData {
 	      private Button btnEditSave = new Button("Speichern");
 	      private Button btnEditAbort = new Button("Abbrechen");
 	@FXML private Button btnDelete;
-	//@FXML private Button btnImport;
+	@FXML private Button btnImport;
 	
 	
 	
@@ -103,7 +107,7 @@ public class ControllerProductData {
 		initBtnEditSave();
 		initBtnEditAbort();
 		initBtnDelete();
-//		initBtnImport();
+		initBtnImport();
 		
 		/* TABLES */
 		initTableOffer();
@@ -168,27 +172,27 @@ public class ControllerProductData {
 		
 	}
 	
-//	private void initBtnImport(){
-//		
-//		btnImport.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
-//		btnImport.setOnAction(new EventHandler<ActionEvent>() {
-//			
-//			@Override
-//			public void handle(ActionEvent event) {
-//				
-//				FileChooser fileChooser = new FileChooser();
-//				fileChooser.setTitle("Select a file for import");
-//				ExtensionFilter filter = new ExtensionFilter("Excel", "*.xlsx", "*.xls");
-//				fileChooser.getExtensionFilters().add(filter);
-//				File f = null;
-//				f = fileChooser.showOpenDialog(MainClass.getPrimaryStage());
-//				if(f != null)
-//					controller.importCustomersFromExcel(f);
-//				
-//			}
-//		});
-//		
-//	}
+	private void initBtnImport(){
+		
+		btnImport.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
+		btnImport.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				
+				FileChooser fileChooser = new FileChooser();
+				fileChooser.setTitle("Select a file for import");
+				ExtensionFilter filter = new ExtensionFilter("Excel", "*.xlsx", "*.xls");
+				fileChooser.getExtensionFilters().add(filter);
+				File f = null;
+				f = fileChooser.showOpenDialog(MainClass.getPrimaryStage());
+				if(f != null)
+					controller.importProductsFromExcel(f);
+				
+			}
+		});
+		
+	}
 	
 	private void initBtnEdit(){
 		

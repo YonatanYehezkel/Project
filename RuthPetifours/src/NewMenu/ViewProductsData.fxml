@@ -26,7 +26,7 @@
 			<AnchorPane styleClass="Headbar">
 				<StackPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 					<HBox fx:id="hboxBtnTopbar" alignment="CENTER_LEFT" StackPane.alignment="CENTER_LEFT">
-                  <Button fx:id="btnNew1" styleClass="btnTopbar" text="Import" />
+                  <Button fx:id="btnImport" styleClass="btnTopbar" text="Import" />
 						<Button fx:id="btnNew" styleClass="btnTopbar" text="New" />
 						<Button fx:id="btnEdit" styleClass="btnTopbar" text="Edit" />
 						<Button fx:id="btnDelete" styleClass="btnTopbar" text="Delete" />
@@ -105,6 +105,7 @@
 													<TableColumn fx:id="tcOfferRole" style="-fx-alignment: CENTER;" text="Id" />
 											    	<TableColumn fx:id="tcOfferUser" style="-fx-alignment: CENTER;" text="Title" />
 													<TableColumn fx:id="tcOfferQuestion1" style="-fx-alignment: CENTER;" text="Price" />
+                                       <TableColumn fx:id="tcOfferQuestion2" style="-fx-alignment: CENTER;" text="Unit" />
 												</columns>
 											</TableView>
 										</AnchorPane>
