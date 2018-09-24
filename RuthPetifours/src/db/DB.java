@@ -1355,6 +1355,38 @@ public class DB {
 		return null;
 	}
 	
+	public  HashMap<String, Product> searchProduct(String title) {
+		HashMap<String, Product> products = new HashMap<String, Product>();
+		
+		if(setConnection()) {
+			try {
+//				stmt = con.createStatement();
+//				ResultSet rs=stmt.executeQuery("select * from customer"); 
+				
+				PreparedStatement statement = con.prepareStatement("select * from product where title like ? ");    
+				statement.setString(1, "%" + title + "%"); 
+				//statement.setString(2, "%" + address + "%");
+				//statement.setString(3, "%" + comment + "%");
+				ResultSet rs = statement.executeQuery(); 
+				
+				while(rs.next())  {
+			
+					Product p = new Product(rs.getInt(1),rs.getString(2), rs.getFloat(3),rs.getString(4));
+					//c.setContacts(getContactsOfCustomer(c));
+					products.put(rs.getString(1), p);
+					
+				}
+				con.close();
+				return products;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return null;
+	}
+	
 	public  HashMap<String, Order> searchOrders(String customer, Date d) {
 		HashMap<String, Order> orders = new HashMap<String, Order>();
 		

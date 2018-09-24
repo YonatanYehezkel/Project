@@ -240,7 +240,7 @@ public class ControllerCustomerData {
 				}
 				
 				tvOffer.setItems(Customers);
-			}
+	}
 
 	private void resetAllFields(){
 		

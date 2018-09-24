@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import Controller.ControllerLogic;
 import Controller.MainClass;
+import Model.Customer;
 import Model.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +20,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -41,7 +43,7 @@ public class ControllerProductData {
 	
 	/* NOTES */
 	@FXML private TextArea taNotes;
-	
+	@FXML private TextField tfProductTitle;
 	/* LAST CHANGE */
 	@FXML private Label lblLastChange;
 	
@@ -83,7 +85,7 @@ public class ControllerProductData {
 	      private Button btnEditAbort = new Button("Abbrechen");
 	@FXML private Button btnDelete;
 	@FXML private Button btnImport;
-	
+	@FXML private Button btnSearch;
 	
 	
 	@FXML private HBox hboxBtnTopbar;
@@ -108,7 +110,8 @@ public class ControllerProductData {
 		initBtnEditAbort();
 		initBtnDelete();
 		initBtnImport();
-		
+		initBtnSearch();
+
 		/* TABLES */
 		initTableOffer();
 		
@@ -359,7 +362,19 @@ public class ControllerProductData {
 		
 	}
 	
-	
+	private void initBtnSearch(){
+		
+		//btnNew.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
+		btnSearch.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				loadNewDataFromDB();
+				//buildRouteTbl3();
+			}
+		});
+		
+	}
 	
 	/*
 	 * TABLES
@@ -392,6 +407,31 @@ public class ControllerProductData {
 			}
 		});
 		
+	}
+	
+	private void loadNewDataFromDB(){
+		
+		HashMap<String, Product> rs = null;
+		
+		this.products = FXCollections.observableArrayList();
+		
+		
+		
+		rs = controller.searchProduct((tfProductTitle.getText()));
+				//HashMap<String, Order> rs = new HashMap<String, Order>();
+				//ArrayList<Customer> customers = new ArrayList<Customer>();
+						
+				ArrayList<Product> productslist = new ArrayList<Product>();
+				
+				if(rs != null) {
+					productslist.addAll(rs.values());
+				}
+				
+				for(Product c : productslist) {
+					products.add(c);
+				}
+				
+				tvOffer.setItems(products);
 	}
 	
 	private void loadDataFromDB(){
