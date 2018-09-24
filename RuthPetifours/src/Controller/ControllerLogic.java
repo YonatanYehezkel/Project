@@ -187,6 +187,10 @@ public class ControllerLogic {
 		return db.searchCustomers(customer, address, comment);
 	}
 	
+	public HashMap<String, Product> searchProduct(String title) {
+		return db.searchProduct(title);
+	}
+	
 	public HashMap<String, Order> searchOrders3(String customer, Date d) {
 		return db.searchOrders3(customer, d);
 	}

@@ -1,9 +1,12 @@
 package NewMenu;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import Controller.ControllerLogic;
+import Controller.MainClass;
+import Model.Customer;
 import Model.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,9 +20,12 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 public class ControllerProductData {
@@ -37,7 +43,7 @@ public class ControllerProductData {
 	
 	/* NOTES */
 	@FXML private TextArea taNotes;
-	
+	@FXML private TextField tfProductTitle;
 	/* LAST CHANGE */
 	@FXML private Label lblLastChange;
 	
@@ -47,7 +53,7 @@ public class ControllerProductData {
 	@FXML private TableColumn<Product,Integer> tcOfferRole;
 	@FXML private TableColumn<Product,String> tcOfferUser;
 	@FXML private TableColumn<Product,Float> tcOfferQuestion1;
-	@FXML private TableColumn<Product,Float> tcOfferQuestion2;
+	@FXML private TableColumn<Product,String> tcOfferQuestion2;
 
 	private ObservableList<Product> products;
 	
@@ -78,8 +84,8 @@ public class ControllerProductData {
 	      private Button btnEditSave = new Button("Speichern");
 	      private Button btnEditAbort = new Button("Abbrechen");
 	@FXML private Button btnDelete;
-	//@FXML private Button btnImport;
-	
+	@FXML private Button btnImport;
+	@FXML private Button btnSearch;
 	
 	
 	@FXML private HBox hboxBtnTopbar;
@@ -103,8 +109,9 @@ public class ControllerProductData {
 		initBtnEditSave();
 		initBtnEditAbort();
 		initBtnDelete();
-//		initBtnImport();
-		
+		initBtnImport();
+		initBtnSearch();
+
 		/* TABLES */
 		initTableOffer();
 		
@@ -127,7 +134,6 @@ public class ControllerProductData {
 	}
 	
 
-	
 	/*
 	 * BUTTONS
 	 */
@@ -168,27 +174,27 @@ public class ControllerProductData {
 		
 	}
 	
-//	private void initBtnImport(){
-//		
-//		btnImport.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
-//		btnImport.setOnAction(new EventHandler<ActionEvent>() {
-//			
-//			@Override
-//			public void handle(ActionEvent event) {
-//				
-//				FileChooser fileChooser = new FileChooser();
-//				fileChooser.setTitle("Select a file for import");
-//				ExtensionFilter filter = new ExtensionFilter("Excel", "*.xlsx", "*.xls");
-//				fileChooser.getExtensionFilters().add(filter);
-//				File f = null;
-//				f = fileChooser.showOpenDialog(MainClass.getPrimaryStage());
-//				if(f != null)
-//					controller.importCustomersFromExcel(f);
-//				
-//			}
-//		});
-//		
-//	}
+	private void initBtnImport(){
+		
+		btnImport.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
+		btnImport.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				
+				FileChooser fileChooser = new FileChooser();
+				fileChooser.setTitle("Select a file for import");
+				ExtensionFilter filter = new ExtensionFilter("Excel", "*.xlsx", "*.xls");
+				fileChooser.getExtensionFilters().add(filter);
+				File f = null;
+				f = fileChooser.showOpenDialog(MainClass.getPrimaryStage());
+				if(f != null)
+					controller.importProductsFromExcel(f);
+					loadDataFromDB();
+			}
+		});
+		
+	}
 	
 	private void initBtnEdit(){
 		
@@ -356,7 +362,19 @@ public class ControllerProductData {
 		
 	}
 	
-	
+	private void initBtnSearch(){
+		
+		//btnNew.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
+		btnSearch.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				loadNewDataFromDB();
+				//buildRouteTbl3();
+			}
+		});
+		
+	}
 	
 	/*
 	 * TABLES
@@ -367,7 +385,7 @@ public class ControllerProductData {
 		tcOfferRole.setCellValueFactory(new PropertyValueFactory<>("Id"));
 		tcOfferUser.setCellValueFactory(new PropertyValueFactory<>("Title"));
 		tcOfferQuestion1.setCellValueFactory(new PropertyValueFactory<>("Price"));
-		//tcOfferQuestion2.setCellValueFactory(new PropertyValueFactory<>("Inventory Quantity"));
+		tcOfferQuestion2.setCellValueFactory(new PropertyValueFactory<>("Unit"));
 		
 		//tvOffer.setContextMenu(new ContextMenuTableOffer());
 		
@@ -389,6 +407,31 @@ public class ControllerProductData {
 			}
 		});
 		
+	}
+	
+	private void loadNewDataFromDB(){
+		
+		HashMap<String, Product> rs = null;
+		
+		this.products = FXCollections.observableArrayList();
+		
+		
+		
+		rs = controller.searchProduct((tfProductTitle.getText()));
+				//HashMap<String, Order> rs = new HashMap<String, Order>();
+				//ArrayList<Customer> customers = new ArrayList<Customer>();
+						
+				ArrayList<Product> productslist = new ArrayList<Product>();
+				
+				if(rs != null) {
+					productslist.addAll(rs.values());
+				}
+				
+				for(Product c : productslist) {
+					products.add(c);
+				}
+				
+				tvOffer.setItems(products);
 	}
 	
 	private void loadDataFromDB(){

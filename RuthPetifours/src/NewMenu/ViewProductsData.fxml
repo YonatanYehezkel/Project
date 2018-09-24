@@ -26,7 +26,7 @@
 			<AnchorPane styleClass="Headbar">
 				<StackPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 					<HBox fx:id="hboxBtnTopbar" alignment="CENTER_LEFT" StackPane.alignment="CENTER_LEFT">
-                  <Button fx:id="btnNew1" styleClass="btnTopbar" text="Import" />
+                  <Button fx:id="btnImport" styleClass="btnTopbar" text="Import" />
 						<Button fx:id="btnNew" styleClass="btnTopbar" text="New" />
 						<Button fx:id="btnEdit" styleClass="btnTopbar" text="Edit" />
 						<Button fx:id="btnDelete" styleClass="btnTopbar" text="Delete" />
@@ -77,9 +77,12 @@
 												<columnConstraints>
 													<ColumnConstraints halignment="RIGHT" />
 													<ColumnConstraints halignment="LEFT" />
+                                 <ColumnConstraints halignment="LEFT" />
+                                 <ColumnConstraints halignment="LEFT" />
 												</columnConstraints>
 												<Label text="Product Title:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-												<TextField fx:id="tfPhone" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+												<TextField fx:id="tfProductTitle" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                              <Button fx:id="btnSearch" styleClass="btnTopbar" text="Search" GridPane.columnIndex="2" />
 											
 											<padding>
 												<Insets bottom="10" left="10" right="10" top="10" />
@@ -105,6 +108,7 @@
 													<TableColumn fx:id="tcOfferRole" style="-fx-alignment: CENTER;" text="Id" />
 											    	<TableColumn fx:id="tcOfferUser" style="-fx-alignment: CENTER;" text="Title" />
 													<TableColumn fx:id="tcOfferQuestion1" style="-fx-alignment: CENTER;" text="Price" />
+                                       <TableColumn fx:id="tcOfferQuestion2" style="-fx-alignment: CENTER;" text="Unit" />
 												</columns>
 											</TableView>
 										</AnchorPane>
