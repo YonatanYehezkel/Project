@@ -62,7 +62,7 @@
 													<ColumnConstraints halignment="LEFT" />
 												</columnConstraints>
 												<Label text="Role" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-												<TextField fx:id="tfSupplierID" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+												<TextField fx:id="UserRole" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 												<Button fx:id="btnRemovefilters" styleClass="btnTopbar" text="Remove filters" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 																			
 											<padding>
@@ -80,7 +80,7 @@
 													<ColumnConstraints halignment="LEFT" />
 												</columnConstraints>
 												<Label text="User Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-												<TextField fx:id="tfPhone" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+												<TextField fx:id="UserName" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 											    <Button fx:id="btnSearch" styleClass="btnTopbar" text="Search" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 											
 											<padding>

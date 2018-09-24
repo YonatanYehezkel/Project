@@ -10,6 +10,7 @@ import java.util.HashMap;
 import Controller.ControllerLogic;
 import Controller.MainClass;
 import Model.Customer;
+import Model.Order;
 import Model.User;
 import View.MainMenuController;
 import View.ShowCustomerDetails;
@@ -63,6 +64,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -79,14 +81,12 @@ import javafx.util.Callback;
 public class ControllerUserData {
 
 	@FXML private Label lblSubHeadline;
-	
-	/* NOTES */
 	@FXML private TextArea taNotes;
-	
-	/* LAST CHANGE */
 	@FXML private Label lblLastChange;
+	@FXML private TextField UserRole;
+	@FXML private TextField UserName;
 	
-	/* OFFER */
+	
 	@FXML private TableView<User> tvOffer;
 	
 	@FXML private TableColumn<User,Integer> tcOfferID;
@@ -100,26 +100,6 @@ public class ControllerUserData {
 
 	private ObservableList<User> users;
 	
-	/* DELIVERYBILL */
-//	@FXML private TableView<ModelDeliverybill> tvDeliverybill;
-//	@FXML private TableColumn<ModelDeliverybill, Integer> tcDeliverybillID;
-//	@FXML private TableColumn<ModelDeliverybill, String> tcDeliverybillClerk;
-//	@FXML private TableColumn<ModelDeliverybill, String> tcDeliverybillRequest;
-//	@FXML private TableColumn<ModelDeliverybill, String> tcDeliverybillDate;
-//	@FXML private TableColumn<ModelDeliverybill, Integer> tcDeliverybillAmountOfPositions;
-//	@FXML private TableColumn<ModelDeliverybill, BigDecimal> tcDeliverybillTotal;
-//	@FXML private TableColumn<ModelDeliverybill, Boolean> tcDeliverybillState;
-	
-	/* INVOICE */
-//	@FXML private TableView<ModelInvoice> tvInvoice;
-//	@FXML private TableColumn<ModelInvoice, Integer> tcInvoiceID;
-//	@FXML private TableColumn<ModelInvoice, String> tcInvoiceDate;
-//	@FXML private TableColumn<ModelInvoice, String> tcInvoiceClerk;
-//	@FXML private TableColumn<ModelInvoice, Integer> tcInvoiceDeliverybillID;
-//	@FXML private TableColumn<ModelInvoice, String> tcInvoiceDeliveryDate;
-//	@FXML private TableColumn<ModelInvoice, Integer> tcInvoiceAmountOfPositions;
-//	@FXML private TableColumn<ModelInvoice, BigDecimal> tcInvoiceTotal;
-	
 	/* BUTTONS */
 	//@FXML private Button btnSearch;
 	@FXML private Button btnNew;
@@ -127,7 +107,8 @@ public class ControllerUserData {
 	      private Button btnEditSave = new Button("Speichern");
 	      private Button btnEditAbort = new Button("Abbrechen");
 	@FXML private Button btnDelete;
-	//@FXML private Button btnImport;
+	@FXML private Button btnSearch;
+	@FXML private Button btnRemovefilters;
 	
 	
 	
@@ -146,13 +127,14 @@ public class ControllerUserData {
 		//deliveryAdressController.showSearchButtonSmall(false);
 		
 		/* BUTTONS */
-		//initBtnSearch();
+		initBtnSearch();
 		initBtnNew();
 		initBtnEdit();
 		initBtnEditSave();
 		initBtnEditAbort();
 		initBtnDelete();
-//		initBtnImport();
+		initBtnRemovefilters();
+
 		
 		/* TABLES */
 		initTableOffer();
@@ -180,23 +162,72 @@ public class ControllerUserData {
 	/*
 	 * BUTTONS
 	 */
-//	private void initBtnSearch(){
-//		
-//		btnSearch.setGraphic(new GraphicButton("search_32.png").getGraphicButton());
-//		btnSearch.setOnAction(new EventHandler<ActionEvent>() {
-//
-//			@Override
-//			public void handle(ActionEvent event) {
-//				
-//				LoadCustomerSearch customerSearch = new LoadCustomerSearch(true);
-//				if(customerSearch.getController().getSelectedCustomerID() != 0){
-//					selectCustomer(customerSearch.getController().getSelectedCustomerID());
-//				}
-//				
-//			}
-//		});
-//		
-//	}
+
+	private void initBtnRemovefilters(){
+		
+		btnRemovefilters.setStyle("-fx-background-color: #669999;");
+		//btnNew.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
+		btnRemovefilters.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				resetAllFields();
+				loadDataFromDB();
+				
+			}
+		});
+		
+	}
+	
+	private void resetAllFields(){
+			
+			this.UserName.clear();
+			this.UserRole.clear();
+	}
+	
+	private void initBtnSearch(){
+		
+		btnSearch.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				loadNewDataFromDB();
+			}
+		});
+		
+	}
+	
+	private void loadNewDataFromDB(){
+			
+			HashMap<String, User> rs = null;
+			
+			this.users = FXCollections.observableArrayList();
+			
+			String uRole = UserRole.getText();
+			if(uRole.isEmpty())
+				uRole = "%";
+			else
+				uRole = "%"+uRole+"%";
+			
+			String uName = UserName.getText();
+			if(uName.isEmpty())
+				uName = "%";
+			else
+				uName = "%"+uName+"%";
+			
+			rs = controller.searchUsers(uRole, uName);
+			
+			ArrayList<User> arrUsers = new ArrayList<User>();
+			
+			arrUsers.addAll(rs.values());
+			
+			for(User u : arrUsers) {
+				users.add(u);
+			}
+			
+			tvOffer.setItems(users);
+			
+	}
 	
 	private void initBtnNew(){
 		

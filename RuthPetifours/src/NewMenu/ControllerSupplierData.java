@@ -911,14 +911,6 @@ public class ControllerSupplierData {
 		
 		loadDataFromDB();
 		
-
-	
-		//this.tfPhone
-		//this.tfFax.clear();
-	
-//		this.cbPayment.getSelectionModel().selectFirst();
-//		this.tfIBAN.clear();
-		
 	}
 	
 	private void setButtonState(){

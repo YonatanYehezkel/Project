@@ -170,6 +170,11 @@ public class ControllerLogic {
 		return false;
 	}
 	
+	public HashMap<String, User> searchUsers(String uRole, String uName) {
+		return db.searchUsers(uRole, uName);
+	}
+	
+	
 	public HashMap<String, Order> searchOrders(String customer) {
 		return db.searchOrders(customer);
 	}
