@@ -190,7 +190,7 @@ public class ControllerProductData {
 				f = fileChooser.showOpenDialog(MainClass.getPrimaryStage());
 				if(f != null)
 					controller.importProductsFromExcel(f);
-					
+					loadDataFromDB();
 			}
 		});
 		
