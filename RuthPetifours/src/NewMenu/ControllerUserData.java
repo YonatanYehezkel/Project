@@ -232,19 +232,19 @@ public class ControllerUserData {
 	private void initBtnNew(){
 		
 		btnNew.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
-//		btnNew.setOnAction(new EventHandler<ActionEvent>() {
-//			
-//			@Override
-//			public void handle(ActionEvent event) {
-//				
-//				LoadCustomerAdd customerAdd = new LoadCustomerAdd(true);
-//				if(customerAdd.getController().getCreatedCustomer() != null){
-//					users.add(customerAdd.getController().getCreatedCustomer());
+		btnNew.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				
+				LoadUserAdd userAdd = new LoadUserAdd(true);
+//				if(userAdd.getController().getCreatedUser() != null){
+//					users.add(userAdd.getController().getCreatedUser());
 //					//selectCustomer(customerAdd.getController().getCreatedCustomerID());
 //				}
-//				
-//			}
-//		});
+				
+			}
+		});
 		
 	}
 	
