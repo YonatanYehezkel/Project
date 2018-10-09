@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -1180,7 +1181,10 @@ public class ControllerSupplierData {
 	
 	
 	private void buildRouteTbl1() {
+		
+		
 		if(tvOrder1.getItems().size()==0){
+			System.out.println("list is empty");
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(MainClass.getPrimaryStage());
             alert.setHeaderText("List is empty!");
@@ -1189,7 +1193,8 @@ public class ControllerSupplierData {
 		}
 		
 		else {
-		
+			
+
 		GeoApiContext context = new GeoApiContext.Builder()
 			    .apiKey(API_KEY)
 			    .build();
@@ -1199,7 +1204,7 @@ public class ControllerSupplierData {
 		    apiRequest.destination("Karmiel");
 		    apiRequest.optimizeWaypoints(true);
 	
-
+		    
 		    List<String> columnData = new ArrayList<>();
 		    for (Order item : tvOrder1.getItems()) {
 		        columnData.add(item.getAdress());
@@ -1207,18 +1212,19 @@ public class ControllerSupplierData {
 		    wayp = columnData.toArray(new String[0]);
 		    apiRequest.waypoints(wayp);
 			
-			
+
 		    apiRequest.mode(TravelMode.DRIVING); 
 
-
+		    
 		    final CountDownLatch latch = new CountDownLatch(1);
 		    
+		    System.out.println(latch.toString());
+		    
 		    apiRequest.setCallback(new PendingResult.Callback<DirectionsResult>() {
-		    	 
-		        @Override
+		    	
+		        //@Override
 		        public void onResult(DirectionsResult result) {
-		            routes = result.routes;
-		           
+		        	routes = result.routes;
 		            Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		           //routes[1].waypointOrder.toString();
 		           System.out.println(Arrays.toString(routes[0].waypointOrder));
@@ -1238,6 +1244,7 @@ public class ControllerSupplierData {
 		        
 
 				private String getOptimalRoute() {
+
 					String s ="Optimal route: ";
 		        	//Arrays.toString(routes[0].waypointOrder);
 		        	
@@ -1255,16 +1262,17 @@ public class ControllerSupplierData {
 		        	
 		        }
 		    });
+		    
 
 		    // We have to hold the main thread open until callback is called by OkHTTP.
 		    try {
-				latch.await();
+			    System.out.println("stage 6");
+		    	latch.await();
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		  
-	
+		    	
 		}
 	}
 	

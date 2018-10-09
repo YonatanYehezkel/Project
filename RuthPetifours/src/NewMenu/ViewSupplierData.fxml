@@ -142,7 +142,7 @@
 												<columns>
 													<TableColumn fx:id="tcOrderID" text="OrderID" />
 													<TableColumn fx:id="tcOrderRequest" text="Customer" />
-													<TableColumn fx:id="tcOrderDate" text="City" />
+													<TableColumn fx:id="tcOrderDate" text="Address" />
 													<TableColumn fx:id="tcClerk" text="Order Sum" />
 													
 												</columns>

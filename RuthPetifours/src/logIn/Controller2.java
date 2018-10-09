@@ -241,7 +241,7 @@ public class Controller2 implements Initializable {
 						  RestorePasswordController cont = 
 								    loader.<RestorePasswordController>getController();
 								  cont.initData(currentUser);
-						MainClass.getPrimaryStage().setScene(appSetScene);
+						NewMenu.getPrimaryStage().setScene(appSetScene);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
