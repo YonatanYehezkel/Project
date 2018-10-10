@@ -61,7 +61,7 @@
 			<Label text="Answer on first security question:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
 			<TextField fx:id="tfAFSQ" GridPane.columnIndex="1" GridPane.rowIndex="4" disable="true" />
 			
-			<Label text="Secon security question:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+			<Label text="Second security question:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
 			<TextField fx:id="tfSSQ" GridPane.columnIndex="1" GridPane.rowIndex="5" disable="true" />
 			
 			<Label text="Answer on second security question:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
@@ -83,11 +83,9 @@
 			<Label text="All mandatory feilds should be filled." GridPane.columnIndex="1" GridPane.rowIndex="1" textFill="#db140b" visible="false"/>
 		
 			
-			<Label text="Job role" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+			<Label text="*Job role" GridPane.columnIndex="0" GridPane.rowIndex="2" />
 			<ComboBox fx:id="tfTitle2"  GridPane.columnIndex="1" GridPane.rowIndex="2" disable="true" />
 			
-			<Label text="Permissions:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-			<ComboBox fx:id="tfName2"  GridPane.columnIndex="1" GridPane.rowIndex="3" disable="true" />
 						
 		<padding>
 			<Insets top="10" bottom="10" left="10" right="10" />

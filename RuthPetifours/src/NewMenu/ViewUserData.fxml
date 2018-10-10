@@ -29,6 +29,7 @@
 						<Button fx:id="btnNew" styleClass="btnTopbar" text="New" />
 						<Button fx:id="btnEdit" styleClass="btnTopbar" text="Edit" />
 						<Button fx:id="btnDelete" styleClass="btnTopbar" text="Delete" />
+						<Button fx:id="btnRefresh" styleClass="btnTopbar" text="Refresh" />
 					</HBox>
 				</StackPane>
 			</AnchorPane>
@@ -104,9 +105,10 @@
 						                  			<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
 						               			</columnResizePolicy>
 												<columns>
-													<TableColumn fx:id="tcOfferID" text="ID" />
-													<TableColumn fx:id="tcOfferRole" text="Role" />
+													<!-- <TableColumn fx:id="tcOfferID" text="ID" /> -->
+													
 											    	<TableColumn fx:id="tcOfferUser" text="UserName" />
+											    	<TableColumn fx:id="tcOfferRole" text="Role" />
 													<TableColumn fx:id="tcOfferQuestion1" text="First question" />
 													<TableColumn fx:id="tcOfferAnswer1" text="First answer" />
 													<TableColumn fx:id="tcOfferQuestion2" text="Second question" />

@@ -89,7 +89,7 @@ public class ControllerUserData {
 	
 	@FXML private TableView<User> tvOffer;
 	
-	@FXML private TableColumn<User,Integer> tcOfferID;
+	//@FXML private TableColumn<User,Integer> tcOfferID;
 	@FXML private TableColumn<User,String> tcOfferRole;
 	@FXML private TableColumn<User,String> tcOfferUser;
 	@FXML private TableColumn<User,String> tcOfferQuestion1;
@@ -109,7 +109,7 @@ public class ControllerUserData {
 	@FXML private Button btnDelete;
 	@FXML private Button btnSearch;
 	@FXML private Button btnRemovefilters;
-	
+	@FXML private Button btnRefresh;
 	
 	
 	@FXML private HBox hboxBtnTopbar;
@@ -134,6 +134,7 @@ public class ControllerUserData {
 		initBtnEditAbort();
 		initBtnDelete();
 		initBtnRemovefilters();
+		initBtnRefresh();
 
 		
 		/* TABLES */
@@ -155,6 +156,7 @@ public class ControllerUserData {
 //	        	}
 //	    });
 		
+		//tcOfferUser.setSortType(TableColumn.SortType.ASCENDING);
 	}
 	
 
@@ -162,6 +164,16 @@ public class ControllerUserData {
 	/*
 	 * BUTTONS
 	 */
+	
+	private void initBtnRefresh() {
+		btnRefresh.setOnAction(new EventHandler<ActionEvent>() {
+					
+					@Override
+					public void handle(ActionEvent event) {
+						loadDataFromDB();
+					}
+				});
+	}
 
 	private void initBtnRemovefilters(){
 		
@@ -395,44 +407,44 @@ public class ControllerUserData {
 	private void initBtnDelete(){
 		
 		btnDelete.setGraphic(new GraphicButton("delete_32.png").getGraphicButton());
-//		btnDelete.setOnAction(new EventHandler<ActionEvent>() {
-//
-//			@Override
-//			public void handle(ActionEvent event) {
-//				if(tvOffer.getSelectionModel().getSelectedItem() != null) {
-//					Alert alert = new Alert(AlertType.CONFIRMATION);
-//					alert.initOwner(MainClass.getPrimaryStage());
-//			        alert.setHeaderText("Confirm before delete");
-//			        alert.setContentText("Are you sure yo want to remove the customer from the system?");
-//			        alert.showAndWait();
-//			       
-//			        if(alert.getResult().getText().equals("OK")) {
-//			        	Customer del = tvOffer.getSelectionModel().getSelectedItem();
-//			        	String del_id = del.getCustomerName();
-//			        	if(controller.deleteCustomer(del_id)) {
-//			        		int selectedIndex = tvOffer.getSelectionModel().getSelectedIndex();
-//			        	    if (selectedIndex >= 0) {
-//			        	    	tvOffer.getItems().remove(selectedIndex);
-//			        	    }
-//			        	    
-//			        	    Alert alert2 = new Alert(AlertType.INFORMATION);
-//			        	    alert2.initOwner(MainClass.getPrimaryStage());
-//			        	  
-//			        	    alert2.setHeaderText("Delete Confirmation");
-//			        	    alert2.setContentText("Selected customer has been successfully removed.");
-//			        	    alert2.showAndWait();	    	
-//			        	}
-//			        }
-//				}
-//				else {
-//					Alert alert = new Alert(AlertType.WARNING);
-//					alert.initOwner(MainClass.getPrimaryStage());
-//		        
-//		            alert.setContentText("Select a customer for deletion.");
-//		            alert.showAndWait();
-//				}
-//			}
-//		});
+		btnDelete.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				if(tvOffer.getSelectionModel().getSelectedItem() != null) {
+					Alert alert = new Alert(AlertType.CONFIRMATION);
+					alert.initOwner(MainClass.getPrimaryStage());
+			        alert.setHeaderText("Confirm before delete");
+			        alert.setContentText("Are you sure yo want to remove the user from the system?");
+			        alert.showAndWait();
+			       
+			        if(alert.getResult().getText().equals("OK")) {
+			        	User del = tvOffer.getSelectionModel().getSelectedItem();
+			        	int del_id = del.getId();
+			        	if(controller.deleteUser(del_id)) {
+			        		int selectedIndex = tvOffer.getSelectionModel().getSelectedIndex();
+			        	    if (selectedIndex >= 0) {
+			        	    	tvOffer.getItems().remove(selectedIndex);
+			        	    }
+			        	    
+			        	    Alert alert2 = new Alert(AlertType.INFORMATION);
+			        	    alert2.initOwner(MainClass.getPrimaryStage());
+			        	  
+			        	    alert2.setHeaderText("Delete Confirmation");
+			        	    alert2.setContentText("User has been successfully removed.");
+			        	    alert2.showAndWait();	    	
+			        	}
+			        }
+				}
+				else {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.initOwner(MainClass.getPrimaryStage());
+		        
+		            alert.setContentText("Select a customer for deletion.");
+		            alert.showAndWait();
+				}
+			}
+		});
 		
 	}
 	
@@ -443,7 +455,7 @@ public class ControllerUserData {
 	 */
 	private void initTableOffer(){
 		
-		tcOfferID.setCellValueFactory(new PropertyValueFactory<>("id"));
+		//tcOfferID.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tcOfferRole.setCellValueFactory(new PropertyValueFactory<>("JobRole"));
 		tcOfferUser.setCellValueFactory(new PropertyValueFactory<>("userName"));
 		tcOfferQuestion1.setCellValueFactory(new PropertyValueFactory<>("question1"));
@@ -454,7 +466,7 @@ public class ControllerUserData {
 		
 		//tvOffer.setContextMenu(new ContextMenuTableOffer());
 		
-		
+		tcOfferUser.setSortType(TableColumn.SortType.ASCENDING);
 		
 		
 		tvOffer.prefHeightProperty().bind(NewMenu.getStage().heightProperty());

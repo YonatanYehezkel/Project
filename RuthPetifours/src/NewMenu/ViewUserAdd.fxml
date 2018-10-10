@@ -54,8 +54,90 @@
 						<VBox spacing="10" >
 							
 						
-										<fx:include source="ViewUserInfo.fxml" fx:id="deliveryAdress" />
+										<!--   <fx:include source="ViewUserInfo.fxml" fx:id="deliveryAdress" /> -->
+							
+							<HBox spacing="10" styleClass="HboxContent" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">							
+		<GridPane hgap="10" vgap="5">
+			<columnConstraints>
+				<ColumnConstraints halignment="RIGHT" />
+				<ColumnConstraints halignment="LEFT" />
+			</columnConstraints>
+			<Label text="Private information:" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+			<Label fx:id="message" text="All mandatory feilds should be filled." GridPane.columnIndex="1" GridPane.rowIndex="1" textFill="#db140b" visible="false"/>
+			<Label text="*First name:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+			<TextField fx:id="tfLocation" GridPane.columnIndex="1" GridPane.rowIndex="2" disable="true" />
+			
+		
+			<Label text="*Second name:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+			<TextField fx:id="tfStreet" GridPane.columnIndex="1" GridPane.rowIndex="3" disable="true" />
+			
+			<Label text="*Username:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+			<HBox fx:id="hboxBtnSearchSmall" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="4" >
+				<TextField fx:id="tfCustomerID" disable="true" />
+				<Button fx:id="btnCustomerSearch" id="btnSearchSmall" />
+			</HBox>
+			
+			<Label text="* - mandatory fields" GridPane.columnIndex="1" GridPane.rowIndex="11" /> 
+	
+		<padding>
+			<Insets top="10" bottom="10" left="10" right="10" />
+		</padding>	
+		</GridPane>	
+	
+		<!-- Second Block -->
+		<GridPane hgap="10" vgap="5" >
+			<columnConstraints>
+				<ColumnConstraints halignment="RIGHT" />
+				<ColumnConstraints halignment="LEFT" />
+			</columnConstraints>
+			<Label text="Security information:" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+			
+					
+			
+			<Label text="*Password" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+			<TextField fx:id="tfPassword"  GridPane.columnIndex="1" GridPane.rowIndex="2" disable="true" />
+			
+			<Label text="First security question:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+			<TextField fx:id="tfFSQ"  GridPane.columnIndex="1" GridPane.rowIndex="3" disable="true" />
 						
+			<Label text="Answer on first security question:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+			<TextField fx:id="tfAFSQ" GridPane.columnIndex="1" GridPane.rowIndex="4" disable="true" />
+			
+			<Label text="Second security question:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+			<TextField fx:id="tfSSQ" GridPane.columnIndex="1" GridPane.rowIndex="5" disable="true" />
+			
+			<Label text="Answer on second security question:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+			<TextField fx:id="tfASSQ" GridPane.columnIndex="1" GridPane.rowIndex="6" disable="true" />
+			
+		<padding>
+			<Insets top="10" bottom="10" left="10" right="10" />
+		</padding>	
+		</GridPane>
+	
+		<!-- Third Block -->
+		<GridPane hgap="10" vgap="5">	
+			<columnConstraints>
+				<ColumnConstraints halignment="RIGHT" />
+				<ColumnConstraints halignment="LEFT" />
+			</columnConstraints>
+			<Label text="Business information:" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+			
+			<Label text="All mandatory feilds should be filled." GridPane.columnIndex="1" GridPane.rowIndex="1" textFill="#db140b" visible="false"/>
+		
+			
+			<Label text="*Job role" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+			<ComboBox fx:id="tfTitle2"  GridPane.columnIndex="1" GridPane.rowIndex="2" disable="true" />
+			
+						
+		<padding>
+			<Insets top="10" bottom="10" left="10" right="10" />
+		</padding>	
+		</GridPane>	
+														
+	</HBox>
+							
+							
+							
 							
 						</VBox>						
 					</left>

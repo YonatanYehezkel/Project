@@ -2,6 +2,7 @@ package NewMenu;
 
 import java.time.LocalDate;
 
+import Controller.ControllerLogic;
 import Controller.MainClass;
 import Model.Customer;
 import Model.User;
@@ -32,6 +33,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class ControllerUserAdd {
@@ -55,6 +59,7 @@ public class ControllerUserAdd {
 	@FXML private Button btnSave;
 	@FXML private Button btnAbort;
 	@FXML private Button btnClear;
+
 	
 	@FXML private Button btnBillingAdd;
 	@FXML private Button btnBillingDelete;
@@ -62,18 +67,206 @@ public class ControllerUserAdd {
 	private Stage stage;
 	private User createdUser = null;
 	
+	
+	
+	////////////////////////////
+	
+	@FXML private TextField tfCustomerID;
+	@FXML private TextField tfStreet;
+	@FXML private TextField tfLocation;
+	
+	@FXML private Label message;
+	
+	/* CONTACT1 DATA */
+
+	@FXML private TextField tfPassword;
+	@FXML private TextField tfFSQ;
+	@FXML private TextField tfAFSQ;
+	@FXML private TextField tfASSQ;
+	@FXML private TextField tfSSQ;
+
+	/* CONTACT2 DATA */
+
+	@FXML private ComboBox tfTitle2;
+
+	
+	/* BUTTONS */
+	@FXML private Button btnCustomerSearch;
+	@FXML private HBox hboxBtnSearchSmall;
+	
+	private int selectedCustomerID;
+	
+	private ControllerLogic controller;
+	
+	/////////////////////////////
+	
 	public ControllerUserAdd(){}
 	
 	@FXML private void initialize(){
 		
 		//deliveryAdressController.showSearchButtonSmall(true);
+		//userInfoController = new ControllerUserInfo();
 		//userInfoController.enableFields();
+		
+		controller = new ControllerLogic();
 		
 		initBtnSave();
 		initBtnAbort();
 		initBtnClear();
 		
+		
+		initBtnCustomerSearch();
+		
+		initTextFields();
+		
+		enableFields();
+		
+		initJobRoleComboBox();
+		
 	}
+	
+	private void initBtnCustomerSearch(){
+		
+		
+		btnCustomerSearch.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				searchCompany();
+			}
+		});
+		
+	}
+	
+
+	
+	private void initJobRoleComboBox() {
+		tfTitle2.getItems().addAll(controller.getAllJobRoles());
+	}
+	
+	
+public void enableFields(){
+		
+		tfCustomerID.setDisable(false);
+		tfStreet.setDisable(false);
+
+		tfLocation.setDisable(false);
+//		tfZip.setDisable(false);
+//		tfPhone.setDisable(false);
+//		tfMobile.setDisable(false);
+//		tfFax.setDisable(false);
+//		tfEmail.setDisable(false);
+//		tfWeb.setDisable(false);
+		
+		tfPassword.setDisable(false);
+		tfFSQ.setDisable(false);
+		tfAFSQ.setDisable(false);
+		tfASSQ.setDisable(false);
+		tfSSQ.setDisable(false);
+		
+		tfTitle2.setDisable(false);
+//		tfName2.setDisable(false);
+//		tfPhone2.setDisable(false);
+//		tfEmail2.setDisable(false);
+//		tfComment.setDisable(false);
+		
+		
+	}
+	
+public void clearFields(){
+		
+		//tfCustomerID.clear();
+		tfStreet.clear();
+
+		tfLocation.clear();
+//		tfZip.clear();
+//		tfPhone.clear();
+//		tfMobile.clear();
+//		tfFax.clear();
+//		tfEmail.clear();
+//		tfWeb.clear();
+		
+		tfPassword.clear();
+		tfFSQ.clear();
+		tfAFSQ.clear();
+		tfASSQ.clear();
+		tfSSQ.clear();
+		
+//		tfTitle2.clear();
+//		tfName2.clear();
+//		tfPhone2.clear();
+//		tfEmail2.clear();
+//		tfComment.clear();
+
+		
+	}
+
+
+private void loadCustomer(User u) {
+	tfPassword.setText(u.getPassword());
+	tfFSQ.setText(u.getQuestion1());
+	tfAFSQ.setText(u.getAnswer1());
+	tfSSQ.setText(u.getQuestion2());
+	tfASSQ.setText(u.getAnswer2());
+	
+}
+
+	
+	public void searchCompany(){
+		clearFields();
+		User u = controller.getUserByUsername(tfCustomerID.getText());
+	
+		if(u == null) {
+			
+		}
+		else 
+			loadCustomer(u);
+//		LoadCustomerSearch customerSearch = new LoadCustomerSearch(true);
+//		if(customerSearch.getController().getSelectedCustomerID() != 0){
+//			selectDeliveryAdress(customerSearch.getController().getSelectedCustomerID());	
+//		}
+		
+	}
+	
+private void initTextFields() {
+		
+		EventHandler<MouseEvent> event = new EventHandler<MouseEvent>() {
+			
+			@Override
+			public void handle(MouseEvent event) {
+				message.setVisible(false);
+			}
+		};
+		
+		tfCustomerID.setOnMouseClicked(event);
+		tfStreet.setOnMouseClicked(event);
+
+		tfLocation.setOnMouseClicked(event);
+//		tfZip.setOnMouseClicked(event);
+//		tfPhone.setOnMouseClicked(event);
+//		tfMobile.setOnMouseClicked(event);
+//		tfFax.setOnMouseClicked(event);
+//		tfEmail.setOnMouseClicked(event);
+//		tfWeb.setOnMouseClicked(event);
+		
+
+		tfPassword.setOnMouseClicked(event);
+		tfFSQ.setOnMouseClicked(event);
+		tfAFSQ.setOnMouseClicked(event);
+		tfASSQ.setOnMouseClicked(event);
+		tfSSQ.setOnMouseClicked(event);
+
+		/* CONTACT2 DATA */
+
+		tfTitle2.setOnMouseClicked(event);
+//		tfName2.setOnMouseClicked(event);
+//		tfPhone2.setOnMouseClicked(event);
+//		tfEmail2.setOnMouseClicked(event);
+		
+//		tfComment.setOnMouseClicked(event);
+		
+	}
+
 	
 	/*
 	 * BUTTONS
@@ -86,13 +279,77 @@ public class ControllerUserAdd {
 			@Override
 			public void handle(ActionEvent event) {
 				
-				if(userInfoController.getTfCustomerID().getText().isEmpty()
-						|| userInfoController.getTfStreet().getText().isEmpty()
-						|| userInfoController.getTfLocation().getText().isEmpty()
+				System.out.println(tfCustomerID.getText() + "kkkkkkkk");
+				
+				
+				if(tfCustomerID.getText().isEmpty()
+						|| tfStreet.getText().isEmpty()
+						|| tfLocation.getText().isEmpty()
+						|| tfPassword.getText().isEmpty()
+						|| tfTitle2.getSelectionModel().getSelectedItem() == null
 						) {
-					userInfoController.getMessage().setVisible(true);
+					message.setText("All mandatory feilds should be filled.");
+					message.setTextFill(Color.web("#cc3300"));
+					message.setVisible(true);
 					
 				}
+				else if(tfFSQ.getText().isEmpty() && !tfAFSQ.getText().isEmpty()) {
+					message.setText("You should fill first security question.");
+					message.setTextFill(Color.web("#cc3300"));
+					message.setVisible(true);
+				}
+				
+				else if(!tfFSQ.getText().isEmpty() && tfAFSQ.getText().isEmpty()) {
+					message.setText("You should fill answer on first security question.");
+					message.setTextFill(Color.web("#cc3300"));
+					message.setVisible(true);
+				}
+				
+				else if(!tfSSQ.getText().isEmpty() && tfASSQ.getText().isEmpty()) {
+					message.setText("You should fill answer on second security question.");
+					message.setTextFill(Color.web("#cc3300"));
+					message.setVisible(true);
+				}
+				
+				else if(tfSSQ.getText().isEmpty() && !tfASSQ.getText().isEmpty()) {
+					message.setText("You should fill second security question.");
+					message.setTextFill(Color.web("#cc3300"));
+					message.setVisible(true);
+				}
+				
+				else if(tfFSQ.getText().isEmpty() && !tfSSQ.getText().isEmpty()) {
+					message.setText("You can't add 2nd question without 1st one.");
+					message.setTextFill(Color.web("#cc3300"));
+					message.setVisible(true);
+				}
+				
+				else if(tfFSQ.getText().isEmpty() && tfSSQ.getText().isEmpty()) {
+					//create user without questions
+					if(controller.addNewUser(tfLocation.getText().toString(), tfStreet.getText().toString(), 
+							tfCustomerID.getText().toString(), tfPassword.getText().toString(), 
+							tfTitle2.getSelectionModel().getSelectedItem().toString())) {
+						message.setText("New user was added successfully.");
+						message.setTextFill(Color.web("#009933"));
+						message.setVisible(true);
+					}
+				}
+				
+				else if(!tfFSQ.getText().isEmpty() && tfSSQ.getText().isEmpty()) {
+					//create user with 1st question
+					
+					if(controller.addNewUser(tfLocation.getText().toString(), tfStreet.getText().toString(), 
+							tfCustomerID.getText().toString(), tfPassword.getText().toString(), 
+							tfTitle2.getSelectionModel().getSelectedItem().toString(), tfFSQ.getText().toString(), tfAFSQ.getText().toString())) {
+						message.setText("New user was added successfully.");
+						message.setTextFill(Color.web("#009933"));
+						message.setVisible(true);
+					}
+				}
+				
+				else if (!tfFSQ.getText().isEmpty() && tfSSQ.getText().isEmpty()) {
+					//create user with 1st and 2nd questions
+				}
+				
 //				else {
 //					String ad = deliveryAdressController.getTfStreet().getText() +" " 
 //							+ deliveryAdressController.getTfLocation().getText() + " " 
@@ -145,7 +402,7 @@ public class ControllerUserAdd {
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.initOwner(MainClass.getPrimaryStage());
 		        alert.setHeaderText("Confirm before closing.");
-		        alert.setContentText("Are you sure yo want to close this window without saving?");
+		        alert.setContentText("Are you sure you want to close this window?");
 		        alert.showAndWait();
 		        
 		        if(alert.getResult().getText().equals("OK")) {

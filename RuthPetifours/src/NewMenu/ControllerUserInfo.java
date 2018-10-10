@@ -62,7 +62,7 @@ public class ControllerUserInfo {
 	/* CONTACT2 DATA */
 
 	@FXML private ComboBox tfTitle2;
-	@FXML private ComboBox tfName2;
+//	@FXML private ComboBox tfName2;
 //	@FXML private TextField tfPhone2;
 //	@FXML private TextField tfEmail2;
 	
@@ -90,6 +90,12 @@ public class ControllerUserInfo {
 		initTextFields();
 		
 		enableFields();
+		
+		initJobRoleComboBox();
+	}
+	
+	private void initJobRoleComboBox() {
+		tfTitle2.getItems().addAll(controller.getAllJobRoles());
 	}
 	
 	private void initTextFields() {
@@ -123,7 +129,7 @@ public class ControllerUserInfo {
 		/* CONTACT2 DATA */
 
 		tfTitle2.setOnMouseClicked(event);
-		tfName2.setOnMouseClicked(event);
+//		tfName2.setOnMouseClicked(event);
 //		tfPhone2.setOnMouseClicked(event);
 //		tfEmail2.setOnMouseClicked(event);
 		
@@ -246,7 +252,7 @@ public class ControllerUserInfo {
 	 */
 	public void enableFields(){
 		
-		tfCustomerID.setDisable(false);
+		//tfCustomerID.setDisable(false);
 		tfStreet.setDisable(false);
 
 		tfLocation.setDisable(false);
@@ -263,7 +269,7 @@ public class ControllerUserInfo {
 		tfASSQ.setDisable(false);
 		tfSSQ.setDisable(false);
 		
-//		tfTitle2.setDisable(false);
+		tfTitle2.setDisable(false);
 //		tfName2.setDisable(false);
 //		tfPhone2.setDisable(false);
 //		tfEmail2.setDisable(false);
@@ -483,13 +489,13 @@ public class ControllerUserInfo {
 		this.tfTitle2 = tfTitle2;
 	}
 	
-	public ComboBox getTfName2() {
-		return tfName2;
-	}
-
-	public void setTfName2(ComboBox tfName2) {
-		this.tfName2 = tfName2;
-	}
+//	public ComboBox getTfName2() {
+//		return tfName2;
+//	}
+//
+//	public void setTfName2(ComboBox tfName2) {
+//		this.tfName2 = tfName2;
+//	}
 
 //	public TextField gettfPhone2() {
 //		return tfPhone2;

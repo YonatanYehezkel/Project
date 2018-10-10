@@ -103,28 +103,46 @@ public class ControllerCustomerAdd {
 					}
 					createdCustomer = new Customer (deliveryAdressController.getTfCustomerID().getText(), ad, comment);
 					
-					if(deliveryAdressController.checkAdress(ad)) {
-						if(deliveryAdressController.getController().addNewCustomer(createdCustomer)) {
-							
-							Alert alert = new Alert(AlertType.CONFIRMATION);
-							alert.initOwner(MainClass.getPrimaryStage());
-				            alert.setTitle("New Customer has been added successfuly");
-				            alert.setHeaderText("Customer Action");
-				            alert.setContentText("New Customer has been added successfulyl");
-				            alert.showAndWait();
-						}
-						else {
-							Alert alert = new Alert(AlertType.CONFIRMATION);
-							alert.initOwner(MainClass.getPrimaryStage());
-				            alert.setTitle("There was a problem adding new customer");
-				            alert.setHeaderText("Customer Action");
-				            alert.setContentText("There was a problem adding new customer");
-				            alert.showAndWait();
-						}
+					if(deliveryAdressController.getController().addNewCustomer(createdCustomer)) {
+						
+						Alert alert = new Alert(AlertType.CONFIRMATION);
+						alert.initOwner(MainClass.getPrimaryStage());
+			            alert.setTitle("New Customer has been added successfuly");
+			            alert.setHeaderText("Customer Action");
+			            alert.setContentText("New Customer has been added successfulyl");
+			            alert.showAndWait();
 					}
 					else {
-						System.out.println("adress not valid");
+						Alert alert = new Alert(AlertType.CONFIRMATION);
+						alert.initOwner(MainClass.getPrimaryStage());
+			            alert.setTitle("There was a problem adding new customer");
+			            alert.setHeaderText("Customer Action");
+			            alert.setContentText("There was a problem adding new customer");
+			            alert.showAndWait();
 					}
+					
+//					if(deliveryAdressController.checkAdress(ad)) {
+//						if(deliveryAdressController.getController().addNewCustomer(createdCustomer)) {
+//							
+//							Alert alert = new Alert(AlertType.CONFIRMATION);
+//							alert.initOwner(MainClass.getPrimaryStage());
+//				            alert.setTitle("New Customer has been added successfuly");
+//				            alert.setHeaderText("Customer Action");
+//				            alert.setContentText("New Customer has been added successfulyl");
+//				            alert.showAndWait();
+//						}
+//						else {
+//							Alert alert = new Alert(AlertType.CONFIRMATION);
+//							alert.initOwner(MainClass.getPrimaryStage());
+//				            alert.setTitle("There was a problem adding new customer");
+//				            alert.setHeaderText("Customer Action");
+//				            alert.setContentText("There was a problem adding new customer");
+//				            alert.showAndWait();
+//						}
+//					}
+//					else {
+//						System.out.println("adress not valid");
+//					}
 				}
 				
 			}

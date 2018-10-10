@@ -56,7 +56,7 @@ public class AddNewUserController implements Initializable{
 				&& !question2.getText().isEmpty() && !answer2.getText().isEmpty() && !jobRole.getValue().getJobRole().equals("")) {
 			
 			User u = new User (name.getText(), password.getText() , question1.getText() , answer1.getText()
-					,question2.getText() ,answer2.getText() ,jobRole.getValue().getId());
+					,question2.getText() ,answer2.getText());
 			
 			if(controller.addNewUser(u)) {
 				

@@ -119,7 +119,7 @@ public class DB {
 //						+ "where d.username like ? and d.jobRolecol like ? ");  
 				
 				PreparedStatement statement = con.prepareStatement("select * from (select iduser, username, password, question1,"
-						+ "question2, answer1, answer2,jobrole, jobRolecol from ruth_db.user u "
+						+ "question2, answer1, answer2, jobRolecol from ruth_db.user u "
 						+ "left join ruth_db.jobrole r on u.jobrole = r.idjobRole) d "
 						+ "where d.username like ? and d.jobRolecol like ? ");  
 				
@@ -130,7 +130,7 @@ public class DB {
 				while(rs.next())  {
 					  
 					User u = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-							rs.getString(6), rs.getString(7), rs.getInt(8), rs.getString(9));
+							rs.getString(6), rs.getString(7), rs.getString(8));
 					users.put(u.getUserName(), u);
 					
 				}
@@ -337,13 +337,13 @@ public class DB {
 			try {
 				
 				PreparedStatement statement = con.prepareStatement("select iduser, username, password, question1,"
-						+ "question2, answer1, answer2,jobrole, jobRolecol from ruth_db.user u "
+						+ "question2, answer1, answer2, jobRolecol from ruth_db.user u "
 						+ "left join ruth_db.jobrole r on u.jobrole = r.idjobRole");    
 				ResultSet rs = statement.executeQuery(); 
 				while(rs.next())  {
 					  
 					User u = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-							rs.getString(6), rs.getString(7), rs.getInt(8), rs.getString(9));
+							rs.getString(6), rs.getString(7), rs.getString(8));
 					users.put(u.getUserName(), u);
 					
 				}
@@ -368,7 +368,7 @@ public class DB {
 				while(rs.next())  {
 					//System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3)+"  "+rs.getString(4));  
 					User u = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-							rs.getString(6), rs.getString(7), rs.getInt(1));
+							rs.getString(6), rs.getString(7), rs.getString(8));
 					users.put(u.getUserName(), u);
 					
 				}
@@ -386,8 +386,8 @@ public class DB {
 	public boolean addNewUser (User u) {
 		if(setConnection()) {
 			try {
-				String query = "insert into user (username, password, question1, question2, answer1, answer2, jobrole)"
-					        + " values (?, ?, ?, ?, ?, ?, ?)";
+				String query = "insert into user (username, password, question1, question2, answer1, answer2, jobrole, firstname, secondname)"
+					        + " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				PreparedStatement statement = con.prepareStatement(query);    
 				//ResultSet rs = statement.executeQuery(); 
 				statement.setString (1, u.getUserName());
@@ -396,7 +396,9 @@ public class DB {
 				statement.setString (4, u.getQuestion2());
 				statement.setString (5, u.getAnswer1());
 				statement.setString (6, u.getAnswer2());
-				statement.setInt (7, u.getIdJobRole());
+				statement.setString (7, u.getJobRole());
+				statement.setString (8, u.getFirstName());
+				statement.setString (9, u.getSecondName());
 
 			      // execute the preparedstatement
 				statement.execute();
@@ -409,6 +411,76 @@ public class DB {
 		}
 		else 
 			System.out.println("DB is not available");
+		return false;
+	}
+	
+	public boolean addNewUser (String fname, String sname, String username, String password, String jobrole) {
+		if(setConnection()) {
+			try {
+				String query = "insert into user (firstname, secondname, username, password, jobrole)"
+					        + " values (?, ?, ?, ?, ?)";
+				PreparedStatement statement = con.prepareStatement(query);    
+				
+				statement.setString (1, fname);
+				statement.setString (2, sname);
+				statement.setString (3, username);
+				statement.setString (4, password);
+				statement.setString (5, jobrole);
+
+			      // execute the preparedstatement
+				statement.execute();
+			      
+			    con.close();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return false;
+	}
+	
+	public boolean addNewUser (String fname, String sname, String username, String password, String jobrole, String fq, String fa) {
+		if(setConnection()) {
+			if(!existingUser(username)) {
+			try {
+				String query = "insert into user (firstname, secondname, username, password, jobrole, question1, answer1)"
+					        + " values (?, ?, ?, ?, ?, ?, ?)";
+				PreparedStatement statement = con.prepareStatement(query);    
+				
+				statement.setString (1, fname);
+				statement.setString (2, sname);
+				statement.setString (3, username);
+				statement.setString (4, password);
+				statement.setString (5, jobrole);
+				statement.setString (6, fq);
+				statement.setString (7, fa);
+				
+
+			      // execute the preparedstatement
+				statement.execute();
+			      
+			    con.close();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+			else
+				editUser(fname, sname, username, password, jobrole, fq, fa);
+		}
+		else 
+			System.out.println("DB is not available");
+		return false;
+	}
+	
+	public boolean existingUser(String username) {
+		
+		return false;
+	}
+	
+	public boolean editUser(String fname, String sname, String username, String password, String jobrole, String fq, String fa) {
 		return false;
 	}
 	
@@ -639,7 +711,7 @@ public class DB {
 				ResultSet rs = statement.executeQuery(); 
 				while(rs.next())  {
 					//System.out.println(rs.getInt(1) + rs.getString(2) + rs.getString(3) + rs.getString(4) + rs.getString(5) + rs.getString(6) + rs.getString(7) + rs.getInt(8));  
-					u = new User(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
+					u = new User(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
 					//c.setContacts(getContactsOfCustomer(c));
 				}
 				con.close();
@@ -663,7 +735,7 @@ public class DB {
 				ResultSet rs = statement.executeQuery(); 
 				while(rs.next())  {
 					//System.out.println(rs.getInt(1) + rs.getString(2) + rs.getString(3) + rs.getString(4) + rs.getString(5) + rs.getString(6) + rs.getString(7) + rs.getInt(8));  
-					u = new User(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
+					u = new User(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
 					//c.setContacts(getContactsOfCustomer(c));
 				}
 				con.close();
@@ -1017,7 +1089,7 @@ public class DB {
 			     preparedStmt.setString(4, u.getQuestion2());
 			     preparedStmt.setString(5, u.getAnswer1());
 			     preparedStmt.setString(6, u.getAnswer2());
-			     preparedStmt.setInt(7, u.getIdJobRole());
+			     preparedStmt.setString(7, u.getJobRole());
 			     preparedStmt.setInt(8, u.getId());
 	
 			     // execute the java preparedstatement
