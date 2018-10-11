@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
+import Controller.MainClass;
 import Model.City;
 import Model.Contact;
 import Model.Customer;
@@ -18,6 +19,8 @@ import Model.JobRole;
 import Model.Order;
 import Model.Product;
 import Model.User;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -54,7 +57,7 @@ public class DB {
 	try{  
 		Class.forName("com.mysql.jdbc.Driver");  
 		con=DriverManager.getConnection(  
-		"jdbc:mysql://localhost:3306/ruth_db?useSSL=false","root","Longshot747"
+		"jdbc:mysql://localhost:3306/ruth_db?useSSL=false","root","1234"
 			/*"jdbc:mysql://localhost:3306/ruth_db?useSSL=false","root","Longshot747"*/
 		 );  
 		 
@@ -416,6 +419,7 @@ public class DB {
 	
 	public boolean addNewUser (String fname, String sname, String username, String password, String jobrole) {
 		if(setConnection()) {
+			if(!existingUser(username)) {
 			try {
 				String query = "insert into user (firstname, secondname, username, password, jobrole)"
 					        + " values (?, ?, ?, ?, ?)";
@@ -432,9 +436,16 @@ public class DB {
 			      
 			    con.close();
 				return true;
-			} catch (SQLException e) {
+			} 
+			catch (MySQLIntegrityConstraintViolationException e) {
+				editUser(fname, sname, username, password, jobrole);
+			}
+			catch (SQLException e) {
 				e.printStackTrace();
 			}  
+			}
+			else
+				editUser(fname, sname, username, password, jobrole);
 		}
 		else 
 			System.out.println("DB is not available");
@@ -463,7 +474,12 @@ public class DB {
 			      
 			    con.close();
 				return true;
-			} catch (SQLException e) {
+			} 
+			catch (MySQLIntegrityConstraintViolationException e) {
+				editUser(fname, sname, username, password, jobrole, fq, fa);
+			}
+			
+			catch (SQLException e) {
 				e.printStackTrace();
 			}  
 		}
@@ -475,12 +491,198 @@ public class DB {
 		return false;
 	}
 	
+	public boolean addNewUser (String fname, String sname, String username, String password, String jobrole, String fq, String fa, String sq, String sa) {
+		if(setConnection()) {
+			if(!existingUser(username)) {
+			try {
+				String query = "insert into user (firstname, secondname, username, password, jobrole, question1, answer1, question2, answer2)"
+					        + " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				PreparedStatement statement = con.prepareStatement(query);    
+				
+				statement.setString (1, fname);
+				statement.setString (2, sname);
+				statement.setString (3, username);
+				statement.setString (4, password);
+				statement.setString (5, jobrole);
+				statement.setString (6, fq);
+				statement.setString (7, fa);
+				statement.setString (8, sq);
+				statement.setString (9, sa);
+				
+
+			      // execute the preparedstatement
+				statement.execute();
+			      
+			    con.close();
+				return true;
+			} 
+			catch (MySQLIntegrityConstraintViolationException e) {
+				editUser(fname, sname, username, password, jobrole, fq, fa, sq, sa);
+			}
+			
+			catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+			else
+				editUser(fname, sname, username, password, jobrole, fq, fa, sq, sa);
+		}
+		else 
+			System.out.println("DB is not available");
+		return false;
+	}
+	
 	public boolean existingUser(String username) {
-		
+		if(!getUserByUsername(username).equals(null)) {
+			//System.out.println("eeeeeeeeeeeeeee");
+			return true;
+		}
 		return false;
 	}
 	
 	public boolean editUser(String fname, String sname, String username, String password, String jobrole, String fq, String fa) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.initOwner(MainClass.getPrimaryStage());
+        //alert.setHeaderText("Confirm before delete");
+        alert.setContentText("User esists in system. Do you want to update?");
+        alert.showAndWait();
+       
+        if(alert.getResult().getText().equals("OK")) {
+        	if(setConnection()) {
+    			try {
+    				 String query = "update user set firstname = ?, secondname = ?, password = ?, "
+    				 		+ "jobrole = ?, question1 = ?, answer1 = ? "
+    				 		+ "where username = ?";
+    			     PreparedStatement preparedStmt = con.prepareStatement(query);
+    			     preparedStmt.setString  (1, fname);
+    			     preparedStmt.setString(2, sname);
+    			     preparedStmt.setString(3, password);
+    			     preparedStmt.setString(4, jobrole);
+    			     preparedStmt.setString(5, fq);
+    			     preparedStmt.setString(6, fa);
+    			     preparedStmt.setString(7, username);
+    	
+    			     preparedStmt.executeUpdate();
+    			      
+    			    con.close();
+    			    
+    			    Alert alert2 = new Alert(AlertType.INFORMATION);
+    				alert2.initOwner(MainClass.getPrimaryStage());
+    		        //alert.setHeaderText("Confirm before delete");
+    		        alert2.setContentText("User was updated successfully.");
+    		        alert2.show();
+    		        
+    				return true;
+    			} catch (SQLException e) {
+    				e.printStackTrace();
+    			}  
+    		}
+    		else 
+    			System.out.println("DB is not available");
+    			
+    		return false;
+
+        }
+		
+		
+		return false;
+	}
+	
+	public boolean editUser(String fname, String sname, String username, String password, String jobrole, String fq, String fa, String sq, String sa) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.initOwner(MainClass.getPrimaryStage());
+        //alert.setHeaderText("Confirm before delete");
+        alert.setContentText("User esists in system. Do you want to update?");
+        alert.showAndWait();
+       
+        if(alert.getResult().getText().equals("OK")) {
+        	if(setConnection()) {
+    			try {
+    				 String query = "update user set firstname = ?, secondname = ?, password = ?, "
+    				 		+ "jobrole = ?, question1 = ?, answer1 = ?, question2 = ?, answer2 = ?"
+    				 		+ "where username = ?";
+    			     PreparedStatement preparedStmt = con.prepareStatement(query);
+    			     preparedStmt.setString  (1, fname);
+    			     preparedStmt.setString(2, sname);
+    			     preparedStmt.setString(3, password);
+    			     preparedStmt.setString(4, jobrole);
+    			     preparedStmt.setString(5, fq);
+    			     preparedStmt.setString(6, fa);
+    			     preparedStmt.setString(7, sq);
+    			     preparedStmt.setString(8, sa);
+    			     
+    			     preparedStmt.setString(9, username);
+    	
+    			     preparedStmt.executeUpdate();
+    			      
+    			    con.close();
+    			    
+    			    Alert alert2 = new Alert(AlertType.INFORMATION);
+    				alert2.initOwner(MainClass.getPrimaryStage());
+    		        //alert.setHeaderText("Confirm before delete");
+    		        alert2.setContentText("User was updated successfully.");
+    		        alert2.show();
+    		        
+    				return true;
+    			} catch (SQLException e) {
+    				e.printStackTrace();
+    			}  
+    		}
+    		else 
+    			System.out.println("DB is not available");
+    			
+    		return false;
+
+        }
+		
+		
+		return false;
+	}
+	
+	
+	public boolean editUser(String fname, String sname, String username, String password, String jobrole) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.initOwner(MainClass.getPrimaryStage());
+        //alert.setHeaderText("Confirm before delete");
+        alert.setContentText("User esists in system. Do you want to update?");
+        alert.showAndWait();
+       
+        if(alert.getResult().getText().equals("OK")) {
+        	if(setConnection()) {
+    			try {
+    				 String query = "update user set firstname = ?, secondname = ?, password = ?, "
+    				 		+ "jobrole = ?"
+    				 		+ "where username = ?";
+    			     PreparedStatement preparedStmt = con.prepareStatement(query);
+    			     preparedStmt.setString  (1, fname);
+    			     preparedStmt.setString(2, sname);
+    			     preparedStmt.setString(3, password);
+    			     preparedStmt.setString(4, jobrole);
+    			     preparedStmt.setString(5, username);
+    	
+    			     preparedStmt.executeUpdate();
+    			      
+    			    con.close();
+    			    
+    			    Alert alert2 = new Alert(AlertType.INFORMATION);
+    				alert2.initOwner(MainClass.getPrimaryStage());
+    		        //alert.setHeaderText("Confirm before delete");
+    		        alert2.setContentText("User was updated successfully.");
+    		        alert2.show();
+    		        
+    				return true;
+    			} catch (SQLException e) {
+    				e.printStackTrace();
+    			}  
+    		}
+    		else 
+    			System.out.println("DB is not available");
+    			
+    		return false;
+
+        }
+		
+		
 		return false;
 	}
 	
@@ -735,7 +937,7 @@ public class DB {
 				ResultSet rs = statement.executeQuery(); 
 				while(rs.next())  {
 					//System.out.println(rs.getInt(1) + rs.getString(2) + rs.getString(3) + rs.getString(4) + rs.getString(5) + rs.getString(6) + rs.getString(7) + rs.getInt(8));  
-					u = new User(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
+					u = new User(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10));
 					//c.setContacts(getContactsOfCustomer(c));
 				}
 				con.close();

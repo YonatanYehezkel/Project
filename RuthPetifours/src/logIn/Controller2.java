@@ -100,10 +100,6 @@ public class Controller2 implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
-       
-
-        //Image image = new Image(getClass().getResource("pic.jpg").toExternalForm());
-        //pic.setFill(new ImagePattern(image));
 
                 login.setText("Login");
                 

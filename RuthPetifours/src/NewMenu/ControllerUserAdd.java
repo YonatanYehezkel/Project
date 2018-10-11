@@ -142,6 +142,8 @@ public class ControllerUserAdd {
 	
 	private void initJobRoleComboBox() {
 		tfTitle2.getItems().addAll(controller.getAllJobRoles());
+		tfTitle2.getItems().add("Select job role");
+		tfTitle2.getSelectionModel().select("Select job role");
 	}
 	
 	
@@ -151,12 +153,6 @@ public void enableFields(){
 		tfStreet.setDisable(false);
 
 		tfLocation.setDisable(false);
-//		tfZip.setDisable(false);
-//		tfPhone.setDisable(false);
-//		tfMobile.setDisable(false);
-//		tfFax.setDisable(false);
-//		tfEmail.setDisable(false);
-//		tfWeb.setDisable(false);
 		
 		tfPassword.setDisable(false);
 		tfFSQ.setDisable(false);
@@ -165,55 +161,44 @@ public void enableFields(){
 		tfSSQ.setDisable(false);
 		
 		tfTitle2.setDisable(false);
-//		tfName2.setDisable(false);
-//		tfPhone2.setDisable(false);
-//		tfEmail2.setDisable(false);
-//		tfComment.setDisable(false);
-		
+
 		
 	}
 	
 public void clearFields(){
 		
-		//tfCustomerID.clear();
+		tfCustomerID.clear();
 		tfStreet.clear();
 
-		tfLocation.clear();
-//		tfZip.clear();
-//		tfPhone.clear();
-//		tfMobile.clear();
-//		tfFax.clear();
-//		tfEmail.clear();
-//		tfWeb.clear();
-		
+		tfLocation.clear();		
 		tfPassword.clear();
 		tfFSQ.clear();
 		tfAFSQ.clear();
 		tfASSQ.clear();
 		tfSSQ.clear();
 		
-//		tfTitle2.clear();
-//		tfName2.clear();
-//		tfPhone2.clear();
-//		tfEmail2.clear();
-//		tfComment.clear();
+		tfTitle2.getSelectionModel().select("Select job role");
+		//initJobRoleComboBox();
 
 		
 	}
 
 
 private void loadCustomer(User u) {
+	
+	tfLocation.setText(u.getFirstName());
+	tfStreet.setText(u.getSecondName());
 	tfPassword.setText(u.getPassword());
 	tfFSQ.setText(u.getQuestion1());
 	tfAFSQ.setText(u.getAnswer1());
 	tfSSQ.setText(u.getQuestion2());
 	tfASSQ.setText(u.getAnswer2());
-	
+	tfTitle2.getSelectionModel().select(u.getJobRole());
 }
 
 	
 	public void searchCompany(){
-		clearFields();
+		//clearFields();
 		User u = controller.getUserByUsername(tfCustomerID.getText());
 	
 		if(u == null) {
@@ -286,7 +271,7 @@ private void initTextFields() {
 						|| tfStreet.getText().isEmpty()
 						|| tfLocation.getText().isEmpty()
 						|| tfPassword.getText().isEmpty()
-						|| tfTitle2.getSelectionModel().getSelectedItem() == null
+						|| tfTitle2.getSelectionModel().getSelectedItem() == "Select job role"
 						) {
 					message.setText("All mandatory feilds should be filled.");
 					message.setTextFill(Color.web("#cc3300"));
@@ -346,8 +331,17 @@ private void initTextFields() {
 					}
 				}
 				
-				else if (!tfFSQ.getText().isEmpty() && tfSSQ.getText().isEmpty()) {
+				else if (!tfFSQ.getText().isEmpty() && !tfSSQ.getText().isEmpty()) {
 					//create user with 1st and 2nd questions
+					
+					if(controller.addNewUser(tfLocation.getText().toString(), tfStreet.getText().toString(), 
+							tfCustomerID.getText().toString(), tfPassword.getText().toString(), 
+							tfTitle2.getSelectionModel().getSelectedItem().toString(), tfFSQ.getText().toString(), 
+							tfAFSQ.getText().toString(), tfSSQ.getText().toString(), tfASSQ.getText().toString())) {
+						message.setText("New user was added successfully.");
+						message.setTextFill(Color.web("#009933"));
+						message.setVisible(true);
+					}
 				}
 				
 //				else {
@@ -423,7 +417,7 @@ private void initBtnClear(){
 			@Override
 			public void handle(ActionEvent event) {
 				
-				userInfoController.clearFields();
+				clearFields();
 				
 			}
 		});

@@ -112,6 +112,7 @@ public class ControllerCustomerData {
 	@FXML private Button btnImport;
 	@FXML private Button btnSearch;
 	@FXML private Button btnRemovefilters;
+	@FXML private Button btnRefresh;
 	
 	
 	@FXML private HBox hboxBtnTopbar;
@@ -126,7 +127,7 @@ public class ControllerCustomerData {
 	@FXML private void initialize(){
 		
 		controller = new ControllerLogic(); 
-		//deliveryAdressController.showSearchButtonSmall(false);
+
 		
 		/* BUTTONS */
 		
@@ -138,14 +139,11 @@ public class ControllerCustomerData {
 		initBtnImport();
 		initBtnRemovefilters();
 		initBtnSearch();
+		initBtnRefresh();
 		
 		/* TABLES */
 		initTableOffer();
 		
-		
-		
-//		initTableDeliverybill();
-//		initTableInvoice();
 		
 		loadDataFromDB();
 		
@@ -165,23 +163,23 @@ public class ControllerCustomerData {
 	/*
 	 * BUTTONS
 	 */
-//	private void initBtnSearch(){
-//		
-//		btnSearch.setGraphic(new GraphicButton("search_32.png").getGraphicButton());
-//		btnSearch.setOnAction(new EventHandler<ActionEvent>() {
-//
-//			@Override
-//			public void handle(ActionEvent event) {
-//				
-//				LoadCustomerSearch customerSearch = new LoadCustomerSearch(true);
-//				if(customerSearch.getController().getSelectedCustomerID() != 0){
-//					selectCustomer(customerSearch.getController().getSelectedCustomerID());
-//				}
-//				
-//			}
-//		});
-//		
-//	}
+
+	
+	private void initBtnRefresh() {
+		btnRefresh.setOnAction(new EventHandler<ActionEvent>() {
+					
+					@Override
+					public void handle(ActionEvent event) {
+						loadDataFromDB();
+						
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.initOwner(MainClass.getPrimaryStage());
+			            alert.setContentText("Table was refreshed");
+			            alert.showAndWait();
+					}
+				});
+	}
+	
 	private void initBtnRemovefilters(){
 		
 		btnRemovefilters.setStyle("-fx-background-color: #669999;");
@@ -199,13 +197,13 @@ public class ControllerCustomerData {
 	}
 	private void initBtnSearch(){
 		
-		//btnNew.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
+	
 		btnSearch.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
 			public void handle(ActionEvent event) {
 				loadNewDataFromDB();
-				//buildRouteTbl3();
+		
 			}
 		});
 		
@@ -317,8 +315,7 @@ public class ControllerCustomerData {
 				
 				
 			
-//				hboxBtnTopbar.getChildren().add(hboxBtnTopbar.getChildren().indexOf(btnEdit) + 1, btnEditSave);
-//				hboxBtnTopbar.getChildren().add(hboxBtnTopbar.getChildren().indexOf(btnEdit) + 2, btnEditAbort);
+
 				
 				enableFields();				
 				setButtonState();
@@ -337,59 +334,7 @@ public class ControllerCustomerData {
 			@Override
 			public void handle(ActionEvent event) {
 				
-//				/* UPDATE CUSTOMER */
-//				if(new ValidateCustomerSave(new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfCustomerID().getText()), 
-//											deliveryAdressController.getTfName1().getText()).isValid()){
-//					
-//					new UpdateCustomer(
-//						new ModelCustomer(
-//							new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfCustomerID().getText()),
-//							deliveryAdressController.getCbSalutation().getSelectionModel().getSelectedItem(),
-//							deliveryAdressController.getTfName1().getText(), 
-//							deliveryAdressController.getTfName2().getText(),
-//							deliveryAdressController.getTfStreet().getText(), 
-//							deliveryAdressController.getCbLand().getSelectionModel().getSelectedItem(), 
-//							new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfZip().getText()), 
-//							deliveryAdressController.getTfLocation().getText(), 
-//							
-//							deliveryAdressController.getTfPhone().getText(), 
-//							deliveryAdressController.getTfMobile().getText(), 
-//							deliveryAdressController.getTfFax().getText(), 
-//							deliveryAdressController.getTfEmail().getText(),
-//							deliveryAdressController.getTfWeb().getText(), 
-//							deliveryAdressController.getTfTaxID().getText(), 
-//							deliveryAdressController.getTfUstID().getText(), 
-//							
-//							deliveryAdressController.getCbPayment().getSelectionModel().getSelectedItem(), 
-//							deliveryAdressController.getTfIBAN().getText(), 
-//							deliveryAdressController.getTfBIC().getText(), 
-//							deliveryAdressController.getTfBank().getText(), 
-//							new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfPaymentSkonto().getText()),
-//							new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfPaymentNetto().getText()), 
-//							new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfSkonto().getText()),
-//							deliveryAdressController.getCbCategory().getSelectionModel().getSelectedItem(),
-//							
-//							String.valueOf(LocalDate.now()), 
-//							taNotes.getText(),
-//							
-//							new Validate().new ValidateOnlyInteger().validateOnlyInteger(billingAdressController.getTfCustomerIDBilling().getText())),
-//						contactDataController.getObsListContact()
-//					);
-//					
-//					hboxBtnTopbar.getChildren().remove(btnEditAbort);
-//					hboxBtnTopbar.getChildren().remove(btnEditSave);
-//					
-//					disableFields();
-//					setButtonState();
-//					
-//					//Reload CustomerData
-//					if(stage != null){
-//						stage.close();
-//					}else{
-//						selectCustomer(new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfCustomerID().getText()));
-//					}
-//					
-//				}
+
 			}
 			
 		});		
@@ -513,128 +458,17 @@ public class ControllerCustomerData {
 		tvOffer.setItems(Customers);
 	}
 		
-	private void initTableDeliverybill(){
-		
-//		tcDeliverybillID.setCellValueFactory(new PropertyValueFactory<>("deliverybillID"));
-//		tcDeliverybillClerk.setCellValueFactory(new PropertyValueFactory<>("clerk"));
-//		tcDeliverybillRequest.setCellValueFactory(new PropertyValueFactory<>("request"));
-//		tcDeliverybillDate.setCellValueFactory(new PropertyValueFactory<>("deliverybillDate"));
-//		tcDeliverybillAmountOfPositions.setCellValueFactory(new PropertyValueFactory<>("amountOfPositions"));
-//		tcDeliverybillTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
-//		tcDeliverybillState.setCellValueFactory(new PropertyValueFactory<>("deliverystate"));
-//		tcDeliverybillState.setCellFactory(CheckBoxTableCell.forTableColumn(tcDeliverybillState));TODO
-		
-		//tvDeliverybill.setContextMenu(new ContextMenuTableDeliverybill());
-		
-//		tvDeliverybill.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//
-//			@Override
-//			public void handle(MouseEvent event) {
-//
-//				if(event.getClickCount() == 2){
-//					goToDeliverybill();
-//				}
-//				
-//			}
-//		});
-//		
-	}
+
 	
-	private void initTableInvoice(){
 		
-//		tcInvoiceID.setCellValueFactory(new PropertyValueFactory<>("invoiceID"));
-//		tcInvoiceDate.setCellValueFactory(new PropertyValueFactory<>("invoiceDate"));
-//		tcInvoiceClerk.setCellValueFactory(new PropertyValueFactory<>("clerk"));
-//		tcInvoiceDeliverybillID.setCellValueFactory(new PropertyValueFactory<>("deliverybillID"));
-//		tcInvoiceDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
-//		tcInvoiceAmountOfPositions.setCellValueFactory(new PropertyValueFactory<>("amountOfPositions"));
-//		tcInvoiceTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
-		
-		//tvInvoice.setContextMenu(new ContextMenuTableInvoice());
-		
-//		tvInvoice.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//
-//			@Override
-//			public void handle(MouseEvent event) {
-//
-//				if(event.getClickCount() == 2){
-//					goToInvoice();
-//				}
-//				
-//			}
-//		});
-		
-	}
+
 	
 	/*
 	 * DATABASE METHODS
 	 */
-	private void selectCustomer(int customerID){
-//		
-//		ModelCustomer customer = new SelectCustomer(new ModelCustomer(customerID)).getModelCustomer();
-//		taNotes.setText(customer.getNotes());
-//		lblLastChange.setText(customer.getLastChange());
-//		
-//		/* DELIVERYADRESS */
-//		deliveryAdressController.selectDeliveryAdress(customerID);
-//		
-//		/* CONTACTS */
-//		contactDataController.setTableData(customer.getObsListContacts());
-//		
-//		/* TITLE */
-//		main.getStage().setTitle((main.getProgramName().concat(" - Kundenstamm " + customer.getCustomerID() + " " + customer.getName1() + ", " + customer.getZip() + " " + customer.getLocation())));
-//		lblSubHeadline.setText("- " + customer.getCustomerID() + " " + customer.getName1() + ", " + customer.getZip() + " " + customer.getLocation());
-//		
-//		/* OFFER */
-//		selectOffer(customerID);
-//		
-//		/* DELIVERYBILL */
-//		selectDeliverybill(customerID);
-//		
-//		/* INVOICE */
-//		selectInvoice(customerID);
-//		
-//		/* BILLING */
-//		//ALWAYS LAST - OTHERWISE THE DATA IN THE MODEL WOULD BE OVERWRITTEN
-//		if(customer.getBillingID() != 0){
-//			billingAdressController.selectBillingAdress(customer.getBillingID());
-//		}else{				
-//			billingAdressController.clearFields();
-//		}
-//		
-//		setButtonState();
-//		
-	}
+
 	
-	private void selectOffer(int customerID){
-		
-//		if(customerID != 0){
-//			tvOffer.setItems(new SelectOffer(new ModelOffer(customerID), OfferSelection.ALL_OFFER_FROM_CUSTOMER).getObsListOffer());
-//		}else{
-//			System.out.println("Bitte g�ltige Kundennummer w�hlen!");
-//		}
-		
-	}
-	
-	private void selectDeliverybill(int customerID){
-		
-//		if(customerID != 0){
-//			tvDeliverybill.setItems(new SelectDeliverybill(new ModelDeliverybill(customerID), DeliverybillSelection.ALL_DELIVERYBILL_FROM_CUSTOMER).getObsListDeliverybill());
-//		}else{
-//			System.out.println("Bitte g�ltige Kundennummer w�hlen!");
-//		}
-//		
-	}
-	
-	private void selectInvoice(int customerID){
-		
-//		if(customerID != 0){
-//			tvInvoice.setItems(new SelectInvoice(new ModelInvoice(customerID), InvoiceSelection.ALL_INVOICE_FROM_CUSTOMER).getModelInvoice().getObsListCustomerInvoice());
-//		}else{
-//			System.out.println("Bitte g�ltige Kundennummer w�hlen!");
-//		}
-		
-	}
+
 	
 	/*
 	 * UI METHODS
@@ -653,17 +487,7 @@ public class ControllerCustomerData {
 		
 	}
 	
-	private void resetFields(){
-		
-//		deliveryAdressController.clearFields();		
-//		billingAdressController.clearFields();
-//		
-//		taNotes.clear();
-//		lblLastChange.setText("Letzte �nderung: "); //Same is in the FXML-File
-//		
-//		lblSubHeadline.setText("");
-		
-	}
+
 			
 	private void setButtonState(){
 		

@@ -35,7 +35,7 @@ public class BestSellingReportController implements Initializable {
 		// TODO Auto-generated method stub
 		controller = new ControllerLogic();
 		ProductsToShow = controller.getBestSelllingProducts();
-		System.out.println(ProductsToShow.toString());
+		//System.out.println(ProductsToShow.toString());
 		ObservableList<PieChart.Data> pieChartData =FXCollections.observableArrayList();
 		
 		for (Product p:ProductsToShow) {

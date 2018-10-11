@@ -35,6 +35,8 @@ public class NewMenu extends Application {
 				
 				primaryStage = new Stage();
 				
+				primaryStage.getIcons().add(new Image("file:Images/cupcake.png"));
+				
 				try {
 					openNewLogIn();
 				} catch (IOException e) {
@@ -61,7 +63,7 @@ public class NewMenu extends Application {
 				
 				stage.setScene(scene);
 				stage.setTitle(programName);
-				stage.getIcons().add(new Image("file:Images/app_icon.png"));
+				stage.getIcons().add(new Image("file:Images/cupcake.png"));
 				stage.setWidth(1200);
 				stage.setHeight(600);
 				stage.setMaximized(true);

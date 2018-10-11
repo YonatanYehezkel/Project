@@ -363,6 +363,11 @@ public class ControllerLogic {
 		return db.addNewUser(fname, sname, username, password, jobRole, fquestion, fanswer);
 	}
 	
+	public boolean addNewUser(String fname, String sname, String username, String password, String jobRole, String fquestion, 
+			String fanswer, String squestion, String sanswer) {
+		return db.addNewUser(fname, sname, username, password, jobRole, fquestion, fanswer, squestion, sanswer);
+	}
+	
 	public boolean updateUser(User u) {
 		if(db.updateUser(u))
 			return true;

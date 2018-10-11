@@ -449,7 +449,7 @@ public class ControllerProductData {
 		
 		tvOffer.setItems(products);
 		
-		System.out.println(products.get(1).getTitle());
+		//System.out.println(products.get(1).getTitle());
 	}
 		
 	private void initTableDeliverybill(){

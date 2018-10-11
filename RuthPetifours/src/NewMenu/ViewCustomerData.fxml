@@ -27,13 +27,12 @@
 			<AnchorPane styleClass="Headbar">
 				<StackPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 					<HBox fx:id="hboxBtnTopbar" alignment="CENTER_LEFT" StackPane.alignment="CENTER_LEFT">
-						<!-- <Button fx:id="btnSearch" text="Search" styleClass="btnTopbar" /> -->
+						
 						<Button fx:id="btnNew" styleClass="btnTopbar" text="New" />
 						<Button fx:id="btnEdit" styleClass="btnTopbar" text="Edit" />
-						<!-- BtnEditSave is added with Java-Code -->
-						<!-- BtnEditAbort is added with Java-Code -->
 						<Button fx:id="btnDelete" styleClass="btnTopbar" text="Delete" />
 						<Button fx:id="btnImport" styleClass="btnTopbar" text="Import" />
+						<Button fx:id="btnRefresh" styleClass="btnTopbar" text="Refresh" />
 					</HBox>
 				</StackPane>
 			</AnchorPane>

@@ -53,9 +53,8 @@ import googleMap.DistanceMatrixApiRequest;
 import googleMap.GeoApiContext;
 import googleMap.GeocodingApi;
 import googleMap.GeocodingResult;
-import View.RadialGlobalMenu;
-import RadioMenu.DemoUtil;
-import RadioMenu.RadialSettingsMenu;
+
+
 
 
 public class MainClass extends Application {
@@ -74,7 +73,7 @@ public class MainClass extends Application {
 
 
     private Group container;
-    private RadialSettingsMenu radialMenu;
+   // private RadialSettingsMenu radialMenu;
     private boolean visible = false;
 
   	
