@@ -92,8 +92,8 @@ public class RestorePasswordController {
 	
 	public void openNewLogIn() throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("/logIn/profile2.fxml"));
-
-        root.setOnMousePressed(new EventHandler<MouseEvent>() {
+        
+		root.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 xOffset = event.getSceneX();
@@ -110,6 +110,7 @@ public class RestorePasswordController {
 
         Scene scene = new Scene(root);
         
+		
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setScene(scene);
         primaryStage.show();

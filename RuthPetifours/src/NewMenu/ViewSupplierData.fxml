@@ -162,10 +162,12 @@
 													<ColumnConstraints halignment="RIGHT" />
 													<ColumnConstraints halignment="LEFT" />
                                                 <ColumnConstraints />
+                                                <ColumnConstraints />
 												</columnConstraints>
 												<Label text="SUM:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 												<TextField fx:id="sumTbl1" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-												<Button fx:id="buildTbl1" text="Get Route" GridPane.columnIndex="2" GridPane.rowIndex="0" />												
+												<Button fx:id="buildTbl1" text="Get Route" GridPane.columnIndex="2" />
+                                             <Button fx:id="exportRoute1" disable="true" mnemonicParsing="false" text="Export Route" GridPane.columnIndex="3" />												
 											<padding>
 												<Insets bottom="10" left="10" right="10" top="10" />
 											</padding>
@@ -229,10 +231,12 @@
 													<ColumnConstraints halignment="RIGHT" />
 													<ColumnConstraints halignment="LEFT" />
                                                 <ColumnConstraints />
+                                                <ColumnConstraints />
 												</columnConstraints>
 												<Label text="SUM:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 												<TextField fx:id="sumTbl3" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 												<Button fx:id="buildTbl3" text="Get Route" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                                             <Button fx:id="exportRoute3" disable="true" mnemonicParsing="false" text="Export Route" GridPane.columnIndex="3" />
 																								
 											<padding>
 												<Insets bottom="10" left="10" right="10" top="10" />
