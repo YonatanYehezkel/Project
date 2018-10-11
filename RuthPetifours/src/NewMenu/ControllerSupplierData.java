@@ -108,7 +108,9 @@ public class ControllerSupplierData {
 	@FXML private TextField sumTbl3;
 	
 	@FXML private Button buildTbl1;
+	@FXML private Button exportRoute1;
 	@FXML private Button buildTbl3;
+	@FXML private Button exportRoute3;
 	@FXML private Button btnSearch;
 	@FXML private Button btnRemovefilters;
 	
@@ -1181,8 +1183,7 @@ public class ControllerSupplierData {
 	
 	
 	private void buildRouteTbl1() {
-		
-		
+				
 		if(tvOrder1.getItems().size()==0){
 			System.out.println("list is empty");
 			Alert alert = new Alert(AlertType.WARNING);
@@ -1218,7 +1219,7 @@ public class ControllerSupplierData {
 		    
 		    final CountDownLatch latch = new CountDownLatch(1);
 		    
-		    System.out.println(latch.toString());
+		    //System.out.println(latch.toString());
 		    
 		    apiRequest.setCallback(new PendingResult.Callback<DirectionsResult>() {
 		    	
@@ -1245,12 +1246,12 @@ public class ControllerSupplierData {
 
 				private String getOptimalRoute() {
 
-					String s ="Optimal route: ";
+					String s ="The Optimal route is: ";
 		        	//Arrays.toString(routes[0].waypointOrder);
 		        	
 		        	for( int i = 0; i <= routes[0].waypointOrder.length - 1; i++) {
 		        		//System.out.println(wayp[routes[0].waypointOrder[i]].toString());
-		        		s = s.concat(wayp[routes[0].waypointOrder[i]].toString()).concat(", ");
+		        		s = "\n"+s.concat(wayp[routes[0].waypointOrder[i]].toString()).concat(", ");
 		        	}
 		        	
 		        	//System.out.println(routes[0].waypointOrder);
@@ -1335,12 +1336,12 @@ public class ControllerSupplierData {
 		        
 
 				private String getOptimalRoute() {
-					String s ="Optimal route: ";
+					String s ="The Optimal route is: ";
 		        	//Arrays.toString(routes[0].waypointOrder);
 		        	
 		        	for( int i = 0; i <= routes[0].waypointOrder.length - 1; i++) {
 		        		//System.out.println(wayp[routes[0].waypointOrder[i]].toString());
-		        		s = s.concat(wayp[routes[0].waypointOrder[i]].toString()).concat(", ");
+		        		s = "\n"+s.concat(wayp[routes[0].waypointOrder[i]].toString()).concat(", ");
 		        	}
 		        	
 		        	//System.out.println(routes[0].waypointOrder);
@@ -1374,9 +1375,7 @@ public class ControllerSupplierData {
 		}
 		
 		table.setItems(orders);
-		
-		System.out.println("kkkkkkkkkkk");
-		
+				
 	}
 }
 
