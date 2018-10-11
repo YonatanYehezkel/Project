@@ -193,7 +193,7 @@ public class DB {
 				ResultSet rs=stmt.executeQuery("select * from product");  
 				while(rs.next())  {
 					Product p = new Product (rs.getInt(1), rs.getString(2), rs.getFloat(3), rs.getString(4));
-					System.out.println(p.toString());
+					//System.out.println(p.toString());
 					//c.setContacts(getContactsOfCustomer(c));
 					products.put(rs.getInt(1), p);
 				}

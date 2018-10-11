@@ -1,5 +1,6 @@
 package View;
 
+import java.awt.Button;
 import java.io.IOException;
 
 import javax.swing.JOptionPane;
@@ -12,7 +13,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -20,9 +23,11 @@ import javafx.stage.StageStyle;
 public class RestorePasswordController {
 	
 	private User currentUser;
+	@FXML private AnchorPane screen;
 	@FXML private Text answer1;
 	@FXML private TextField yourAnswer;
 	@FXML private Text getSecondQ;
+	@FXML private Button save;
 	
 	  //ControllerLogic reference pointer
 	private static ControllerLogic controller;
@@ -114,6 +119,8 @@ public class RestorePasswordController {
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setScene(scene);
         primaryStage.show();
+        
+        screen.setVisible(false);
 	}
 
 
