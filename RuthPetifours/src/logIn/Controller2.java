@@ -253,8 +253,6 @@ public class Controller2 implements Initializable {
 			 errorUser.setVisible(false);
 			 String selected_text = userList.getSelectionModel().getSelectedItem();
 			 currentUser = controller.getUserByUsername(selected_text);
-			 }
-		 
-		 
+			 } 
 		 
 }

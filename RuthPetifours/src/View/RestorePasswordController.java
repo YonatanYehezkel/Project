@@ -1,12 +1,21 @@
 package View;
 
+import java.io.IOException;
+
 import javax.swing.JOptionPane;
 
 import Controller.ControllerLogic;
 import Model.User;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class RestorePasswordController {
 	
@@ -17,7 +26,9 @@ public class RestorePasswordController {
 	
 	  //ControllerLogic reference pointer
 	private static ControllerLogic controller;
-	
+    public static Stage primaryStage = new Stage();
+    private double xOffset = 0;
+    private double yOffset = 0;
 	private int count;
 	
 
@@ -72,10 +83,37 @@ public class RestorePasswordController {
 	}
 	
 	public void getSecondQuestion() {
+		primaryStage = new Stage();
 		count = 1;
 		answer1.setText(currentUser.getQuestion2());
 		yourAnswer.setText(null);
 		getSecondQ.setVisible(false);
 	}
+	
+	public void openNewLogIn() throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("/logIn/profile2.fxml"));
+
+        root.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                primaryStage.setX(event.getScreenX() - xOffset);
+                primaryStage.setY(event.getScreenY() - yOffset);
+            }
+        });
+
+        Scene scene = new Scene(root);
+        
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+	}
+
 
 }
