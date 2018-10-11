@@ -1,9 +1,21 @@
 package NewMenu;
 
-
+import org.apache.pdfbox.*;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Writer;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,6 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+
+import javax.print.DocFlavor;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -146,6 +160,7 @@ public class ControllerSupplierData {
 	private int[] opt_route;
 	private static final String API_KEY = "AIzaSyAIgMRRrFNahxoMfyQdsi7T07SeQ79lEgY";
 	
+	public String OptimalRoute1 = "";
 	
 	public ControllerSupplierData(){}
 	
@@ -1228,7 +1243,7 @@ public class ControllerSupplierData {
 		        	routes = result.routes;
 		            Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		           //routes[1].waypointOrder.toString();
-		           System.out.println(Arrays.toString(routes[0].waypointOrder));
+		           //System.out.println(Arrays.toString(routes[0].waypointOrder));
 		           opt_route = routes[0].waypointOrder;
 		            /*bestRout.setText(getOptimalRoute()); */
 		            System.out.println(getOptimalRoute());
@@ -1244,7 +1259,7 @@ public class ControllerSupplierData {
 
 		        
 
-				private String getOptimalRoute() {
+				protected String getOptimalRoute() {
 
 					String s ="The Optimal route is: ";
 		        	//Arrays.toString(routes[0].waypointOrder);
@@ -1255,7 +1270,9 @@ public class ControllerSupplierData {
 		        	}
 		        	
 		        	//System.out.println(routes[0].waypointOrder);
+		        	OptimalRoute1=s;
 					return s;
+					
 				}
 
 				@Override
@@ -1275,6 +1292,28 @@ public class ControllerSupplierData {
 			}
 		    	
 		}
+
+		this.exportRoute1.setDisable(false);
+	}
+	
+	public void exportRoute1ToPDF() throws Exception {
+		
+		System.out.println("exporting");
+		
+		PDDocument doc = new PDDocument();
+		PDPage page = new PDPage();
+		doc.addPage(page);
+		PDPageContentStream stream = new PDPageContentStream(doc,page);
+		PDFont font = PDType1Font.HELVETICA;
+		stream.setFont(font, 16);
+		stream.beginText();
+		stream.moveTextPositionByAmount(10, 750 );
+		stream.drawString(OptimalRoute1);
+		stream.endText();
+		stream.close();
+		doc.save("/Users/yonatanyehezkel/Desktop/Route1.pdf");
+		doc.close();
+		
 	}
 	
 	private void buildRouteTbl3() {
