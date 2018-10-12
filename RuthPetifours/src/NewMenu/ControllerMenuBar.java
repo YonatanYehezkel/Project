@@ -3,9 +3,14 @@ package NewMenu;
 
 
 
+import java.util.Optional;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
 
 public class ControllerMenuBar {
@@ -18,6 +23,8 @@ public class ControllerMenuBar {
 	@FXML private MenuItem itemOffer;
 	
 	@FXML private MenuItem itemProperties;
+	
+	@FXML private MenuItem close;
 	
 	//private LoadCustomerData customerData;
 	//private LoadArticleData articleData;
@@ -136,6 +143,24 @@ public class ControllerMenuBar {
 	 */	
 	public void setMain(NewMenu main){
 		this.main = main;
+	}
+	
+	public void closeSystem() {
+		
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmation Dialog");
+		alert.setHeaderText("Ruth Petifours System");
+		alert.setContentText("Are You sure you want to exit the system?");
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){
+		    // ... user chose OK
+			System.exit(0);
+		} else {
+		    // ... user chose CANCEL or closed the dialog
+			alert.close();
+		}
+		
 	}
 	
 }

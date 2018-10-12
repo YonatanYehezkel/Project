@@ -2,14 +2,18 @@ package View;
 
 import java.awt.Button;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
 import Controller.ControllerLogic;
 import Model.User;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
@@ -17,19 +21,25 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class RestorePasswordController {
+public class RestorePasswordController implements Initializable{
 	
 	private User currentUser;
 	@FXML private AnchorPane screen;
-	@FXML private BorderPane border;
+	//@FXML private BorderPane border;
 	@FXML private Text answer1;
 	@FXML private TextField yourAnswer;
 	@FXML private Text getSecondQ;
 	@FXML private Button save;
+	@FXML
+    Circle min;
+    @FXML
+    Circle close;
+    ActionEvent event;
 	
 	  //ControllerLogic reference pointer
 	private static ControllerLogic controller;
@@ -98,6 +108,7 @@ public class RestorePasswordController {
 	}
 	
 	public void openNewLogIn() throws IOException {
+		
 		Parent root = FXMLLoader.load(getClass().getResource("/logIn/profile2.fxml"));
         
 		root.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -122,8 +133,33 @@ public class RestorePasswordController {
         primaryStage.setScene(scene);
         primaryStage.show();
         
-        border.setVisible(false);
+        //border.setVisible(false);
         screen.setVisible(false);
+        
+	}
+	
+	/**** minimize ****/
+    @FXML
+    public void minclick(MouseEvent event) throws IOException {
+
+        ((Stage)((Circle)event.getSource()).getScene().getWindow()).setIconified(true);
+
+
+    }
+
+    /**** close screen ****/
+    @FXML
+    public void closeclick(MouseEvent event) throws IOException {
+
+
+        System.exit(0);
+
+    }
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

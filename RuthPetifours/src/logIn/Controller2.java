@@ -8,6 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -226,7 +228,13 @@ public class Controller2 implements Initializable {
 			 if(userList.getSelectionModel().isEmpty()) {
 				 //Alert alert = new Alert(AlertType.INFORMATION);
 				 //alert.setContentText("Select User");
-				 JOptionPane.showMessageDialog(null, "select User");
+				 //JOptionPane.showMessageDialog(null, "select User");
+				 Alert alert = new Alert(AlertType.INFORMATION);
+				 alert.setTitle("Information Dialog");
+				 alert.setHeaderText(null);
+				 alert.setContentText("Please select user for password reset!");
+
+				 alert.showAndWait();
 			 }
 			 else {	 
 				 try {
