@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -24,6 +25,7 @@ public class RestorePasswordController {
 	
 	private User currentUser;
 	@FXML private AnchorPane screen;
+	@FXML private BorderPane border;
 	@FXML private Text answer1;
 	@FXML private TextField yourAnswer;
 	@FXML private Text getSecondQ;
@@ -120,6 +122,7 @@ public class RestorePasswordController {
         primaryStage.setScene(scene);
         primaryStage.show();
         
+        border.setVisible(false);
         screen.setVisible(false);
 	}
 
