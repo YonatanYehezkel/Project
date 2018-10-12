@@ -159,7 +159,7 @@ public class DB {
 //				ResultSet rs=stmt.executeQuery("select * from customer"); 
 				
 				PreparedStatement statement = con.prepareStatement("select * from customer where customername like ? "
-						+ "and adress like ? and comment like ?");    
+						+ "and adress like ? and (comment like ? or comment is null)");    
 				statement.setString(1, "%" + customer + "%"); 
 				statement.setString(2, "%" + address + "%");
 				statement.setString(3, "%" + comment + "%");
@@ -294,7 +294,8 @@ public class DB {
 				statement.setString(1, name); 
 				ResultSet rs = statement.executeQuery(); 
 				while(rs.next())  {
-					c = new Customer(rs.getString(1),rs.getString(2), rs.getString(3));
+					c = new Customer(rs.getString(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), 
+							rs.getInt(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11));
 					c.setContacts(getContactsOfCustomer(c));
 				}
 				con.close();
@@ -852,29 +853,113 @@ public class DB {
 	
 	public boolean addNewCustomer (Customer customer) {
 		if(setConnection()) {
+			if(!existingCustomer(customer.getCustomerName())) {
 			try {
-				String query = "insert into customer (customername, adress, comment)"
-					        + " values (?, ?, ?)";
+				String query = "insert into customer (customername, adress, comment, city, street, zipcode, phone1, phone2, "
+						+ "fax, email, web)"
+					        + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				PreparedStatement statement = con.prepareStatement(query);    
 				//ResultSet rs = statement.executeQuery(); 
 				statement.setString (1, customer.getCustomerName());
 				statement.setString (2, customer.getAdress());
 				statement.setString (3, customer.getComment());
+				statement.setString (4, customer.getCity());
+				statement.setString (5, customer.getStreet());
+				statement.setInt (6, customer.getZipcode());
+				statement.setString (7, customer.getPhone1());
+				statement.setString (8, customer.getPhone2());
+				statement.setString (9, customer.getFax());
+				statement.setString (10, customer.getEmail());
+				statement.setString (11, customer.getWeb());
 		
 			      // execute the preparedstatement
 				statement.execute();
 			      
 			    con.close();
 				return true;
-			} catch (SQLException e) {
+			} catch (MySQLIntegrityConstraintViolationException e) {
+				editCustomer(customer);
+				return true;
+			}
+			
+			catch (SQLException e) {
 				e.printStackTrace();
 			}  
+			
+			}
+			else {
+				editCustomer(customer);
+				System.out.println("Customer exists");
+				return true;
+			}
 		}
 		else 
 			System.out.println("DB is not available");
 		return false;
 	}
 	
+	public boolean editCustomer (Customer c) {
+		
+		
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.initOwner(MainClass.getPrimaryStage());
+	        //alert.setHeaderText("Confirm before delete");
+	        alert.setContentText("Customer esists in system. Do you want to update?");
+	        alert.showAndWait();
+	       
+	        if(alert.getResult().getText().equals("OK")) {
+	        	if(setConnection()) {
+	    			try {
+	    				
+	    				String query = "update customer set adress = ?, comment = ?, city = ?, street =?, "
+	    						+ "zipcode = ?, phone1 =?, phone2 =?, fax = ?, email = ?, web =? "
+	    				 		+ "where customername = ?";
+	    			     PreparedStatement preparedStmt = con.prepareStatement(query);
+	    			     
+	    			     preparedStmt.setString(1, c.getAdress());
+	    			     preparedStmt.setString(2, c.getComment());
+	    			     preparedStmt.setString(3, c.getCity());
+	    			     preparedStmt.setString(4, c.getStreet());
+	    			     preparedStmt.setInt(5, c.getZipcode());
+	    			     preparedStmt.setString(6, c.getPhone1());
+	    			     preparedStmt.setString(7, c.getPhone2());
+	    			     preparedStmt.setString(8, c.getFax());
+	    			     preparedStmt.setString(9, c.getEmail());
+	    			     preparedStmt.setString(10, c.getWeb());
+	    			     preparedStmt.setString  (11, c.getCustomerName());
+	    			     
+
+	    			     preparedStmt.executeUpdate();
+	    			      
+	    			    con.close();
+	    			    
+	    			    Alert alert2 = new Alert(AlertType.INFORMATION);
+	    				alert2.initOwner(MainClass.getPrimaryStage());
+	    		        //alert.setHeaderText("Confirm before delete");
+	    		        alert2.setContentText("Customer was updated successfully.");
+	    		        alert2.show();
+	    		        
+	    				return true;
+	    			} catch (SQLException e) {
+	    				e.printStackTrace();
+	    			}  
+	    		}
+	    		else 
+	    			System.out.println("DB is not available");
+	    			
+	    		return false;
+
+	        }
+			
+		
+		return false;
+	}
+	
+	public boolean existingCustomer (String customerName) {
+		if (!getCustomerByName(customerName).equals(null))
+			return true;
+		return false;
+	}
 
 	
 	public boolean deleteCustomer (String s) {

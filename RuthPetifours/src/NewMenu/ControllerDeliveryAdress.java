@@ -35,11 +35,8 @@ public class ControllerDeliveryAdress {
 
 	/* MAIN DATA */
 	@FXML private TextField tfCustomerID;
-	//@FXML private ComboBox<String> cbSalutation;
 
-	//@FXML private TextField tfName2;
 	@FXML private TextField tfStreet;
-	//@FXML private ComboBox<String> cbLand;
 	@FXML private TextField tfZip;
 	@FXML private TextField tfLocation;
 	@FXML private TextField tfPhone;
@@ -153,20 +150,35 @@ public class ControllerDeliveryAdress {
 		}
 		else 
 			loadCustomer(s);
-//		LoadCustomerSearch customerSearch = new LoadCustomerSearch(true);
-//		if(customerSearch.getController().getSelectedCustomerID() != 0){
-//			selectDeliveryAdress(customerSearch.getController().getSelectedCustomerID());	
-//		}
 		
 	}
 	
 	private void loadCustomer(Customer s) {
 		ArrayList <Contact> arr = s.getContacts();
+		
+		
 		tfCustomerID.setText(s.getCustomerName());
-		tfStreet.setText(s.adress);
+		tfStreet.setText(s.getStreet());
+		tfLocation.setText(s.getCity());
+		tfZip.setText(String.valueOf(s.getZipcode()));
+		tfPhone.setText(s.getPhone1());
+		tfMobile.setText(s.getPhone2());
+		tfFax.setText(s.getFax());
+		tfEmail.setText(s.getEmail());
+		tfWeb.setText(s.getWeb());
 		tfComment.setText(s.getComment());
-		if(arr.size()>1) {
-			tfTitle1.setText(arr.get(0).jobRole);
+		if(!arr.isEmpty()) {
+			/* first contact */
+			tfTitle1.setText(arr.get(0).getJobRole());
+			tfName1.setText(arr.get(0).getContactName());
+			tfPhone1.setText(String.valueOf(arr.get(0).getPhoneNumber1()));
+			tfEmail1.setText(arr.get(0).getEmail1());
+			
+			/*second contact */
+			tfTitle2.setText(arr.get(1).getJobRole());
+			tfName2.setText(arr.get(1).getContactName());
+			tfPhone2.setText(String.valueOf(arr.get(1).getPhoneNumber1()));
+			tfEmail2.setText(arr.get(1).getEmail1());
 		}
 		
 	}
@@ -238,6 +250,9 @@ public class ControllerDeliveryAdress {
 		
 	/*
 	 * UI METHODS
+	 */
+	/**
+	 * 
 	 */
 	public void enableFields(){
 		

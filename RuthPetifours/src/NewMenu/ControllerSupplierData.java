@@ -158,7 +158,9 @@ public class ControllerSupplierData {
 	private String[] wayp;
 	private DirectionsRoute[] routes;
 	private int[] opt_route;
-	private static final String API_KEY = "AIzaSyAIgMRRrFNahxoMfyQdsi7T07SeQ79lEgY";
+	private static final String API_KEY = "AIzaSyBgZxet8V_vUHpGyO9qmLaM46z6kTxDahs";
+	
+	
 	
 	public String OptimalRoute1 = "";
 	public String OptimalRoute3 = "";
@@ -1285,7 +1287,7 @@ public class ControllerSupplierData {
 
 		    // We have to hold the main thread open until callback is called by OkHTTP.
 		    try {
-			    System.out.println("stage 6");
+			    //System.out.println("stage 6");
 		    	latch.await();
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block

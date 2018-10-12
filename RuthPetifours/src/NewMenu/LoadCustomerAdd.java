@@ -71,9 +71,9 @@ public class LoadCustomerAdd {
 	}
 	
 	private void loadCustomerToEdit(Customer customerToEdit) {
-		controller.getControllerDeliveryAdress().getTfCustomerID().setText(customerToEdit.getCustomerName());
-		controller.getControllerDeliveryAdress().getTfStreet().setText(customerToEdit.getAdress());
-		controller.getControllerDeliveryAdress().gettfComment().setText(customerToEdit.getComment());
+//		controller.getControllerDeliveryAdress().getTfCustomerID().setText(customerToEdit.getCustomerName());
+//		controller.getControllerDeliveryAdress().getTfStreet().setText(customerToEdit.getAdress());
+//		controller.getControllerDeliveryAdress().gettfComment().setText(customerToEdit.getComment());
 	}
 	
 	public AnchorPane getContent(){

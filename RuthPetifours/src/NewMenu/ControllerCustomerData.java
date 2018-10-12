@@ -114,7 +114,6 @@ public class ControllerCustomerData {
 	@FXML private Button btnRemovefilters;
 	@FXML private Button btnRefresh;
 	
-	
 	@FXML private HBox hboxBtnTopbar;
 	
 	private Stage stage;
@@ -453,6 +452,7 @@ public class ControllerCustomerData {
 		
 		for(Customer c : customers) {
 			Customers.add(c);
+			
 		}
 		
 		tvOffer.setItems(Customers);
