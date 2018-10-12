@@ -11,7 +11,7 @@
 			<MenuItem fx:id="close" onAction="#closeSystem" text="Close" />
 		</Menu>
 		<Menu text="Main Items">
-			<MenuItem fx:id="itemCustomer" text="Users" />
+			<MenuItem fx:id="itemUsers" text="Users" />
 			<MenuItem fx:id="itemArticle" text="Products" />
 			<MenuItem fx:id="itemSupplier" text="Orders" />
 			<MenuItem fx:id="itemStock" text="Customers" />

@@ -16,7 +16,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -46,7 +48,7 @@ public class RestorePasswordController implements Initializable{
     public static Stage primaryStage = new Stage();
     private double xOffset = 0;
     private double yOffset = 0;
-	private int count;
+	private int count=0;
 	
 
   	/*
@@ -83,7 +85,12 @@ public class RestorePasswordController implements Initializable{
 			getSecondQ.setVisible(true);
 		}
 		else if(count == 1 && yourAnswer.getText().equals(currentUser.getAnswer2())) {
-			JOptionPane.showMessageDialog(null, currentUser.getPassword());
+			//JOptionPane.showMessageDialog(null, currentUser.getPassword());
+			 Alert alert = new Alert(AlertType.INFORMATION);
+			 alert.setTitle("Password Restore");
+			 alert.setHeaderText(null);
+			 alert.setContentText("Your password has been restored: \n"+currentUser.getPassword());
+			 alert.showAndWait();
 		}
 		
 		/*if(yourAnswer.getText().equals(currentUser.getAnswer1()))
@@ -151,9 +158,7 @@ public class RestorePasswordController implements Initializable{
     @FXML
     public void closeclick(MouseEvent event) throws IOException {
 
-
         System.exit(0);
-
     }
 
 	@Override

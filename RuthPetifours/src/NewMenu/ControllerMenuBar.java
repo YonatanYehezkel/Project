@@ -15,7 +15,7 @@ import javafx.scene.control.MenuItem;
 
 public class ControllerMenuBar {
 
-	@FXML private MenuItem itemCustomer;
+	@FXML private MenuItem itemUsers;
 	@FXML private MenuItem itemArticle;
 	@FXML private MenuItem itemSupplier;
 	@FXML private MenuItem itemStock;
@@ -25,6 +25,9 @@ public class ControllerMenuBar {
 	@FXML private MenuItem itemProperties;
 	
 	@FXML private MenuItem close;
+	
+	private LoadUserData userData;
+
 	
 	//private LoadCustomerData customerData;
 	//private LoadArticleData articleData;
@@ -44,8 +47,11 @@ public class ControllerMenuBar {
 		//supplierData =  new LoadSupplierData(false, 0, main);
 		//offerData = new LoadOfferData(false, 0, 0, main);
 		
+		userData = new LoadUserData(false, main);
+
+		
 		//MenuItems
-		initItemCustomer();
+		inititemUsers();
 		initItemArticle();
 		initItemSupplier();
 		initItemStock();
@@ -99,17 +105,25 @@ public class ControllerMenuBar {
 		
 	}
 	
-	private void initItemCustomer(){
+	private void inititemUsers(){
 		
-		itemCustomer.setGraphic(new GraphicMenuItem("file:Images/customer_32_blue.png").getGraphicMenuItem());
-		itemCustomer.setOnAction(new EventHandler<ActionEvent>() {
+		itemUsers.setGraphic(new GraphicMenuItem("file:Images/customer_32_blue.png").getGraphicMenuItem());
+		itemUsers.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
 			public void handle(ActionEvent event) {
 				//main.getContentPane().setCenter(customerData.getContent());
+				main.getContentPane().setCenter(userData.getContent());
+				main.getStage().setTitle(main.getProgramName() + " - Users");
+				setSizeToScene();
 			}
 		});
 		
+	}
+	
+	private void setSizeToScene(){
+		if(! main.getStage().isMaximized())
+			main.getStage().sizeToScene();
 	}
 	
 	private void initItemOffer(){
