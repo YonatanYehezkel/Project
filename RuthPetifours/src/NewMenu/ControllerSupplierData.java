@@ -161,6 +161,7 @@ public class ControllerSupplierData {
 	private static final String API_KEY = "AIzaSyAIgMRRrFNahxoMfyQdsi7T07SeQ79lEgY";
 	
 	public String OptimalRoute1 = "";
+	public String OptimalRoute3 = "";
 	
 	public ControllerSupplierData(){}
 	
@@ -1298,7 +1299,7 @@ public class ControllerSupplierData {
 	
 	public void exportRoute1ToPDF() throws Exception {
 		
-		System.out.println("exporting");
+		System.out.println("exporting1");
 		
 		PDDocument doc = new PDDocument();
 		PDPage page = new PDPage();
@@ -1384,6 +1385,7 @@ public class ControllerSupplierData {
 		        	}
 		        	
 		        	//System.out.println(routes[0].waypointOrder);
+		        	OptimalRoute3=s;
 					return s;
 				}
 
@@ -1403,6 +1405,28 @@ public class ControllerSupplierData {
 		  
 	
 		}
+		
+		this.exportRoute3.setDisable(false);
+	}
+	
+	public void exportRoute3ToPDF() throws Exception {
+		
+		System.out.println("exporting");
+		
+		PDDocument doc = new PDDocument();
+		PDPage page = new PDPage();
+		doc.addPage(page);
+		PDPageContentStream stream = new PDPageContentStream(doc,page);
+		PDFont font = PDType1Font.HELVETICA;
+		stream.setFont(font, 16);
+		stream.beginText();
+		stream.moveTextPositionByAmount(10, 750 );
+		stream.drawString(OptimalRoute1);
+		stream.endText();
+		stream.close();
+		doc.save("/Users/yonatanyehezkel/Desktop/Route3.pdf");
+		doc.close();
+		
 	}
 	
 	private void sortTablebyOptimalRoute(TableView<Order> table) {
@@ -1416,5 +1440,6 @@ public class ControllerSupplierData {
 		table.setItems(orders);
 				
 	}
+	
 }
 
