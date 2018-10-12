@@ -72,11 +72,16 @@ public class RestorePasswordController implements Initializable{
 	
 	public void validateAnswer() {
 		//JOptionPane.showMessageDialog(null, "ok");
-		if(count == 0 && !yourAnswer.getText().equals(currentUser.getAnswer1())) {
+		if(count == 0 && !yourAnswer.getText().equals(currentUser.getAnswer1().toString())) {
 			getSecondQ.setVisible(true);
 		}
-		else if(count == 0 && yourAnswer.getText().equals(currentUser.getAnswer1())) {
-			JOptionPane.showMessageDialog(null, currentUser.getPassword());
+		else if(count == 0 && yourAnswer.getText().equals(currentUser.getAnswer1().toString())) {
+			//JOptionPane.showMessageDialog(null, currentUser.getPassword());
+			Alert alert = new Alert(AlertType.INFORMATION);
+			 alert.setTitle("Password Restore");
+			 alert.setHeaderText(null);
+			 alert.setContentText("Your password is: \n"+currentUser.getPassword());
+			 alert.showAndWait();
 		}
 		
 		//else if(count == 1 && !yourAnswer.getText().equals(currentUser.getAnswer2())) {
@@ -89,7 +94,7 @@ public class RestorePasswordController implements Initializable{
 			 Alert alert = new Alert(AlertType.INFORMATION);
 			 alert.setTitle("Password Restore");
 			 alert.setHeaderText(null);
-			 alert.setContentText("Your password has been restored: \n"+currentUser.getPassword());
+			 alert.setContentText("Your password is: \n"+currentUser.getPassword());
 			 alert.showAndWait();
 		}
 		
