@@ -3,16 +3,19 @@ package NewMenu;
 
 import java.io.IOException;
 
+import Model.User;
 //import de.michaprogs.crm.database.CreateTables;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import logIn.Controller2;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 public class NewMenu extends Application {
@@ -25,6 +28,12 @@ public class NewMenu extends Application {
 		private double xOffset = 0;
 	    private double yOffset = 0;
 	    public static Stage primaryStage;
+	    
+	    private AnchorPane root2;
+	    
+	    private Controller2 controller;
+	    
+	   public static User currentUser;
 	    
 		@Override
 		public void start(Stage stage) {
@@ -39,6 +48,7 @@ public class NewMenu extends Application {
 				
 				try {
 					openNewLogIn();
+					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -49,12 +59,10 @@ public class NewMenu extends Application {
 				
 				LoadMenuBar menubar = new LoadMenuBar(false, this);			
 				LoadNavigation navigation = new LoadNavigation(this);			
-				LoadCustomerData customerData = new LoadCustomerData(false, this);	
 				LoadSupplierData supplierData  =new LoadSupplierData(false, 0, this);
 				
 				contentPane.setTop(menubar.getContent());
 				contentPane.setLeft(navigation.getContent());			
-				contentPane.setCenter(customerData.getContent());
 				contentPane.setCenter(supplierData.getContent());
 				
 				
@@ -69,6 +77,9 @@ public class NewMenu extends Application {
 				stage.setMaximized(true);
 				getStage().setTitle(this.getProgramName() + " - Orders");
 				//stage.show();
+				
+				currentUser = controller.getCurrentUser();
+				System.out.println(currentUser.getUserName());
 				
 			} catch(Exception e) {
 				e.printStackTrace();
@@ -93,25 +104,31 @@ public class NewMenu extends Application {
 		}
 
 		private void openNewLogIn() throws IOException {
-			Parent root = FXMLLoader.load(getClass().getResource("/logIn/profile2.fxml"));
+		//	Parent root = FXMLLoader.load(getClass().getResource("/logIn/profile2.fxml"));
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/logIn/profile2.fxml"));
+			
+			root2 = loader.load();
+			controller = loader.getController();
+			controller.setMain(this);
 
-	        root.setOnMousePressed(new EventHandler<MouseEvent>() {
-	            @Override
-	            public void handle(MouseEvent event) {
-	                xOffset = event.getSceneX();
-	                yOffset = event.getSceneY();
-	            }
-	        });
-	        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-	            @Override
-	            public void handle(MouseEvent event) {
-	                primaryStage.setX(event.getScreenX() - xOffset);
-	                primaryStage.setY(event.getScreenY() - yOffset);
-	            }
-	        });
+//	        root.setOnMousePressed(new EventHandler<MouseEvent>() {
+//	            @Override
+//	            public void handle(MouseEvent event) {
+//	                xOffset = event.getSceneX();
+//	                yOffset = event.getSceneY();
+//	            }
+//	        });
+//	        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+//	            @Override
+//	            public void handle(MouseEvent event) {
+//	                primaryStage.setX(event.getScreenX() - xOffset);
+//	                primaryStage.setY(event.getScreenY() - yOffset);
+//	            }
+//	        });
 
 	        
-	        Scene scene = new Scene(root);
+	        Scene scene = new Scene(root2);
 
 
 

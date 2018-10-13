@@ -17,9 +17,11 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -34,7 +36,7 @@ public class ControllerNavigation {
 	@FXML private Button btnbestSellersReport;
 	@FXML private Button btnareasDemand;
 	@FXML private Button profitableCustomers;
-	@FXML private Button btnCustomer;
+	@FXML public Button btnCustomer;
 	@FXML private Button btnArticle;
 	@FXML private Button btnSupplier;
 	//@FXML private Button btnOffer;
@@ -150,10 +152,21 @@ public class ControllerNavigation {
 		btnCustomer.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
-			public void handle(ActionEvent event) {					
-				main.getContentPane().setCenter(userData.getContent());
-				main.getStage().setTitle(main.getProgramName() + " - Users");
-				setSizeToScene();
+			public void handle(ActionEvent event) {	
+				System.out.println(main.currentUser.getJobRole());
+				if(main.currentUser.getJobRole().equals("driver") || main.currentUser.getJobRole().equals("stockman")) {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.initOwner(MainClass.getPrimaryStage());
+		            alert.setHeaderText("Permissions denied.");
+		            alert.setContentText("You don't have permissions to access this page.");
+		            alert.showAndWait();
+				}
+				else {
+					main.getContentPane().setCenter(userData.getContent());
+					main.getStage().setTitle(main.getProgramName() + " - Users");
+					setSizeToScene();
+				}
+				
 			}
 		});
 		
@@ -166,9 +179,20 @@ public class ControllerNavigation {
 
 			@Override
 			public void handle(ActionEvent event) {
-				main.getContentPane().setCenter(productsData.getContent());
-				main.getStage().setTitle(main.getProgramName() + " - Products");
-				setSizeToScene();
+				
+				if(main.currentUser.getJobRole().equals("driver")) {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.initOwner(MainClass.getPrimaryStage());
+		            alert.setHeaderText("Permissions denied.");
+		            alert.setContentText("You don't have permissions to access this page.");
+		            alert.showAndWait();
+				}
+				else {
+					main.getContentPane().setCenter(productsData.getContent());
+					main.getStage().setTitle(main.getProgramName() + " - Products");
+					setSizeToScene();
+				}
+				
 			}
 		});
 		
@@ -196,9 +220,19 @@ public class ControllerNavigation {
 
 			@Override
 			public void handle(ActionEvent event) {
-				main.getContentPane().setCenter(customerData.getContent());
-				main.getStage().setTitle(main.getProgramName() + " - Customers");
-				setSizeToScene();
+				if(main.currentUser.getJobRole().equals("driver")) {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.initOwner(MainClass.getPrimaryStage());
+		            alert.setHeaderText("Permissions denied.");
+		            alert.setContentText("You don't have permissions to access this page.");
+		            alert.showAndWait();
+				}
+				else {
+					main.getContentPane().setCenter(customerData.getContent());
+					main.getStage().setTitle(main.getProgramName() + " - Customers");
+					setSizeToScene();
+				}
+				
 			}
 		});
 		
@@ -274,10 +308,15 @@ public class ControllerNavigation {
 
 			@Override
 			public void handle(ActionEvent event) {
-//				main.getContentPane().setCenter(orderData.getContent());
-//				main.getStage().setTitle(main.getProgramName() + " - Bestellung");
-//				setSizeToScene();
-				goToBestSellingReport();
+				if(main.currentUser.getJobRole().equals("driver") || main.currentUser.getJobRole().equals("stockman")) {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.initOwner(MainClass.getPrimaryStage());
+		            alert.setHeaderText("Permissions denied.");
+		            alert.setContentText("You don't have permissions to access this page.");
+		            alert.showAndWait();
+				}
+				else
+					goToBestSellingReport();
 			}
 		});
 		
@@ -330,10 +369,15 @@ public class ControllerNavigation {
 
 					@Override
 					public void handle(ActionEvent event) {
-//						main.getContentPane().setCenter(orderData.getContent());
-//						main.getStage().setTitle(main.getProgramName() + " - Bestellung");
-//						setSizeToScene();
-						goToMostDemandingArea();
+						if(main.currentUser.getJobRole().equals("driver") || main.currentUser.getJobRole().equals("stockman")) {
+							Alert alert = new Alert(AlertType.WARNING);
+							alert.initOwner(MainClass.getPrimaryStage());
+				            alert.setHeaderText("Permissions denied.");
+				            alert.setContentText("You don't have permissions to access this page.");
+				            alert.showAndWait();
+						}
+						else
+							goToMostDemandingArea();
 					}
 				});
 		
@@ -365,10 +409,15 @@ public class ControllerNavigation {
 
 			@Override
 			public void handle(ActionEvent event) {
-//				main.getContentPane().setCenter(orderData.getContent());
-//				main.getStage().setTitle(main.getProgramName() + " - Bestellung");
-//				setSizeToScene();
-				goToMostDemandingProfitable();
+				if(main.currentUser.getJobRole().equals("driver") || main.currentUser.getJobRole().equals("stockman")) {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.initOwner(MainClass.getPrimaryStage());
+		            alert.setHeaderText("Permissions denied.");
+		            alert.setContentText("You don't have permissions to access this page.");
+		            alert.showAndWait();
+				}
+				else
+					goToMostDemandingProfitable();
 			}
 		});
 		

@@ -36,10 +36,6 @@ import Controller.ControllerLogic;
 import Controller.MainClass;
 import Model.User;
 import NewMenu.*;
-import NewMenu.LoadCustomerData;
-import NewMenu.LoadMenuBar;
-import NewMenu.LoadNavigation;
-import NewMenu.NewMenu;
 import View.MainMenuController;
 import View.RestorePasswordController;
 
@@ -75,14 +71,21 @@ public class Controller2 implements Initializable {
     private double xOffset = 0;
     private double yOffset = 0;
     
+    
+    private NewMenu main;
+    
     //ControllerLogic reference pointer
   	private static ControllerLogic controller;
   	
   	private User currentUser;
+  	
+  	private BorderPane contentPane2 = new BorderPane();
+  	
+  	private static Stage stage2;
 
     private void aa(ActionEvent event) {
         // Button was clicked, do something...
-        System.out.println("jsdfh");
+    
       //  change(this);
 
     }
@@ -101,7 +104,8 @@ public class Controller2 implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
+    			stage2 = new Stage();
+    	
 
                 login.setText("Login");
                 
@@ -180,9 +184,65 @@ public class Controller2 implements Initializable {
 	}
 	
 	 @FXML private void goToMainMenu(){
-		 
+		
 		 NewMenu.getPrimaryStage().hide();
 		 NewMenu.getStage().show();
+		 NewMenu.currentUser = currentUser;
+		 
+
+		//new CreateTables();
+		 
+		 	//System.out.println(currentUser.getUserName());
+		 	
+//		 	if(currentUser.getJobRole() == "driver") {
+//		 		LoadMenuBar menubar = new LoadMenuBar(false, main);	
+//				LoadNavigation navigation = new LoadNavigation(main);	
+//				navigation.getController().btnCustomer.setDisable(true);
+//				LoadSupplierData supplierData  =new LoadSupplierData(false, 0, main);
+//				
+//				contentPane2.setTop(menubar.getContent());
+//				contentPane2.setLeft(navigation.getContent());			
+//				contentPane2.setCenter(supplierData.getContent());
+//				
+//				
+//				Scene scene = new Scene(contentPane2);
+//				scene.getStylesheets().add("style.css");
+//				
+//				stage2.setScene(scene);
+//				stage2.setTitle(programName);
+//				stage2.getIcons().add(new Image("file:Images/cupcake.png"));
+//				stage2.setWidth(1200);
+//				stage2.setHeight(600);
+//				stage2.setMaximized(true);
+//				stage2.setTitle(main.getProgramName() + " - Orders");
+//				stage2.show();
+//		 	}
+//		 	else {
+//				LoadMenuBar menubar = new LoadMenuBar(false, main);			
+//				LoadNavigation navigation = new LoadNavigation(main);			
+//				LoadSupplierData supplierData  =new LoadSupplierData(false, 0, main);
+//				
+//				contentPane2.setTop(menubar.getContent());
+//				contentPane2.setLeft(navigation.getContent());			
+//				contentPane2.setCenter(supplierData.getContent());
+//				
+//				
+//				Scene scene = new Scene(contentPane2);
+//				scene.getStylesheets().add("style.css");
+//				
+//				stage2.setScene(scene);
+//				stage2.setTitle(programName);
+//				stage2.getIcons().add(new Image("file:Images/cupcake.png"));
+//				stage2.setWidth(1200);
+//				stage2.setHeight(600);
+//				stage2.setMaximized(true);
+//				stage2.setTitle(main.getProgramName() + " - Orders");
+//				stage2.show();
+//		 	}
+			//stage.show();
+			//new CreateTables();
+			
+		
 			/* try {
 					FXMLLoader loader = new FXMLLoader();
 					loader.setLocation(OrdersSortingController.class.getResource("/View/OrdersSortingScreen.fxml"));
@@ -222,6 +282,11 @@ public class Controller2 implements Initializable {
 //				}
 //			 
 		 }
+	 
+	 
+	 public void setMain(NewMenu main){
+			this.main = main;
+		}
 		 
 		 @FXML private void openResrorePasswordWindow() {
 			 //JOptionPane.showMessageDialog(null, "ok");
@@ -258,5 +323,9 @@ public class Controller2 implements Initializable {
 			 String selected_text = userList.getSelectionModel().getSelectedItem();
 			 currentUser = controller.getUserByUsername(selected_text);
 			 } 
+		 
+		 public User getCurrentUser() {
+			 return currentUser;
+		 }
 		 
 }
