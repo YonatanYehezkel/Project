@@ -28,5 +28,6 @@
 	<classpathentry exported="true" kind="lib" path="external Jars/slf4j-nop-1.6.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="external Jars/xmlbeans-2.6.0.jar"/>
 	<classpathentry kind="lib" path="external Jars/pdfbox-app-2.0.12.jar"/>
+	<classpathentry kind="lib" path="external Jars/itextpdf-5.4.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

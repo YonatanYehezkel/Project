@@ -167,7 +167,7 @@
 												<Label text="SUM:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 												<TextField fx:id="sumTbl1" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 												<Button fx:id="buildTbl1" text="Get Route" GridPane.columnIndex="2" />
-                                             <Button disable="true" mnemonicParsing="false" onAction="#exportRoute1ToPDF" onMouseClicked="#exportRoute1ToPDF" text="Export Route" GridPane.columnIndex="3" />												
+                                             <Button mnemonicParsing="false" onAction="#exportRoute1ToPDF" onMouseClicked="#exportRoute1ToPDF" text="Export Route" GridPane.columnIndex="3" />												
 											<padding>
 												<Insets bottom="10" left="10" right="10" top="10" />
 											</padding>

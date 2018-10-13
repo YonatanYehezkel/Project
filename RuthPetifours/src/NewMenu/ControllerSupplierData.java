@@ -6,29 +6,46 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.encoding.WinAnsiEncoding;
 
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import javax.imageio.ImageIO;
 import javax.print.DocFlavor;
+import javax.swing.ImageIcon;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.itextpdf.text.*;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.CMYKColor;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import Controller.ControllerLogic;
 import Controller.MainClass;
@@ -162,7 +179,7 @@ public class ControllerSupplierData {
 	
 	
 	
-	public String OptimalRoute1 = "";
+	public ArrayList <String> OptimalRoute1 = new ArrayList<String>();
 	public String OptimalRoute3 = "";
 	
 	public ControllerSupplierData(){}
@@ -1201,6 +1218,8 @@ public class ControllerSupplierData {
 	
 	
 	private void buildRouteTbl1() {
+		
+		//this.exportRoute1.setDisable(false);
 				
 		if(tvOrder1.getItems().size()==0){
 			System.out.println("list is empty");
@@ -1263,17 +1282,24 @@ public class ControllerSupplierData {
 		        
 
 				protected String getOptimalRoute() {
+					
+					//ArrayList<String> routeText = new ArrayList <String>();
 
-					String s ="The Optimal route is: ";
+					String s ="The Optimal route is: #\n";
 		        	//Arrays.toString(routes[0].waypointOrder);
 		        	
 		        	for( int i = 0; i <= routes[0].waypointOrder.length - 1; i++) {
 		        		//System.out.println(wayp[routes[0].waypointOrder[i]].toString());
-		        		s = "\n"+s.concat(wayp[routes[0].waypointOrder[i]].toString()).concat(", ");
+		        		s = s.concat("# "+(i+1)+"* "+wayp[routes[0].waypointOrder[i]].toString()).concat(", ") + "#\n";
+		        		OptimalRoute1.add((i+1)+"* "+wayp[routes[0].waypointOrder[i]].toString());
 		        	}
 		        	
 		        	//System.out.println(routes[0].waypointOrder);
-		        	OptimalRoute1=s;
+		        	
+		        	System.out.println(OptimalRoute1);
+		        	
+		        	//OptimalRoute1=s;
+		        	
 					return s;
 					
 				}
@@ -1296,27 +1322,57 @@ public class ControllerSupplierData {
 		    	
 		}
 
-		this.exportRoute1.setDisable(false);
+		//this.exportRoute1.setDisable(false);
+		
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Information Dialog");
+		alert.setHeaderText("Route Has Been Successfully Built!");
+		alert.setContentText("You can view it through the table below \n and export it to a PDF file");
+
+		alert.showAndWait();
 	}
 	
-	public void exportRoute1ToPDF() throws Exception {
+	public void exportRoute1ToPDF() throws Exception {	
 		
-		System.out.println("exporting1");
+				
+		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+		Calendar calobj = Calendar.getInstance();
 		
-		PDDocument doc = new PDDocument();
-		PDPage page = new PDPage();
-		doc.addPage(page);
-		PDPageContentStream stream = new PDPageContentStream(doc,page);
-		PDFont font = PDType1Font.HELVETICA;
-		stream.setFont(font, 16);
-		stream.beginText();
-		stream.moveTextPositionByAmount(10, 750 );
-		stream.drawString(OptimalRoute1);
-		stream.endText();
-		stream.close();
-		doc.save("/Users/yonatanyehezkel/Desktop/Route1.pdf");
-		doc.close();
+		String dateString = df.format(calobj.getTime()).toString();
+				
+		Document document = new Document(PageSize.A4, 50, 50, 50, 50);
 		
+		PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("/Users/yonatanyehezkel/Desktop/Route1.pdf"));
+				
+		document.open();
+				
+		Paragraph title = new Paragraph("Driving Instructions For Today's Deliveries Route", FontFactory.getFont(FontFactory.HELVETICA, 18, Font.BOLDITALIC, new CMYKColor(0, 255, 255,17)));
+				    
+		Chapter chapter1 = new Chapter(title, 1);
+				       
+		chapter1.setNumberDepth(0);
+		
+		document.add(chapter1);
+		
+		
+		Paragraph dateText = new Paragraph("\n The date is: "+dateString+"\n");
+		
+		document.add(dateText);
+		
+		int rows = 0;
+
+		
+		for (Object row: tvOrder1.getItems()) {
+			
+			document.add(new Paragraph("\n\nDestination # "+(rows+1)+" is: "+tvOrder1.getItems().get(rows).getAdress()+
+									   "\nCustomer "+tvOrder1.getItems().get(rows).getCustomer()+
+									   "\nOrder Sum is: "+tvOrder1.getItems().get(rows).getValue()+"\n\n"));
+			
+			rows++;
+		}
+				
+		document.close();
+
 	}
 	
 	private void buildRouteTbl3() {
@@ -1423,7 +1479,7 @@ public class ControllerSupplierData {
 		stream.setFont(font, 16);
 		stream.beginText();
 		stream.moveTextPositionByAmount(10, 750 );
-		stream.drawString(OptimalRoute1);
+		//stream.drawString(OptimalRoute1);
 		stream.endText();
 		stream.close();
 		doc.save("/Users/yonatanyehezkel/Desktop/Route3.pdf");
