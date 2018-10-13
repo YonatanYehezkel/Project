@@ -7,7 +7,7 @@ import java.util.concurrent.CountDownLatch;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.lynden.gmapsfx.GoogleMapView;
+//import com.lynden.gmapsfx.GoogleMapView;
 
 import Controller.ControllerLogic;
 import Controller.MainClass;
@@ -39,7 +39,7 @@ public class BestRouteController implements Initializable{
 	@FXML private Button run;
 	@FXML private Button Back;
 	@FXML private Label cur_user;
-	@FXML private GoogleMapView map;
+	//@FXML private GoogleMapView map;
 	
 	//@FXML private GoogleMapView mapView = new GoogleMapView();
 	//private GoogleMap map = new GoogleMap();
