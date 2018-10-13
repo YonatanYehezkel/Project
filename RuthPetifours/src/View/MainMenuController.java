@@ -153,7 +153,7 @@ public class MainMenuController {
 		 
 	 }
 	 
-@FXML private void goToBuildRoute() {
+/*@FXML private void goToBuildRoute() {
 		 
 		 try {
 				FXMLLoader loader = new FXMLLoader();
@@ -172,7 +172,7 @@ public class MainMenuController {
 				e.printStackTrace();
 			}
 		 
-	 }
+	 }*/
 
 	@FXML private void goToReportsScreen() {
 				
