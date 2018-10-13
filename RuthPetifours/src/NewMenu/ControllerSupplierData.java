@@ -1297,7 +1297,7 @@ public class ControllerSupplierData {
 		        	
 		        	//System.out.println(routes[0].waypointOrder);
 		        	
-		        	System.out.println(OptimalRoute1);
+		        	//System.out.println(OptimalRoute1);
 		        	
 		        	//OptimalRoute1=s;
 		        	
@@ -1420,10 +1420,10 @@ public class ControllerSupplierData {
 		           
 		            Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		           //routes[1].waypointOrder.toString();
-		           System.out.println(Arrays.toString(routes[0].waypointOrder));
+		           //System.out.println(Arrays.toString(routes[0].waypointOrder));
 		           opt_route = routes[0].waypointOrder;
 		            /*bestRout.setText(getOptimalRoute()); */
-		            System.out.println(getOptimalRoute());
+		            //System.out.println(getOptimalRoute());
 		            //getOptimalRoute();
 		            //bestRout.setText(Arrays.toString(routes[0].waypointOrder));
 			        //System.out.println(gson.toJson(routes));
