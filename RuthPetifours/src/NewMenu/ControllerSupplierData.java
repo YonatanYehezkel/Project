@@ -82,6 +82,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -1345,51 +1346,34 @@ public class ControllerSupplierData {
 		}
 		
 		Image img = Image.getInstance("src/login/ruth.jpg");
-	
 		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
 		Calendar calobj = Calendar.getInstance();
-		
 		String dateString = df.format(calobj.getTime()).toString();
-				
-		Document document = new Document(PageSize.A4, 50, 50, 50, 50);
 		
-		PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("/Users/yonatanyehezkel/Desktop/Route1.pdf"));
-				
-		document.open();
-						
+	
+		Document document = new Document(PageSize.A4, 50, 50, 50, 50);		
+		PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(new FileChooser().showSaveDialog(stage)));
+		document.open();					
 		Paragraph title = new Paragraph("Driving Instructions For Today's Deliveries Route", FontFactory.getFont(FontFactory.HELVETICA, 18, Font.BOLDITALIC, new CMYKColor(0, 255, 255,17)));
-				    
 		Chapter chapter1 = new Chapter(title, 1);
-				       
 		chapter1.setNumberDepth(0);
-		
 		document.add(chapter1);
-		
 		document.add(img);
-		
 		Paragraph dateText = new Paragraph("\n The date is: "+dateString+"\n");
-		
 		document.add(dateText);
-		
 		int rows = 0;
-
-		
 		for (Object row: tvOrder1.getItems()) {
-			
 			document.add(new Paragraph("\n\nDestination # "+(rows+1)+" is: "+tvOrder1.getItems().get(rows).getAdress()+
 									   "\nCustomer "+tvOrder1.getItems().get(rows).getCustomer()+
-									   "\nOrder Sum is: "+tvOrder1.getItems().get(rows).getValue()+"\n\n"));
-			
+									   "\nOrder Sum is: "+tvOrder1.getItems().get(rows).getValue()+"\n\n"));	
 			rows++;
-		}
-				
+		}		
 		document.close();
 		
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Information Dialog");
 		alert.setHeaderText("Route Exported Successfully!");
 		alert.setContentText("The PDF route has been Successfully exported!");
-
 		alert.showAndWait();
 
 	}
@@ -1511,7 +1495,7 @@ public class ControllerSupplierData {
 				
 		Document document = new Document(PageSize.A4, 50, 50, 50, 50);
 		
-		PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("/Users/yonatanyehezkel/Desktop/Route3.pdf"));
+		PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(new FileChooser().showSaveDialog(stage)));
 				
 		document.open();
 						
