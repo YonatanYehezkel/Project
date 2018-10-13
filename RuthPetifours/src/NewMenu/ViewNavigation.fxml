@@ -48,7 +48,7 @@
 									<Button id="btnSidebar" fx:id="btnDeliverybill" text="todo 1" />
 									<Button id="btnSidebar" fx:id="btnInvoice" text="todo 2" /> -->
 		                           <Button id="btnSidebar" fx:id="btnbestSellersReport" text="Best Sellers" />
-		                           <Button id="btnSidebar" fx:id="btnareasDemand" text="Area's Demand" />
+		                           <Button id="btnSidebar" fx:id="btnareasDemand" text="Demand By Area" />
 		                           <Button id="btnSidebar" fx:id="profitableCustomers" text="Profitable Customers" />
 										</VBox>
 							</TitledPane>

@@ -26,7 +26,7 @@ public class ControllerMenuBar {
 	private LoadUserData userData;
 	private LoadCustomerData customerData;
 	//private LoadArticleData articleData;
-	//private LoadSupplierData supplierData;
+	private LoadSupplierData supplierData;
 	//private LoadOfferData offerData;
 	//private LoadStockAdd stockAdd = new LoadStockAdd(false);
 	
@@ -38,11 +38,11 @@ public class ControllerMenuBar {
 		
 		//Content
 		//articleData  = new LoadArticleData(false, 0, main);
-		//supplierData =  new LoadSupplierData(false, 0, main);
 		//offerData = new LoadOfferData(false, 0, 0, main);
 		
 		userData = new LoadUserData(false, main);
 		customerData = new LoadCustomerData(false, main);
+		supplierData =  new LoadSupplierData(false, 0, main);
 
 		
 		//MenuItems
@@ -84,6 +84,9 @@ public class ControllerMenuBar {
 			@Override
 			public void handle(ActionEvent event) {
 				//main.getContentPane().setCenter(supplierData.getContent());
+				main.getContentPane().setCenter(supplierData.getContent());
+				main.getStage().setTitle(main.getProgramName() + " - Orders");
+				setSizeToScene();
 			}
 		});
 		
