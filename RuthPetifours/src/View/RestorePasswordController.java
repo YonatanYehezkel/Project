@@ -9,11 +9,14 @@ import javax.swing.JOptionPane;
 
 import Controller.ControllerLogic;
 import Model.User;
+import NewMenu.NewMenu;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -32,7 +35,6 @@ public class RestorePasswordController implements Initializable{
 	
 	private User currentUser;
 	@FXML private AnchorPane screen;
-	//@FXML private BorderPane border;
 	@FXML private Text answer1;
 	@FXML private TextField yourAnswer;
 	@FXML private Text getSecondQ;
@@ -71,7 +73,7 @@ public class RestorePasswordController implements Initializable{
 	}
 	
 	public void validateAnswer() {
-		//JOptionPane.showMessageDialog(null, "ok");
+
 		if(count == 0 && !yourAnswer.getText().equals(currentUser.getAnswer1().toString())) {
 			getSecondQ.setVisible(true);
 		}
@@ -120,7 +122,7 @@ public class RestorePasswordController implements Initializable{
 	}
 	
 	public void openNewLogIn() throws IOException {
-		
+				
 		Parent root = FXMLLoader.load(getClass().getResource("/logIn/profile2.fxml"));
         
 		root.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -140,13 +142,14 @@ public class RestorePasswordController implements Initializable{
 
         Scene scene = new Scene(root);
         
+		NewMenu.getPrimaryStage().setScene(scene);
+
 		
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
+       /* primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setScene(scene);
-        primaryStage.show();
+        primaryStage.show();*/
         
-        //border.setVisible(false);
-        screen.setVisible(false);
+        //screen.setVisible(false);
         
 	}
 	
