@@ -19,17 +19,12 @@ public class ControllerMenuBar {
 	@FXML private MenuItem itemArticle;
 	@FXML private MenuItem itemSupplier;
 	@FXML private MenuItem itemStock;
-	
 	@FXML private MenuItem itemOffer;
-	
 	@FXML private MenuItem itemProperties;
-	
 	@FXML private MenuItem close;
 	
 	private LoadUserData userData;
-
-	
-	//private LoadCustomerData customerData;
+	private LoadCustomerData customerData;
 	//private LoadArticleData articleData;
 	//private LoadSupplierData supplierData;
 	//private LoadOfferData offerData;
@@ -42,12 +37,12 @@ public class ControllerMenuBar {
 	@FXML private void initialize(){
 		
 		//Content
-		//customerData = new LoadCustomerData(false, main);
 		//articleData  = new LoadArticleData(false, 0, main);
 		//supplierData =  new LoadSupplierData(false, 0, main);
 		//offerData = new LoadOfferData(false, 0, 0, main);
 		
 		userData = new LoadUserData(false, main);
+		customerData = new LoadCustomerData(false, main);
 
 		
 		//MenuItems
@@ -73,7 +68,9 @@ public class ControllerMenuBar {
 			@Override
 			public void handle(ActionEvent event) {
 				//main.getContentPane().setCenter(articleData.getContent());
-				
+				main.getContentPane().setCenter(customerData.getContent());
+				main.getStage().setTitle(main.getProgramName() + " - Products");
+				setSizeToScene();
 			}
 		});
 		

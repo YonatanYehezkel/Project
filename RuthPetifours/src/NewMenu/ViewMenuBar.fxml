@@ -12,15 +12,14 @@
 		</Menu>
 		<Menu text="Main Items">
 			<MenuItem fx:id="itemUsers" text="Users" />
-			<MenuItem fx:id="itemArticle" text="Products" />
+			<MenuItem fx:id="itemArticle" text="Customers" />
 			<MenuItem fx:id="itemSupplier" text="Orders" />
-			<MenuItem fx:id="itemStock" text="Customers" />
+			<MenuItem fx:id="itemStock" text="Products" />
 		</Menu>
 		<Menu text="Reports">
-			<MenuItem fx:id="itemOffer" text="Orders" />
-		</Menu>
-		<Menu text="Settings">
-			<MenuItem fx:id="itemProperties" text="Change language" />
+			<MenuItem fx:id="itemOffer" text="Best Sellers" />
+         <MenuItem fx:id="itemProperties" text="Demand By Area" />
+         <MenuItem text="Profitable Customers" />
 		</Menu>
 	</MenuBar>
 </AnchorPane>

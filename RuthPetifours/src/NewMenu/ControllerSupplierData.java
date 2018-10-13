@@ -1274,7 +1274,7 @@ public class ControllerSupplierData {
 		            //bestRout.setText(Arrays.toString(routes[0].waypointOrder));
 			        //System.out.println(gson.toJson(routes));
 		            sortTablebyOptimalRoute(tvOrder1);
-		            		            
+		          	            
 		            //opt_label_small.setVisible(true);
 		            
 			        latch.countDown();

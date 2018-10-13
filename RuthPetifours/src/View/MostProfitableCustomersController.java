@@ -66,7 +66,6 @@ public class MostProfitableCustomersController implements Initializable{
         
         for (Customer c : CustomersToShow) {
         	Data.getData().add(new XYChart.Data(c.getCustomerName(), c.getOrdersSum()));
-        	System.out.println(c.toString());
         }
         
         chart.getData().addAll(Data);
