@@ -25,7 +25,7 @@ public class ControllerMenuBar {
 	
 	private LoadUserData userData;
 	private LoadCustomerData customerData;
-	//private LoadArticleData articleData;
+	private LoadProductData ProductData;
 	private LoadSupplierData supplierData;
 	//private LoadOfferData offerData;
 	//private LoadStockAdd stockAdd = new LoadStockAdd(false);
@@ -37,12 +37,12 @@ public class ControllerMenuBar {
 	@FXML private void initialize(){
 		
 		//Content
-		//articleData  = new LoadArticleData(false, 0, main);
 		//offerData = new LoadOfferData(false, 0, 0, main);
 		
 		userData = new LoadUserData(false, main);
 		customerData = new LoadCustomerData(false, main);
 		supplierData =  new LoadSupplierData(false, 0, main);
+		ProductData  = new LoadProductData(false, main);
 
 		
 		//MenuItems
@@ -67,7 +67,7 @@ public class ControllerMenuBar {
 			
 			@Override
 			public void handle(ActionEvent event) {
-				//main.getContentPane().setCenter(articleData.getContent());
+				//main.getContentPane().setCenter(ProductData.getContent());
 				main.getContentPane().setCenter(customerData.getContent());
 				main.getStage().setTitle(main.getProgramName() + " - Products");
 				setSizeToScene();
@@ -84,8 +84,8 @@ public class ControllerMenuBar {
 			@Override
 			public void handle(ActionEvent event) {
 				//main.getContentPane().setCenter(supplierData.getContent());
-				main.getContentPane().setCenter(supplierData.getContent());
-				main.getStage().setTitle(main.getProgramName() + " - Orders");
+				main.getContentPane().setCenter(ProductData.getContent());
+				main.getStage().setTitle(main.getProgramName() + " - Products");
 				setSizeToScene();
 			}
 		});
@@ -100,6 +100,9 @@ public class ControllerMenuBar {
 			@Override
 			public void handle(ActionEvent event) {
 				//main.getContentPane().setCenter(stockAdd.getContent());
+				main.getContentPane().setCenter(supplierData.getContent());
+				main.getStage().setTitle(main.getProgramName() + " - Orders");
+				setSizeToScene();
 			}
 		});
 		
