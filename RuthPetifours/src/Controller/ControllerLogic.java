@@ -26,8 +26,6 @@ import Model.ModelLogic;
 import Model.Order;
 import Model.Product;
 import Model.User;
-import Utils.Constants;
-//import Utils.Constants;
 import View.ViewLogic;
 import db.DB;
 import javafx.event.EventHandler;
@@ -55,7 +53,7 @@ public class ControllerLogic {
 	public ControllerLogic() {
 		model = new ModelLogic();
 		//model.rollTheDice();
-		new Constants();
+		//new Constants();
 	}
 	
 	public void Serialize(){
