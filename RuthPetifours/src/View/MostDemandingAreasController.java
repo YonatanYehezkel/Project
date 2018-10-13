@@ -73,7 +73,6 @@ public class MostDemandingAreasController implements Initializable{
         
         for (City c : CitiesToShow) {
         	c.setCurrentPercantage(c.getDemandNumber()/(this.total));
-        	System.out.println((1/8));
         }
         
         for (City c : CitiesToShow) {

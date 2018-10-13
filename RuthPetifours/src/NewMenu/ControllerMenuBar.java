@@ -8,8 +8,12 @@ import java.util.Optional;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
 
@@ -19,8 +23,11 @@ public class ControllerMenuBar {
 	@FXML private MenuItem itemArticle;
 	@FXML private MenuItem itemSupplier;
 	@FXML private MenuItem itemStock;
+	
 	@FXML private MenuItem itemOffer;
 	@FXML private MenuItem itemProperties;
+	@FXML private MenuItem itemReport3;
+	
 	@FXML private MenuItem close;
 	
 	private LoadUserData userData;
@@ -54,6 +61,8 @@ public class ControllerMenuBar {
 		initItemOffer();
 		
 		initItemProperties();
+		
+		initItemReport3();
 		
 	}
 	
@@ -137,6 +146,7 @@ public class ControllerMenuBar {
 			@Override
 			public void handle(ActionEvent event) {
 				//main.getContentPane().setCenter(offerData.getContent());
+				goToBestSellingReport();
 			}
 		});
 
@@ -144,14 +154,89 @@ public class ControllerMenuBar {
 	
 	private void initItemProperties(){
 		
-//		itemProperties.setGraphic(); TODO
+		itemProperties.setGraphic(new GraphicMenuItem("file:Images/offer_32_blue.png").getGraphicMenuItem()); 
 		itemProperties.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
 				//new LoadProperties(true).getController().setMain(main);
+				goToMostDemandingArea();
 			}
 		});
+		
+	}
+	
+	private void initItemReport3(){
+		
+		itemReport3.setGraphic(new GraphicMenuItem("file:Images/offer_32_blue.png").getGraphicMenuItem()); 
+		itemReport3.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				//new LoadProperties(true).getController().setMain(main);
+				goToMostDemandingProfitable();
+			}
+		});
+		
+	}
+	
+	private void goToBestSellingReport() {
+		
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(NewMenu.class.getResource("/View/BestSellingReport.fxml"));
+			AnchorPane appSet = loader.load();
+			Scene appSetScene = new Scene(appSet);
+			Stage s = new Stage();
+			s.setScene(appSetScene);
+			s.show();
+			//MainClass.getPrimaryStage().setFullScreenExitHint("");
+			//MainClass.getPrimaryStage().setMaximized(true);
+			
+		} catch (java.io.IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private void goToMostDemandingArea() {
+		
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(NewMenu.class.getResource("/View/MostDemandingAreas.fxml"));
+			AnchorPane appSet = loader.load();
+			Scene appSetScene = new Scene(appSet);
+			Stage s = new Stage();
+			s.setScene(appSetScene);
+			s.show();
+			//MainClass.getPrimaryStage().setFullScreenExitHint("");
+			//MainClass.getPrimaryStage().setMaximized(true);
+			
+		} catch (java.io.IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private void goToMostDemandingProfitable() {
+		
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(NewMenu.class.getResource("/View/MostProfitableReport.fxml"));
+			AnchorPane appSet = loader.load();
+			Scene appSetScene = new Scene(appSet);
+			Stage s = new Stage();
+			s.setScene(appSetScene);
+			s.show();
+			//MainClass.getPrimaryStage().setFullScreenExitHint("");
+			//MainClass.getPrimaryStage().setMaximized(true);
+			
+		} catch (java.io.IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

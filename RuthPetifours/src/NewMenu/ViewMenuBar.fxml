@@ -19,7 +19,7 @@
 		<Menu text="Reports">
 			<MenuItem fx:id="itemOffer" text="Best Sellers" />
          <MenuItem fx:id="itemProperties" text="Demand By Area" />
-         <MenuItem text="Profitable Customers" />
+         <MenuItem fx:id="itemReport3" text="Profitable Customers" />
 		</Menu>
 	</MenuBar>
 </AnchorPane>
