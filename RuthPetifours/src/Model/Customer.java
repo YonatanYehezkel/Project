@@ -43,6 +43,7 @@ public class Customer {
 		this.fax = fax;
 		this.email = email;
 		this.web = web;
+		
 	}
 	
 	
@@ -64,6 +65,8 @@ public class Customer {
 		this.fax = fax;
 		this.email = email;
 		this.web = web;
+		
+		contacts = new ArrayList<Contact>();
 	}
 	
 	/*

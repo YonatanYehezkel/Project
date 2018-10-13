@@ -244,7 +244,7 @@ public class ControllerUserData {
 	
 	private void initBtnNew(){
 		
-		btnNew.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
+		btnNew.setGraphic(new GraphicButton("edit_32.png").getGraphicButton());
 		btnNew.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override

@@ -105,7 +105,7 @@ public class ControllerCustomerData {
 	/* BUTTONS */
 	//@FXML private Button btnSearch;
 	@FXML private Button btnNew;
-	@FXML private Button btnEdit;
+	//@FXML private Button btnEdit;
 	      private Button btnEditSave = new Button("Speichern");
 	      private Button btnEditAbort = new Button("Abbrechen");
 	@FXML private Button btnDelete;
@@ -131,7 +131,7 @@ public class ControllerCustomerData {
 		/* BUTTONS */
 		
 		initBtnNew();
-		initBtnEdit();
+		//initBtnEdit();
 		initBtnEditSave();
 		initBtnEditAbort();
 		initBtnDelete();
@@ -254,7 +254,7 @@ public class ControllerCustomerData {
 	
 	private void initBtnNew(){
 		
-		btnNew.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
+		btnNew.setGraphic(new GraphicButton("edit_32.png").getGraphicButton());
 		btnNew.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
@@ -293,36 +293,36 @@ public class ControllerCustomerData {
 		
 	}
 	
-	private void initBtnEdit(){
-		
-		btnEdit.setGraphic(new GraphicButton("edit_32.png").getGraphicButton());
-		btnEdit.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				
-				if(tvOffer.getSelectionModel().getSelectedItem() != null) {
-					LoadCustomerAdd customerAdd = new LoadCustomerAdd(tvOffer.getSelectionModel().getSelectedItem());
-				}
-				else {
-					Alert alert = new Alert(AlertType.WARNING);
-					alert.initOwner(MainClass.getPrimaryStage());
-		        
-		            alert.setContentText("Select a customer for editing.");
-		            alert.showAndWait();
-				}
-				
-				
-			
-
-				
-				enableFields();				
-				setButtonState();
-				
-			}
-		});		
-		
-	}
+//	private void initBtnEdit(){
+//		
+//		btnEdit.setGraphic(new GraphicButton("edit_32.png").getGraphicButton());
+//		btnEdit.setOnAction(new EventHandler<ActionEvent>() {
+//
+//			@Override
+//			public void handle(ActionEvent event) {
+//				
+//				if(tvOffer.getSelectionModel().getSelectedItem() != null) {
+//					LoadCustomerAdd customerAdd = new LoadCustomerAdd(tvOffer.getSelectionModel().getSelectedItem());
+//				}
+//				else {
+//					Alert alert = new Alert(AlertType.WARNING);
+//					alert.initOwner(MainClass.getPrimaryStage());
+//		        
+//		            alert.setContentText("Select a customer for editing.");
+//		            alert.showAndWait();
+//				}
+//				
+//				
+//			
+//
+//				
+//				enableFields();				
+//				setButtonState();
+//				
+//			}
+//		});		
+//		
+//	}
 	
 	private void initBtnEditSave(){
 		

@@ -158,6 +158,11 @@ public class ControllerLogic {
 		return db.getAllProducts();		
 	}
 	
+	public boolean addNewContact (Contact c) {
+		if(db.addNewContact(c))
+			return true;
+		return false;
+	}
 	public boolean addNewUser (User u) {
 		if(db.addNewUser(u))
 				return true;

@@ -418,9 +418,38 @@ public class DB {
 		return false;
 	}
 	
-	public boolean addNewUser (String fname, String sname, String username, String password, String jobrole) {
+
+	public boolean addNewContact (Contact c) {
 		if(setConnection()) {
+			try {
+				String query = "insert into contact (customer, name, phonenumber1, email1, jobrole)"
+					        + " values (?, ?, ?, ?, ?)";
+				PreparedStatement statement = con.prepareStatement(query);    
+				statement.setString (1, c.getCompanyName());
+				statement.setString (2, c.getContactName());
+				statement.setInt (3, c.getPhoneNumber1());
+				statement.setString (4, c.getEmail1());
+				statement.setString (5, c.getJobRole());
+		
+
+			      // execute the preparedstatement
+				statement.execute();
+			      
+			    con.close();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  
+		}
+		else 
+			System.out.println("DB is not available");
+		return false;
+	}
+	
+	public boolean addNewUser (String fname, String sname, String username, String password, String jobrole) {
+		
 			if(!existingUser(username)) {
+				if(setConnection()) {
 			try {
 				String query = "insert into user (firstname, secondname, username, password, jobrole)"
 					        + " values (?, ?, ?, ?, ?)";
@@ -454,8 +483,9 @@ public class DB {
 	}
 	
 	public boolean addNewUser (String fname, String sname, String username, String password, String jobrole, String fq, String fa) {
-		if(setConnection()) {
+		
 			if(!existingUser(username)) {
+				if(setConnection()) {
 			try {
 				String query = "insert into user (firstname, secondname, username, password, jobrole, question1, answer1)"
 					        + " values (?, ?, ?, ?, ?, ?, ?)";
@@ -493,8 +523,9 @@ public class DB {
 	}
 	
 	public boolean addNewUser (String fname, String sname, String username, String password, String jobrole, String fq, String fa, String sq, String sa) {
-		if(setConnection()) {
+		
 			if(!existingUser(username)) {
+				if(setConnection()) {
 			try {
 				String query = "insert into user (firstname, secondname, username, password, jobrole, question1, answer1, question2, answer2)"
 					        + " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -534,12 +565,52 @@ public class DB {
 	}
 	
 	public boolean existingUser(String username) {
+		
+		try{
 		if(!getUserByUsername(username).equals(null)) {
 			//System.out.println("eeeeeeeeeeeeeee");
 			return true;
 		}
 		return false;
+		}
+		catch (NullPointerException e) {
+			return false;
+		}
 	}
+	
+	public boolean editContact(Contact c) {
+		
+        	if(setConnection()) {
+    			try {
+    				 String query = "update contact set phonenumber1 = ?, email1 = ?, jobrole = ? "
+    				 		+ "where name = ? and customer = ?";
+    				 
+    			     PreparedStatement preparedStmt = con.prepareStatement(query);
+    			     preparedStmt.setInt  (1, c.getPhoneNumber1());
+    			     preparedStmt.setString(2, c.getEmail1());
+    			     preparedStmt.setString(3, c.getJobRole());
+    			     preparedStmt.setString(4, c.getContactName());
+    			     preparedStmt.setString(5, c.getCompanyName());
+    		
+    	
+    			     preparedStmt.executeUpdate();
+    			      
+    			    con.close();
+    			    
+    		        
+    				return true;
+    			} catch (SQLException e) {
+    				e.printStackTrace();
+    			}  
+    		}
+    		else 
+    			System.out.println("DB is not available");
+    			
+    		return false;
+
+        }
+		
+	
 	
 	public boolean editUser(String fname, String sname, String username, String password, String jobrole, String fq, String fa) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -852,8 +923,9 @@ public class DB {
 	}
 	
 	public boolean addNewCustomer (Customer customer) {
-		if(setConnection()) {
+		
 			if(!existingCustomer(customer.getCustomerName())) {
+				if(setConnection()) {
 			try {
 				String query = "insert into customer (customername, adress, comment, city, street, zipcode, phone1, phone2, "
 						+ "fax, email, web)"
@@ -874,8 +946,21 @@ public class DB {
 		
 			      // execute the preparedstatement
 				statement.execute();
-			      
+			    if(!customer.getContacts().isEmpty()) {
+			    	if(customer.getContacts().size()>0 && customer.getContacts().get(0).getContactName() != null) {
+			    		addNewContact(customer.getContacts().get(0));
+			    		if(customer.getContacts().size()>1 && customer.getContacts().get(1).getContactName() != null) {
+			    			addNewContact(customer.getContacts().get(1));
+			    		}
+			    	}
+			    	
+					
+			    }
+				
+				
 			    con.close();
+			    
+			 
 				return true;
 			} catch (MySQLIntegrityConstraintViolationException e) {
 				editCustomer(customer);
@@ -888,13 +973,16 @@ public class DB {
 			
 			}
 			else {
-				editCustomer(customer);
-				System.out.println("Customer exists");
-				return true;
+				
+				System.out.println("DB is not available");
 			}
 		}
-		else 
-			System.out.println("DB is not available");
+		else {
+			editCustomer(customer);
+			System.out.println("Customer exists");
+			return true;
+		}
+			
 		return false;
 	}
 	
@@ -933,6 +1021,15 @@ public class DB {
 	    			      
 	    			    con.close();
 	    			    
+	    			    if(!c.getContacts().isEmpty()) {
+	    			    	if(c.getContacts().size()>0 && c.getContacts().get(0).getContactName() != null) {
+	    			    		editContact(c.getContacts().get(0));
+	    			    		if(c.getContacts().size()>1 && c.getContacts().get(1).getContactName() != null) {
+	    			    			editContact(c.getContacts().get(1));
+	    			    		}
+	    			    	}
+	    			    }
+	    			    
 	    			    Alert alert2 = new Alert(AlertType.INFORMATION);
 	    				alert2.initOwner(MainClass.getPrimaryStage());
 	    		        //alert.setHeaderText("Confirm before delete");
@@ -956,9 +1053,16 @@ public class DB {
 	}
 	
 	public boolean existingCustomer (String customerName) {
-		if (!getCustomerByName(customerName).equals(null))
+		try {
+			if(getCustomerByName(customerName).equals(null))
+				return false;
+			System.out.println("yes");
 			return true;
-		return false;
+		}
+		catch (NullPointerException e) {
+			System.out.println("no");
+			return false;
+		}
 	}
 
 	
@@ -985,8 +1089,7 @@ public class DB {
 			System.out.println("DB is not available");
 		return false;
 	}
-
-
+	
 
 	public User getUserByID(int id) {
 		User u = null;

@@ -32,14 +32,6 @@ public class ControllerProductData {
 
 	@FXML private Label lblSubHeadline;
 	
-	/* DELIVERYADRESS - NESTED CONTROLLER */
-	//@FXML private ControllerDeliveryAdress deliveryAdressController; //fx:id + 'Controller'
-	
-	/* BILLINGADRESS - NESTED CONTROLLER */
-	//@FXML private ControllerBillingAdress billingAdressController; //fx:id + 'Controller'
-	
-	/* CONTACTS - NESTED CONTROLLER */
-	//@FXML private ControllerContactData contactDataController; //fx:id + 'Controller'
 	
 	/* NOTES */
 	@FXML private TextArea taNotes;
@@ -57,35 +49,13 @@ public class ControllerProductData {
 
 	private ObservableList<Product> products;
 	
-	/* DELIVERYBILL */
-//	@FXML private TableView<ModelDeliverybill> tvDeliverybill;
-//	@FXML private TableColumn<ModelDeliverybill, Integer> tcDeliverybillID;
-//	@FXML private TableColumn<ModelDeliverybill, String> tcDeliverybillClerk;
-//	@FXML private TableColumn<ModelDeliverybill, String> tcDeliverybillRequest;
-//	@FXML private TableColumn<ModelDeliverybill, String> tcDeliverybillDate;
-//	@FXML private TableColumn<ModelDeliverybill, Integer> tcDeliverybillAmountOfPositions;
-//	@FXML private TableColumn<ModelDeliverybill, BigDecimal> tcDeliverybillTotal;
-//	@FXML private TableColumn<ModelDeliverybill, Boolean> tcDeliverybillState;
-	
-	/* INVOICE */
-//	@FXML private TableView<ModelInvoice> tvInvoice;
-//	@FXML private TableColumn<ModelInvoice, Integer> tcInvoiceID;
-//	@FXML private TableColumn<ModelInvoice, String> tcInvoiceDate;
-//	@FXML private TableColumn<ModelInvoice, String> tcInvoiceClerk;
-//	@FXML private TableColumn<ModelInvoice, Integer> tcInvoiceDeliverybillID;
-//	@FXML private TableColumn<ModelInvoice, String> tcInvoiceDeliveryDate;
-//	@FXML private TableColumn<ModelInvoice, Integer> tcInvoiceAmountOfPositions;
-//	@FXML private TableColumn<ModelInvoice, BigDecimal> tcInvoiceTotal;
 	
 	/* BUTTONS */
 	//@FXML private Button btnSearch;
 	@FXML private Button btnNew;
 	@FXML private Button btnEdit;
-	      private Button btnEditSave = new Button("Speichern");
-	      private Button btnEditAbort = new Button("Abbrechen");
 	@FXML private Button btnDelete;
 	@FXML private Button btnImport;
-	@FXML private Button btnSearch;
 	
 	
 	@FXML private HBox hboxBtnTopbar;
@@ -106,30 +76,18 @@ public class ControllerProductData {
 		//initBtnSearch();
 		initBtnNew();
 		initBtnEdit();
-		initBtnEditSave();
-		initBtnEditAbort();
 		initBtnDelete();
 		initBtnImport();
-		initBtnSearch();
 
 		/* TABLES */
 		initTableOffer();
 		
 		
 		
-//		initTableDeliverybill();
-//		initTableInvoice();
-		
 		loadDataFromDB();
 		
 		setButtonState();
 		
-//		tvOffer.setOnMouseClicked(( event) -> {
-//	        if (event.getButton().equals(MouseButton.SECONDARY)) {
-//	            
-//	        	LoadCustomerAdd customerAdd = new LoadCustomerAdd(tvOffer.getSelectionModel().getSelectedItem());
-//	        	}
-//	    });
 		
 	}
 	
@@ -137,40 +95,12 @@ public class ControllerProductData {
 	/*
 	 * BUTTONS
 	 */
-//	private void initBtnSearch(){
-//		
-//		btnSearch.setGraphic(new GraphicButton("search_32.png").getGraphicButton());
-//		btnSearch.setOnAction(new EventHandler<ActionEvent>() {
-//
-//			@Override
-//			public void handle(ActionEvent event) {
-//				
-//				LoadCustomerSearch customerSearch = new LoadCustomerSearch(true);
-//				if(customerSearch.getController().getSelectedCustomerID() != 0){
-//					selectCustomer(customerSearch.getController().getSelectedCustomerID());
-//				}
-//				
-//			}
-//		});
-//		
-//	}
+
 	
 	private void initBtnNew(){
 		
 		btnNew.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
-//		btnNew.setOnAction(new EventHandler<ActionEvent>() {
-//			
-//			@Override
-//			public void handle(ActionEvent event) {
-//				
-//				LoadCustomerAdd customerAdd = new LoadCustomerAdd(true);
-//				if(customerAdd.getController().getCreatedCustomer() != null){
-//					users.add(customerAdd.getController().getCreatedCustomer());
-//					//selectCustomer(customerAdd.getController().getCreatedCustomerID());
-//				}
-//				
-//			}
-//		});
+		btnNew.setDisable(true);
 		
 	}
 	
@@ -199,182 +129,24 @@ public class ControllerProductData {
 	private void initBtnEdit(){
 		
 		btnEdit.setGraphic(new GraphicButton("edit_32.png").getGraphicButton());
-//		btnEdit.setOnAction(new EventHandler<ActionEvent>() {
-//
-//			@Override
-//			public void handle(ActionEvent event) {
-//				
-//				if(tvOffer.getSelectionModel().getSelectedItem() != null) {
-//					LoadCustomerAdd customerAdd = new LoadCustomerAdd(tvOffer.getSelectionModel().getSelectedItem());
-//				}
-//				else {
-//					Alert alert = new Alert(AlertType.WARNING);
-//					alert.initOwner(MainClass.getPrimaryStage());
-//		        
-//		            alert.setContentText("Select a customer for editing.");
-//		            alert.showAndWait();
-//				}
-//				
-//				
-//			
-//				hboxBtnTopbar.getChildren().add(hboxBtnTopbar.getChildren().indexOf(btnEdit) + 1, btnEditSave);
-//				hboxBtnTopbar.getChildren().add(hboxBtnTopbar.getChildren().indexOf(btnEdit) + 2, btnEditAbort);
-//				
-//				enableFields();				
-//				setButtonState();
-//				
-//			}
-//		});		
+		btnEdit.setDisable(true);
+
 		
 	}
 	
-	private void initBtnEditSave(){
-		
-		btnEditSave.getStyleClass().add("btnTopbar");
-		btnEditSave.setGraphic(new GraphicButton("save_32.png").getGraphicButton());
-		btnEditSave.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				
-//				/* UPDATE CUSTOMER */
-//				if(new ValidateCustomerSave(new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfCustomerID().getText()), 
-//											deliveryAdressController.getTfName1().getText()).isValid()){
-//					
-//					new UpdateCustomer(
-//						new ModelCustomer(
-//							new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfCustomerID().getText()),
-//							deliveryAdressController.getCbSalutation().getSelectionModel().getSelectedItem(),
-//							deliveryAdressController.getTfName1().getText(), 
-//							deliveryAdressController.getTfName2().getText(),
-//							deliveryAdressController.getTfStreet().getText(), 
-//							deliveryAdressController.getCbLand().getSelectionModel().getSelectedItem(), 
-//							new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfZip().getText()), 
-//							deliveryAdressController.getTfLocation().getText(), 
-//							
-//							deliveryAdressController.getTfPhone().getText(), 
-//							deliveryAdressController.getTfMobile().getText(), 
-//							deliveryAdressController.getTfFax().getText(), 
-//							deliveryAdressController.getTfEmail().getText(),
-//							deliveryAdressController.getTfWeb().getText(), 
-//							deliveryAdressController.getTfTaxID().getText(), 
-//							deliveryAdressController.getTfUstID().getText(), 
-//							
-//							deliveryAdressController.getCbPayment().getSelectionModel().getSelectedItem(), 
-//							deliveryAdressController.getTfIBAN().getText(), 
-//							deliveryAdressController.getTfBIC().getText(), 
-//							deliveryAdressController.getTfBank().getText(), 
-//							new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfPaymentSkonto().getText()),
-//							new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfPaymentNetto().getText()), 
-//							new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfSkonto().getText()),
-//							deliveryAdressController.getCbCategory().getSelectionModel().getSelectedItem(),
-//							
-//							String.valueOf(LocalDate.now()), 
-//							taNotes.getText(),
-//							
-//							new Validate().new ValidateOnlyInteger().validateOnlyInteger(billingAdressController.getTfCustomerIDBilling().getText())),
-//						contactDataController.getObsListContact()
-//					);
-//					
-//					hboxBtnTopbar.getChildren().remove(btnEditAbort);
-//					hboxBtnTopbar.getChildren().remove(btnEditSave);
-//					
-//					disableFields();
-//					setButtonState();
-//					
-//					//Reload CustomerData
-//					if(stage != null){
-//						stage.close();
-//					}else{
-//						selectCustomer(new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfCustomerID().getText()));
-//					}
-//					
-//				}
-			}
-			
-		});		
-	}
 	
-	private void initBtnEditAbort(){
-		
-		btnEditAbort.getStyleClass().add("btnTopbar");
-		btnEditAbort.setGraphic(new GraphicButton("cancel_32.png").getGraphicButton());
-		btnEditAbort.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				
-				hboxBtnTopbar.getChildren().remove(btnEditAbort);
-				hboxBtnTopbar.getChildren().remove(btnEditSave);
-				
-				disableFields();
-				setButtonState();
-
-				//Reload CustomerData
-				//selectCustomer(new Validate().new ValidateOnlyInteger().validateOnlyInteger(deliveryAdressController.getTfCustomerID().getText()));				
-				
-			}
-		});
-		
-	}
+	
+	
 	
 	private void initBtnDelete(){
 		
 		btnDelete.setGraphic(new GraphicButton("delete_32.png").getGraphicButton());
-//		btnDelete.setOnAction(new EventHandler<ActionEvent>() {
-//
-//			@Override
-//			public void handle(ActionEvent event) {
-//				if(tvOffer.getSelectionModel().getSelectedItem() != null) {
-//					Alert alert = new Alert(AlertType.CONFIRMATION);
-//					alert.initOwner(MainClass.getPrimaryStage());
-//			        alert.setHeaderText("Confirm before delete");
-//			        alert.setContentText("Are you sure yo want to remove the customer from the system?");
-//			        alert.showAndWait();
-//			       
-//			        if(alert.getResult().getText().equals("OK")) {
-//			        	Customer del = tvOffer.getSelectionModel().getSelectedItem();
-//			        	String del_id = del.getCustomerName();
-//			        	if(controller.deleteCustomer(del_id)) {
-//			        		int selectedIndex = tvOffer.getSelectionModel().getSelectedIndex();
-//			        	    if (selectedIndex >= 0) {
-//			        	    	tvOffer.getItems().remove(selectedIndex);
-//			        	    }
-//			        	    
-//			        	    Alert alert2 = new Alert(AlertType.INFORMATION);
-//			        	    alert2.initOwner(MainClass.getPrimaryStage());
-//			        	  
-//			        	    alert2.setHeaderText("Delete Confirmation");
-//			        	    alert2.setContentText("Selected customer has been successfully removed.");
-//			        	    alert2.showAndWait();	    	
-//			        	}
-//			        }
-//				}
-//				else {
-//					Alert alert = new Alert(AlertType.WARNING);
-//					alert.initOwner(MainClass.getPrimaryStage());
-//		        
-//		            alert.setContentText("Select a customer for deletion.");
-//		            alert.showAndWait();
-//				}
-//			}
-//		});
+		btnDelete.setDisable(true);
+
 		
 	}
 	
-	private void initBtnSearch(){
-		
-		//btnNew.setGraphic(new GraphicButton("new_32.png").getGraphicButton());
-		btnSearch.setOnAction(new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent event) {
-				loadNewDataFromDB();
-				//buildRouteTbl3();
-			}
-		});
-		
-	}
+
 	
 	/*
 	 * TABLES
@@ -661,15 +433,7 @@ public class ControllerProductData {
 //		}
 	}
 	
-	private boolean editable(){
-		
-		if(hboxBtnTopbar.getChildren().contains(btnEditSave)){
-			return true;
-		}else{
-			return false;
-		}
-		
-	}
+
 	
 	private void goToOffer(){
 		

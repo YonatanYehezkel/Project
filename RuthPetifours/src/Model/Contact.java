@@ -27,6 +27,16 @@ public class Contact {
 		this.CompanyName = CompanyName;
 	}
 	
+	public Contact(String contactName, int phoneNumber1, String email1, 
+		 String jobRole, String CompanyName) {
+		super();
+		this.contactName = contactName;
+		this.phoneNumber1 = phoneNumber1;
+		this.email1 = email1;
+		this.jobRole = jobRole;
+		this.CompanyName = CompanyName;
+	}
+	
 	
 
 	public String getContactName() {

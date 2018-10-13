@@ -64,6 +64,7 @@ public class ControllerCustomerAdd {
 	@FXML private TextField tfName1;
 	@FXML private TextField tfPhone1;
 	@FXML private TextField tfEmail1;
+	@FXML private Label messageC1;
 
 	/* CONTACT2 DATA */
 
@@ -73,7 +74,7 @@ public class ControllerCustomerAdd {
 	@FXML private TextField tfEmail2;
 	
 	@FXML private TextArea tfComment;
-
+	@FXML private Label messageC2;
 	
 	/* BILLING */
 	private int billingID;
@@ -188,7 +189,8 @@ private void initTextFields() {
 		tfCustomerID.setText(s.getCustomerName());
 		tfStreet.setText(s.getStreet());
 		tfLocation.setText(s.getCity());
-		tfZip.setText(String.valueOf(s.getZipcode()));
+		if(s.getZipcode() != 0)
+			tfZip.setText(String.valueOf(s.getZipcode()));
 		tfPhone.setText(s.getPhone1());
 		tfMobile.setText(s.getPhone2());
 		tfFax.setText(s.getFax());
@@ -199,14 +201,16 @@ private void initTextFields() {
 			/* first contact */
 			tfTitle1.setText(arr.get(0).getJobRole());
 			tfName1.setText(arr.get(0).getContactName());
-			tfPhone1.setText(String.valueOf(arr.get(0).getPhoneNumber1()));
+			if(arr.get(0).getPhoneNumber1() != 0)
+				tfPhone1.setText(String.valueOf(arr.get(0).getPhoneNumber1()));
 			tfEmail1.setText(arr.get(0).getEmail1());
 			
 			if(arr.size()>1) {
 				/*second contact */
 				tfTitle2.setText(arr.get(1).getJobRole());
 				tfName2.setText(arr.get(1).getContactName());
-				tfPhone2.setText(String.valueOf(arr.get(1).getPhoneNumber1()));
+				if (arr.get(1).getPhoneNumber1() != 0)
+					tfPhone2.setText(String.valueOf(arr.get(1).getPhoneNumber1()));
 				tfEmail2.setText(arr.get(1).getEmail1());
 			}
 		}
@@ -228,6 +232,14 @@ private void initTextFields() {
 					message.setVisible(true);
 					
 				}
+				if (tfName1.getText().isEmpty() && (!tfTitle1.getText().isEmpty() || !tfPhone1.getText().isEmpty() || !tfEmail1.getText().isEmpty())) {
+					messageC1.setVisible(true);
+				}
+				
+				if (tfName2.getText().isEmpty() && (!tfTitle2.getText().isEmpty() ||  !tfPhone2.getText().isEmpty() || !tfEmail2.getText().isEmpty())) {
+					messageC2.setVisible(true);
+				}
+				
 				else {
 					
 					/* address */
@@ -247,44 +259,107 @@ private void initTextFields() {
 					/* zipcode */
 					int zipcode = 0;
 					if(!tfZip.getText().isEmpty()) {
-						zipcode = Integer.valueOf(tfZip.getText());
+						try {
+							zipcode = Integer.valueOf(tfZip.getText());
+						}
+						catch(NumberFormatException e) {
+							zipcode = 0;
+						}
+						
 					}
 					
 					/* phone1 */
 					
 					String phone1 = null;
-					if(!tfPhone.getText().isEmpty()) {
+					if(tfPhone.getText() != null) {
 						phone1 = tfPhone.getText();
 					}
 					
 					/* phone2 */
 					String phone2 = null;
-					if(!tfMobile.getText().isEmpty()) {
+					if(tfMobile.getText() != null) {
 						phone2 = tfMobile.getText();
 					}
 					
 					/* fax */
 					String fax = null;
-					if(!tfFax.getText().isEmpty()) {
+					if(tfFax.getText() != null) {
 						fax = tfFax.getText();
 					}
 					
 					/* email */
 					String email = null;
-					if(!tfEmail.getText().isEmpty()) {
+					if(tfEmail.getText() != null) {
 						email = tfEmail.getText();
 					}
 					
 					/* web */
 					String web = null;
-					if(!tfWeb.getText().isEmpty()) {
+					if(tfWeb.getText() != null) {
 						web = tfWeb.getText();
 					}
 					
+					/* first contact */
+					String jobrole1 = null;
+					if(tfTitle1.getText() != null) {
+						jobrole1 = tfTitle1.getText();
+					}
+					String name1 = null;
+					if(tfName1.getText() != null) {
+						name1 = tfName1.getText();
+					}
+					int phonenumber1 = 0;
+					if(tfPhone1.getText() != null && tfPhone1.getText() != "" ) {
+						try {
+							phonenumber1 = Integer.valueOf(tfPhone1.getText());
+						}
+						catch(NumberFormatException e) {
+							phonenumber1 = 0;
+						}
+					}
+					String email1 = null;
+					if(tfEmail1.getText() != null) {
+						email1 = tfEmail1.getText();
+					}
+					
+					
+					/* second contact */
+					String jobrole2 = null;
+					if(tfTitle2.getText() != null ) {
+						jobrole2 = tfTitle2.getText();
+					}
+					String name2 = null;
+					if(tfName2.getText() != null) {
+						name2 = tfName2.getText();
+					}
+					int phonenumber2 = 0;
+					if(tfPhone2.getText() != null) {
+						try {
+							phonenumber2 = Integer.valueOf(tfPhone2.getText());
+						}
+						catch(NumberFormatException e) {
+							phonenumber2 = 0;
+						}
+						
+					}
+					String email2 = null;
+					if(tfEmail2.getText() != null) {
+						email2 = tfEmail2.getText();
+					}
 					
 					createdCustomer = new Customer (tfCustomerID.getText(), ad, comment,
 							tfLocation.getText(), tfStreet.getText(),
 							zipcode, phone1, phone2, fax, email, web);
+					
+					Contact contact1 = new Contact (name1, phonenumber1, email1, jobrole1, tfCustomerID.getText());
+					Contact contact2 = new Contact (name2, phonenumber2, email2, jobrole2, tfCustomerID.getText());
+					
+					if(contact1.getContactName() != null)
+						createdCustomer.contacts.add(contact1);
+					if(contact2.getContactName() != null)
+						createdCustomer.contacts.add(contact2);
+					
+					createdCustomer.getCustomerName();
 					
 					if(controller.addNewCustomer(createdCustomer)) {
 						
@@ -345,7 +420,7 @@ private void initBtnClear(){
 			@Override
 			public void handle(ActionEvent event) {
 				
-//				deliveryAdressController.clearFields();
+				clearFields2();
 				
 			}
 		});
@@ -384,6 +459,33 @@ public void enableFields(){
 public void clearFields(){
 	
 	//tfCustomerID.clear();
+	tfStreet.clear();
+	tfZip.clear();
+	tfLocation.clear();
+	
+	tfPhone.clear();
+	tfMobile.clear();
+	tfFax.clear();
+	tfEmail.clear();
+	tfWeb.clear();
+	
+	tfTitle1.clear();
+	tfName1.clear();
+	tfPhone1.clear();
+	tfEmail1.clear();
+	
+	tfTitle2.clear();
+	tfName2.clear();
+	tfPhone2.clear();
+	tfEmail2.clear();
+	tfComment.clear();
+
+	
+}
+
+public void clearFields2(){
+	
+	tfCustomerID.clear();
 	tfStreet.clear();
 	tfZip.clear();
 	tfLocation.clear();

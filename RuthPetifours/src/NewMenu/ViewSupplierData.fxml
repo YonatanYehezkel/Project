@@ -44,6 +44,7 @@
 				<BorderPane>
 					<top>
 						<HBox alignment="CENTER_LEFT" spacing="10">
+							<Label id="lblHeadline" text="Orders" />
 							<Label id="lblSubHeadline" fx:id="lblSubHeadline" />
 						<padding>
 							<Insets bottom="10" />
