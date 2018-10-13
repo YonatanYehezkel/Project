@@ -82,6 +82,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -1296,7 +1297,7 @@ public class ControllerSupplierData {
 		        	
 		        	//System.out.println(routes[0].waypointOrder);
 		        	
-		        	System.out.println(OptimalRoute1);
+		        	//System.out.println(OptimalRoute1);
 		        	
 		        	//OptimalRoute1=s;
 		        	
@@ -1330,48 +1331,50 @@ public class ControllerSupplierData {
 		alert.setContentText("You can view it through the table below \n and export it to a PDF file");
 
 		alert.showAndWait();
+		
+	    exportRoute1.setDisable(false);
 	}
 	
 	public void exportRoute1ToPDF() throws Exception {	
 		
-				
+		if(tvOrder1.getItems().isEmpty()) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Warning Dialog");
+			alert.setHeaderText("Empty Route PDF File");
+			alert.setContentText("No destinations will be shown in the file, \nsince the orders table is empty!");
+			alert.showAndWait();
+		}
+		
+		Image img = Image.getInstance("src/login/ruth.jpg");
 		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
 		Calendar calobj = Calendar.getInstance();
-		
 		String dateString = df.format(calobj.getTime()).toString();
-				
-		Document document = new Document(PageSize.A4, 50, 50, 50, 50);
 		
-		PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("/Users/yonatanyehezkel/Desktop/Route1.pdf"));
-				
-		document.open();
-				
+	
+		Document document = new Document(PageSize.A4, 50, 50, 50, 50);		
+		PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(new FileChooser().showSaveDialog(stage)));
+		document.open();					
 		Paragraph title = new Paragraph("Driving Instructions For Today's Deliveries Route", FontFactory.getFont(FontFactory.HELVETICA, 18, Font.BOLDITALIC, new CMYKColor(0, 255, 255,17)));
-				    
 		Chapter chapter1 = new Chapter(title, 1);
-				       
 		chapter1.setNumberDepth(0);
-		
 		document.add(chapter1);
-		
-		
+		document.add(img);
 		Paragraph dateText = new Paragraph("\n The date is: "+dateString+"\n");
-		
 		document.add(dateText);
-		
 		int rows = 0;
-
-		
 		for (Object row: tvOrder1.getItems()) {
-			
 			document.add(new Paragraph("\n\nDestination # "+(rows+1)+" is: "+tvOrder1.getItems().get(rows).getAdress()+
 									   "\nCustomer "+tvOrder1.getItems().get(rows).getCustomer()+
-									   "\nOrder Sum is: "+tvOrder1.getItems().get(rows).getValue()+"\n\n"));
-			
+									   "\nOrder Sum is: "+tvOrder1.getItems().get(rows).getValue()+"\n\n"));	
 			rows++;
-		}
-				
+		}		
 		document.close();
+		
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Information Dialog");
+		alert.setHeaderText("Route Exported Successfully!");
+		alert.setContentText("The PDF route has been Successfully exported!");
+		alert.showAndWait();
 
 	}
 	
@@ -1417,10 +1420,10 @@ public class ControllerSupplierData {
 		           
 		            Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		           //routes[1].waypointOrder.toString();
-		           System.out.println(Arrays.toString(routes[0].waypointOrder));
+		           //System.out.println(Arrays.toString(routes[0].waypointOrder));
 		           opt_route = routes[0].waypointOrder;
 		            /*bestRout.setText(getOptimalRoute()); */
-		            System.out.println(getOptimalRoute());
+		            //System.out.println(getOptimalRoute());
 		            //getOptimalRoute();
 		            //bestRout.setText(Arrays.toString(routes[0].waypointOrder));
 			        //System.out.println(gson.toJson(routes));
@@ -1460,30 +1463,76 @@ public class ControllerSupplierData {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		    
+		    Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Information Dialog");
+			alert.setHeaderText("Route Has Been Successfully Built!");
+			alert.setContentText("You can view it through the table below \n and export it to a PDF file");
+
+			alert.showAndWait();
 		  
-	
+		    exportRoute3.setDisable(false);
 		}
 		
-		this.exportRoute3.setDisable(false);
 	}
 	
 	public void exportRoute3ToPDF() throws Exception {
 		
-		System.out.println("exporting");
+		if(tvOrder3.getItems().isEmpty()) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Warning Dialog");
+			alert.setHeaderText("Empty Route PDF File");
+			alert.setContentText("No destinations will be shown in the file, \nsince the orders table is empty!");
+			alert.showAndWait();
+		}
 		
-		PDDocument doc = new PDDocument();
-		PDPage page = new PDPage();
-		doc.addPage(page);
-		PDPageContentStream stream = new PDPageContentStream(doc,page);
-		PDFont font = PDType1Font.HELVETICA;
-		stream.setFont(font, 16);
-		stream.beginText();
-		stream.moveTextPositionByAmount(10, 750 );
-		//stream.drawString(OptimalRoute1);
-		stream.endText();
-		stream.close();
-		doc.save("/Users/yonatanyehezkel/Desktop/Route3.pdf");
-		doc.close();
+		Image img = Image.getInstance("src/login/ruth.jpg");
+		
+		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+		Calendar calobj = Calendar.getInstance();
+		
+		String dateString = df.format(calobj.getTime()).toString();
+				
+		Document document = new Document(PageSize.A4, 50, 50, 50, 50);
+		
+		PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(new FileChooser().showSaveDialog(stage)));
+				
+		document.open();
+						
+		Paragraph title = new Paragraph("Driving Instructions For Today's Deliveries Route", FontFactory.getFont(FontFactory.HELVETICA, 18, Font.BOLDITALIC, new CMYKColor(0, 255, 255,17)));
+				    
+		Chapter chapter1 = new Chapter(title, 1);
+				       
+		chapter1.setNumberDepth(0);
+		
+		document.add(chapter1);
+		
+		document.add(img);
+		
+		Paragraph dateText = new Paragraph("\n The date is: "+dateString+"\n");
+		
+		document.add(dateText);
+		
+		int rows = 0;
+
+		
+		for (Object row: tvOrder3.getItems()) {
+			
+			document.add(new Paragraph("\n\nDestination # "+(rows+1)+" is: "+tvOrder3.getItems().get(rows).getAdress()+
+									   "\nCustomer "+tvOrder3.getItems().get(rows).getCustomer()+
+									   "\nOrder Sum is: "+tvOrder3.getItems().get(rows).getValue()+"\n\n"));
+			
+			rows++;
+		}
+				
+		document.close();
+		
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Information Dialog");
+		alert.setHeaderText("Route Exported Successfully!");
+		alert.setContentText("The PDF route has been Successfully exported!");
+
+		alert.showAndWait();
 		
 	}
 	

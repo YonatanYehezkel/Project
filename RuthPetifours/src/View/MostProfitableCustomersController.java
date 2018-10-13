@@ -59,8 +59,8 @@ public class MostProfitableCustomersController implements Initializable{
 		CustomersToShow = controller.getMostProfitableCustomers();
 		
 		xAxis.setTickLabelRotation(90);
-		xAxis.setLabel("Orders Sum Value");  
-        yAxis.setLabel("Customer Name"); 
+		xAxis.setLabel("Customer Name");  
+        yAxis.setLabel("Orders Sum Value"); 
         
         XYChart.Series Data = new XYChart.Series<>();
         
